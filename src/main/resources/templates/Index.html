@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html class="wide desktop landscape rd-navbar-static-linked" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Home</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width height=device-height initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- <link rel="icon" href="images/favicon.ico" type="image/x-icon"> -->
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:400%7CUbuntu:300,400,500,600,700">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body class="">
+<div class="page animated" style="animation-duration: 500ms;">
+    <!-- Page Header-->
+    <header class="section page-header jumbotron-creative">
+        <!-- RD Navbar-->
+        <div class="rd-navbar-wrap" style="height: 110px;">
+            <nav class="rd-navbar rd-navbar-classic rd-navbar-original rd-navbar-static" data-layout="rd-navbar-fixed" data-sm-layout="rd-navbar-fixed" data-md-layout="rd-navbar-fixed" data-md-device-layout="rd-navbar-fixed" data-lg-layout="rd-navbar-static" data-lg-device-layout="rd-navbar-fixed" data-xl-layout="rd-navbar-static" data-xl-device-layout="rd-navbar-static" data-xxl-layout="rd-navbar-static" data-xxl-device-layout="rd-navbar-static" data-lg-stick-up-offset="46px" data-xl-stick-up-offset="46px" data-xxl-stick-up-offset="46px" data-lg-stick-up="true" data-xl-stick-up="true" data-xxl-stick-up="true">
+                <div class="rd-navbar-main-outer">
+                    <div class="rd-navbar-main">
+                        <!-- RD Navbar Panel-->
+                        <div class="rd-navbar-panel">
+                            <!-- RD Navbar Toggle-->
+                            <button class="rd-navbar-toggle toggle-original" data-rd-navbar-toggle=".rd-navbar-nav-wrap"><span></span></button>
+                            <!-- RD Navbar Brand-->
+                            <div class="rd-navbar-brand">
+                                <!--Brand-->
+                                <a class="brand" href="Index.html">
+                                    <img class="brand-logo-dark" th:src="@{/images/logo-default-286x52.png}" alt="" width="143" height="26">
+                                    <img class="brand-logo-light" th:src="@{/images/logo-inverse-286x52.png}" alt="" width="143" height="26">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="rd-navbar-main-element">
+                            <div class="rd-navbar-nav-wrap toggle-original-elements">
+                                <ul class="rd-navbar-nav">
+                                    <li class="rd-nav-item rd-navbar--has-dropdown">
+                                        <a class="rd-nav-link" href="#">Главная</a>
+                                    </li>
+                                    <li class="rd-nav-item rd-navbar--has-megamenu rd-navbar-submenu">
+                                        <a class="rd-nav-link" href="#">Бизнес</a>
+                                        <ul class="rd-menu rd-navbar-megamenu rd-navbar-open-right">
+                                            <li class="rd-megamenu-item">
+                                                <h6 class="rd-megamenu-title"><a href="pages-1.html">Поиск партнеров</a></h6>
+                                                <ul class="rd-megamenu-list">
+                                                    <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="about-us.html">Москва</a></li>
+                                                    <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="contact-us.html">Санкт-Петербург</a></li>
+                                                    <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="faq.html">Новосибирск</a></li>
+                                                    <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="pricing-tables.html">Другие города</a></li>
+                                                </ul>
+                                            </li>
+                                            <li class="rd-megamenu-item">
+                                                <h6 class="rd-megamenu-title"><a href="pages-2.html">Поиск инвестора</a></h6>
+                                                <ul class="rd-megamenu-list">
+                                                    <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="about-us.html">Москва</a></li>
+                                                    <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="contact-us.html">Санкт-Петербург</a></li>
+                                                    <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="faq.html">Новосибирск</a></li>
+                                                    <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="pricing-tables.html">Другие города</a></li>
+                                                </ul>
+                                            </li>
+                                            <li class="rd-megamenu-item">
+                                                <h6 class="rd-megamenu-title"><a href="elements.html">Продажа бизнеса</a></h6>
+                                                <ul class="rd-megamenu-list">
+                                                    <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="about-us.html">Москва</a></li>
+                                                    <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="contact-us.html">Санкт-Петербург</a></li>
+                                                    <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="faq.html">Новосибирск</a></li>
+                                                    <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="pricing-tables.html">Другие города</a></li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="rd-nav-item rd-navbar--has-dropdown rd-navbar-submenu">
+                                        <a class="rd-nav-link" href="blog.html">Объявления</a>
+                                        <ul class="rd-menu rd-navbar-dropdown">
+                                            <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="#">Добавить</a>
+                                            <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="#">Управление</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="rd-nav-item rd-navbar--has-dropdown">
+                                        <a class="rd-nav-link" href="#">FAQ</a>
+                                    </li>
+                                    <li class="rd-nav-item rd-navbar--has-dropdown">
+                                        <a class="rd-nav-link" href="#">Контакты</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="rd-navbar-aside">
+                            <div class="rd-navbar-aside-item">
+                                <button class="button button-xs button-primary-outline button-icon button-icon-left rd-navbar-popup-toggle toggle-original" data-rd-navbar-toggle="#rd-navbar-register">
+                                    <span class="icon mdi mdi-account"></span>Создать</button>
+                                <div class="rd-navbar-popup bg-gray-100 toggle-original-elements" id="rd-navbar-register">
+                                    <h5 class="rd-navbar-popup-title">Регистрация</h5>
+                                    <form class="rd-form rd-mailform form-compact" data-form-output="form-output-global" data-form-type="contact" method="post" action="bat/rd-mailform.php" novalidate="novalidate">
+                                        <div class="form-wrap">
+                                            <input class="form-input form-control-has-validation" id="rd-navbar-register-name" type="text" name="username" data-constraints="@Required"><span class="form-validation"></span>
+                                            <label class="form-label rd-input-label" for="rd-navbar-register-name">Логин</label>
+                                        </div>
+                                        <div class="form-wrap">
+                                            <input class="form-input form-control-has-validation" id="rd-navbar-register-email" type="email" name="email" data-constraints="@Email @Required"><span class="form-validation"></span>
+                                            <label class="form-label rd-input-label" for="rd-navbar-register-email">E-mail</label>
+                                        </div>
+                                        <div class="form-wrap">
+                                            <input class="form-input form-control-has-validation" id="rd-navbar-register-password" type="password" name="password" data-constraints="@Required"><span class="form-validation"></span>
+                                            <label class="form-label rd-input-label" for="rd-navbar-register-password">Пароль</label>
+                                        </div>
+                                        <div class="form-wrap">
+                                            <input class="form-input form-control-has-validation" id="rd-navbar-register-password-confirm" type="password" name="password-confirm" data-constraints="@Required"><span class="form-validation"></span>
+                                            <label class="form-label rd-input-label" for="rd-navbar-register-password-confirm">Подтвердите пароль</label>
+                                        </div>
+                                        <div class="form-wrap">
+                                            <button class="button button-block button-primary" type="submit">Создать</button>
+                                        </div>
+                                        <div class="form-wrap form-wrap-ally">
+                                            <div class="text-decoration-lines rd-navbar-popup-title">
+                                                <span class="text-decoration-lines-content">Или войдите с помощью других сервисов</span></div>
+                                        </div>
+                                        <div class="form-wrap form-wrap-ally">
+                                            <div class="button-group"><a class="button button-facebook button-icon button-icon-only button-winona" href="#" aria-label="Facebook">
+                                                <span class="icon mdi mdi mdi-facebook"></span></a><a class="button button-twitter button-icon button-icon-only button-winona" href="#" aria-label="Twitter">
+                                                <span class="icon mdi mdi-twitter"></span></a><a class="button button-google button-icon button-icon-only button-winona" href="#" aria-label="Google+"><span class="icon mdi mdi-google"></span></a></div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="rd-navbar-aside-item">
+                                <button class="button button-xs button-primary button-icon button-icon-left rd-navbar-popup-toggle toggle-original" data-rd-navbar-toggle="#rd-navbar-login">
+                                    <span class="icon mdi mdi-import"></span>Войти</button>
+                                <div class="rd-navbar-popup bg-gray-100 toggle-original-elements" id="rd-navbar-login">
+                                    <h5 class="rd-navbar-popup-title">Личный кабинет</h5>
+                                    <form class="rd-form form-compact">
+                                        <div class="form-wrap">
+                                            <input class="form-input form-control-has-validation" id="rd-navbar-login-email" type="email" name="email" data-constraints="@Email @Required"><span class="form-validation"></span>
+                                            <label class="form-label rd-input-label" for="rd-navbar-login-email">E-mail</label>
+                                        </div>
+                                        <div class="form-wrap">
+                                            <input class="form-input form-control-has-validation" id="rd-navbar-login-password" type="password" name="password" data-constraints="@Required"><span class="form-validation"></span>
+                                            <label class="form-label rd-input-label" for="rd-navbar-login-password">Пароль</label>
+                                        </div>
+                                        <div class="form-wrap">
+                                            <button class="button button-block button-primary" type="submit">Войти</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <div class="jumbotron-creative-inner">
+            <div class="container">
+                <div class="jumbotron-creative-main">
+                    <h2 class="jumbotron-creative-title">Начни свой бизнес прямо сейчас!</h2>
+                    <div class="form-layout-search-outer">
+                        <div class="form-wrap form-wrap-icon">
+                            <div class="button button-primary">Создать тему</div>
+                        </div>
+                    </div>
+                    <p class="big text-gray-800">Мы предлагаем большую базу объявлений</p>
+                </div>
+            </div>
+            <div class="jc-decoration">
+                <div class="jc-decoration-item jc-decoration-item-1">
+                    <svg version="1.1" x="0px" y="0px" viewBox="0 0 1446 970" width="1446" height="970" preserveAspectRatio="none">
+                        <path d="M-0.000,33.000 C-0.000,33.000 80.000,54.000 113.000,83.000 C146.000,112.000 147.000,152.000 183.000,174.000 C219.000,196.000 288.000,172.000 334.000,193.000 C380.000,214.000 379.000,282.000 427.000,317.000 C475.000,352.000 548.000,336.000 588.000,371.000 C628.000,406.000 614.000,483.000 647.000,513.000 C680.000,543.000 786.000,537.000 841.000,587.000 C896.000,637.000 885.000,739.000 932.000,776.000 C979.000,813.000 1026.000,796.000 1069.000,817.000 C1112.000,838.000 1135.000,865.000 1189.000,893.000 C1243.000,921.000 1433.000,970.000 1433.000,970.000 L1446.000,0.000 L-0.000,33.000 Z"></path>
+                    </svg>
+                </div>
+                <div class="jc-decoration-item jc-decoration-item-2">
+                    <svg version="1.1" x="0px" y="0px" viewBox="0 0 1446 970" width="1446" height="970" preserveAspectRatio="none">
+                        <path d="M-0.000,33.000 C-0.000,33.000 80.000,54.000 113.000,83.000 C146.000,112.000 147.000,152.000 183.000,174.000 C219.000,196.000 288.000,172.000 334.000,193.000 C380.000,214.000 379.000,282.000 427.000,317.000 C475.000,352.000 548.000,336.000 588.000,371.000 C628.000,406.000 614.000,483.000 647.000,513.000 C680.000,543.000 786.000,537.000 841.000,587.000 C896.000,637.000 885.000,739.000 932.000,776.000 C979.000,813.000 1026.000,796.000 1069.000,817.000 C1112.000,838.000 1135.000,865.000 1189.000,893.000 C1243.000,921.000 1433.000,970.000 1433.000,970.000 L1446.000,0.000 L-0.000,33.000 Z"></path>
+                    </svg>
+                </div>
+                <picture>
+                    <source th:srcset="@{/images/home.webp}" type="image/webp">
+                    <source th:srcset="@{/images/home.png}" type="image/png">
+                    <img class="jc-decoration-image" th:src="@{/images/home.png}"  alt="" width="748" height="528">
+                </picture>
+            </div>
+        </div>
+    </header>
+    <!-- Welcome to JobsFactory-->
+    <section class="section section-md bg-default text-center">
+        <div class="container">
+            <h3>Добро пожаловать на <span class="text-primary">Jobs</span>Factory</h3>
+            <p class="text-spacing-05">Это место где Вы сможете найти партнеров или инвестров для свого бизнеса.</p>
+            <div class="row row-50 justify-content-center align-items-center text-left">
+                <div class="col-md-10 col-lg-6">
+                    <figure class="figure-responsive block-5">
+                        <picture>
+                            <source th:srcset="@{/images/home/home1.webp}" type="image/webp">
+                            <source th:srcset="@{/images/home/home1.jpg}" type="image/jpg">
+                            <img th:src="@{/images/home/home1.jpg}"  alt="" width="540" height="413">
+                        </picture>
+                    </figure>
+                </div>
+                <div class="col-md-10 col-lg-6">
+                    <div class="row row-50 row-xl-70">
+                        <div class="col-sm-6">
+                            <!-- Box Line-->
+                            <article class="box-line box-line_sm">
+                                <div class="box-line-inner">
+                                    <div class="box-line-icon icon mercury-icon-group"></div>
+                                    <h5 class="box-line-title">Найти партнеров для бизнеса</h5>
+                                </div>
+                            </article>
+                        </div>
+                        <div class="col-sm-6">
+                            <!-- Box Line-->
+                            <article class="box-line box-line_sm">
+                                <div class="box-line-inner">
+                                    <div class="box-line-icon icon mercury-icon-partners"></div>
+                                    <h5 class="box-line-title">Найти инвесторов для своего бизнеса</h5>
+                                </div>
+                            </article>
+                        </div>
+                        <div class="col-sm-6">
+                            <!-- Box Line  -->
+                            <article class="box-line box-line_sm">
+                                <div class="box-line-inner">
+                                    <div class="box-line-icon icon mercury-icon-money"></div>
+                                    <h5 class="box-line-title">Продать свой бизнес</h5>
+                                </div>
+                            </article>
+                        </div>
+                        <div class="col-sm-6">
+                            <!-- Box Line-->
+                            <article class="box-line box-line_sm">
+                                <div class="box-line-inner">
+                                    <div class="box-line-icon icon mercury-icon-note"></div>
+                                    <h5 class="box-line-title">Большая база объявлений и предложений</h5>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="parallax-container section-md bg-primary bg-overlay-1 text-center" th:data-parallax-img="@{/images/home/parallax-2.jpg}">
+        <div class="material-parallax parallax">
+            <img th:src="@{/images/home/parallax-2.jpg}" alt="" style="display: block; transform: translate3d(-50%, 315px, 0px) rotate(0.1deg);">
+        </div>
+        <div class="parallax-content">
+            <div class="container">
+                <h3>Цитаты</h3>
+                <div class="owl-carousel">
+                    <div class="item">
+                        <blockquote class="quote-mary">
+                            <div class="quote-mary-main">
+                                <svg class="quote-mary-mark" version="1.1" x="0px" y="0px" viewBox="0 0 36 28" width="38" height="28">
+                                    <path d="M13,0l-2.4,13.3H15V28H0V13.1L4,0H13z M34,0l-2.4,13.3H36V28H20.9V13.1L25,0H34z"></path>
+                                </svg>
+                                <div class="quote-mary-text">
+                                    <p>Когда мне не хватало денег, я садился думать, а не бежал зарабатывать. Идея – самый дорогой товар на свете.</p>
+                                </div>
+                            </div>
+                            <div class="quote-mary-meta">
+                                <img class="quote-mary-avatar" th:src="@{/images/home/steve-jobs.png}" alt="" width="73" height="73">
+                                <div class="quote-mary-info">
+                                    <cite class="quote-mary-cite heading-5">Стив Джобс</cite>
+                                    <p class="quote-mary-subtitle">Основатель Apple</p>
+                                </div>
+                            </div>
+                        </blockquote>
+                    </div>
+                    <div class="item">
+                        <blockquote class="quote-mary">
+                            <div class="quote-mary-main">
+                                <svg class="quote-mary-mark" version="1.1" x="0px" y="0px" viewBox="0 0 36 28" width="38" height="28">
+                                    <path d="M13,0l-2.4,13.3H15V28H0V13.1L4,0H13z M34,0l-2.4,13.3H36V28H20.9V13.1L25,0H34z"></path>
+                                </svg>
+                                <div class="quote-mary-text">
+                                    <p>Нахождение хороших партнеров является ключом к успеху в любом деле: в бизнесе, в браке и, особенно, в инвестировании.</p>
+                                </div>
+                            </div>
+                            <div class="quote-mary-meta">
+                                <img class="quote-mary-avatar" th:src="@{/images/home/robert.png}" alt="" width="73" height="73">
+                                <div class="quote-mary-info">
+                                    <cite class="quote-mary-cite heading-5">Роберт Кийосаки</cite>
+                                    <p class="quote-mary-subtitle">Предприниматель, инвестор</p>
+                                </div>
+                            </div>
+                        </blockquote>
+                    </div>
+                    <div class="item">
+                        <blockquote class="quote-mary">
+                            <div class="quote-mary-main">
+                                <svg class="quote-mary-mark" version="1.1" x="0px" y="0px" viewBox="0 0 36 28" width="38" height="28">
+                                    <path d="M13,0l-2.4,13.3H15V28H0V13.1L4,0H13z M34,0l-2.4,13.3H36V28H20.9V13.1L25,0H34z"></path>
+                                </svg>
+                                <div class="quote-mary-text">
+                                    <p>Самое главное в бизнесе — сконцентрироваться на создании чего-то важного. Я просто работал над тем, чем бы мне хотелось самому пользоваться.</p>
+                                </div>
+                            </div>
+                            <div class="quote-mary-meta">
+                                <img class="quote-mary-avatar" th:src="@{/images/home/mark.png}" alt="" width="73" height="73">
+                                <div class="quote-mary-info">
+                                    <cite class="quote-mary-cite heading-5">Марк Цукерберг</cite>
+                                    <p class="quote-mary-subtitle">основатель Facebook</p>
+                                </div>
+                            </div>
+                        </blockquote>
+                    </div>
+                    <div class="item">
+                        <blockquote class="quote-mary">
+                            <div class="quote-mary-main">
+                                <svg class="quote-mary-mark" version="1.1" x="0px" y="0px" viewBox="0 0 36 28" width="38" height="28">
+                                    <path d="M13,0l-2.4,13.3H15V28H0V13.1L4,0H13z M34,0l-2.4,13.3H36V28H20.9V13.1L25,0H34z"></path>
+                                </svg>
+                                <div class="quote-mary-text">
+                                    <p>Успешные люди вырываются вперед, используя то время, которое остальные используют впустую.</p>
+                                    <br />
+                                </div>
+                            </div>
+                            <div class="quote-mary-meta">
+                                <img class="quote-mary-avatar" th:src="@{/images/home/genry.png}" alt="" width="73" height="73">
+                                <div class="quote-mary-info">
+                                    <cite class="quote-mary-cite heading-5">Генри Форд</cite>
+                                    <p class="quote-mary-subtitle">Американский промышленник</p>
+                                </div>
+                            </div>
+                        </blockquote>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Steps-->
+    <section class="section section-md bg-default text-center">
+        <div class="container">
+            <h3>Всего 4 простых шага для создания собственного бизнеса</h3>
+            <ul class="list-linked">
+                <li class="ll-item">
+                    <div class="icon ll-item-icon mercury-icon-key">
+                        <svg class="ll-item-icon-inner" version="1.2" baseProfile="tiny" viewBox="-1 -1 102 102">
+                            <circle cx="50" cy="50" r="50" fill="none" vector-effect="non-scaling-stroke"></circle>
+                        </svg>
+                    </div>
+                    <div class="ll-item-main">
+                        <h5 class="ll-item-title"><a href="job-listing.html">Регистрация</a></h5>
+                        <p>Зарегистрируйтесь на сайте</p>
+                    </div>
+                </li>
+                <li class="ll-item">
+                    <div class="icon ll-item-icon mercury-icon-search">
+                        <svg class="ll-item-icon-inner" version="1.2" baseProfile="tiny" viewBox="-1 -1 102 102">
+                            <circle cx="50" cy="50" r="50" fill="none" vector-effect="non-scaling-stroke"></circle>
+                        </svg>
+                    </div>
+                    <div class="ll-item-main">
+                        <h5 class="ll-item-title"><a href="job-details.html">Поиск объявлений</a></h5>
+                        <p>Найдите единомышленников</p>
+                    </div>
+                </li>
+                <li class="ll-item">
+                    <div class="icon ll-item-icon ll-item-icon-sm mercury-icon-e-mail-o">
+                        <svg class="ll-item-icon-inner" version="1.2" baseProfile="tiny" viewBox="-1 -1 102 102">
+                            <circle cx="50" cy="50" r="50" fill="none" vector-effect="non-scaling-stroke"></circle>
+                        </svg>
+                    </div>
+                    <div class="ll-item-main">
+                        <h5 class="ll-item-title"><a href="submit-resume.html">Напишите автору</a></h5>
+                        <p>Напишите автору объявления</p>
+                    </div>
+                </li>
+                <li class="ll-item">
+                    <div class="icon ll-item-icon mercury-icon-target-2">
+                        <svg class="ll-item-icon-inner" version="1.2" baseProfile="tiny" viewBox="-1 -1 102 102">
+                            <circle cx="50" cy="50" r="50" fill="none" vector-effect="non-scaling-stroke"></circle>
+                        </svg>
+                    </div>
+                    <div class="ll-item-main">
+                        <h5 class="ll-item-title"><a href="submit-resume.html">Запустите бизнес!</a></h5>
+                        <p>Запустите совместный бизнес</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </section>
+    <!-- Latest Posts-->
+    <section class="section section-md bg-gray-100">
+        <div class="container">
+            <h3 class="text-center">Последние новости</h3>
+            <div class="row row-30 row-xl-70">
+                <div class="col-12 col-lg-4">
+                    <!-- Post Minimal-->
+                    <article class="post-minimal">
+                        <a class="post-minimal-media" href="blog-post.html">
+                            <picture>
+                                <source th:srcset="@{/images/home/new1.webp}" type="image/webp">
+                                <source th:srcset="@{/images/home/new1.jpg}" type="image/jpg">
+                                <img th:src="@{/images/home/new1.jpg}" alt="" width="369" height="253">
+                            </picture>
+                        </a>
+                        <div class="post-minimal-main">
+                            <h5 class="post-minimal-title"><a href="blog-post.html">Мы запустили новый telegram канал (@new_shearch)</a></h5>
+                            <p>Мы запустили новый телеграм каннал, теперь Вы можете получать новые объявления удобным для Вас способом.</p>
+                            <time class="post-minimal-time" datetime="2019">23 Ноября 2020</time>
+                        </div>
+                    </article>
+                </div>
+                <div class="col-12 col-lg-4">
+                    <!-- Post Minimal-->
+                    <article class="post-minimal">
+                        <a class="post-minimal-media" href="blog-post.html">
+                            <picture>
+                                <source th:srcset="@{/images/home/new2.webp}" type="image/webp">
+                                <source th:srcset="@{/images/home/new2.jpg}" type="image/jpg">
+                                <img th:src="@{/images/home/new2.jpg}" alt="" width="369" height="253">
+                            </picture>
+                        </a>
+                        <div class="post-minimal-main">
+                            <h5 class="post-minimal-title"><a href="blog-post.html">Добавлен новый раздел (Продажа бизнеса)</a></h5>
+                            <p>В новом разделе "Продажа бизнеса", теперь Вы можете удобно и быстро продать свой бизнес. </p>
+                            <time class="post-minimal-time" datetime="2019">03 июня 2020</time>
+                        </div>
+                    </article>
+                </div>
+                <div class="col-12 col-lg-4">
+                    <!-- Post Minimal-->
+                    <article class="post-minimal">
+                        <a class="post-minimal-media" href="blog-post.html">
+                            <picture>
+                                <source th:srcset="@{/images/home/new3.webp}" type="image/webp">
+                                <source th:srcset="@{/images/home/new3.jpg}" type="image/jpg">
+                                <img th:src="@{/images/home/new3.jpg}" alt="" width="369" height="253">
+                            </picture>
+                        </a>
+                        <div class="post-minimal-main">
+                            <h5 class="post-minimal-title"><a href="blog-post.html">Делись интересными постами в соцсетях!</a></h5>
+                            <p>На страницах объявлений добавлена возможность быстро и удобно делиться понравившимися объявлениями.</p>
+                            <time class="post-minimal-time" datetime="2019">15 мая 2020</time>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Page Footer-->
+    <footer class="section footer-creative context-dark">
+        <div class="footer-creative-main">
+            <div class="container">
+                <div id="footer-block_row">
+                    <div class="footer-block_items footer-block_item1">
+                        <p class="footer-creative-title hidden">Найти партнера<span class="mdi mdi-chevron-right footer-mdi"></span></p>
+                        <div class="footer-creative-divider"></div>
+                        <div class="row row-narrow row-15 item-hidden">
+                            <div class="foot-col-6">
+                                <ul class="list-marked-1">
+                                    <li><a href="#">Москва</a></li>
+                                    <li><a href="#">Новосибирск</a></li>
+                                    <li><a href="#">Другие города</a></li>
+                                </ul>
+                            </div>
+                            <div class="foot-col-6">
+                                <ul class="list-marked-1">
+                                    <li><a href="#">Найти</a></li>
+                                    <li><a href="#">Поиск</a></li>
+                                    <li><a href="#">Контакты</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="footer-block_items footer-block_item2">
+                        <p class="footer-creative-title hidden">Последние новости<span class="mdi mdi-chevron-right footer-mdi"></span></p>
+                        <div class="footer-creative-divider"></div>
+                        <div class="post-line-group item-hidden">
+                            <!-- Post Line--><a class="post-line" href="blog-post.html">
+                            <time class="post-line-time" datetime="2019"><span class="post-line-time-day">25</span><span class="post-line-time-month">december</span></time>
+                            <p class="post-line-text">Добавлен новый раздел (Поиск инвестора)</p></a>
+                            <!-- Post Line--><a class="post-line" href="blog-post.html">
+                            <time class="post-line-time" datetime="2019"><span class="post-line-time-day">10</span><span class="post-line-time-month">november</span></time>
+                            <p class="post-line-text">Как продать свой бизнес правильно?</p></a>
+                        </div>
+                    </div>
+                    <div class="footer-block_items footer-block_item3">
+                        <p class="footer-creative-title hidden">Найти инвестора<span class="mdi mdi-chevron-right footer-mdi"></span></p>
+                        <div class="footer-creative-divider"></div>
+                        <div class="row row-narrow row-15 item-hidden">
+                            <div class="foot-col-6">
+                                <ul class="list-marked-1">
+                                    <li><a href="#">Москва</a></li>
+                                    <li><a href="#">Новосибирск</a></li>
+                                    <li><a href="#">Другие города</a></li>
+                                </ul>
+                            </div>
+                            <div class="foot-col-6">
+                                <ul class="list-marked-1">
+                                    <li><a href="#">Найти</a></li>
+                                    <li><a href="#">Поиск</a></li>
+                                    <li><a href="#">Контакты</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-creative-aside">
+            <div class="container">
+                <p class="rights"><span>StartUp Search&nbsp;©&nbsp;2019 Privacy Policy</span></p>
+            </div>
+        </div>
+    </footer>
+</div>
+<div class="snackbars" id="form-output-global"></div>
+<script th:src="@{/js/jquery-3.4.1.min.js}"></script>
+<script th:src="@{/js/core.min.js}"></script>
+<script th:src="@{/js/script.js}"></script>
+<script>
+    $('.owl-carousel').owlCarousel({
+        loop:true,
+        margin:30,
+        responsive:{
+            0:{
+                items:1
+            },
+            800:{
+                items:2
+            },
+            1000:{
+                items:2
+            }
+        }
+    })
+</script>
+<a href="#" id="ui-to-top" class="ui-to-top fl-bigmug-line-up107"></a>
+</body>
+</html>
