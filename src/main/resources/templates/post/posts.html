@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html class="wide desktop landscape rd-navbar-static-linked" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Blog post</title>
+    <div th:replace="~{fragments/links :: links1}"></div>
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:400%7CUbuntu:300,400,500,600,700">
+</head>
+<body>
+    <div th:replace="~{fragments/menu :: menu}"></div>
+    <div th:replace="~{fragments/title :: title('Поиск партнера по бизнесу')}"></div>
+    <section class="section section-md">
+        <div class="container">
+            <form class="form-creative-outer">
+                <div class="form-layout-search form-lg">
+                    <div class="form-wrap form-wrap-icon form-wrap-select">
+                        <!-- Select 2-->
+                        <select class="form-input select form-control-has-validation select2-hidden-accessible" id="form-categories" data-placeholder="Страна" name="category" data-minimum-results-for-search="Infinity" data-constraints="@Selected" tabindex="-1" aria-hidden="true">
+                            <option label="All Categories"></option>
+                            <option value="1">Web Design</option>
+                            <option value="2">Development</option>
+                            <option value="3">Marketing</option>
+                        </select>
+                        <span class="form-validation"></span><span class="icon icon-custom-sizing icon-1 fl-bigmug-line-portfolio23"></span>
+                    </div>
+                    <div class="form-wrap form-wrap-icon form-wrap-select">
+                        <!-- Select 2-->
+                        <select class="form-input select form-control-has-validation select2-hidden-accessible" id="form-region" data-placeholder="Город" name="region" data-minimum-results-for-search="Infinity" data-constraints="@Selected" tabindex="-1" aria-hidden="true">
+                            <option label="All Regions"></option>
+                            <option value="1">Seattle</option>
+                            <option value="2">Miami</option>
+                            <option value="3">Chicago</option>
+                        </select>
+                        <span class="form-validation"></span><span class="icon fl-bigmug-line-big104"></span>
+                    </div>
+                    <div class="form-wrap form-wrap-button">
+                        <button class="button button-lg button-primary" type="submit">Поиск</button>
+                    </div>
+                </div>
+            </form>
+            <div class="table-job-offers-outer">
+                <table class="table-job-offers table-responsive">
+                    <tbody><tr>
+                        <td class="table-job-offers-date hours-hidden"><span>1 час назад</span></td>
+                        <td class="table-job-offers-main">
+                            <!-- Company Light-->
+                            <article class="company-light">
+                                <figure class="company-light-figure">
+                                    <div class="comment-avatar" style="background-color:#cc33cc"><span>V</span></div>
+                                    <span class="get-time">1 час</span>
+                                </figure>
+                                <div class="company-light-main">
+                                    <h5 class="company-light-title"><a href="job-details.html">Поиск партнеров(выгодное предложение)</a></h5>
+                                    <p>vas.tvk7619 » 20 окт 2020, 16:28</p>
+                                    <p class="view-text"><span>15 просмотров</span>&nbsp;&nbsp;&nbsp;0 ответов</p>
+                                </div>
+                            </article>
+                        </td>
+                        <td class="table-job-offers-meta td-hidden">
+                            <div class="object-inline"><span class="icon icon-sm text-primary mdi mdi-eye"></span><span>15</span></div>
+                        </td>
+                        <td class="table-job-offers-meta td-hidden">
+                            <div class="object-inline"><span class="icon icon-1 text-primary mdi mdi-comment-outline"></span><span>0</span></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="table-job-offers-date hours-hidden"><span>5 часов назад</span></td>
+                        <td class="table-job-offers-main">
+                            <!-- Company Light-->
+                            <article class="company-light">
+                                <figure class="company-light-figure">
+                                    <div class="comment-avatar" style="background-color:#ffcc33"><span>R</span></div>
+                                    <span class="get-time">5 час</span>
+                                </figure>
+                                <div class="company-light-main">
+                                    <h5 class="company-light-title"><a href="job-details.html">Включусь в действующий бизнес</a></h5>
+                                    <p>RVD » 20 окт 2020, 10:46</p>
+                                    <p class="view-text"><span>65 просмотров</span>&nbsp;&nbsp;&nbsp;5 ответов</p>
+                                </div>
+                            </article>
+                        </td>
+                        <td class="table-job-offers-meta td-hidden">
+                            <div class="object-inline"><span class="icon icon-sm text-primary mdi mdi-eye"></span><span>65</span></div>
+                        </td>
+                        <td class="table-job-offers-meta td-hidden">
+                            <div class="object-inline"><span class="icon icon-1 text-primary mdi mdi-comment-outline"></span><span>5</span></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="table-job-offers-date hours-hidden"><span>1 день назад</span></td>
+                        <td class="table-job-offers-main">
+                            <!-- Company Light-->
+                            <article class="company-light">
+                                <figure class="company-light-figure">
+                                    <div class="comment-avatar" style="background-color:#cc0000"><span>A</span></div>
+                                    <span class="get-time">15 час</span>
+                                </figure>
+                                <div class="company-light-main">
+                                    <h5 class="company-light-title"><a href="job-details.html">ищем партнера-инвестора в бизнес</a></h5>
+                                    <p>Alpist13 » 02 сен 2019, 19:24</p>
+                                    <p class="view-text"><span>2 300 просмотров</span>&nbsp;&nbsp;&nbsp;15 ответов</p>
+                                </div>
+                            </article>
+                        </td>
+                        <td class="table-job-offers-meta td-hidden">
+                            <div class="object-inline"><span class="icon icon-sm text-primary mdi mdi-eye"></span><span>2300</span></div>
+                        </td>
+                        <td class="table-job-offers-meta td-hidden">
+                            <div class="object-inline"><span class="icon icon-1 text-primary mdi mdi-comment-outline"></span><span>15</span></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="table-job-offers-date hours-hidden"><span>1 день назад</span></td>
+                        <td class="table-job-offers-main">
+                            <!-- Company Light-->
+                            <article class="company-light">
+                                <figure class="company-light-figure">
+                                    <div class="comment-avatar" style="background-color:#cc33cc"><span>В</span></div>
+                                    <span class="get-time">1 дн</span>
+                                </figure>
+                                <div class="company-light-main">
+                                    <h5 class="company-light-title"><a href="job-details.html">Ищу компаньонов в Научную Артель, Химия,биохимия</a></h5>
+                                    <p>Василий Логинов » 23 янв 2020, 00:37</p>
+                                    <p class="view-text"><span>1 300 просмотров</span>&nbsp;&nbsp;&nbsp;3 ответа</p>
+                                </div>
+                            </article>
+                        </td>
+                        <td class="table-job-offers-meta td-hidden">
+                            <div class="object-inline"><span class="icon icon-sm text-primary mdi mdi-eye"></span><span>1300</span></div>
+                        </td>
+                        <td class="table-job-offers-meta td-hidden">
+                            <div class="object-inline"><span class="icon icon-1 text-primary mdi mdi-comment-outline"></span><span>3</span></div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="table-job-offers-date hours-hidden"><span>1 день назад</span></td>
+                        <td class="table-job-offers-main">
+                            <!-- Company Light-->
+                            <article class="company-light">
+                                <figure class="company-light-figure">
+                                    <div class="comment-avatar" style="background-color:#00cc00"><span>П</span></div>
+                                    <span class="get-time">5 дн</span>
+                                </figure>
+                                <div class="company-light-main">
+                                    <h5 class="company-light-title"><a href="job-details.html">Ищу партнёра по бизнесу для открытия производственной мастерской.</a></h5>
+                                    <p>RVD » 20 окт 2020, 10:46</p>
+                                    <p class="view-text"><span>150 просмотров</span>&nbsp;&nbsp;&nbsp;7 ответов</p>
+                                </div>
+                            </article>
+                        </td>
+                        <td class="table-job-offers-meta td-hidden">
+                            <div class="object-inline"><span class="icon icon-sm text-primary mdi mdi-eye"></span><span>150</span></div>
+                        </td>
+                        <td class="table-job-offers-meta td-hidden">
+                            <div class="object-inline"><span class="icon icon-1 text-primary mdi mdi-comment-outline"></span><span>7</span></div>
+                        </td>
+                    </tr>
+                    </tbody></table>
+            </div>
+            <!-- Bootstrap Pagination-->
+            <nav class="pagination-outer text-center" aria-label="Page navigation">
+                <div class="pagination">
+                    <div class="page-item page-item-control"><a class="page-link" href="#" aria-label="Previous">Prev</a></div>
+                    <div class="page-item"><a class="page-link" href="#">1</a></div>
+                    <div class="page-item"><a class="page-link" href="#">2</a></div>
+                    <div class="page-item active"><span class="page-link">3</span></div>
+                    <div class="page-item"><a class="page-link" href="#">4</a></div>
+                    <div class="page-item page-item-control"><a class="page-link" href="#" aria-label="Next">Next</a></div>
+                </div>
+            </nav>
+        </div>
+    </section>
+    <div th:replace="~{fragments/footer :: footer}"></div>
+</body>
+</html>
