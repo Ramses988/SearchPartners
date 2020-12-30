@@ -1,6 +1,6 @@
 package com.search_partners.service;
 
-import com.search_partners.model.PostEntity;
+import com.search_partners.model.Post;
 import com.search_partners.repository.PostRepository;
 import com.search_partners.util.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +21,8 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public List<PostEntity> getPosts() {
-        List<PostEntity> posts = repository.findAll();
+    public List<Post> getPosts() {
+        List<Post> posts = repository.findAll();
         posts.forEach(DateUtils::getDuration);
         return posts;
     }

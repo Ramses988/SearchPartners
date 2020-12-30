@@ -8,18 +8,19 @@ import java.time.LocalDateTime;
 @Data
 @Entity
 @Table(name="posts")
-public class PostEntity {
+public class Post {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private String name;
     private String title;
     private LocalDateTime date;
     private long show;
     private long comments;
-    private String initial;
-    private String color;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
     @Transient
     private String duration;

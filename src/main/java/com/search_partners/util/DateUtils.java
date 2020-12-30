@@ -1,13 +1,13 @@
 package com.search_partners.util;
 
-import com.search_partners.model.PostEntity;
+import com.search_partners.model.Post;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
 public class DateUtils {
 
-    public static void getDuration(PostEntity post) {
+    public static void getDuration(Post post) {
         LocalDateTime date = LocalDateTime.now();
         long value = post.getDate().until(date, ChronoUnit.MONTHS);
         if (value >= 1) {

@@ -46,15 +46,15 @@
                             <!-- Company Light-->
                             <article class="company-light">
                                 <figure class="company-light-figure">
-                                    <div class="comment-avatar" th:style="'background-color:'+${post.color}">
-                                        <span th:text="${post.initial}"></span></div>
+                                    <div class="comment-avatar" th:style="'background-color:'+${post.user.color}">
+                                        <span th:text="${post.user.initial}"></span></div>
                                     <span class="get-time" th:text="${post.durationShort}"></span>
                                 </figure>
                                 <div class="company-light-main">
                                     <h5 class="company-light-title">
                                         <a href="job-details.html">[[${post.title}]]</a>
                                     </h5>
-                                    <p th:text="${post.name}+' » '+${#temporals.format(post.date, 'dd MMM yyyy, HH:mm')}"></p>
+                                    <p th:text="${post.user.name}+' » '+${#temporals.format(post.date, 'dd MMM yyyy, HH:mm')}"></p>
                                     <p class="view-text"><span th:text="${post.show}+' просмотров'"></span>&nbsp;&nbsp;&nbsp;[[${post.comments}]] ответов</p>
                                 </div>
                             </article>
