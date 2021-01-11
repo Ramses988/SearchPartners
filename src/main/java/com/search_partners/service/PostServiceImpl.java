@@ -27,4 +27,9 @@ public class PostServiceImpl implements PostService {
         posts.forEach(DateUtils::getDuration);
         return posts;
     }
+
+    @Override
+    public Post getPost(long id) {
+        return repository.findById(id).orElse(null);
+    }
 }

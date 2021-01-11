@@ -7,4 +7,6 @@ public interface PostService {
 
     Page<Post> getPosts(int page);
 
+    Post getPost(long id);
+
 }

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html class="wide desktop landscape rd-navbar-static-linked" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Blog post</title>
+    <div th:replace="~{fragments/links :: links1}"></div>
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:400%7CUbuntu:300,400,500,600,700">
+</head>
+<body>
+<div th:replace="~{fragments/menu :: menu}"></div>
+<div th:replace="~{fragments/title :: title(${post.title})}"></div>
+<section class="section section-md">
+    <div class="container">
+        <div class="blog-layout">
+            <div class="blog-layout-main">
+                <article class="post-creative">
+                    <div class="post-creative-meta">
+                        <div class="post-creative-meta-inner">
+                            <div class="post-creative-author">
+                                <div class="avatar" th:style="'background-color:'+${post.user.color}">
+                                    <span th:text="${post.user.initial}"></span></div>
+                                <p>
+                                    от&nbsp;<a href="#">[[${post.user.name}]]</a></p>
+                            </div>
+                            <div>
+                                <ul class="post-creative-meta-list">
+                                    <li> <span class="icon mdi mdi-clock"> </span>
+                                        <time th:text="${#temporals.format(post.date, 'dd MMM yyyy')}"></time>
+                                    </li>
+                                    <li><span class="icon fl-justicons-visible6"></span>
+                                        <span th:text="${post.show}"> </span></li>
+                                    <li><span class="icon mdi mdi-message-outline"></span>
+                                        <span th:text="${post.comments}"></span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <h5 th:text="${post.title}"></h5>
+                    <p th:text="${post.text}"></p>
+                    <div class="post-creative-footer">
+                        <div class="post-creative-footer-inner">
+                            <p>Поделиться</p>
+                            <div>
+                                <ul class="list-inline list-inline-xs">
+                                    <li><a class="icon icon-xxs icon-filled icon-filled-brand icon-circle fa fa-facebook" href="#"></a></li>
+                                    <li><a class="icon icon-xxs icon-filled icon-filled-brand icon-circle fa fa-google-plus" href="#"></a></li>
+                                    <li><a class="icon icon-xxs icon-filled icon-filled-brand icon-circle fa fa-twitter" href="#"></a></li>
+                                    <li><a class="icon icon-xxs icon-filled icon-filled-brand icon-circle fa fa-pinterest-p" href="#"></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+                <div class="section-sm section-bottom-0">
+                    <p class="blog-layout-title text-center">Комментарии 5</p>
+                    <!-- Comment-->
+                    <div class="comment-group">
+                        <article class="comment comment-box">
+                            <div class="comment-aside">
+                                <div class="comment-avatar" style="background-color:#ffcc33"><span>M</span></div>
+                            </div>
+                            <div class="comment-header">
+                                <p class="comment-title">Miranda</p>
+                            </div>
+                            <div class="comment-main">
+                                <form class="rd-mailform rd-mailform-outline" novalidate="novalidate">
+                                    <div class="form-wrap">
+                                        <label class="form-label rd-input-label" for="comment-message">Написать комментарий</label>
+                                        <textarea class="form-input form-control-has-validation form-control-last-child" id="comment-message" name="message" data-constraints="@Required"></textarea><span class="form-validation"></span>
+                                    </div>
+                                    <div class="from-wrap">
+                                        <button class="button button-primary" type="submit">Отправить</button>
+                                </form>
+                            </div>
+                        </article>
+                    </div>
+                    <div class="comment-group">
+                        <!-- Comment-->
+                        <article class="comment">
+                            <div class="comment-aside">
+                                <div class="comment-avatar" style="background-color:#00cc00"><span>П</span></div>
+                            </div>
+                            <div class="comment-header">
+                                <div class="comment-header-inner">
+                                    <p class="comment-title">Пользователь35</p><span class="comment-time">25 Окт. 2020, 12:15</span>
+                                </div>
+                            </div>
+                            <div class="comment-main">
+                                <div class="comment-text">
+                                    <p>какая доля продается, какова ее стоимость?</p>
+                                </div>
+                                <div class="comment-footer">
+                                    <ul class="comment-list">
+                                        <li> <a class="comment-link" href="#"><span class="icon mdi mdi-thumb-up-outline"></span><span>32</span></a></li>
+                                        <li><a class="comment-link" href="#"><span class="icon mdi mdi-comment-outline"></span><span>Ответить</span></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </article>
+                        <div class="comment-group">
+                            <!-- Comment-->
+                            <article class="comment">
+                                <div class="comment-aside">
+                                    <div class="comment-avatar" style="background-color:#3366cc"><span>С</span></div>
+                                </div>
+                                <div class="comment-header">
+                                    <div class="comment-header-inner">
+                                        <p class="comment-title">Станислав Успех</p><span class="comment-time">25 Окт. 2020, 15:03</span>
+                                    </div>
+                                </div>
+                                <div class="comment-main">
+                                    <div class="comment-text">
+                                        <p>Напишите подробней 89261694200</p>
+                                    </div>
+                                    <div class="comment-footer">
+                                        <ul class="comment-list">
+                                            <li> <a class="comment-link" href="#"><span class="icon mdi mdi-thumb-up-outline"></span><span>5</span></a></li>
+                                            <li><a class="comment-link" href="#"><span class="icon mdi mdi-comment-outline"></span><span>Ответить</span></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+                    <div class="comment-group">
+                        <!-- Comment-->
+                        <article class="comment">
+                            <div class="comment-aside">
+                                <div class="comment-avatar" style="background-color:#00cc00"><span>P</span></div>
+                            </div>
+                            <div class="comment-header">
+                                <div class="comment-header-inner">
+                                    <p class="comment-title">psparnas43</p><span class="comment-time">25 Окт. 2020, 13:05</span>
+                                </div>
+                            </div>
+                            <div class="comment-main">
+                                <div class="comment-text">
+                                    <p>Добрый день! Заинтересовало ваше предложение, как с вами связаться для обсуждения сотрудничества?</p>
+                                </div>
+                                <div class="comment-footer">
+                                    <ul class="comment-list">
+                                        <li> <a class="comment-link" href="#"><span class="icon mdi mdi-thumb-up-outline"></span><span>0</span></a></li>
+                                        <li><a class="comment-link" href="#"><span class="icon mdi mdi-comment-outline"></span><span>Ответить</span></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                    <div class="comment-group">
+                        <!-- Comment-->
+                        <article class="comment">
+                            <div class="comment-aside">
+                                <div class="comment-avatar" style="background-color:#cc33cc"><span>G</span></div>
+                            </div>
+                            <div class="comment-header">
+                                <div class="comment-header-inner">
+                                    <p class="comment-title">gregorylub</p><span class="comment-time">25 Окт. 2020, 17:55</span>
+                                </div>
+                            </div>
+                            <div class="comment-main">
+                                <div class="comment-text">
+                                    <p>Добрый день! Заинтересовало ваше предложение, как с вами связаться для обсуждения сотрудничества и получения информации
+                                        Григорий</p>
+                                </div>
+                                <div class="comment-footer">
+                                    <ul class="comment-list">
+                                        <li> <a class="comment-link" href="#"><span class="icon mdi mdi-thumb-up-outline"></span><span>0</span></a></li>
+                                        <li><a class="comment-link" href="#"><span class="icon mdi mdi-comment-outline"></span><span>Ответить</span></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+            <div class="blog-layout-aside">
+                <div class="blog-layout-aside-item">
+                    <p class="blog-layout-title">Последние посты</p>
+                    <div class="post-light-group">
+                        <!-- Post Light--><a class="post-light" href="blog-post.html">
+                        <div class="post-light-main">
+                            <p class="post-light-title">web программист - ищу партнера / проекты</p>
+                            <time class="post-light-time" datetime="2019">23 Окт. 2020, 12:18</time>
+                        </div></a>
+                        <!-- Post Light--><a class="post-light" href="blog-post.html">
+                        <div class="post-light-main">
+                            <p class="post-light-title">Ищу надежного партнера в интересный проект. Готов инвестировать.</p>
+                            <time class="post-light-time" datetime="2019">19 Окт. 2020, 19:46</time>
+                        </div></a>
+                        <!-- Post Light--><a class="post-light" href="blog-post.html">
+                        <div class="post-light-main">
+                            <p class="post-light-title">Участок под постройку ТЦ</p>
+                            <time class="post-light-time" datetime="2019">25 Окт. 2020, 12:16</time>
+                        </div></a>
+                    </div>
+                </div>
+                <div class="blog-layout-aside-item">
+                    <p class="blog-layout-title">Минуточку внимания</p>
+                    <div class="post-light-group">
+                        <img src="/images/reklama.png" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div th:replace="~{fragments/footer :: footer}"></div>
+</body>
+</html>
