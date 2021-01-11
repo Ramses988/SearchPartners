@@ -1,11 +1,10 @@
 package com.search_partners.service;
 
 import com.search_partners.model.Post;
-
-import java.util.List;
+import org.springframework.data.domain.Page;
 
 public interface PostService {
 
-    List<Post> getPosts();
+    Page<Post> getPosts(int page);
 
 }

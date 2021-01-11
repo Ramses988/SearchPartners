@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class PostController {
@@ -17,8 +18,9 @@ public class PostController {
     }
 
     @GetMapping("/posts")
-    public String getPosts(Model model) {
-        model.addAttribute("posts", service.getPosts());
+    public String getPosts(@RequestParam(defaultValue = "0", required = false) int page,
+                           Model model) {
+        model.addAttribute("posts", service.getPosts(page));
         return "post/posts";
     }
 
