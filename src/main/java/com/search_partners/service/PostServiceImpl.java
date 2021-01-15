@@ -30,6 +30,7 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public Post getPost(long id) {
+        //TODO: Add check exception if post equals null
         return repository.findById(id).orElse(null);
     }
 }

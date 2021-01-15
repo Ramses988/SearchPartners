@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html class="wide desktop landscape rd-navbar-static-linked" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Blog post</title>
+    <div th:replace="~{fragments/links :: links1}"></div>
+</head>
+<body>
+<div th:replace="~{fragments/menu :: menu}"></div>
+<section class="section breadcrumbs-custom">
+    <div class="breadcrumbs-custom-main bg-image bg-primary">
+        <div class="container">
+            <div class="layout-2">
+                <div class="layout-2-item layout-2-item-main">
+                    <!-- Profile Light-->
+                    <article class="profile-light">
+                        <img class="profile-light-image" src="/images/no_avatar.gif" alt="" width="100" height="100">
+                        <div class="profile-light-main">
+                            <h4 class="profile-light-name" th:text="${user.name}"></h4>
+                            <h6 class="profile-light-position" th:text="${user.email}"></h6>
+                            <div class="profile-light-divider"></div>
+                            <ul class="profile-light-list">
+                                <li>
+                                    <span class="icon icon-sm mdi mdi-map-marker"></span>
+                                    <span>Город: Москва</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="breadcrumbs-custom-aside">
+        <div class="container">
+            <ul class="breadcrumbs-custom-path">
+                <li><a href="index.html">Главная</a></li>
+                <li class="active">Написать в блог</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<section class="section section-md text-center">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-xl-10">
+                <h4>Редактировать учетную запись</h4>
+                <!-- Bootstrap tabs -->
+                <div class="tabs-custom tabs-horizontal tabs-minimal" id="tabs-1">
+                    <!-- Nav tabs-->
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item" role="presentation"><a class="nav-link active show" href="#tabs-1-1" data-toggle="tab">Мой профиль</a></li>
+                        <li class="nav-item" role="presentation"><a class="nav-link" href="#tabs-1-2" data-toggle="tab">Смена пароля</a></li>
+                    </ul>
+                    <!-- Tab panes-->
+                    <div class="tab-content" style="letter-spacing: .05em;">
+                        <div class="tab-pane fade active show" id="tabs-1-1">
+                            <div class="block-form">
+                                <h5>Профиль</h5>
+                                <hr>
+                                <!-- RD Mailform-->
+                                <div class="rd-form rd-mailform form-lg form-lg form-corporate" novalidate="novalidate">
+                                    <div class="row row-40">
+                                        <div class="col-md-6">
+                                            <div class="form-wrap">
+                                                <label class="form-label-outside" for="general-information-name">Никнейм</label>
+                                                <div class="form-wrap-inner">
+                                                    <input class="form-input only-read" id="general-information-name" form="submit-resume-form" th:value="${user.name}" type="text" name="name" readonly>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-wrap">
+                                                <label class="form-label-outside" for="general-information-email">Email</label>
+                                                <div class="form-wrap-inner">
+                                                    <input class="form-input only-read" id="general-information-email" form="submit-resume-form" th:value="${user.email}" type="email" name="email" readonly>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-wrap">
+                                                <label class="form-label-outside" for="general-information-profession">Меня зовут</label>
+                                                <div class="form-wrap-inner">
+                                                    <input class="form-input form-control-has-validation" id="general-information-profession" form="submit-resume-form" type="text" name="profession" data-constraints="@Required"><span class="form-validation"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-wrap">
+                                                <label class="form-label-outside" for="general-information-job-category">Сфера деятельности</label>
+                                                <div class="form-wrap-inner">
+                                                    <!-- Select 2-->
+                                                    <select class="form-input select form-control-has-validation form-control-last-child select2-hidden-accessible" id="general-information-job-category" form="submit-resume-form" data-placeholder="Выберите из списка" name="resume-category" data-minimum-results-for-search="Infinity" data-constraints="@Selected" tabindex="-1" aria-hidden="true">
+                                                        <option label="Выберите из списка"></option>
+                                                        <option value="1">Web Design</option>
+                                                        <option value="2">Development</option>
+                                                        <option value="3">Marketing</option>
+                                                    </select>
+                                                    <span class="form-validation"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-wrap">
+                                                <label class="form-label-outside" for="general-information-job-category">Моя страна</label>
+                                                <div class="form-wrap-inner">
+                                                    <!-- Select 2-->
+                                                    <select class="form-input select form-control-has-validation form-control-last-child select2-hidden-accessible" id="general-information-job-category" form="submit-resume-form" data-placeholder="Выберите из списка" name="resume-category" data-minimum-results-for-search="Infinity" data-constraints="@Selected" tabindex="-1" aria-hidden="true">
+                                                        <option label="Выберите из списка"></option>
+                                                        <option value="1">Web Design</option>
+                                                        <option value="2">Development</option>
+                                                        <option value="3">Marketing</option>
+                                                    </select>
+                                                    <span class="form-validation"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-wrap">
+                                                <label class="form-label-outside" for="general-information-job-category">Мой город</label>
+                                                <div class="form-wrap-inner">
+                                                    <!-- Select 2-->
+                                                    <select class="form-input select form-control-has-validation form-control-last-child select2-hidden-accessible" id="general-information-job-category" form="submit-resume-form" data-placeholder="Выберите из списка" name="resume-category" data-minimum-results-for-search="Infinity" data-constraints="@Selected" tabindex="-1" aria-hidden="true">
+                                                        <option label="Выберите из списка"></option>
+                                                        <option value="1">Web Design</option>
+                                                        <option value="2">Development</option>
+                                                        <option value="3">Marketing</option>
+                                                    </select>
+                                                    <span class="form-validation"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-wrap">
+                                                <label class="form-label-outside" for="general-information-job-category">Ваш пол</label>
+                                                <div class="form-wrap-inner">
+                                                    <!-- Select 2-->
+                                                    <select class="form-input select form-control-has-validation form-control-last-child select2-hidden-accessible" id="general-information-job-category" form="submit-resume-form" name="resume-category" data-minimum-results-for-search="Infinity" data-constraints="@Selected" tabindex="-1" aria-hidden="true">
+                                                        <option value></option>
+                                                        <option value="1">Мужской</option>
+                                                        <option value="2">Женский</option>
+                                                    </select>
+                                                    <span class="form-validation"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 col-sub">
+                                            <div class="form-wrap">
+                                                <label class="form-label-outside" for="general-information-job-category">Дата рождения</label>
+                                                <div class="form-wrap-inner">
+                                                    <!-- Select 2-->
+                                                    <select class="form-input select form-control-has-validation form-control-last-child select2-hidden-accessible" id="general-information-job-category" form="submit-resume-form" data-placeholder="День" name="resume-category" data-minimum-results-for-search="Infinity" data-constraints="@Selected" tabindex="-1" aria-hidden="true">
+                                                        <option label="День"></option>
+                                                        <option value="1">Web Design</option>
+                                                        <option value="2">Development</option>
+                                                        <option value="3">Marketing</option>
+                                                    </select>
+                                                    <span class="form-validation"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 col-sub">
+                                            <div class="form-wrap">
+                                                <label class="form-label-outside col-md-none" for="general-information-job-category"></label>
+                                                <div class="form-wrap-inner label-none">
+                                                    <!-- Select 2-->
+                                                    <select class="form-input select form-control-has-validation form-control-last-child select2-hidden-accessible" id="general-information-job-category" form="submit-resume-form" data-placeholder="Месяц" name="resume-category" data-minimum-results-for-search="Infinity" data-constraints="@Selected" tabindex="-1" aria-hidden="true">
+                                                        <option label="Месяц"></option>
+                                                        <option value="1">Web Design</option>
+                                                        <option value="2">Development</option>
+                                                        <option value="3">Marketing</option>
+                                                    </select>
+                                                    <span class="form-validation"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 col-sub">
+                                            <div class="form-wrap">
+                                                <label class="form-label-outside col-md-none" for="general-information-job-category"></label>
+                                                <div class="form-wrap-inner label-none">
+                                                    <!-- Select 2-->
+                                                    <select class="form-input select form-control-has-validation form-control-last-child select2-hidden-accessible" id="general-information-job-category" form="submit-resume-form" data-placeholder="Год" name="resume-category" data-minimum-results-for-search="Infinity" data-constraints="@Selected" tabindex="-1" aria-hidden="true">
+                                                        <option label="Год"></option>
+                                                        <option value="1">Web Design</option>
+                                                        <option value="2">Development</option>
+                                                        <option value="3">Marketing</option>
+                                                    </select>
+                                                    <span class="form-validation"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="button button-sm button-primary">Сохранить</button>
+                        </div>
+                        <div class="tab-center tab-pane fade" id="tabs-1-2">
+                            <div class="block-form">
+                                <h5>Пароль</h5>
+                                <hr>
+                                <!-- RD Mailform-->
+                                <div class="rd-form rd-mailform form-lg form-corporate" novalidate="novalidate">
+                                    <div class="form-wrap">
+                                        <label class="form-label-outside" for="education-school-name">Текущий пароль</label>
+                                        <div class="form-wrap-inner">
+                                            <input class="form-input form-control-has-validation" id="education-school-name" form="submit-resume-form" type="text" name="school-name" data-constraints="@Required">
+                                            <span class="form-validation"></span>
+                                        </div>
+                                    </div>
+                                    <div class="form-wrap">
+                                        <label class="form-label-outside" for="education-qualification">Новый пароль</label>
+                                        <div class="form-wrap-inner">
+                                            <input class="form-input form-control-has-validation" id="education-qualification" form="submit-resume-form" type="text" name="qualification" data-constraints="@Required">
+                                            <span class="form-validation"></span>
+                                        </div>
+                                    </div>
+                                    <div class="form-wrap">
+                                        <label class="form-label-outside" for="education-period">Ещё раз новый пароль</label>
+                                        <div class="form-wrap-inner">
+                                            <input class="form-input form-control-has-validation" id="education-period" form="submit-resume-form" type="text" name="period" data-constraints="@Required">
+                                            <span class="form-validation"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="button button-sm button-primary">Сменить</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div th:replace="~{fragments/footer :: footer}"></div>
+</body>
+</html>

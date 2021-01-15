@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html class="wide desktop landscape rd-navbar-static-linked" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Login</title>
+    <div th:replace="~{fragments/links :: links1}"></div>
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:400%7CUbuntu:300,400,500,600,700">
+</head>
+<body>
+<div th:replace="~{fragments/menu :: menu}"></div>
+<section class="section section-md text-center">
+    <div class="container">
+        <div class="block-1">
+            <h4>Вход в личный кабинет</h4>
+            <div th:if="${error}" id="error-block">
+                <p>Неверный логин или пароль</p>
+            </div>
+            <div class="group-justify"><a class="button button-sm button-facebook button-icon button-icon-left" href="#"><span class="icon fa fa-facebook"></span>Facebook</a><a class="button button-sm button-twitter button-icon button-icon-left" href="#"><span class="icon fa fa-twitter"></span>Twitter</a><a class="button button-sm button-google button-icon button-icon-left" href="#"><span class="icon fa fa-google-plus"></span>Google+</a></div>
+            <div class="text-decoration-lines"><span class="text-decoration-lines-content">or</span></div>
+            <form class="rd-form form-centered form-filled" action="/check_login" method="post">
+                <div class="form-wrap">
+                    <input class="form-input" type="email" id="username" name="username" placeholder="E-mail" required>
+                </div>
+                <div class="form-wrap">
+                    <input class="form-input" type="password" id="password" name="password" placeholder="Пароль" required>
+                </div>
+                <div class="row row-15 row-x-14">
+                    <div class="col-sm-6">
+                        <button class="button button-block button-primary" type="submit">Войти</button>
+                    </div>
+                    <div class="col-sm-6">
+                        <a class="button button-block button-default-outline" href="#">Зарегистрироваться</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+<div th:replace="~{fragments/footer :: footer}"></div>
+</body>
+</html>
