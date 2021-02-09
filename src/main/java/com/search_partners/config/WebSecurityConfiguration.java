@@ -26,6 +26,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
+        // TODO: Add encoder password
         return NoOpPasswordEncoder.getInstance();
     }
 
@@ -46,6 +47,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .defaultSuccessUrl("/")
                 .failureUrl("/login?error=true")
                 .and()
+                // TODO: Enable csrf
                 .csrf().disable();
     }
 }

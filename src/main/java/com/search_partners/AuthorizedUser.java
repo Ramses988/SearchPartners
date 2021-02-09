@@ -18,6 +18,14 @@ public class AuthorizedUser implements UserDetails {
         return user.getId();
     }
 
+    public String getName() {
+        return user.getName();
+    }
+
+    public String getInitial() {
+        return user.getInitial();
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return user.getRoles();

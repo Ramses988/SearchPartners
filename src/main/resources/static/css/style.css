@@ -183,6 +183,9 @@ h6, .h6 {
 }
 
 @media (min-width: 1200px) {
+    #rd-navbar-profile {
+        margin-top: 41px;
+    }
     .container {
         max-width: 1200px;
     }
@@ -606,6 +609,16 @@ h6, .h6 {
 
 .mdi-eye:before {
     content: "\f2fd";
+}
+
+.mdi-email:before {
+    content: "\f2e3";
+}
+
+.mdi-menu-down:before {
+    content: "\f44f";
+    color:#000;
+    top: 2px;
 }
 
 .mdi-google:before {
@@ -2309,8 +2322,16 @@ html a.icon-filled-brand:active, html a.icon-filled-brand:focus, html a.icon-fil
 	font-size: 15px;
 }
 
+.icon-sms {
+    font-size: 17px;
+}
+
 .icon-sm {
-	font-size: 19px;
+    font-size: 19px;
+}
+
+.icon-lgs {
+    font-size: 25px;
 }
 
 .icon-lg {
@@ -3053,6 +3074,9 @@ hr {
 	.form-layout-search.form-lg .form-wrap-button-search-md-lg {
 		min-width: 60px;
 	}
+    #rd-navbar-profile {
+        margin-top: 32px;
+    }
 }
 
 @media (min-width: 768px) {
@@ -3425,6 +3449,17 @@ hr {
 		height: auto;
 		max-width: none;
 	}
+    .menu-margin {
+        padding: 15px 0 10px 25px;
+    }
+
+    .menu-item-user {
+        font-size: 15px;
+    }
+
+    #rd-navbar-profile-mobile {
+        margin-top: 10px;
+    }
 	@supports (object-fit: cover) {
 		.col-12.col-lg-4 .post-minimal-media img {
 			left: 0;
@@ -5250,7 +5285,7 @@ p.footer-creative-title {
 }
 
 html .text-primary {
-    color: #1087eb;
+    color: #9a9a9a;
 }
 
 html .text-gray-800 {
@@ -6430,25 +6465,37 @@ html:not(.lt-ie10) .not-animated {
 	border: 1px solid #e0e0e0;
 }
 
-.rd-navbar-popup > * {
-	position: relative;
-	z-index: 1;
-	opacity: 0;
-	visibility: hidden;
-	transition: .5s;
-	transform-origin: 50% 0;
-	transform: scale3d(1, 0.95, 1);
+#rd-navbar-profile, #rd-navbar-profile-mobile {
+    position: absolute;
+    right: 0;
+    z-index: 1030;
+    width: calc(100vw - 10px);
+    opacity: 0;
+    visibility: hidden;
+    transition: .2s;
+    overflow: hidden;
+    border: 1px solid #e0e0e0;
 }
 
-.rd-navbar-popup.active {
-	opacity: 1;
-	visibility: visible;
+.rd-navbar-popup > *, #rd-navbar-profile > *, #rd-navbar-profile-mobile > * {
+    position: relative;
+    z-index: 1;
+    opacity: 0;
+    visibility: hidden;
+    transition: .5s;
+    transform-origin: 50% 0;
+    transform: scale3d(1, 0.95, 1);
 }
 
-.rd-navbar-popup.active > * {
-	opacity: 1;
-	visibility: visible;
-	transform: scale3d(1, 1, 1);
+.rd-navbar-popup.active, #rd-navbar-profile.active, #rd-navbar-profile-mobile.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.rd-navbar-popup.active > *, #rd-navbar-profile.active > *, #rd-navbar-profile-mobile.active > * {
+    opacity: 1;
+    visibility: visible;
+    transform: scale3d(1, 1, 1);
 }
 
 .rd-navbar-popup .rd-navbar-popup-title {
@@ -6459,6 +6506,9 @@ html:not(.lt-ie10) .not-animated {
 	.rd-navbar-popup {
 		width: 370px;
 	}
+    #rd-navbar-profile {
+        width: 270px;
+    }
 }
 
 .ios.landscape.mobile .rd-navbar-popup {
@@ -7751,11 +7801,11 @@ html.rd-navbar-fixed-linked .page {
 }
 
 @media (min-width: 1600px) {
-	.rd-navbar-classic.rd-navbar-static .rd-navbar-popup {
-		left: 50%;
-		transform: translate3d(-50%, 0, 0);
-		right: auto;
-	}
+    .rd-navbar-classic.rd-navbar-static .rd-navbar-popup, #rd-navbar-profile {
+        left: 50%;
+        transform: translate3d(-50%, 0, 0);
+        right: auto;
+    }
 }
 
 .rd-navbar-classic.rd-navbar-static.rd-navbar--is-stuck, .rd-navbar-classic.rd-navbar-static.rd-navbar--is-clone {
@@ -9222,6 +9272,58 @@ html.rd-navbar-fixed-linked .page {
 
 /* Start my code*/
 
+.sep-menu {
+    border-top: 1px solid #d6d6d6;
+}
+
+.menu-item-user {
+    cursor: pointer;
+    color: #151515;
+}
+
+.menu-margin {
+    padding: 10px 0 7px 25px;
+}
+
+.menu-item-user:hover {
+    background: #f3f4f9;
+    color: #1087eb;
+}
+
+.title-menu {
+    color: #000;
+    background: #f3f4f9;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.bg-color-white {
+    background: #fff;
+}
+
+#ul-login-block > li {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.line-sep {
+    margin: 10px;
+}
+
+#login-name {
+    color: #000;
+    font: 500 14px/25px "Ubuntu", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    letter-spacing: .1em;
+    cursor: pointer;
+}
+
+.line-sep {
+    border-right: 2px solid currentColor;
+    opacity: .3;
+    height: 36px;
+    width: 0;
+}
+
 .user-answer, .user-question {
 	padding: 15px;
 	border-radius: 12px;
@@ -9418,15 +9520,34 @@ html.rd-navbar-fixed-linked .page {
 	position: relative;
 }
 
+.comment-avatar-min {
+    width: 23px;
+    min-width: 23px;
+    height: 23px;
+    border-radius: 50%;
+    margin-right: 3px;
+    position: relative;
+}
+
 .comment-avatar span {
-	font-weight: 500;
-	color: #fff;
-	font-size: 25px;
-	margin: 0;
-	position: absolute;
-	top: 46%;
+    font-weight: 500;
+    color: #fff;
+    font-size: 25px;
+    margin: 0;
+    position: absolute;
+    top: 46%;
     left: 52%;
-    transform: translate(-50%, -50%) 
+    transform: translate(-50%, -50%)
+}
+
+.comment-avatar-min span {
+    color: #fff;
+    font-size: 15px;
+    margin: 0;
+    position: absolute;
+    top: 48%;
+    left: 53%;
+    transform: translate(-50%, -50%)
 }
 
 .only-read:hover {
@@ -9501,6 +9622,12 @@ html.rd-navbar-fixed-linked .page {
 		display: flex;
 		padding-bottom: 20px;
 	}
+}
+
+@media (min-width: 992px) {
+    .mobile-profile {
+        display: none;
+    }
 }
 
 @media (max-width: 767px) {
@@ -9587,6 +9714,10 @@ html.rd-navbar-fixed-linked .page {
 		max-width: 100%;
 	}
 
+    #ul-login-block {
+        display: none;
+    }
+
 	#text-message {
 		min-height: 120px;
 	}
@@ -9659,6 +9790,19 @@ html.rd-navbar-fixed-linked .page {
 		text-align: center;
 		margin-top: 5px;
 	}
+
+    .menu-margin {
+        padding: 15px 0 10px 25px;
+    }
+
+    .menu-item-user {
+        font-size: 15px;
+    }
+
+    #rd-navbar-profile-mobile {
+        margin-top: 10px;
+        width: 92vw;
+    }
 }
 
 /* End my code */

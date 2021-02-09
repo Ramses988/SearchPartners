@@ -1,4 +1,4 @@
-<th:block xmlns:th="http://www.thymeleaf.org" th:fragment="menu">
+<th:block xmlns:th="http://www.thymeleaf.org" th:fragment="menu" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <div class="page animated">
         <!-- Page Header-->
         <header class="section page-header">
@@ -72,72 +72,128 @@
                                     </ul>
                                 </div>
                             </div>
-                            <div class="rd-navbar-aside">
-                                <div class="rd-navbar-aside-item">
-                                    <button class="button button-xs button-primary-outline button-icon button-icon-left rd-navbar-popup-toggle toggle-original" data-rd-navbar-toggle="#rd-navbar-register">
-                                        <span class="icon mdi mdi-account"></span>Создать</button>
-                                    <div class="rd-navbar-popup bg-gray-100 toggle-original-elements" id="rd-navbar-register">
-                                        <h5 class="rd-navbar-popup-title">Регистрация</h5>
-                                        <form class="rd-form rd-mailform form-compact" data-form-output="form-output-global" data-form-type="contact" method="post" action="url" novalidate="novalidate">
-                                            <div class="form-wrap">
-                                                <input class="form-input form-control-has-validation" id="rd-navbar-register-name" type="text" name="username" data-constraints="@Required">
-                                                <span class="form-validation"></span>
-                                                <label class="form-label rd-input-label" for="rd-navbar-register-name">Логин</label>
-                                            </div>
-                                            <div class="form-wrap">
-                                                <input class="form-input form-control-has-validation" id="rd-navbar-register-email" type="email" name="email" data-constraints="@Email @Required">
-                                                <span class="form-validation"></span>
-                                                <label class="form-label rd-input-label" for="rd-navbar-register-email">E-mail</label>
-                                            </div>
-                                            <div class="form-wrap">
-                                                <input class="form-input form-control-has-validation" id="rd-navbar-register-password" type="password" name="password" data-constraints="@Required">
-                                                <span class="form-validation"></span>
-                                                <label class="form-label rd-input-label" for="rd-navbar-register-password">Пароль</label>
-                                            </div>
-                                            <div class="form-wrap">
-                                                <input class="form-input form-control-has-validation" id="rd-navbar-register-password-confirm" type="password" name="password-confirm" data-constraints="@Required">
-                                                <span class="form-validation"></span>
-                                                <label class="form-label rd-input-label" for="rd-navbar-register-password-confirm">Подтвердите пароль</label>
-                                            </div>
-                                            <div class="form-wrap">
-                                                <button class="button button-block button-primary" type="submit">Создать</button>
-                                            </div>
-                                            <div class="form-wrap form-wrap-ally">
-                                                <div class="text-decoration-lines rd-navbar-popup-title">
-                                                    <span class="text-decoration-lines-content">Или войдите с помощью других сервисов</span>
+                            <div sec:authorize="isAnonymous()">
+                                <div class="rd-navbar-aside">
+                                    <div class="rd-navbar-aside-item">
+                                        <button class="button button-xs button-primary-outline button-icon button-icon-left rd-navbar-popup-toggle toggle-original" data-rd-navbar-toggle="#rd-navbar-register">
+                                            <span class="icon mdi mdi-account"></span>Создать</button>
+                                        <div class="rd-navbar-popup bg-gray-100 toggle-original-elements" id="rd-navbar-register">
+                                            <h5 class="rd-navbar-popup-title">Регистрация</h5>
+                                            <form class="rd-form rd-mailform form-compact" data-form-output="form-output-global" data-form-type="contact" method="post" action="url" novalidate="novalidate">
+                                                <div class="form-wrap">
+                                                    <input class="form-input form-control-has-validation" id="rd-navbar-register-name" type="text" name="username" data-constraints="@Required">
+                                                    <span class="form-validation"></span>
+                                                    <label class="form-label rd-input-label" for="rd-navbar-register-name">Логин</label>
                                                 </div>
-                                            </div>
-                                            <div class="form-wrap form-wrap-ally">
-                                                <div class="button-group">
-                                                    <a class="button button-facebook button-icon button-icon-only button-winona" href="#" aria-label="Facebook">
-                                                        <span class="icon mdi mdi mdi-facebook"></span></a>
-                                                    <a class="button button-twitter button-icon button-icon-only button-winona" href="#" aria-label="Twitter">
-                                                        <span class="icon mdi mdi-twitter"></span></a><a class="button button-google button-icon button-icon-only button-winona" href="#" aria-label="Google+">
-                                                    <span class="icon mdi mdi-google"></span>
-                                                </a>
+                                                <div class="form-wrap">
+                                                    <input class="form-input form-control-has-validation" id="rd-navbar-register-email" type="email" name="email" data-constraints="@Email @Required">
+                                                    <span class="form-validation"></span>
+                                                    <label class="form-label rd-input-label" for="rd-navbar-register-email">E-mail</label>
                                                 </div>
-                                            </div>
-                                        </form>
+                                                <div class="form-wrap">
+                                                    <input class="form-input form-control-has-validation" id="rd-navbar-register-password" type="password" name="password" data-constraints="@Required">
+                                                    <span class="form-validation"></span>
+                                                    <label class="form-label rd-input-label" for="rd-navbar-register-password">Пароль</label>
+                                                </div>
+                                                <div class="form-wrap">
+                                                    <input class="form-input form-control-has-validation" id="rd-navbar-register-password-confirm" type="password" name="password-confirm" data-constraints="@Required">
+                                                    <span class="form-validation"></span>
+                                                    <label class="form-label rd-input-label" for="rd-navbar-register-password-confirm">Подтвердите пароль</label>
+                                                </div>
+                                                <div class="form-wrap">
+                                                    <button class="button button-block button-primary" type="submit">Создать</button>
+                                                </div>
+                                                <div class="form-wrap form-wrap-ally">
+                                                    <div class="text-decoration-lines rd-navbar-popup-title">
+                                                        <span class="text-decoration-lines-content">Или войдите с помощью других сервисов</span>
+                                                    </div>
+                                                </div>
+                                                <div class="form-wrap form-wrap-ally">
+                                                    <div class="button-group">
+                                                        <a class="button button-facebook button-icon button-icon-only button-winona" href="#" aria-label="Facebook">
+                                                            <span class="icon mdi mdi mdi-facebook"></span></a>
+                                                        <a class="button button-twitter button-icon button-icon-only button-winona" href="#" aria-label="Twitter">
+                                                            <span class="icon mdi mdi-twitter"></span></a><a class="button button-google button-icon button-icon-only button-winona" href="#" aria-label="Google+">
+                                                        <span class="icon mdi mdi-google"></span>
+                                                    </a>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <div class="rd-navbar-aside-item">
+                                        <button class="button button-xs button-primary button-icon button-icon-left rd-navbar-popup-toggle toggle-original" data-rd-navbar-toggle="#rd-navbar-login">
+                                            <span class="icon mdi mdi-import"></span>Войти</button>
+                                        <div class="rd-navbar-popup bg-gray-100 toggle-original-elements" id="rd-navbar-login">
+                                            <h5 class="rd-navbar-popup-title">Личный кабинет</h5>
+                                            <form class="rd-form form-compact">
+                                                <div class="form-wrap">
+                                                    <input class="form-input form-control-has-validation" id="rd-navbar-login-email" type="email" name="email" data-constraints="@Email @Required"><span class="form-validation"></span>
+                                                    <label class="form-label rd-input-label" for="rd-navbar-login-email">E-mail</label>
+                                                </div>
+                                                <div class="form-wrap">
+                                                    <input class="form-input form-control-has-validation" id="rd-navbar-login-password" type="password" name="password" data-constraints="@Required"><span class="form-validation"></span>
+                                                    <label class="form-label rd-input-label" for="rd-navbar-login-password">Пароль</label>
+                                                </div>
+                                                <div class="form-wrap">
+                                                    <button class="button button-block button-primary" type="submit">Войти</button>
+                                                </div>
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="rd-navbar-aside-item">
-                                    <button class="button button-xs button-primary button-icon button-icon-left rd-navbar-popup-toggle toggle-original" data-rd-navbar-toggle="#rd-navbar-login">
-                                        <span class="icon mdi mdi-import"></span>Войти</button>
-                                    <div class="rd-navbar-popup bg-gray-100 toggle-original-elements" id="rd-navbar-login">
-                                        <h5 class="rd-navbar-popup-title">Личный кабинет</h5>
-                                        <form class="rd-form form-compact">
-                                            <div class="form-wrap">
-                                                <input class="form-input form-control-has-validation" id="rd-navbar-login-email" type="email" name="email" data-constraints="@Email @Required"><span class="form-validation"></span>
-                                                <label class="form-label rd-input-label" for="rd-navbar-login-email">E-mail</label>
+                            </div>
+                            <div sec:authorize="isAuthenticated()">
+                                <div class="rd-navbar-aside">
+                                    <div class="rd-navbar-aside-item">
+                                        <div class="mobile-profile">
+                                            <button class="button button-xs button-primary-outline button-icon button-icon-left rd-navbar-popup-toggle toggle-original" data-rd-navbar-toggle="#rd-navbar-profile-mobile">
+                                                <span class="icon mdi mdi-account"></span>
+                                            </button>
+                                            <div class="bg-color-white toggle-original-elements" id="rd-navbar-profile-mobile">
+                                                <ul class="user-menu">
+                                                    <li class="title-menu menu-margin" sec:authentication="principal.username"></li>
+                                                    <li class="menu-item-user menu-margin"><a href="#">Сообщения</a></li>
+                                                    <li class="menu-item-user menu-margin"><a href="#">Профиль</a></li>
+                                                    <li class="sep-menu"></li>
+                                                    <li class="menu-item-user menu-margin"><a href="#">Выход</a></li>
+                                                </ul>
                                             </div>
-                                            <div class="form-wrap">
-                                                <input class="form-input form-control-has-validation" id="rd-navbar-login-password" type="password" name="password" data-constraints="@Required"><span class="form-validation"></span>
-                                                <label class="form-label rd-input-label" for="rd-navbar-login-password">Пароль</label>
-                                            </div>
-                                            <div class="form-wrap">
-                                                <button class="button button-block button-primary" type="submit">Войти</button>
-                                            </div>
-                                        </form>
+                                        </div>
+                                    </div>
+                                    <div class="rd-navbar-aside-item">
+                                        <div class="mobile-profile">
+                                            <button class="button button-xs button-primary button-icon button-icon-left rd-navbar-popup-toggle toggle-original">
+                                                <span class="icon mdi mdi-email"></span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="rd-navbar-aside-item">
+                                        <ul id="ul-login-block">
+                                            <li class="line-sep"></li>
+                                            <li class="icon icon-lgs text-primary mdi mdi-email"></li>
+                                            <li class="line-sep"></li>
+                                            <li>
+                                                <figure>
+                                                    <div class="comment-avatar-min" style="background-color:#1087eb">
+                                                        <span sec:authentication="principal.initial">R</span></div>
+                                                </figure>
+                                            </li>
+                                            <li>
+                                                <span id="login-name" sec:authentication="principal.name" onselectstart="return false" onmousedown="return false" data-rd-navbar-toggle="#rd-navbar-profile">
+                                                </span>
+                                                <span class="icon icon-sms mdi mdi-menu-down"></span>
+                                                <div class="bg-color-white toggle-original-elements" id="rd-navbar-profile">
+                                                    <ul class="user-menu">
+                                                        <li class="title-menu menu-margin" sec:authentication="principal.username"></li>
+                                                        <li class="menu-item-user menu-margin"><a href="#">Сообщения</a></li>
+                                                        <li class="menu-item-user menu-margin"><a href="#">Профиль</a></li>
+                                                        <li class="sep-menu"></li>
+                                                        <li class="menu-item-user menu-margin"><a th:href="@{/logout}">Выход</a></li>
+                                                    </ul>
+                                                </div>
+                                            </li>
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
