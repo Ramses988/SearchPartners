@@ -1,5 +1,6 @@
 package com.search_partners.web.account;
 
+import com.search_partners.service.CountryAndCityService;
 import com.search_partners.service.UserService;
 import com.search_partners.util.SecurityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,11 +12,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class AccountController {
 
-    private final UserService service;
+    private final UserService userService;
+    private final CountryAndCityService countryService;
 
     @Autowired
-    public AccountController(UserService service) {
-        this.service = service;
+    public AccountController(UserService userService, CountryAndCityService countryService) {
+        this.userService = userService;
+        this.countryService = countryService;
     }
 
     @GetMapping("/login")
@@ -27,7 +30,8 @@ public class AccountController {
 
     @GetMapping("/profile")
     public String getProfile(Model model) {
-        model.addAttribute("user", service.getUser(SecurityUtil.authUserId()));
+        model.addAttribute("user", userService.getUser(SecurityUtil.authUserId()));
+        model.addAttribute("countries", countryService.getAllCountries());
         return "account/profile";
     }
 

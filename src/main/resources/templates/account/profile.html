@@ -63,17 +63,17 @@
                                     <div class="row row-40">
                                         <div class="col-md-6">
                                             <div class="form-wrap">
-                                                <label class="form-label-outside" for="general-information-name">Никнейм</label>
+                                                <label class="form-label-outside">Никнейм</label>
                                                 <div class="form-wrap-inner">
-                                                    <input class="form-input only-read" id="general-information-name" form="submit-resume-form" th:value="${user.name}" type="text" name="name" readonly>
+                                                    <input class="form-input only-read" th:value="${user.name}" type="text" name="name" readonly>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-wrap">
-                                                <label class="form-label-outside" for="general-information-email">Email</label>
+                                                <label class="form-label-outside">Email</label>
                                                 <div class="form-wrap-inner">
-                                                    <input class="form-input only-read" id="general-information-email" form="submit-resume-form" th:value="${user.email}" type="email" name="email" readonly>
+                                                    <input class="form-input only-read" th:value="${user.email}" type="email" name="email" readonly>
                                                 </div>
                                             </div>
                                         </div>
@@ -105,11 +105,11 @@
                                                 <label class="form-label-outside" for="general-information-job-category">Моя страна</label>
                                                 <div class="form-wrap-inner">
                                                     <!-- Select 2-->
-                                                    <select class="form-input select form-control-has-validation form-control-last-child select2-hidden-accessible" id="general-information-job-category" form="submit-resume-form" data-placeholder="Выберите из списка" name="resume-category" data-minimum-results-for-search="Infinity" data-constraints="@Selected" tabindex="-1" aria-hidden="true">
-                                                        <option label="Выберите из списка"></option>
-                                                        <option value="1">Web Design</option>
-                                                        <option value="2">Development</option>
-                                                        <option value="3">Marketing</option>
+                                                    <select th:field="*{user.country.id}" class="form-input select form-control-has-validation form-control-last-child select2-hidden-accessible">
+                                                        <option th:each="country : ${countries}"
+                                                                th:value="${country.id}"
+                                                                th:text="${country.name}">
+                                                        </option>
                                                     </select>
                                                     <span class="form-validation"></span>
                                                 </div>
@@ -135,10 +135,10 @@
                                                 <label class="form-label-outside" for="general-information-job-category">Ваш пол</label>
                                                 <div class="form-wrap-inner">
                                                     <!-- Select 2-->
-                                                    <select class="form-input select form-control-has-validation form-control-last-child select2-hidden-accessible" id="general-information-job-category" form="submit-resume-form" name="resume-category" data-minimum-results-for-search="Infinity" data-constraints="@Selected" tabindex="-1" aria-hidden="true">
-                                                        <option value></option>
-                                                        <option value="1">Мужской</option>
-                                                        <option value="2">Женский</option>
+                                                    <select th:field="*{user.gender}" class="form-input select form-control-has-validation form-control-last-child select2-hidden-accessible">
+                                                        <option th:value="'U'">Выберите пол</option>
+                                                        <option th:value="'M'" th:text="Мужской"></option>
+                                                        <option th:value="'F'" th:text="Женский"></option>
                                                     </select>
                                                     <span class="form-validation"></span>
                                                 </div>
@@ -149,11 +149,9 @@
                                                 <label class="form-label-outside" for="general-information-job-category">Дата рождения</label>
                                                 <div class="form-wrap-inner">
                                                     <!-- Select 2-->
-                                                    <select class="form-input select form-control-has-validation form-control-last-child select2-hidden-accessible" id="general-information-job-category" form="submit-resume-form" data-placeholder="День" name="resume-category" data-minimum-results-for-search="Infinity" data-constraints="@Selected" tabindex="-1" aria-hidden="true">
-                                                        <option label="День"></option>
-                                                        <option value="1">Web Design</option>
-                                                        <option value="2">Development</option>
-                                                        <option value="3">Marketing</option>
+                                                    <select th:field="*{user.day}" class="form-input select form-control-has-validation form-control-last-child select2-hidden-accessible">
+                                                        <option th:value="0">день</option>
+                                                        <option th:each="i : ${#numbers.sequence(1, 31)}" th:value="${i}" th:text="${i}"></option>
                                                     </select>
                                                     <span class="form-validation"></span>
                                                 </div>
@@ -164,11 +162,20 @@
                                                 <label class="form-label-outside col-md-none" for="general-information-job-category"></label>
                                                 <div class="form-wrap-inner label-none">
                                                     <!-- Select 2-->
-                                                    <select class="form-input select form-control-has-validation form-control-last-child select2-hidden-accessible" id="general-information-job-category" form="submit-resume-form" data-placeholder="Месяц" name="resume-category" data-minimum-results-for-search="Infinity" data-constraints="@Selected" tabindex="-1" aria-hidden="true">
-                                                        <option label="Месяц"></option>
-                                                        <option value="1">Web Design</option>
-                                                        <option value="2">Development</option>
-                                                        <option value="3">Marketing</option>
+                                                    <select th:field="*{user.month}" class="form-input select form-control-has-validation form-control-last-child select2-hidden-accessible">
+                                                        <option th:value="0">месяц</option>
+                                                        <option th:value="1">января</option>
+                                                        <option th:value="2">февраля</option>
+                                                        <option th:value="3">марта</option>
+                                                        <option th:value="4">апреля</option>
+                                                        <option th:value="5">майя</option>
+                                                        <option th:value="6">июня</option>
+                                                        <option th:value="7">июля</option>
+                                                        <option th:value="8">августа</option>
+                                                        <option th:value="9">сентября</option>
+                                                        <option th:value="10">октября</option>
+                                                        <option th:value="11">ноября</option>
+                                                        <option th:value="12">декабря</option>
                                                     </select>
                                                     <span class="form-validation"></span>
                                                 </div>
@@ -179,11 +186,9 @@
                                                 <label class="form-label-outside col-md-none" for="general-information-job-category"></label>
                                                 <div class="form-wrap-inner label-none">
                                                     <!-- Select 2-->
-                                                    <select class="form-input select form-control-has-validation form-control-last-child select2-hidden-accessible" id="general-information-job-category" form="submit-resume-form" data-placeholder="Год" name="resume-category" data-minimum-results-for-search="Infinity" data-constraints="@Selected" tabindex="-1" aria-hidden="true">
-                                                        <option label="Год"></option>
-                                                        <option value="1">Web Design</option>
-                                                        <option value="2">Development</option>
-                                                        <option value="3">Marketing</option>
+                                                    <select th:field="*{user.year}" class="form-input select form-control-has-validation form-control-last-child select2-hidden-accessible">
+                                                        <option value="0">год</option>
+                                                        <option th:each="i : ${#numbers.sequence(2009, 1905)}" th:value="${i}" th:text="${i}"></option>
                                                     </select>
                                                     <span class="form-validation"></span>
                                                 </div>
