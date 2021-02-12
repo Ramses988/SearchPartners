@@ -2,10 +2,12 @@ package com.search_partners.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Data
+@NoArgsConstructor
 @Entity
 @Table(name = "cities")
 public class City {
@@ -20,4 +22,8 @@ public class City {
     @JoinColumn(name = "country_id")
     private Country country;
 
+    public City(long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 }

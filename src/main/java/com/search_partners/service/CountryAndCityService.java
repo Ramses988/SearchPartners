@@ -9,6 +9,6 @@ public interface CountryAndCityService {
 
     List<Country> getAllCountries();
 
-    List<City> getCities(int id);
+    List<City> getCities(long id);
 
 }

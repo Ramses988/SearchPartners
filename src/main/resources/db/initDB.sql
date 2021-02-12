@@ -31,8 +31,10 @@ CREATE TABLE users
     day          INTEGER DEFAULT 0             NOT NULL,
     month        INTEGER DEFAULT 0             NOT NULL,
     year         INTEGER DEFAULT 0             NOT NULL,
+    city_id      INTEGER DEFAULT 0             NOT NULL,
     country_id   INTEGER DEFAULT 0             NOT NULL,
-    FOREIGN KEY (country_id) REFERENCES countries (id)
+    FOREIGN KEY (country_id) REFERENCES countries (id),
+    FOREIGN KEY (city_id) REFERENCES cities (id)
 );
 CREATE UNIQUE INDEX users_unique_email_idx ON users (email);
 

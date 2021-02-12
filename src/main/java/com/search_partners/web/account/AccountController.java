@@ -1,5 +1,7 @@
 package com.search_partners.web.account;
 
+import com.search_partners.model.City;
+import com.search_partners.model.User;
 import com.search_partners.service.CountryAndCityService;
 import com.search_partners.service.UserService;
 import com.search_partners.util.SecurityUtil;
@@ -8,6 +10,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class AccountController {
@@ -30,8 +35,14 @@ public class AccountController {
 
     @GetMapping("/profile")
     public String getProfile(Model model) {
-        model.addAttribute("user", userService.getUser(SecurityUtil.authUserId()));
+        User user = userService.getUser(SecurityUtil.authUserId());
+        model.addAttribute("user", user);
         model.addAttribute("countries", countryService.getAllCountries());
+        List<City> cityList = new ArrayList<>();
+        cityList.add(new City(0, "Выберите из списка"));
+        if (user.getCountry().getId() > 0)
+            cityList.addAll(countryService.getCities(user.getCountry().getId()));
+        model.addAttribute("cities", cityList);
         return "account/profile";
     }
 

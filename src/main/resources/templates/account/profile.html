@@ -91,10 +91,6 @@
                                                 <div class="form-wrap-inner">
                                                     <!-- Select 2-->
                                                     <select class="form-input select form-control-has-validation form-control-last-child select2-hidden-accessible" id="general-information-job-category" form="submit-resume-form" data-placeholder="Выберите из списка" name="resume-category" data-minimum-results-for-search="Infinity" data-constraints="@Selected" tabindex="-1" aria-hidden="true">
-                                                        <option label="Выберите из списка"></option>
-                                                        <option value="1">Web Design</option>
-                                                        <option value="2">Development</option>
-                                                        <option value="3">Marketing</option>
                                                     </select>
                                                     <span class="form-validation"></span>
                                                 </div>
@@ -105,7 +101,7 @@
                                                 <label class="form-label-outside" for="general-information-job-category">Моя страна</label>
                                                 <div class="form-wrap-inner">
                                                     <!-- Select 2-->
-                                                    <select th:field="*{user.country.id}" class="form-input select form-control-has-validation form-control-last-child select2-hidden-accessible">
+                                                    <select th:field="*{user.country.id}" id="country" class="form-input select form-control-has-validation form-control-last-child select2-hidden-accessible">
                                                         <option th:each="country : ${countries}"
                                                                 th:value="${country.id}"
                                                                 th:text="${country.name}">
@@ -120,13 +116,12 @@
                                                 <label class="form-label-outside" for="general-information-job-category">Мой город</label>
                                                 <div class="form-wrap-inner">
                                                     <!-- Select 2-->
-                                                    <select class="form-input select form-control-has-validation form-control-last-child select2-hidden-accessible" id="general-information-job-category" form="submit-resume-form" data-placeholder="Выберите из списка" name="resume-category" data-minimum-results-for-search="Infinity" data-constraints="@Selected" tabindex="-1" aria-hidden="true">
-                                                        <option label="Выберите из списка"></option>
-                                                        <option value="1">Web Design</option>
-                                                        <option value="2">Development</option>
-                                                        <option value="3">Marketing</option>
+                                                    <select th:field="*{user.city.id}" id="city" class="form-input select form-control-has-validation form-control-last-child select2-hidden-accessible">
+                                                        <option th:each="city : ${cities}"
+                                                                th:value="${city.id}"
+                                                                th:text="${city.name}">
+                                                        </option>
                                                     </select>
-                                                    <span class="form-validation"></span>
                                                 </div>
                                             </div>
                                         </div>
@@ -140,7 +135,6 @@
                                                         <option th:value="'M'" th:text="Мужской"></option>
                                                         <option th:value="'F'" th:text="Женский"></option>
                                                     </select>
-                                                    <span class="form-validation"></span>
                                                 </div>
                                             </div>
                                         </div>
@@ -153,7 +147,6 @@
                                                         <option th:value="0">день</option>
                                                         <option th:each="i : ${#numbers.sequence(1, 31)}" th:value="${i}" th:text="${i}"></option>
                                                     </select>
-                                                    <span class="form-validation"></span>
                                                 </div>
                                             </div>
                                         </div>
@@ -177,7 +170,6 @@
                                                         <option th:value="11">ноября</option>
                                                         <option th:value="12">декабря</option>
                                                     </select>
-                                                    <span class="form-validation"></span>
                                                 </div>
                                             </div>
                                         </div>
@@ -190,7 +182,6 @@
                                                         <option value="0">год</option>
                                                         <option th:each="i : ${#numbers.sequence(2009, 1905)}" th:value="${i}" th:text="${i}"></option>
                                                     </select>
-                                                    <span class="form-validation"></span>
                                                 </div>
                                             </div>
                                         </div>
@@ -237,5 +228,6 @@
     </div>
 </section>
 <div th:replace="~{fragments/footer :: footer}"></div>
+<script src="/js/script-profile.js"></script>
 </body>
 </html>

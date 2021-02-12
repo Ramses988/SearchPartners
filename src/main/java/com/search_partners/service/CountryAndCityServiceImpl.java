@@ -6,10 +6,12 @@ import com.search_partners.repository.CityRepository;
 import com.search_partners.repository.CountryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@Transactional(readOnly = true)
 public class CountryAndCityServiceImpl implements CountryAndCityService {
 
     private final CountryRepository countryRepository;
@@ -27,7 +29,7 @@ public class CountryAndCityServiceImpl implements CountryAndCityService {
     }
 
     @Override
-    public List<City> getCities(int id) {
+    public List<City> getCities(long id) {
         return cityRepository.findAllByCountry(new Country(id));
     }
 }

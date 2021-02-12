@@ -21,7 +21,7 @@ public class RestCityController {
     }
 
     @PostMapping("/get-cities")
-    public List<City> getCities(@RequestParam int id) {
+    public List<City> getCities(@RequestParam long id) {
         return service.getCities(id);
     }
 
