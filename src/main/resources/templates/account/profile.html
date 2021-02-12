@@ -21,7 +21,7 @@
                             <ul class="profile-light-list">
                                 <li>
                                     <span class="icon icon-sm mdi mdi-map-marker"></span>
-                                    <span>Город: Москва</span>
+                                    <span th:text="${user.city.id > 0} ? 'Город: ' + ${user.city.name} : 'Город:'"></span>
                                 </li>
                             </ul>
                         </div>
@@ -79,26 +79,30 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-wrap">
-                                                <label class="form-label-outside" for="general-information-profession">Меня зовут</label>
+                                                <label class="form-label-outside">Меня зовут</label>
                                                 <div class="form-wrap-inner">
-                                                    <input class="form-input form-control-has-validation" id="general-information-profession" form="submit-resume-form" type="text" name="profession" data-constraints="@Required"><span class="form-validation"></span>
+                                                    <input class="form-input form-control-has-validation" th:value="${user.realName}">
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-wrap">
-                                                <label class="form-label-outside" for="general-information-job-category">Сфера деятельности</label>
+                                                <label class="form-label-outside">Ваша занятость</label>
                                                 <div class="form-wrap-inner">
                                                     <!-- Select 2-->
-                                                    <select class="form-input select form-control-has-validation form-control-last-child select2-hidden-accessible" id="general-information-job-category" form="submit-resume-form" data-placeholder="Выберите из списка" name="resume-category" data-minimum-results-for-search="Infinity" data-constraints="@Selected" tabindex="-1" aria-hidden="true">
+                                                    <select th:field="*{user.busyness}" class="form-input select form-control-has-validation form-control-last-child select2-hidden-accessible">
+                                                        <option th:value="0">Выберите из списка</option>
+                                                        <option th:value="1">Имею свой бизнес</option>
+                                                        <option th:value="2">Наемный работник</option>
+                                                        <option th:value="3">Без работы</option>
+                                                        <option th:value="4">Другое</option>
                                                     </select>
-                                                    <span class="form-validation"></span>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-wrap">
-                                                <label class="form-label-outside" for="general-information-job-category">Моя страна</label>
+                                                <label class="form-label-outside">Моя страна</label>
                                                 <div class="form-wrap-inner">
                                                     <!-- Select 2-->
                                                     <select th:field="*{user.country.id}" id="country" class="form-input select form-control-has-validation form-control-last-child select2-hidden-accessible">
@@ -113,7 +117,7 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-wrap">
-                                                <label class="form-label-outside" for="general-information-job-category">Мой город</label>
+                                                <label class="form-label-outside">Мой город</label>
                                                 <div class="form-wrap-inner">
                                                     <!-- Select 2-->
                                                     <select th:field="*{user.city.id}" id="city" class="form-input select form-control-has-validation form-control-last-child select2-hidden-accessible">
@@ -127,7 +131,7 @@
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-wrap">
-                                                <label class="form-label-outside" for="general-information-job-category">Ваш пол</label>
+                                                <label class="form-label-outside">Ваш пол</label>
                                                 <div class="form-wrap-inner">
                                                     <!-- Select 2-->
                                                     <select th:field="*{user.gender}" class="form-input select form-control-has-validation form-control-last-child select2-hidden-accessible">
@@ -140,7 +144,7 @@
                                         </div>
                                         <div class="col-md-2 col-sub">
                                             <div class="form-wrap">
-                                                <label class="form-label-outside" for="general-information-job-category">Дата рождения</label>
+                                                <label class="form-label-outside">Дата рождения</label>
                                                 <div class="form-wrap-inner">
                                                     <!-- Select 2-->
                                                     <select th:field="*{user.day}" class="form-input select form-control-has-validation form-control-last-child select2-hidden-accessible">
@@ -152,7 +156,7 @@
                                         </div>
                                         <div class="col-md-2 col-sub">
                                             <div class="form-wrap">
-                                                <label class="form-label-outside col-md-none" for="general-information-job-category"></label>
+                                                <label class="form-label-outside col-md-none"></label>
                                                 <div class="form-wrap-inner label-none">
                                                     <!-- Select 2-->
                                                     <select th:field="*{user.month}" class="form-input select form-control-has-validation form-control-last-child select2-hidden-accessible">
@@ -175,7 +179,7 @@
                                         </div>
                                         <div class="col-md-3 col-sub">
                                             <div class="form-wrap">
-                                                <label class="form-label-outside col-md-none" for="general-information-job-category"></label>
+                                                <label class="form-label-outside col-md-none"></label>
                                                 <div class="form-wrap-inner label-none">
                                                     <!-- Select 2-->
                                                     <select th:field="*{user.year}" class="form-input select form-control-has-validation form-control-last-child select2-hidden-accessible">
@@ -199,21 +203,21 @@
                                     <div class="form-wrap">
                                         <label class="form-label-outside" for="education-school-name">Текущий пароль</label>
                                         <div class="form-wrap-inner">
-                                            <input class="form-input form-control-has-validation" id="education-school-name" form="submit-resume-form" type="text" name="school-name" data-constraints="@Required">
+                                            <input class="form-input form-control-has-validation" id="education-school-name" type="text" name="school-name" data-constraints="@Required">
                                             <span class="form-validation"></span>
                                         </div>
                                     </div>
                                     <div class="form-wrap">
                                         <label class="form-label-outside" for="education-qualification">Новый пароль</label>
                                         <div class="form-wrap-inner">
-                                            <input class="form-input form-control-has-validation" id="education-qualification" form="submit-resume-form" type="text" name="qualification" data-constraints="@Required">
+                                            <input class="form-input form-control-has-validation" id="education-qualification" type="text" name="qualification" data-constraints="@Required">
                                             <span class="form-validation"></span>
                                         </div>
                                     </div>
                                     <div class="form-wrap">
                                         <label class="form-label-outside" for="education-period">Ещё раз новый пароль</label>
                                         <div class="form-wrap-inner">
-                                            <input class="form-input form-control-has-validation" id="education-period" form="submit-resume-form" type="text" name="period" data-constraints="@Required">
+                                            <input class="form-input form-control-has-validation" id="education-period" type="text" name="period" data-constraints="@Required">
                                             <span class="form-validation"></span>
                                         </div>
                                     </div>

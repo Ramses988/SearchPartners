@@ -16,12 +16,15 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String name;
+    @Column(name = "real_name")
+    private String realName;
     private String email;
     private String password;
     private boolean enabled;
     private String initial;
     private String color;
     private String gender;
+    private String busyness;
     private int day;
     private int month;
     private int year;

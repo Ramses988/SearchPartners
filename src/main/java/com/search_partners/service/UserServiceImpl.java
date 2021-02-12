@@ -20,8 +20,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getUser(long id) {
-        User user = repository.findById(id).orElse(null);
+    public User getUserWithCity(long id) {
+        User user = repository.getUserWithCity(id).orElse(null);
         //TODO: check if not found
         return user;
     }

@@ -35,7 +35,7 @@ public class AccountController {
 
     @GetMapping("/profile")
     public String getProfile(Model model) {
-        User user = userService.getUser(SecurityUtil.authUserId());
+        User user = userService.getUserWithCity(SecurityUtil.authUserId());
         model.addAttribute("user", user);
         model.addAttribute("countries", countryService.getAllCountries());
         List<City> cityList = new ArrayList<>();
