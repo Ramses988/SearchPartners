@@ -18,10 +18,12 @@ import org.springframework.transaction.annotation.Transactional;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository repository;
+    private final CountryAndCityService service;
 
     @Autowired
-    public UserServiceImpl(UserRepository repository) {
+    public UserServiceImpl(UserRepository repository, CountryAndCityService service) {
         this.repository = repository;
+        this.service = service;
     }
 
     @Override
@@ -29,6 +31,28 @@ public class UserServiceImpl implements UserService {
         User user = repository.getUserWithCity(id).orElse(null);
         //TODO: check if not found
         return user;
+    }
+
+    @Override
+    @Transactional
+    public void saveUserProfile(UserProfileDto userDto, long id) {
+        User user = getUser(id);
+        Country country = service.getCountry(userDto.getCountry());
+        City city = service.getCity(userDto.getCity());
+        //TODO: check if not found User, Country and City
+        user.setRealName(userDto.getRealName());
+        user.setBusyness(userDto.getBusyness());
+        user.setCountry(country);
+        user.setCity(city);
+        user.setGender(userDto.getGender());
+        user.setDay(userDto.getDay());
+        user.setMonth(userDto.getMonth());
+        user.setYear(userDto.getYear());
+        repository.save(user);
+    }
+
+    private User getUser(long id) {
+        return repository.findById(id).orElse(null);
     }
 
     @Override

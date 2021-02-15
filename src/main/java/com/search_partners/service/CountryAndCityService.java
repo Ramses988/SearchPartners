@@ -11,4 +11,8 @@ public interface CountryAndCityService {
 
     List<City> getCities(long id);
 
+    Country getCountry(long id);
+
+    City getCity(long id);
+
 }

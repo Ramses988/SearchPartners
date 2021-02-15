@@ -32,4 +32,14 @@ public class CountryAndCityServiceImpl implements CountryAndCityService {
     public List<City> getCities(long id) {
         return cityRepository.findAllByCountry(new Country(id));
     }
+
+    @Override
+    public Country getCountry(long id) {
+        return countryRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public City getCity(long id) {
+        return cityRepository.findById(id).orElse(null);
+    }
 }
