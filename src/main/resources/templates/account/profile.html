@@ -54,6 +54,7 @@
                     </ul>
                     <!-- Tab panes-->
                     <div class="tab-content" style="letter-spacing: .05em;">
+                        <form action="/rest/account/change-user-profile" method="post">
                         <div class="tab-pane fade active show" id="tabs-1-1">
                             <div class="block-form">
                                 <h5>Профиль</h5>
@@ -65,7 +66,7 @@
                                             <div class="form-wrap">
                                                 <label class="form-label-outside">Никнейм</label>
                                                 <div class="form-wrap-inner">
-                                                    <input class="form-input only-read" th:value="${user.name}" type="text" name="name" readonly>
+                                                    <input class="form-input only-read" th:value="${user.name}" type="text" readonly>
                                                 </div>
                                             </div>
                                         </div>
@@ -73,7 +74,7 @@
                                             <div class="form-wrap">
                                                 <label class="form-label-outside">Email</label>
                                                 <div class="form-wrap-inner">
-                                                    <input class="form-input only-read" th:value="${user.email}" type="email" name="email" readonly>
+                                                    <input class="form-input only-read" th:value="${user.email}" type="email" readonly>
                                                 </div>
                                             </div>
                                         </div>
@@ -81,7 +82,7 @@
                                             <div class="form-wrap">
                                                 <label class="form-label-outside">Меня зовут</label>
                                                 <div class="form-wrap-inner">
-                                                    <input class="form-input form-control-has-validation" th:value="${user.realName}">
+                                                    <input class="form-input form-control-has-validation" th:value="${user.realName}" name="realName">
                                                 </div>
                                             </div>
                                         </div>
@@ -90,7 +91,7 @@
                                                 <label class="form-label-outside">Ваша занятость</label>
                                                 <div class="form-wrap-inner">
                                                     <!-- Select 2-->
-                                                    <select th:field="*{user.busyness}" class="form-input select form-control-has-validation form-control-last-child select2-hidden-accessible">
+                                                    <select th:field="*{user.busyness}" th:name="busyness" class="form-input select form-control-has-validation form-control-last-child select2-hidden-accessible">
                                                         <option th:value="0">Выберите из списка</option>
                                                         <option th:value="1">Имею свой бизнес</option>
                                                         <option th:value="2">Наемный работник</option>
@@ -105,10 +106,11 @@
                                                 <label class="form-label-outside">Моя страна</label>
                                                 <div class="form-wrap-inner">
                                                     <!-- Select 2-->
-                                                    <select th:field="*{user.country.id}" id="country" class="form-input select form-control-has-validation form-control-last-child select2-hidden-accessible">
+                                                    <select id="country" th:name="country" class="form-input select form-control-has-validation form-control-last-child select2-hidden-accessible">
                                                         <option th:each="country : ${countries}"
                                                                 th:value="${country.id}"
-                                                                th:text="${country.name}">
+                                                                th:text="${country.name}"
+                                                                th:selected="${user.country.id == country.id}">
                                                         </option>
                                                     </select>
                                                     <span class="form-validation"></span>
@@ -120,10 +122,11 @@
                                                 <label class="form-label-outside">Мой город</label>
                                                 <div class="form-wrap-inner">
                                                     <!-- Select 2-->
-                                                    <select th:field="*{user.city.id}" id="city" class="form-input select form-control-has-validation form-control-last-child select2-hidden-accessible">
+                                                    <select id="city" th:name="city" class="form-input select form-control-has-validation form-control-last-child select2-hidden-accessible">
                                                         <option th:each="city : ${cities}"
                                                                 th:value="${city.id}"
-                                                                th:text="${city.name}">
+                                                                th:text="${city.name}"
+                                                                th:selected="${user.city.id == city.id}">
                                                         </option>
                                                     </select>
                                                 </div>
@@ -134,7 +137,7 @@
                                                 <label class="form-label-outside">Ваш пол</label>
                                                 <div class="form-wrap-inner">
                                                     <!-- Select 2-->
-                                                    <select th:field="*{user.gender}" class="form-input select form-control-has-validation form-control-last-child select2-hidden-accessible">
+                                                    <select th:field="*{user.gender}" th:name="gender" class="form-input select form-control-has-validation form-control-last-child select2-hidden-accessible">
                                                         <option th:value="'U'">Выберите пол</option>
                                                         <option th:value="'M'" th:text="Мужской"></option>
                                                         <option th:value="'F'" th:text="Женский"></option>
@@ -147,7 +150,7 @@
                                                 <label class="form-label-outside">Дата рождения</label>
                                                 <div class="form-wrap-inner">
                                                     <!-- Select 2-->
-                                                    <select th:field="*{user.day}" class="form-input select form-control-has-validation form-control-last-child select2-hidden-accessible">
+                                                    <select th:field="*{user.day}" th:name="day" class="form-input select form-control-has-validation form-control-last-child select2-hidden-accessible">
                                                         <option th:value="0">день</option>
                                                         <option th:each="i : ${#numbers.sequence(1, 31)}" th:value="${i}" th:text="${i}"></option>
                                                     </select>
@@ -159,7 +162,7 @@
                                                 <label class="form-label-outside col-md-none"></label>
                                                 <div class="form-wrap-inner label-none">
                                                     <!-- Select 2-->
-                                                    <select th:field="*{user.month}" class="form-input select form-control-has-validation form-control-last-child select2-hidden-accessible">
+                                                    <select th:field="*{user.month}" th:name="month" class="form-input select form-control-has-validation form-control-last-child select2-hidden-accessible">
                                                         <option th:value="0">месяц</option>
                                                         <option th:value="1">января</option>
                                                         <option th:value="2">февраля</option>
@@ -182,7 +185,7 @@
                                                 <label class="form-label-outside col-md-none"></label>
                                                 <div class="form-wrap-inner label-none">
                                                     <!-- Select 2-->
-                                                    <select th:field="*{user.year}" class="form-input select form-control-has-validation form-control-last-child select2-hidden-accessible">
+                                                    <select th:field="*{user.year}" th:name="year" class="form-input select form-control-has-validation form-control-last-child select2-hidden-accessible">
                                                         <option value="0">год</option>
                                                         <option th:each="i : ${#numbers.sequence(2009, 1905)}" th:value="${i}" th:text="${i}"></option>
                                                     </select>
@@ -194,6 +197,7 @@
                             </div>
                             <button class="button button-sm button-primary">Сохранить</button>
                         </div>
+                        </form>
                         <div class="tab-center tab-pane fade" id="tabs-1-2">
                             <div class="block-form">
                                 <h5>Пароль</h5>

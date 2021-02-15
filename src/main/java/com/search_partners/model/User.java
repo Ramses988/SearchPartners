@@ -24,7 +24,7 @@ public class User {
     private String initial;
     private String color;
     private String gender;
-    private String busyness;
+    private int busyness;
     private int day;
     private int month;
     private int year;
