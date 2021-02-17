@@ -1,22 +1,21 @@
 package com.search_partners.model;
 
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @Entity
 @Table(name="countries")
-public class Country {
+public class Country extends AbstractBaseEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
     private String name;
 
     public Country(long id) {
-        this.id = id;
+        super(id);
     }
 }

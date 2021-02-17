@@ -33,6 +33,12 @@ public class AccountController {
         return "login";
     }
 
+    @GetMapping("/register")
+    public String getRegister(Model model) {
+        model.addAttribute("countries", countryService.getAllCountries());
+        return "account/register";
+    }
+
     @GetMapping("/profile")
     public String getProfile(Model model) {
         User user = userService.getUserWithCity(SecurityUtil.authUserId());

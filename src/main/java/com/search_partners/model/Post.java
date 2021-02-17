@@ -1,18 +1,17 @@
 package com.search_partners.model;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name="posts")
-public class Post {
+public class Post extends AbstractBaseEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
     private String title;
     private String text;
     private LocalDateTime date;

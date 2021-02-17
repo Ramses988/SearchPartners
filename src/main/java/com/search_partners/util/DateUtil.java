@@ -5,7 +5,7 @@ import com.search_partners.model.Post;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
-public class DateUtils {
+public class DateUtil {
 
     public static void getDuration(Post post) {
         LocalDateTime date = LocalDateTime.now();

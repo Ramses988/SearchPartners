@@ -1,21 +1,22 @@
 package com.search_partners.model;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
 
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name="users")
-public class User {
+public class User extends AbstractBaseEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String name;
+    private LocalDateTime date;
     @Column(name = "real_name")
     private String realName;
     private String email;
@@ -46,4 +47,16 @@ public class User {
     @JoinColumn(name = "city_id")
     private City city;
 
+    public User() {}
+
+    public User(String name, LocalDateTime date, String email, boolean enabled, String initial, String color, String gender, Role... rolesSet) {
+        this.name = name;
+        this.date = date;
+        this.email = email;
+        this.enabled = enabled;
+        this.initial = initial;
+        this.color = color;
+        this.gender = gender;
+        setRoles(Set.of(rolesSet));
+    }
 }

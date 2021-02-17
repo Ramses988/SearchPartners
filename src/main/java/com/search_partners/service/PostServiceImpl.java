@@ -2,7 +2,7 @@ package com.search_partners.service;
 
 import com.search_partners.model.Post;
 import com.search_partners.repository.PostRepository;
-import com.search_partners.util.DateUtils;
+import com.search_partners.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -24,7 +24,7 @@ public class PostServiceImpl implements PostService {
     @Override
     public Page<Post> getPosts(int page) {
         Page<Post> posts = repository.findAll(PageRequest.of(page, 100, Sort.by("date").descending()));
-        posts.forEach(DateUtils::getDuration);
+        posts.forEach(DateUtil::getDuration);
         return posts;
     }
 

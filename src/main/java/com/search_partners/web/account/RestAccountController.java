@@ -2,6 +2,7 @@ package com.search_partners.web.account;
 
 import com.search_partners.service.UserService;
 import com.search_partners.to.UserProfileDto;
+import com.search_partners.to.UserRegisterDto;
 import com.search_partners.util.SecurityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,6 +27,11 @@ public class RestAccountController {
     @PostMapping("/change-user-profile")
     public void changeUserProfile(@Valid UserProfileDto user) {
         service.saveUserProfile(user, SecurityUtil.authUserId());
+    }
+
+    @PostMapping("/create-user")
+    public void createUser(UserRegisterDto user) {
+        service.createUser(user);
     }
 
 }

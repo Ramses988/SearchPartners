@@ -4,12 +4,13 @@ import com.search_partners.AuthorizedUser;
 import com.search_partners.model.City;
 import com.search_partners.model.Country;
 import com.search_partners.model.User;
-import com.search_partners.repository.CityRepository;
-import com.search_partners.repository.CountryRepository;
 import com.search_partners.repository.UserRepository;
 import com.search_partners.to.UserProfileDto;
+import com.search_partners.to.UserRegisterDto;
+import com.search_partners.util.UserUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -48,6 +49,19 @@ public class UserServiceImpl implements UserService {
         user.setDay(userDto.getDay());
         user.setMonth(userDto.getMonth());
         user.setYear(userDto.getYear());
+        repository.save(user);
+    }
+
+    @Override
+    @Transactional
+    public void createUser(UserRegisterDto newUser) {
+        User user = UserUtil.createNewFromTo(newUser);
+        Country country = service.getCountry(newUser.getCountry());
+        City city = service.getCity(newUser.getCity());
+        //TODO: check if not found User, Country and City
+        user.setPassword(UserUtil.prepareToPassword(newUser.getPassword()));
+        user.setCountry(country);
+        user.setCity(city);
         repository.save(user);
     }
 

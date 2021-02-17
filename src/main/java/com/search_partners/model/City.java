@@ -1,20 +1,19 @@
 package com.search_partners.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @Entity
 @Table(name = "cities")
-public class City {
+public class City extends AbstractBaseEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
     private String name;
 
     @JsonIgnore
@@ -23,7 +22,7 @@ public class City {
     private Country country;
 
     public City(long id, String name) {
-        this.id = id;
+        super(id);
         this.name = name;
     }
 }

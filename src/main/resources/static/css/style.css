@@ -140,7 +140,7 @@ h6, .h6 {
     font-size: 16px;
 }
 
-.container {
+.container, .inner-container {
     width: 100%;
     padding-right: 15px;
     padding-left: 15px;
@@ -180,6 +180,10 @@ h6, .h6 {
     .container {
         max-width: 960px;
     }
+
+    .inner-container {
+        max-width: 760px;
+    }
 }
 
 @media (min-width: 1200px) {
@@ -188,6 +192,10 @@ h6, .h6 {
     }
     .container {
         max-width: 1200px;
+    }
+
+    .inner-container {
+        max-width: 900px;
     }
 }
 
@@ -9965,6 +9973,10 @@ html.rd-navbar-fixed-linked .page {
 
 
 /* Start my code*/
+
+.color-gray {
+    color: #9a9a9a !important;
+}
 
 .sep-menu {
     border-top: 1px solid #d6d6d6;

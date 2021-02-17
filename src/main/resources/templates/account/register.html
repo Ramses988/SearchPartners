@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html class="wide desktop landscape rd-navbar-static-linked" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Регистрация нового пользователя</title>
+    <div th:replace="~{fragments/links :: links1}"></div>
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:400%7CUbuntu:300,400,500,600,700">
+</head>
+<body>
+<div th:replace="~{fragments/menu :: menu}"></div>
+<div th:replace="~{fragments/title :: title('Регистрация нового пользователя')}"></div>
+
+<section class="section section-md">
+    <div class="container">
+        <div class="inner-container">
+            <div class="block-form">
+                <h4>Регистрация</h4>
+                <hr>
+                <form id="form-createUser">
+                    <div class="rd-form form-lg form-corporate">
+                        <div class="form-wrap">
+                            <label class="form-label-outside" for="name">Логин</label>
+                            <div class="form-wrap-inner">
+                                <input class="form-input form-control-has-validation" id="name" name="name" type="text" placeholder="Введите логин">
+                            </div>
+                        </div>
+                        <div class="form-wrap">
+                            <label class="form-label-outside" for="email">Email</label>
+                            <div class="form-wrap-inner">
+                                <input class="form-input form-control-has-validation" id="email" name="email" type="email" placeholder="Введите email">
+                            </div>
+                        </div>
+                        <div class="form-wrap">
+                            <label class="form-label-outside" for="password">Пароль</label>
+                            <div class="form-wrap-inner">
+                                <input class="form-input form-control-has-validation" id="password" name="password" type="password" placeholder="Введите пароль">
+                            </div>
+                        </div>
+                        <div class="form-wrap">
+                            <label class="form-label-outside" for="confirmPassword">Подтвердите пароль</label>
+                            <div class="form-wrap-inner">
+                                <input class="form-input form-control-has-validation" id="confirmPassword" name="confirmPassword" type="password" placeholder="Подтвердите пароль">
+                            </div>
+                        </div>
+                        <div class="form-wrap">
+                            <label class="form-label-outside" for="country">Моя страна</label>
+                            <div class="form-wrap-inner">
+                                <select id="country" name="country" class="form-input select form-control-has-validation form-control-last-child select2-hidden-accessible">
+                                    <option th:each="country : ${countries}"
+                                            th:value="${country.id}"
+                                            th:text="${country.name}">
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-wrap">
+                            <label class="form-label-outside" for="city">Мой город</label>
+                            <div class="form-wrap-inner">
+                                <select id="city" name="city" class="form-input select form-control-has-validation form-control-last-child select2-hidden-accessible">
+                                    <option value="0">Выберите из списка</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-wrap">
+                            <label class="form-label-outside" for="gender">Ваш пол</label>
+                            <div class="form-wrap-inner">
+                                <select id="gender" name="gender" class="form-input select form-control-has-validation form-control-last-child select2-hidden-accessible">
+                                    <option value="U">Выберите пол</option>
+                                    <option value="M">Мужской</option>
+                                    <option value="F">Женский</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" id="btn-createUser" class="button button-sm button-primary">Создать</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div th:replace="~{fragments/footer :: footer}"></div>
+<script src="/js/noty.min.js"> </script>
+<script src="/js/script-register.js"></script>
+</body>
+</html>
