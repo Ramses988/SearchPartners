@@ -10,6 +10,8 @@ import com.search_partners.to.UserRegisterDto;
 import com.search_partners.util.UserUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,11 +22,14 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository repository;
     private final CountryAndCityService service;
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
     public UserServiceImpl(UserRepository repository, CountryAndCityService service) {
         this.repository = repository;
         this.service = service;
+//        passwordEncoder = new BCryptPasswordEncoder();
+        passwordEncoder = NoOpPasswordEncoder.getInstance();
     }
 
     @Override
@@ -59,7 +64,7 @@ public class UserServiceImpl implements UserService {
         Country country = service.getCountry(newUser.getCountry());
         City city = service.getCity(newUser.getCity());
         //TODO: check if not found User, Country and City
-        user.setPassword(UserUtil.prepareToPassword(newUser.getPassword()));
+        user.setPassword(UserUtil.prepareToPassword(newUser.getPassword(), passwordEncoder));
         user.setCountry(country);
         user.setCity(city);
         repository.save(user);
@@ -75,5 +80,10 @@ public class UserServiceImpl implements UserService {
         //TODO: check if not found
 
         return new AuthorizedUser(user);
+    }
+
+    @Override
+    public PasswordEncoder getPasswordEncoder() {
+        return passwordEncoder;
     }
 }

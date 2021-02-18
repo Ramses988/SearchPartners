@@ -14,4 +14,6 @@ public interface UserService extends UserDetailsService {
 
     void createUser(UserRegisterDto newUser);
 
+    PasswordEncoder getPasswordEncoder();
+
 }

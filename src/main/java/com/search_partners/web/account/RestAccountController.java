@@ -15,7 +15,7 @@ import javax.validation.Valid;
 @RequestMapping(value = RestAccountController.REST_URL)
 public class RestAccountController {
 
-    private UserService service;
+    private final UserService service;
 
     @Autowired
     public RestAccountController(UserService service) {
@@ -30,7 +30,7 @@ public class RestAccountController {
     }
 
     @PostMapping("/create-user")
-    public void createUser(UserRegisterDto user) {
+    public void createUser(@Valid UserRegisterDto user) {
         service.createUser(user);
     }
 

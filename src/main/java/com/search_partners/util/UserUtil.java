@@ -3,7 +3,7 @@ package com.search_partners.util;
 import com.search_partners.model.Role;
 import com.search_partners.model.User;
 import com.search_partners.to.UserRegisterDto;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDateTime;
 
@@ -15,9 +15,8 @@ public class UserUtil {
                 "#cc33cc", newUser.getGender(), Role.ROLE_USER);
     }
 
-    public static String prepareToPassword(String password) {
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        return encoder.encode(password);
+    public static String prepareToPassword(String password, PasswordEncoder passwordEncoder) {
+        return passwordEncoder.encode(password);
     }
 
 }
