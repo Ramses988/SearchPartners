@@ -8,6 +8,7 @@ import com.search_partners.repository.UserRepository;
 import com.search_partners.to.UserProfileDto;
 import com.search_partners.to.UserRegisterDto;
 import com.search_partners.util.UserUtil;
+import com.search_partners.util.exception.ErrorCheckRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -15,6 +16,8 @@ import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Objects;
 
 @Service
 @Transactional(readOnly = true)
@@ -60,14 +63,25 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public void createUser(UserRegisterDto newUser) {
+        if (!newUser.getPassword().equals(newUser.getConfirmPassword()))
+            throw new ErrorCheckRequestException("Пароли не совпадают!");
+
         User user = UserUtil.createNewFromTo(newUser);
         Country country = service.getCountry(newUser.getCountry());
         City city = service.getCity(newUser.getCity());
-        //TODO: check if not found User, Country and City
-        user.setPassword(UserUtil.prepareToPassword(newUser.getPassword(), passwordEncoder));
-        user.setCountry(country);
-        user.setCity(city);
-        repository.save(user);
+
+        if (Objects.isNull(country) || Objects.isNull(city))
+            throw new ErrorCheckRequestException("Ошибка создания пользователя!");
+        User currentUser = repository.findByEmail(user.getEmail()).orElse(null);
+
+        if (Objects.isNull(currentUser)) {
+            user.setPassword(UserUtil.prepareToPassword(newUser.getPassword(), passwordEncoder));
+            user.setCountry(country);
+            user.setCity(city);
+            repository.save(user);
+        } else {
+            throw new ErrorCheckRequestException("Ошибка создания пользователя!");
+        }
     }
 
     private User getUser(long id) {

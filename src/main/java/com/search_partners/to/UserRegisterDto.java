@@ -7,20 +7,20 @@ import javax.validation.constraints.*;
 @Data
 public class UserRegisterDto {
 
-    @NotBlank
-    @Size(max = 15)
+    @NotBlank(message = "Логин не должен быть пустым!")
+    @Size(max = 15, message = "Максимальный размер поля логин, 15 символов!")
     private String name;
 
-    @Email
-    @NotBlank
+    @Email(message = "Email должен иметь формат адреса электронной почты!")
+    @NotBlank(message = "Email не должен быть пустым!")
     private String email;
 
-    @NotBlank
-    @Size(min = 7, max = 30)
+    @NotBlank(message = "Пароль не должен быть пустым!")
+    @Size(min = 7, max = 30, message = "Пароль должен находиться в диапазоне от 7 до 30!")
     private String password;
 
-    @NotBlank
-    @Size(min = 7, max = 30)
+    @NotBlank(message = "Пароль не должен быть пустым!")
+    @Size(min = 7, max = 30, message = "Пароль должен находиться в диапазоне от 7 до 30!")
     private String confirmPassword;
 
     @NotBlank
