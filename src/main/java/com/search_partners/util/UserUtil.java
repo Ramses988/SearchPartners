@@ -10,8 +10,8 @@ import java.time.LocalDateTime;
 public class UserUtil {
 
     public static User createNewFromTo(UserRegisterDto newUser) {
-        String initial = String.valueOf(newUser.getName().charAt(0)).toUpperCase();
-        return new User(newUser.getName(), LocalDateTime.now(), newUser.getEmail().toLowerCase(), false, initial,
+        String initial = String.valueOf(newUser.getName().trim().charAt(0)).toUpperCase();
+        return new User(newUser.getName().trim(), LocalDateTime.now(), newUser.getEmail().toLowerCase(), false, initial,
                 "#cc33cc", newUser.getGender(), Role.ROLE_USER);
     }
 

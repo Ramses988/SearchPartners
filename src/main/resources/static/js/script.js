@@ -1,4 +1,85 @@
 "use strict";
+
+function email(data) {
+  return (!data.match(/\S+@\S+\.\S+/));
+}
+
+function required(data) {
+  return (data.trim() === '');
+}
+
+function checklenth(data, count) {
+  return (data.length > count);
+}
+
+function number(data) {
+  return (!data.match(/^[0-9]+$/));
+}
+
+function range(data, count) {
+  return (data <= 0 || data > count);
+}
+
+function password(data) {
+  return (data.length < 7 || data.length > 30);
+}
+
+function validForm(data) {
+  let chek = true;
+  $(data).find('.required').each(function(index, el) {
+    const v = $(el).val();
+    const status = $(el).hasClass('has-error');
+    if(required(v)) {
+      if (!status) {
+        $(el).addClass('has-error');
+        $(el).parent().find('.validation-name').append('Поле обязательно для заполнения');
+      }
+      chek = false;
+    }
+    if($(el).hasClass("checklenth")) {
+      if(checklenth(v, 50)) {
+        chek = false;
+      }
+    }
+    if($(el).hasClass("textarea")) {
+      if(checklenth(v, 500)) {
+        chek = false;
+      }
+    }
+    if($(el).hasClass("email")) {
+      if(email(v)) {
+        chek = false;
+      }
+    }
+    if($(el).hasClass("number")) {
+      if(number(v)) {
+        chek = false;
+      }
+    }
+    if($(el).hasClass("range")) {
+      if(range(v, 100)) {
+        chek = false;
+      }
+    }
+    if($(el).hasClass("password")) {
+      if(password(v)) {
+        chek = false;
+      }
+    }
+  });
+
+  return chek;
+}
+
+$('.required').focusout(function () {
+  const data = $(this).val();
+  if (required(data)) {
+    $(this).addClass("has-error");
+    $(this).parent().find('.validation-name').empty();
+    $(this).parent().find('.validation-name').append("Поле обязательно для заполнения");
+  }
+});
+
 (function () {
   // Global variables
   var userAgent = navigator.userAgent.toLowerCase(),
