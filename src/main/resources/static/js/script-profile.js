@@ -52,4 +52,37 @@ $(function() {
         })
     });
 
+    $('#btn-resetPassword').click(function () {
+        if (validForm('#resetPasswordForm')) {
+            $.ajax({
+                type: 'POST',
+                url: '/rest/account/change-password',
+                data: $('#resetPasswordForm').serialize(),
+                success: function () {
+                    successNoty('Пароль успешно изменен!');
+                    $('#currentPassword').val('');
+                    $('#newPassword').val('');
+                    $('#confirmPassword').val('');
+                },
+                error: function (data) {
+                    failNoty(data.responseText);
+                }
+            })
+        } else {
+            failNoty('Проверьте правильность заполнения полей!');
+        }
+    });
+
+    $('#currentPassword').on('input', function() {
+        validPassword('#currentPassword');
+    });
+
+    $('#newPassword').on('input', function() {
+        validPassword('#newPassword');
+    });
+
+    $('#confirmPassword').on('input', function() {
+        validPassword('#confirmPassword');
+    });
+
 });

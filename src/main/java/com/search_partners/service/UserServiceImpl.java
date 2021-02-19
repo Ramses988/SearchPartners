@@ -5,6 +5,7 @@ import com.search_partners.model.City;
 import com.search_partners.model.Country;
 import com.search_partners.model.User;
 import com.search_partners.repository.UserRepository;
+import com.search_partners.to.ChangePasswordDto;
 import com.search_partners.to.UserProfileDto;
 import com.search_partners.to.UserRegisterDto;
 import com.search_partners.util.UserUtil;
@@ -31,8 +32,8 @@ public class UserServiceImpl implements UserService {
     public UserServiceImpl(UserRepository repository, CountryAndCityService service) {
         this.repository = repository;
         this.service = service;
-//        passwordEncoder = new BCryptPasswordEncoder();
-        passwordEncoder = NoOpPasswordEncoder.getInstance();
+        passwordEncoder = new BCryptPasswordEncoder();
+//        passwordEncoder = NoOpPasswordEncoder.getInstance();
     }
 
     @Override
@@ -81,6 +82,24 @@ public class UserServiceImpl implements UserService {
             repository.save(user);
         } else {
             throw new ErrorCheckRequestException("Ошибка создания пользователя!");
+        }
+    }
+
+    @Override
+    @Transactional
+    public void changePassword(ChangePasswordDto request, long id) {
+        User user = getUser(id);
+        if (Objects.nonNull(user)) {
+            if(!passwordEncoder.matches(request.getCurrentPassword(), user.getPassword()))
+                throw new ErrorCheckRequestException("Текущий пароль не совпадает!");
+            if (!request.getNewPassword().equals(request.getConfirmPassword()))
+                throw new ErrorCheckRequestException("Новые пароли не совпадают!");
+
+            user.setPassword(UserUtil.prepareToPassword(request.getNewPassword(), passwordEncoder));
+            repository.save(user);
+
+        } else {
+            throw new ErrorCheckRequestException("Ошибка смены пароля!");
         }
     }
 

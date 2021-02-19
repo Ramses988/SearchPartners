@@ -71,6 +71,23 @@ function validForm(data) {
   return chek;
 }
 
+function validPassword(dataInput) {
+  const dataPassword = $(dataInput);
+  const data = dataPassword.val();
+  const status = dataPassword.hasClass("has-error");
+  if (!password(data)) {
+    if (status) {
+      dataPassword.removeClass("has-error");
+      dataPassword.parent().find('.validation-name').empty();
+    }
+  }
+  if (password(data)) {
+    dataPassword.addClass("has-error");
+    dataPassword.parent().find('.validation-name').empty();
+    dataPassword.parent().find('.validation-name').append("Пароль должен находиться в диапазоне от 7 до 30");
+  }
+}
+
 $('.required').focusout(function () {
   const data = $(this).val();
   if (required(data)) {

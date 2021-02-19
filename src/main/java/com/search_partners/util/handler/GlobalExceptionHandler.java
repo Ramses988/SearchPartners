@@ -31,10 +31,10 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(Exception.class)
-    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
     public String handle(Exception exception) {
-        System.out.println("test Exception");
-        return "test";
+        // TODO: Add log
+        return "Ошибка обработки запроса!";
     }
 
 }

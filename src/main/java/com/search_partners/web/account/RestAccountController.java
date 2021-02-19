@@ -1,13 +1,12 @@
 package com.search_partners.web.account;
 
 import com.search_partners.service.UserService;
+import com.search_partners.to.ChangePasswordDto;
 import com.search_partners.to.UserProfileDto;
 import com.search_partners.to.UserRegisterDto;
 import com.search_partners.util.SecurityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -32,6 +31,11 @@ public class RestAccountController {
     @PostMapping("/create-user")
     public void createUser(@Valid UserRegisterDto user) {
         service.createUser(user);
+    }
+
+    @PostMapping("/change-password")
+    public void changePassword(@Valid ChangePasswordDto request) {
+        service.changePassword(request, SecurityUtil.authUserId());
     }
 
 }
