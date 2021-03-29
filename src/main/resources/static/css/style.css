@@ -9978,6 +9978,51 @@ html.rd-navbar-fixed-linked .page {
     color: #9a9a9a !important;
 }
 
+#reset-style {
+    padding-top: 15px;
+}
+
+#reset-style ol {
+    display: block;
+    list-style-type: decimal;
+    margin: 1em 0;
+    padding-left: 40px;
+}
+
+#reset-style ul {
+    display: block;
+    list-style-type: disc;
+    margin: 1em 0 1em;
+    padding-left: 40px;
+}
+
+#reset-style li {
+    display: list-item;
+}
+
+#reset-style .marker {
+    background-color: yellow;
+    color: black;
+}
+
+.cke_contents_ltr blockquote {
+    padding-left: 20px;
+    padding-right: 8px;
+    border-left-width: 5px;
+}
+
+#reset-style blockquote {
+    margin: 1em 40px;
+    font-style: italic;
+    padding: 15px 0 15px 15px;
+    font-family: Georgia, Times, "Times New Roman", serif;
+    border-left: 5px solid #ccc;
+}
+
+.color-blue {
+    color: #1087eb;
+}
+
 .sep-menu {
     border-top: 1px solid #d6d6d6;
 }

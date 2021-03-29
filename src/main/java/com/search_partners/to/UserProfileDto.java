@@ -7,6 +7,7 @@ import javax.validation.constraints.*;
 @Data
 public class UserProfileDto {
 
+    //TODO: Check for special character
     @Size(max = 30)
     private String realName;
 

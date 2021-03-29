@@ -33,11 +33,8 @@ public class DateUtil {
             post.setDuration(getText(value, " минуту", " минуты", " минут"));
             return;
         }
-        value = post.getDate().until(date, ChronoUnit.SECONDS);
-        if (value >= 1) {
-            post.setDurationShort("только что");
-            post.setDuration("только что");
-        }
+        post.setDurationShort("только что");
+        post.setDuration("только что");
     }
 
     private static String getText(long num, String form1, String form2, String form3) {

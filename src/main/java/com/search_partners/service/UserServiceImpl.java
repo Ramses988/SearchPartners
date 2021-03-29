@@ -32,8 +32,8 @@ public class UserServiceImpl implements UserService {
     public UserServiceImpl(UserRepository repository, CountryAndCityService service) {
         this.repository = repository;
         this.service = service;
-        passwordEncoder = new BCryptPasswordEncoder();
-//        passwordEncoder = NoOpPasswordEncoder.getInstance();
+//        passwordEncoder = new BCryptPasswordEncoder();
+        passwordEncoder = NoOpPasswordEncoder.getInstance();
     }
 
     @Override

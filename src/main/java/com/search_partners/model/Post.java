@@ -1,13 +1,15 @@
 package com.search_partners.model;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Entity
 @Table(name="posts")
 public class Post extends AbstractBaseEntity {
@@ -26,5 +28,4 @@ public class Post extends AbstractBaseEntity {
     private String duration;
     @Transient
     private String durationShort;
-
 }

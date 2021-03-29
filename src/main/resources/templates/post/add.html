@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html class="wide desktop landscape rd-navbar-static-linked" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Добавить новую запись</title>
+    <div th:replace="~{fragments/links :: links1}"></div>
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:400%7CUbuntu:300,400,500,600,700">
+</head>
+<body>
+<div th:replace="~{fragments/menu :: menu}"></div>
+<div th:replace="~{fragments/title :: title('Добавить новую запись')}"></div>
+
+<section class="section section-md">
+    <div class="container">
+        <form id="addPostForm">
+            <div class="block-form">
+                <h4>Новая запись</h4>
+                <hr>
+                <div class="rd-form form-lg">
+                    <div class="row row-40">
+                        <div class="col-md-6">
+                            <div class="form-wrap">
+                                <label class="form-label-outside">Страна</label>
+                                <div class="form-wrap-inner">
+                                    <!-- Select 2-->
+                                    <select id="country" name="country" class="form-input select form-control-has-validation form-control-last-child select2-hidden-accessible">
+                                        <option th:each="country : ${countries}"
+                                                th:value="${country.id}"
+                                                th:text="${country.name}"
+                                                th:selected="${user.country.id == country.id}">
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-wrap">
+                                <label class="form-label-outside">Город</label>
+                                <div class="form-wrap-inner">
+                                    <!-- Select 2-->
+                                    <select id="city" name="city" class="form-input select form-control-has-validation form-control-last-child select2-hidden-accessible">
+                                        <option th:each="city : ${cities}"
+                                                th:value="${city.id}"
+                                                th:text="${city.name}"
+                                                th:selected="${user.city.id == city.id}">
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-wrap">
+                                <label class="form-label-outside" for="title">Заголовок</label>
+                                <div class="form-wrap-inner">
+                                    <input class="form-input required" id="title" name="title">
+                                    <span class="form-validation validation-name"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-wrap">
+                                <label class="form-label-outside" for="text">Текст записи</label>
+                                <div class="form-wrap-inner">
+                                    <textarea id="text" name="text" class="form-input form-control-last-child"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button type="button" id="btn_addPost" class="button button-sm button-primary">Опубликовать запись</button>
+        </form>
+    </div>
+</section>
+
+<div th:replace="~{fragments/footer :: footer}"></div>
+<script src="/js/ckeditor/ckeditor.js"> </script>
+<script src="/js/noty.min.js"> </script>
+<script>
+
+    const instanceText = CKEDITOR.replace('text');
+
+    function failNoty(msg) {
+        new Noty({
+            theme: 'relax',
+            text: "<span class='fa fa-lg fa-exclamation-circle'></span> &nbsp;"+msg,
+            type: 'error',
+            layout: "topRight",
+            timeout: 3000
+        }).show();
+    }
+
+    $('#btn_addPost').click(function () {
+        if (validForm('#addPostForm')) {
+            instanceText.updateElement();
+            $.ajax({
+                type: 'POST',
+                url: '/manage/rest/post/add-post',
+                data: $('#addPostForm').serialize(),
+                success: function (data) {
+                    window.location.replace("/posts");
+                },
+                error: function(data) {
+                    failNoty(data.responseText);
+                }
+            })
+        } else {
+            failNoty('Проверьте правильность заполнения полей!');
+        }
+    });
+
+    $('#title').on('input', function() {
+        const titleInput = $('#title');
+        const data = titleInput.val();
+        const status = titleInput.hasClass("has-error");
+        if (data.length <= 100) {
+            if (status) {
+                titleInput.removeClass("has-error");
+                titleInput.parent().find('.validation-name').empty();
+            }
+        }
+        if (data.length > 100) {
+            titleInput.addClass("has-error");
+            titleInput.parent().find('.validation-name').empty();
+            titleInput.parent().find('.validation-name').append("Максимум 100 символов");
+        }
+    });
+
+</script>
+</body>
+</html>

@@ -14,6 +14,7 @@ import javax.validation.Valid;
 @RequestMapping(value = RestAccountController.REST_URL)
 public class RestAccountController {
 
+    static final String REST_URL = "/rest/account";
     private final UserService service;
 
     @Autowired
@@ -21,8 +22,7 @@ public class RestAccountController {
         this.service = service;
     }
 
-    static final String REST_URL = "/rest/account";
-
+    //TODO: Close url
     @PostMapping("/change-user-profile")
     public void changeUserProfile(@Valid UserProfileDto user) {
         service.saveUserProfile(user, SecurityUtil.authUserId());
@@ -33,6 +33,7 @@ public class RestAccountController {
         service.createUser(user);
     }
 
+    //TODO: Close url
     @PostMapping("/change-password")
     public void changePassword(@Valid ChangePasswordDto request) {
         service.changePassword(request, SecurityUtil.authUserId());
