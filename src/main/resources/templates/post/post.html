@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="wide desktop landscape rd-navbar-static-linked" xmlns:th="http://www.thymeleaf.org">
+<html class="wide desktop landscape rd-navbar-static-linked" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <title>Blog post</title>
     <div th:replace="~{fragments/links :: links1}"></div>
@@ -52,15 +52,17 @@
                     </div>
                 </article>
                 <div class="section-sm section-bottom-0">
-                    <p class="blog-layout-title text-center">Комментарии 5</p>
+                    <p class="blog-layout-title text-center" th:text="${'Комментарии ' + post.comments}"></p>
                     <!-- Comment-->
                     <div class="comment-group">
                         <article class="comment comment-box">
                             <div class="comment-aside">
-                                <div class="comment-avatar" style="background-color:#ffcc33"><span>M</span></div>
+                                <div class="comment-avatar" style="background-color:#1087eb">
+                                    <span sec:authentication="principal.initial"></span>
+                                </div>
                             </div>
                             <div class="comment-header">
-                                <p class="comment-title">Miranda</p>
+                                <p class="comment-title" sec:authentication="principal.name"></p>
                             </div>
                             <div class="comment-main">
                                 <form class="rd-mailform rd-mailform-outline" novalidate="novalidate">
@@ -70,107 +72,38 @@
                                     </div>
                                     <div class="from-wrap">
                                         <button class="button button-primary" type="submit">Отправить</button>
+                                    </div>
                                 </form>
                             </div>
                         </article>
                     </div>
-                    <div class="comment-group">
-                        <!-- Comment-->
-                        <article class="comment">
-                            <div class="comment-aside">
-                                <div class="comment-avatar" style="background-color:#00cc00"><span>П</span></div>
-                            </div>
-                            <div class="comment-header">
-                                <div class="comment-header-inner">
-                                    <p class="comment-title">Пользователь35</p><span class="comment-time">25 Окт. 2020, 12:15</span>
-                                </div>
-                            </div>
-                            <div class="comment-main">
-                                <div class="comment-text">
-                                    <p>какая доля продается, какова ее стоимость?</p>
-                                </div>
-                                <div class="comment-footer">
-                                    <ul class="comment-list">
-                                        <li> <a class="comment-link" href="#"><span class="icon mdi mdi-thumb-up-outline"></span><span>32</span></a></li>
-                                        <li><a class="comment-link" href="#"><span class="icon mdi mdi-comment-outline"></span><span>Ответить</span></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </article>
-                        <div class="comment-group">
+                        <div th:each="comment : ${post.commentList}" class="comment-group">
                             <!-- Comment-->
                             <article class="comment">
                                 <div class="comment-aside">
-                                    <div class="comment-avatar" style="background-color:#3366cc"><span>С</span></div>
+                                    <div class="comment-avatar" th:style="'background-color:'+${comment.user.color}">
+                                        <span th:text="${comment.user.initial}"></span>
+                                    </div>
                                 </div>
                                 <div class="comment-header">
                                     <div class="comment-header-inner">
-                                        <p class="comment-title">Станислав Успех</p><span class="comment-time">25 Окт. 2020, 15:03</span>
+                                        <p class="comment-title" th:text="${comment.user.name}"></p>
+                                        <span class="comment-time" th:text="${#temporals.format(comment.date, 'dd MMM yyyy, HH:mm')}"></span>
                                     </div>
                                 </div>
                                 <div class="comment-main">
                                     <div class="comment-text">
-                                        <p>Напишите подробней 89261694200</p>
+                                        <p th:text="${comment.text}"></p>
                                     </div>
                                     <div class="comment-footer">
                                         <ul class="comment-list">
-                                            <li> <a class="comment-link" href="#"><span class="icon mdi mdi-thumb-up-outline"></span><span>5</span></a></li>
+                                            <li> <a class="comment-link" href="#"><span class="icon mdi mdi-thumb-up-outline"></span><span>0</span></a></li>
                                             <li><a class="comment-link" href="#"><span class="icon mdi mdi-comment-outline"></span><span>Ответить</span></a></li>
                                         </ul>
                                     </div>
                                 </div>
                             </article>
                         </div>
-                    </div>
-                    <div class="comment-group">
-                        <!-- Comment-->
-                        <article class="comment">
-                            <div class="comment-aside">
-                                <div class="comment-avatar" style="background-color:#00cc00"><span>P</span></div>
-                            </div>
-                            <div class="comment-header">
-                                <div class="comment-header-inner">
-                                    <p class="comment-title">psparnas43</p><span class="comment-time">25 Окт. 2020, 13:05</span>
-                                </div>
-                            </div>
-                            <div class="comment-main">
-                                <div class="comment-text">
-                                    <p>Добрый день! Заинтересовало ваше предложение, как с вами связаться для обсуждения сотрудничества?</p>
-                                </div>
-                                <div class="comment-footer">
-                                    <ul class="comment-list">
-                                        <li> <a class="comment-link" href="#"><span class="icon mdi mdi-thumb-up-outline"></span><span>0</span></a></li>
-                                        <li><a class="comment-link" href="#"><span class="icon mdi mdi-comment-outline"></span><span>Ответить</span></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </article>
-                    </div>
-                    <div class="comment-group">
-                        <!-- Comment-->
-                        <article class="comment">
-                            <div class="comment-aside">
-                                <div class="comment-avatar" style="background-color:#cc33cc"><span>G</span></div>
-                            </div>
-                            <div class="comment-header">
-                                <div class="comment-header-inner">
-                                    <p class="comment-title">gregorylub</p><span class="comment-time">25 Окт. 2020, 17:55</span>
-                                </div>
-                            </div>
-                            <div class="comment-main">
-                                <div class="comment-text">
-                                    <p>Добрый день! Заинтересовало ваше предложение, как с вами связаться для обсуждения сотрудничества и получения информации
-                                        Григорий</p>
-                                </div>
-                                <div class="comment-footer">
-                                    <ul class="comment-list">
-                                        <li> <a class="comment-link" href="#"><span class="icon mdi mdi-thumb-up-outline"></span><span>0</span></a></li>
-                                        <li><a class="comment-link" href="#"><span class="icon mdi mdi-comment-outline"></span><span>Ответить</span></a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </article>
-                    </div>
                 </div>
             </div>
             <div class="blog-layout-aside">

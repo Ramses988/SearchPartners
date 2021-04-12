@@ -42,8 +42,12 @@ public class PostServiceImpl implements PostService {
 
     @Override
     @Transactional
-    public void save(Post post) {
+    public Post getPostWithComments(long id) {
+        //TODO: Add check exception if post equals null
+        Post post = postRepository.getPostWithComments(id).orElse(null);
+        post.setShow(post.getShow() + 1);
         postRepository.save(post);
+        return post;
     }
 
     @Override

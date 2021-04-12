@@ -41,10 +41,7 @@ public class PostController {
 
     @GetMapping("/post/{id}")
     public String getPost(@PathVariable("id") long id, Model model) {
-        Post post = postService.getPost(id);
-        post.setShow(post.getShow() + 1);
-        postService.save(post);
-        model.addAttribute("post", post);
+        model.addAttribute("post", postService.getPostWithComments(id));
         return "post/post";
     }
 

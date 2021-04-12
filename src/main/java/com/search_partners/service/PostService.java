@@ -10,7 +10,7 @@ public interface PostService {
 
     Post getPost(long id);
 
-    void save(Post post);
+    Post getPostWithComments(long id);
 
     void savePost(PostDto postDto, Long id);
 
