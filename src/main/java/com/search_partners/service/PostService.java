@@ -12,6 +12,8 @@ public interface PostService {
 
     Post getPostWithComments(long id);
 
+    void savePost(Post post);
+
     void savePost(PostDto postDto, Long id);
 
 }

@@ -4,7 +4,9 @@ import com.search_partners.service.PostService;
 import com.search_partners.to.PostDto;
 import com.search_partners.util.SecurityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
@@ -20,6 +22,7 @@ public class RestPostController {
     }
 
     @PostMapping("/manage/rest/post/add-post")
+    @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void addPost(@Valid PostDto post) {
         service.savePost(post, SecurityUtil.authUserId());
     }

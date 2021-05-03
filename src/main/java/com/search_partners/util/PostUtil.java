@@ -18,6 +18,12 @@ public class PostUtil {
         initCharacters();
     }
 
+    public static Post getPost(Long id) {
+        Post post = new Post();
+        post.setId(id);
+        return post;
+    }
+
     public static Post createNewFromTo(PostDto postDto) {
         return Post.builder()
                 .title(postDto.getTitle())

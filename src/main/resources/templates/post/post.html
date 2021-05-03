@@ -54,30 +54,41 @@
                 <div class="section-sm section-bottom-0">
                     <p class="blog-layout-title text-center" th:text="${'Комментарии ' + post.comments}"></p>
                     <!-- Comment-->
-                    <div class="comment-group">
-                        <article class="comment comment-box">
-                            <div class="comment-aside">
-                                <div class="comment-avatar" style="background-color:#1087eb">
-                                    <span sec:authentication="principal.initial"></span>
-                                </div>
-                            </div>
-                            <div class="comment-header">
-                                <p class="comment-title" sec:authentication="principal.name"></p>
-                            </div>
-                            <div class="comment-main">
-                                <form class="rd-mailform rd-mailform-outline" novalidate="novalidate">
-                                    <div class="form-wrap">
-                                        <label class="form-label rd-input-label" for="comment-message">Написать комментарий</label>
-                                        <textarea class="form-input form-control-has-validation form-control-last-child" id="comment-message" name="message" data-constraints="@Required"></textarea><span class="form-validation"></span>
-                                    </div>
-                                    <div class="from-wrap">
-                                        <button class="button button-primary" type="submit">Отправить</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </article>
+                    <div sec:authorize="isAnonymous()">
+                        <div id="comment-enter">
+                            <p id="comment-text-register">Оставлять комментарии могут только зарегистрированные пользователи.</p>
+                            <p id="comment-button">
+                                <a href="/login" class="button-smm button-primary button-circle">Войти</a>
+                                <a href="/register" class="button-smm button-primary button-circle">Зарегистрироваться</a></p>
+                        </div>
                     </div>
-                        <div th:each="comment : ${post.commentList}" class="comment-group">
+                    <div sec:authorize="isAuthenticated()">
+                        <div class="comment-group">
+                            <article class="comment comment-box">
+                                <div class="comment-aside">
+                                    <div class="comment-avatar" style="background-color:#1087eb">
+                                        <span sec:authentication="principal.initial"></span>
+                                    </div>
+                                </div>
+                                <div class="comment-header">
+                                    <p class="comment-title" sec:authentication="principal.name"></p>
+                                </div>
+                                <div class="comment-main">
+                                    <form class="rd-mailform rd-mailform-outline" id="addPostComment" novalidate="novalidate">
+                                        <input type="hidden" name="post" th:value="${post.id}">
+                                        <div class="form-wrap">
+                                            <textarea class="form-input" id="comment-message" name="message" placeholder="Написать комментарий"></textarea>
+                                        </div>
+                                        <div class="from-wrap">
+                                            <button type="button" id="btn-addCommit" class="button button-primary">Отправить</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+
+                        <div th:each="comment : ${post.commentList}" class="comment-group block-comments">
                             <!-- Comment-->
                             <article class="comment">
                                 <div class="comment-aside">
@@ -138,5 +149,7 @@
     </div>
 </section>
 <div th:replace="~{fragments/footer :: footer}"></div>
+<script src="/js/noty.min.js"></script>
+<script src="/js/script-post.js"></script>
 </body>
 </html>

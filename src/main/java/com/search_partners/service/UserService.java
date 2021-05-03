@@ -11,6 +11,8 @@ public interface UserService extends UserDetailsService {
 
     User getUserWithCity(long id);
 
+    User getUser(long id);
+
     void saveUserProfile(UserProfileDto user, long id);
 
     void createUser(UserRegisterDto newUser);

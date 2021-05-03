@@ -1,5 +1,6 @@
 package com.search_partners.service;
 
+import com.search_partners.model.Comment;
 import com.search_partners.model.Post;
 import com.search_partners.model.User;
 import com.search_partners.repository.PostRepository;
@@ -13,6 +14,9 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Collections;
+import java.util.Comparator;
 
 @Service
 @Transactional(readOnly = true)
@@ -47,7 +51,14 @@ public class PostServiceImpl implements PostService {
         Post post = postRepository.getPostWithComments(id).orElse(null);
         post.setShow(post.getShow() + 1);
         postRepository.save(post);
+        Collections.sort(post.getCommentList());
         return post;
+    }
+
+    @Override
+    @Transactional
+    public void savePost(Post post) {
+        postRepository.save(post);
     }
 
     @Override

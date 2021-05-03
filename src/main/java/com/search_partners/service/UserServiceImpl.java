@@ -103,7 +103,8 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-    private User getUser(long id) {
+    @Override
+    public User getUser(long id) {
         return repository.findById(id).orElse(null);
     }
 

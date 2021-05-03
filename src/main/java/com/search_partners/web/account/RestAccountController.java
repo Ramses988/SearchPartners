@@ -6,6 +6,7 @@ import com.search_partners.to.UserProfileDto;
 import com.search_partners.to.UserRegisterDto;
 import com.search_partners.util.SecurityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -24,17 +25,20 @@ public class RestAccountController {
 
     //TODO: Close url
     @PostMapping("/change-user-profile")
+    @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void changeUserProfile(@Valid UserProfileDto user) {
         service.saveUserProfile(user, SecurityUtil.authUserId());
     }
 
     @PostMapping("/create-user")
+    @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void createUser(@Valid UserRegisterDto user) {
         service.createUser(user);
     }
 
     //TODO: Close url
     @PostMapping("/change-password")
+    @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void changePassword(@Valid ChangePasswordDto request) {
         service.changePassword(request, SecurityUtil.authUserId());
     }

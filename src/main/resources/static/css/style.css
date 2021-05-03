@@ -104,6 +104,16 @@ button, input {
     overflow: visible;
 }
 
+.button-smm {
+    font-weight: 500;
+    margin: 5px;
+    letter-spacing: .1em;
+    padding: 10px 20px;
+    font-size: 13px;
+    line-height: 1.5;
+    cursor: pointer;
+}
+
 button, select {
     text-transform: none;
 }
@@ -2575,6 +2585,10 @@ hr {
 .button-block {
     display: block;
     width: 100%;
+}
+
+.button-circle {
+    border-radius: 30px;
 }
 
 .button-primary, .button-primary:focus {
@@ -9973,6 +9987,20 @@ html.rd-navbar-fixed-linked .page {
 
 
 /* Start my code*/
+
+#comment-enter {
+    margin-top: 20px;
+    border: 1px solid #e0e0e0;
+}
+
+#comment-text-register {
+    color: #000;
+    padding: 15px 0 0 15px;
+}
+
+#comment-button {
+    padding: 0 0 25px 30px;
+}
 
 .color-gray {
     color: #9a9a9a !important;
