@@ -9995,7 +9995,7 @@ html.rd-navbar-fixed-linked .page {
 
 #comment-text-register {
     color: #000;
-    padding: 15px 0 0 15px;
+    padding: 20px 0 0 37px;
 }
 
 #comment-button {
@@ -10559,6 +10559,14 @@ html.rd-navbar-fixed-linked .page {
 		margin-right: auto;
 	}
 
+    #comment-text-register {
+        padding: 10px 0 0 17px;
+    }
+
+    #comment-button {
+        padding: 0 0 15px 15px;
+    }
+
 	.company-light-figure {
 		min-width: 0px;
 		margin-right: 10px;
@@ -10585,6 +10593,13 @@ html.rd-navbar-fixed-linked .page {
     #rd-navbar-profile-mobile {
         margin-top: 10px;
         width: 92vw;
+    }
+}
+
+@media (max-width: 320px) {
+    .button-smm {
+        padding: 7px 7px;
+        margin: 0px;
     }
 }
 
