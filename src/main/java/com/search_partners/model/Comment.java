@@ -8,6 +8,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -27,6 +28,9 @@ public class Comment extends AbstractBaseEntity implements Comparable<Comment> {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "comment")
+    private List<InternalComment> internalComments;
 
     public Comment() {}
 

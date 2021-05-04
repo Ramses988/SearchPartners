@@ -114,6 +114,33 @@
                                     </div>
                                 </div>
                             </article>
+                            <div th:each="internal : ${comment.internalComments}" class="comment-group block-comments">
+                                <!-- Comment-->
+                                <article class="comment">
+                                    <div class="comment-aside">
+                                        <div class="comment-avatar" th:style="'background-color:'+${internal.user.color}">
+                                            <span th:text="${internal.user.initial}"></span>
+                                        </div>
+                                    </div>
+                                    <div class="comment-header">
+                                        <div class="comment-header-inner">
+                                            <p class="comment-title" th:text="${internal.user.name}"></p>
+                                            <span class="comment-time" th:text="${#temporals.format(internal.date, 'dd MMM yyyy, HH:mm')}"></span>
+                                        </div>
+                                    </div>
+                                    <div class="comment-main">
+                                        <div class="comment-text">
+                                            <p th:text="${internal.text}"></p>
+                                        </div>
+                                        <div class="comment-footer">
+                                            <ul class="comment-list">
+                                                <li> <a class="comment-link" href="#"><span class="icon mdi mdi-thumb-up-outline"></span><span>0</span></a></li>
+                                                <li><a class="comment-link" href="#"><span class="icon mdi mdi-comment-outline"></span><span>Ответить</span></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </article>
+                            </div>
                         </div>
                 </div>
             </div>
