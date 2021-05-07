@@ -2,7 +2,7 @@ let template = '<div class="comment-group block-comments"><article class="commen
     '           <div class="comment-avatar" style="background-color:sColor"><span>$initial</span>\n' +
     '           </div></div> <div class="comment-header"><div class="comment-header-inner"><p class="comment-title">$name</p>\n' +
     '           <span class="comment-time">$date</span></div></div><div class="comment-main">\n' +
-    '           <div class="comment-text"><p>$text</p></div><div class="comment-footer">\<ul class="comment-list"><li> <a class="comment-link" href="#">' +
+    '           <div class="comment-text">$text</div><div class="comment-footer">\<ul class="comment-list"><li> <a class="comment-link" href="#">' +
     '           <span class="icon mdi mdi-thumb-up-outline"></span><span>0</span></a></li>\n' +
     '           <li><a class="comment-link" href="#"><span class="icon mdi mdi-comment-outline"></span><span>Ответить</span></a></li></ul>\n' +
     '           </div></div></article></div>';
@@ -40,7 +40,7 @@ function addComment(data) {
     str = str.replace("sColor", data.user.color);
     str = str.replace("$initial", data.user.initial);
     str = str.replace("$name", data.user.name);
-    str = str.replace("$text", data.text);
+    str = str.replace("$text", "<p>"+data.text+"</p>");
     str = str.replace("$date", date);
     let block = $('.block-comments');
     if (block.length) {
@@ -64,6 +64,51 @@ $('#btn-addCommit').click(function () {
             failNoty(data.responseText);
         }
     })
+});
+
+$('#btnAddPostCommentChildren').click(function () {
+    $.ajax({
+        type: 'POST',
+        url: '/rest/comments/save-comment-children',
+        data: $('#addPostCommentChildren').serialize(),
+        success: function (data) {
+            $('.popup-fade').fadeOut();
+            successNoty('Комментарий успешно добавлен!');
+        },
+        error: function (data) {
+            failNoty(data.responseText);
+        }
+    })
+});
+
+$('.popup-open').click(function() {
+    let parent = $(this).parents('.comment');
+    $('#parent').val(parent.children(".number-parent").val());
+    $('#children').val(parent.children(".number-children").val());
+    $('#message').val('');
+    $('.popup-fade').fadeIn();
+    return false;
+});
+
+// Клик по ссылке "Закрыть".
+$('.popup-close').click(function() {
+    $(this).parents('.popup-fade').fadeOut();
+    return false;
+});
+
+// Закрытие по клавише Esc.
+$(document).keydown(function(e) {
+    if (e.keyCode === 27) {
+        e.stopPropagation();
+        $('.popup-fade').fadeOut();
+    }
+});
+
+// Клик по фону, но не по окну.
+$('.popup-fade').click(function(e) {
+    if ($(e.target).closest('.popup').length == 0) {
+        $(this).fadeOut();
+    }
 });
 
 // $('.block-comments').remove();

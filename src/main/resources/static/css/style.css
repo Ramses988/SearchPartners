@@ -725,6 +725,11 @@ h6, .h6 {
     color: #1087eb;
 }
 
+.mdi-close:before {
+    content: "\f24c";
+    font-size: 19px;
+}
+
 .mdi-comment-outline:before {
     content: "\f278";
 }
@@ -876,7 +881,7 @@ body {
 	font-size: 14px;
 	line-height: 1.71429;
 	font-weight: 400;
-	color: #9a9a9a;
+	color: grey;
 	background-color: #ffffff;
 	-webkit-text-size-adjust: none;
 	-webkit-font-smoothing: subpixel-antialiased;
@@ -9987,6 +9992,57 @@ html.rd-navbar-fixed-linked .page {
 
 
 /* Start my code*/
+
+.comment-response {
+    background-color: #fbfbfb;
+    padding-left: 15px;
+    border-left: 2px solid #c7c7c7;
+}
+
+.comment-main-modal {
+    width: 100%;
+    padding-top: 15px;
+}
+
+.from-wrap-modal {
+    margin-top: 20px;
+}
+
+.popup-fade {
+    display: none;
+}
+
+.popup-fade:before {
+    content: '';
+    background: #000;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.7;
+    z-index: 9999;
+}
+
+.popup {
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    padding: 20px;
+    width: 95%;
+    max-width: 500px;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    border: 1px solid #1087eb;
+    border-radius: 4px;
+    z-index: 99999;
+    opacity: 1;
+}
+.popup-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
 
 #comment-enter {
     margin-top: 20px;

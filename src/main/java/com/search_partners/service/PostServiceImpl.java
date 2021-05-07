@@ -52,6 +52,9 @@ public class PostServiceImpl implements PostService {
         post.setShow(post.getShow() + 1);
         postRepository.save(post);
         Collections.sort(post.getCommentList());
+        for (Comment comment : post.getCommentList()) {
+            Collections.sort(comment.getInternalComments());
+        }
         return post;
     }
 

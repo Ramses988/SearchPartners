@@ -91,6 +91,8 @@
                         <div th:each="comment : ${post.commentList}" class="comment-group block-comments">
                             <!-- Comment-->
                             <article class="comment">
+                                <input class="number-parent" type="hidden" th:value="${comment.id}">
+                                <input class="number-children" type="hidden" th:value="0">
                                 <div class="comment-aside">
                                     <div class="comment-avatar" th:style="'background-color:'+${comment.user.color}">
                                         <span th:text="${comment.user.initial}"></span>
@@ -109,7 +111,12 @@
                                     <div class="comment-footer">
                                         <ul class="comment-list">
                                             <li> <a class="comment-link" href="#"><span class="icon mdi mdi-thumb-up-outline"></span><span>0</span></a></li>
-                                            <li><a class="comment-link" href="#"><span class="icon mdi mdi-comment-outline"></span><span>Ответить</span></a></li>
+                                            <th:block sec:authorize="isAuthenticated()">
+                                                <li>
+                                                    <a class="comment-link popup-open" href="#"><span class="icon mdi mdi-comment-outline"></span>
+                                                        <span>Ответить</span></a>
+                                                </li>
+                                            </th:block>
                                         </ul>
                                     </div>
                                 </div>
@@ -117,6 +124,8 @@
                             <div th:each="internal : ${comment.internalComments}" class="comment-group block-comments">
                                 <!-- Comment-->
                                 <article class="comment">
+                                    <input class="number-parent" type="hidden" th:value="${comment.id}">
+                                    <input class="number-children" type="hidden" th:value="${internal.id}">
                                     <div class="comment-aside">
                                         <div class="comment-avatar" th:style="'background-color:'+${internal.user.color}">
                                             <span th:text="${internal.user.initial}"></span>
@@ -129,13 +138,16 @@
                                         </div>
                                     </div>
                                     <div class="comment-main">
-                                        <div class="comment-text">
-                                            <p th:text="${internal.text}"></p>
-                                        </div>
+                                        <div class="comment-text" th:utext="${internal.text}"></div>
                                         <div class="comment-footer">
                                             <ul class="comment-list">
                                                 <li> <a class="comment-link" href="#"><span class="icon mdi mdi-thumb-up-outline"></span><span>0</span></a></li>
-                                                <li><a class="comment-link" href="#"><span class="icon mdi mdi-comment-outline"></span><span>Ответить</span></a></li>
+                                                <th:block sec:authorize="isAuthenticated()">
+                                                    <li>
+                                                        <a class="comment-link popup-open" href="#"><span class="icon mdi mdi-comment-outline"></span>
+                                                        <span>Ответить</span></a>
+                                                    </li>
+                                                </th:block>
                                             </ul>
                                         </div>
                                     </div>
@@ -175,6 +187,28 @@
         </div>
     </div>
 </section>
+<div class="popup-fade">
+    <div class="popup">
+        <a class="popup-close" href="#"><span class="icon mdi mdi-close"></span></a>
+        <div class="comment-header">
+            <th:block sec:authorize="isAuthenticated()">
+                <p class="comment-title" sec:authentication="principal.name"></p>
+            </th:block>
+        </div>
+        <div class="comment-main-modal">
+            <form class="rd-mailform rd-mailform-outline" id="addPostCommentChildren">
+                <input type="hidden" id="parent" name="parent">
+                <input type="hidden" id="children" name="children">
+                <div class="form-wrap">
+                    <textarea class="form-input" id="message" name="message" placeholder="Написать комментарий"></textarea>
+                </div>
+                <div class="from-wrap-modal">
+                    <button type="button" class="button button-primary" id="btnAddPostCommentChildren">Отправить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 <div th:replace="~{fragments/footer :: footer}"></div>
 <script src="/js/noty.min.js"></script>
 <script src="/js/script-post.js"></script>

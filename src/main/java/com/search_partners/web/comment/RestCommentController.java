@@ -1,7 +1,9 @@
 package com.search_partners.web.comment;
 
 import com.search_partners.model.Comment;
+import com.search_partners.model.InternalComment;
 import com.search_partners.service.CommentService;
+import com.search_partners.util.CommentUtil;
 import com.search_partners.util.SecurityUtil;
 import com.search_partners.util.exception.ErrorCheckRequestException;
 import lombok.extern.log4j.Log4j2;
@@ -33,10 +35,14 @@ public class RestCommentController {
     //TODO: Close url
     @PostMapping("/save-comment")
     public Comment saveComment(Long post, String message) throws ErrorCheckRequestException {
-        if (Objects.isNull(message) || message.isBlank())
-            throw new ErrorCheckRequestException("Комментарий не должен быть пустым!");
-        if (message.contains(">") || message.contains("<") || message.contains("http"))
-            throw new ErrorCheckRequestException("Уберите запрещенные символы!");
+        message = CommentUtil.commentValid(message);
         return service.saveComment(post, message, SecurityUtil.authUserId());
+    }
+
+    //TODO: Close url
+    @PostMapping("/save-comment-children")
+    public InternalComment saveCommentChildren(Long parent, Long children, String message) throws ErrorCheckRequestException {
+        message = CommentUtil.commentValid(message);
+        return service.saveCommentChildren(parent, children, message, SecurityUtil.authUserId());
     }
 }
