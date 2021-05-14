@@ -1,6 +1,8 @@
 package com.search_partners.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.search_partners.util.UserUtil;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,7 +27,7 @@ public class InternalComment extends AbstractBaseEntity implements Comparable<In
     @JoinColumn(name = "comment_id")
     private Comment comment;
 
-    @JsonIgnore
+    @JsonSerialize(converter = UserUtil.class)
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;

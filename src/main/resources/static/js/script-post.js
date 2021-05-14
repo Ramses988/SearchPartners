@@ -6,6 +6,7 @@ let template = '<div class="comment-group block-comments"><article class="commen
     '           <span class="icon mdi mdi-thumb-up-outline"></span><span>0</span></a></li>\n' +
     '           <li><a class="comment-link" href="#"><span class="icon mdi mdi-comment-outline"></span><span>Ответить</span></a></li></ul>\n' +
     '           </div></div></article></div>';
+let elementId = '';
 
 function successNoty(msg) {
     new Noty({
@@ -50,6 +51,23 @@ function addComment(data) {
     }
 }
 
+function addCommentInner(data) {
+    let str = template;
+    let date = formatDate();
+    str = str.replace("sColor", data.user.color);
+    str = str.replace("$initial", data.user.initial);
+    str = str.replace("$name", data.user.name);
+    str = str.replace("$text", data.text);
+    str = str.replace("$date", date);
+    str = str.replace("block-comments", "block-comments-inner");
+    let block = elementId.parents('.block-comments').children('.block-comments-inner').last();
+    if (block.length) {
+        block.after(str);
+    } else {
+        elementId.parents('.comment').after(str);
+    }
+}
+
 $('#btn-addCommit').click(function () {
     $.ajax({
         type: 'POST',
@@ -72,6 +90,7 @@ $('#btnAddPostCommentChildren').click(function () {
         url: '/rest/comments/save-comment-children',
         data: $('#addPostCommentChildren').serialize(),
         success: function (data) {
+            addCommentInner(data);
             $('.popup-fade').fadeOut();
             successNoty('Комментарий успешно добавлен!');
         },
@@ -82,6 +101,7 @@ $('#btnAddPostCommentChildren').click(function () {
 });
 
 $('.popup-open').click(function() {
+    elementId = $(this);
     let parent = $(this).parents('.comment');
     $('#parent').val(parent.children(".number-parent").val());
     $('#children').val(parent.children(".number-children").val());

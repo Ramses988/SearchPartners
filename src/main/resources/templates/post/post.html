@@ -121,7 +121,7 @@
                                     </div>
                                 </div>
                             </article>
-                            <div th:each="internal : ${comment.internalComments}" class="comment-group block-comments">
+                            <div th:each="internal : ${comment.internalComments}" class="comment-group block-comments-inner">
                                 <!-- Comment-->
                                 <article class="comment">
                                     <input class="number-parent" type="hidden" th:value="${comment.id}">
