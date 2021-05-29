@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Чат</title>
+</head>
+<body>
+<label for="sender">Имя</label>
+<input type="text" id="sender" name="sender">
+<label for="content">Сообщение</label>
+<input type="text" id="content" name="content">
+<button id="sendText">Отправить</button>
+<script src="/js/jquery-3.4.1.min.js"></script>
+<script src="/js/sockjs.min.js"></script>
+<script src="/js/stomp.min.js"></script>
+<script>
+    function onMessageReceived(data) {
+        console.log(data);
+    }
+
+    const onConnected = () => {
+        console.log("connected");
+
+        stompClient.subscribe('/chat/messages', onMessageReceived);
+    };
+
+    const onError = () => {
+        console.log("onError");
+    };
+
+    let socket = new SockJS('/ws');
+    // stompClient.debug = () => {};
+    stompClient = Stomp.over(socket);
+    stompClient.connect({}, onConnected, onError);
+
+    $('#sendText').click(function () {
+        const message = {
+            sender: $('#sender').val(),
+            content: $('#content').val()
+        };
+        if (message && stompClient) {
+            stompClient.send('/app/message', {}, JSON.stringify(message));
+        }
+    });
+</script>
+</body>
+</html>
