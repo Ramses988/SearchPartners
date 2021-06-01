@@ -31,9 +31,4 @@ public class ChatMessage extends AbstractBaseEntity {
     @JoinColumn(name = "recipient_id", nullable = false)
     private User recipientId;
 
-    @Transient
-    private String recipientName;
-    @Transient
-    private String senderName;
-
 }

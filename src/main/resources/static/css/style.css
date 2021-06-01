@@ -10238,7 +10238,7 @@ html.rd-navbar-fixed-linked .page {
     width: 100%;
     height: 35px;
 	background-color: #F2F2F2;
-	background-image: url(C:/Users/Roman/Desktop/SearchPartnersForBsines/ramses988.github.io/images/IconsetW.png);
+	background-image: url(../images/IconsetW.png);
     background-repeat: no-repeat;
     background-position: -6px -205px;
 }
@@ -10287,7 +10287,7 @@ html.rd-navbar-fixed-linked .page {
 
 #content-text-wrapper {
 	position: relative;
-	margin: 20px 40px 0 40px;
+	margin: 7px 40px 0 40px;
 }
 
 #content-text {

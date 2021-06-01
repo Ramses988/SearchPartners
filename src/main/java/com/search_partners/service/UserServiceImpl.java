@@ -105,7 +105,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getUser(long id) {
-        return repository.findById(id).orElse(null);
+        User user = repository.findById(id).orElse(null);
+        //TODO: check if not found
+        return user;
     }
 
     @Override

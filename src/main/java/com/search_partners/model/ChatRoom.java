@@ -1,7 +1,9 @@
 package com.search_partners.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -11,6 +13,7 @@ import java.util.List;
 @Setter
 @Entity
 @Table(name="chat_room")
+@NoArgsConstructor
 public class ChatRoom extends AbstractBaseEntity {
 
     @Column(name="chat_id")
@@ -30,4 +33,9 @@ public class ChatRoom extends AbstractBaseEntity {
     @JoinColumn(name = "recipient_id", nullable = false)
     private User recipientId;
 
+    public ChatRoom(String chatId, User senderId, User recipientId) {
+        this.chatId = chatId;
+        this.senderId = senderId;
+        this.recipientId = recipientId;
+    }
 }

@@ -29,6 +29,8 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/profile/**").authenticated()
                 .antMatchers("/manage/**").authenticated()
+                .antMatchers("/chat/**").authenticated()
+                .antMatchers("/messages/**").authenticated()
                 .anyRequest().permitAll()
                 .and()
                 .formLogin()

@@ -44,7 +44,6 @@ CREATE TABLE users
     FOREIGN KEY (city_id) REFERENCES cities (id)
 );
 CREATE UNIQUE INDEX users_unique_email_idx ON users (email);
-CREATE UNIQUE INDEX users_unique_name_idx ON users (name);
 
 CREATE TABLE user_roles
 (
