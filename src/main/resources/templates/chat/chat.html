@@ -185,6 +185,7 @@
             <div id="container-messages">
                 <p id="chatMail" style="display: none" sec:authentication="principal.username"></p>
                 <p id="chatId" style="display: none" sec:authentication="principal.id"></p>
+                <p id="activeId" style="display: none"></p>
                 <div id="message-left" class="mobile-users active">
                     <div id="users-search">
                         <input type="search" placeholder="Поиск пользователя" />
@@ -195,6 +196,7 @@
                                 <div class="comment-avatar" style="background-color:#cc33cc"><span>V</span></div>
                             </figure>
                             <div class="company-light-main">
+                                <p class="id_user" style="display: none">1</p>
                                 <h5 class="message-light-title">vas.tvk7619</h5>
                                 <p><i>Ок, понял, буду пробовать )))</i></p>
                             </div>
@@ -204,6 +206,7 @@
                                 <div class="comment-avatar" style="background-color:#ffcc33"><span>R</span></div>
                             </figure>
                             <div class="company-light-main">
+                                <p class="id_user" style="display: none">2</p>
                                 <h5 class="message-light-title">RVD</h5>
                                 <p>3.0 не видит, возможно надо...</p>
                             </div>
@@ -213,7 +216,8 @@
                                 <div class="comment-avatar" style="background-color:#cc0000"><span>В</span></div>
                             </figure>
                             <div class="company-light-main">
-                                <h5 class="message-light-title">Василий Логинов</h5>
+                                <p class="id_user" style="display: none">5</p>
+                                <h5 class="message-light-title">Роман</h5>
                                 <p>Не я ничего не настраивал, п...</p>
                             </div>
                         </article>
@@ -244,14 +248,38 @@
 <script>
     let chatId = '/chat/' + $('#chatMail').text() + '/' + $('#chatId').text();
     let block = document.getElementById("block-messages");
+    let templateQuestion = "<div class='user-question'>$content<p><span><i>$date</i></span></p></div>";
+    let templateAnswer = "<div class='user-answer'><p><b>$name</b> <span><i>$date</i></span></p>$content</div>";
     block.scrollTop = block.scrollHeight;
 
-    function onMessageReceived(data) {
-        console.log(data);
+    function formatDate(now) {
+        let months = 'января,февраля,марта,апреля,мая,июня,июля,августа,сентября,октября,декабря'.split(',');
+        return now.getDate() + " " + months[now.getMonth()] + " " + now.getFullYear() + " в "
+            + now.getHours() + ":" + (now.getUTCMinutes()<10?'0':'') + now.getUTCMinutes();
+    }
+
+    const onMessageReceived = (response) => {
+        let data = JSON.parse(response.body)
+        let userId = $('#activeId').text();
+        let sender = data.senderId.id;
+        if(userId) {
+            if (userId == sender) {
+                let str = templateAnswer;
+                str = str.replace("$content", data.content);
+                str = str.replace("$name", data.senderId.name);
+                str = str.replace("$date", formatDate(new Date(data.date)));
+                $('#block-messages').append(str);
+            }
+        } else {
+            console.log('false')
+        }
     }
 
     function addMessageInChat(message) {
-        $('#block-messages').append();
+        let str = templateQuestion;
+        str = str.replace("$content", message.content);
+        str = str.replace("$date", formatDate(new Date()));
+        $('#block-messages').append(str);
     }
 
     const onConnected = () => {
@@ -269,11 +297,17 @@
     stompClient = Stomp.over(socket);
     stompClient.connect({}, onConnected, onError);
 
+    $('.click-user').click(function () {
+        let id = $('#activeId');
+        id.text('');
+        id.text($(this).find('.id_user').text());
+    });
+
     $('#sendBtn').click(function () {
         const message = {
             content: $('#content-text').val(),
             recipientId: {
-                id: 2
+                id: $('#activeId').text()
             }
         };
         if (message && stompClient) {

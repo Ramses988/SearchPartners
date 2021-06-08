@@ -28,7 +28,7 @@ public class ChatServiceImpl implements ChatService {
     @Override
     public ChatMessage sendMessage(ChatMessage message, Long id) {
         message.setSenderId(userService.getUser(id));
-        message.setRecipientId(userService.getUser(2));
+        message.setRecipientId(userService.getUser(message.getRecipientId().getId()));
         message.setChatId(getChatRoom(message));
         message.setDate(LocalDateTime.now());
         return messageRepository.save(message);

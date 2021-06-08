@@ -40,6 +40,7 @@ public class UserUtil extends StdConverter<User, UserDto> {
     @Override
     public UserDto convert(User user) {
         return UserDto.builder()
+                .id(user.getId())
                 .name(user.getName())
                 .initial(user.getInitial())
                 .color(user.getColor())
