@@ -251,9 +251,8 @@
                 str = str.replace("$name", data.senderId.name);
                 str = str.replace("$date", formatDate(new Date(data.date)));
                 $('#block-messages').append(str);
+                block.scrollTop = block.scrollHeight;
             }
-        } else {
-            console.log('false')
         }
     }
 
@@ -262,6 +261,7 @@
         str = str.replace("$content", message.content);
         str = str.replace("$date", formatDate(new Date()));
         $('#block-messages').append(str);
+        block.scrollTop = block.scrollHeight;
     }
 
     const onConnected = () => {
@@ -279,10 +279,38 @@
     stompClient = Stomp.over(socket);
     stompClient.connect({}, onConnected, onError);
 
+    function getHistory(id) {
+        $.post('/rest/chat/history', { recipientId : id }, function (data) {
+            $('#block-messages').empty();
+            for (let item in data) {
+                let str;
+                let message = data[item];
+                let activeUser = $('#chatId').text();
+                let getDate = message.date[0] + "," + message.date[1] + "," + message.date[2] + "," + message.date[3]
+                    + ":" + message.date[4]+ ":" + ((message.date[5] === 'undefined')?message.date[5]:'0');
+                console.log(message.date);
+                console.log(getDate);
+                if (message.senderId.id == activeUser) {
+                    str = templateQuestion;
+                    str = str.replace("$content", message.content);
+                    str = str.replace("$date", formatDate(new Date(getDate)));
+                } else {
+                    str = templateAnswer;
+                    str = str.replace("$name", message.senderId.name);
+                    str = str.replace("$content", message.content);
+                    str = str.replace("$date", formatDate(new Date(getDate)));
+                }
+                $('#block-messages').append(str);
+            }
+            block.scrollTop = block.scrollHeight;
+        })
+    }
+
     $('.click-user').click(function () {
         let id = $('#activeId');
         id.text('');
         id.text($(this).find('.id_user').text());
+        getHistory(id.text());
     });
 
     $('#sendBtn').click(function () {

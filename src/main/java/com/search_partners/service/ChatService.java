@@ -9,6 +9,8 @@ public interface ChatService {
 
     ChatMessage sendMessage(ChatMessage message, Long id);
 
+    List<ChatMessage> getHistory(Long recipientId, Long senderId);
+
     List<User> getUsers(Long id);
 
 }

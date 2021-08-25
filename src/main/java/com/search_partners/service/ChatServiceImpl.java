@@ -68,8 +68,18 @@ public class ChatServiceImpl implements ChatService {
         return response;
     }
 
+    @Override
+    public List<ChatMessage> getHistory(Long recipientId, Long senderId) {
+        String id = getIdChat(recipientId, senderId);
+        ChatRoom room = roomRepository.findByChatId(id).orElse(null);
+        if (Objects.nonNull(room)) {
+            return messageRepository.findAllByChatIdOrderByDateAsc(room);
+        }
+        return List.of();
+    }
+
     private ChatRoom getChatRoom(ChatMessage message) {
-        String id = getIdChat(message);
+        String id = getIdChat(message.getRecipientId().getId(), message.getSenderId().getId() );
         ChatRoom room = roomRepository.findByChatId(id).orElse(null);
         if (Objects.nonNull(room)) {
             return room;
@@ -79,11 +89,11 @@ public class ChatServiceImpl implements ChatService {
         }
     }
 
-    private String getIdChat(ChatMessage message) {
-        if (message.getSenderId().getId() > message.getRecipientId().getId())
-            return message.getRecipientId().getId() + "_" + message.getSenderId().getId();
+    private String getIdChat(Long recipientId, Long senderId) {
+        if (senderId > recipientId)
+            return recipientId + "_" + senderId;
         else
-            return message.getSenderId().getId() + "_" + message.getRecipientId().getId();
+            return senderId + "_" + recipientId;
     }
 
 }
