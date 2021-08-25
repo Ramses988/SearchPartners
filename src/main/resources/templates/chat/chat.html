@@ -191,34 +191,16 @@
                         <input type="search" placeholder="Поиск пользователя" />
                     </div>
                     <div id="users-list">
-                        <article class="message-light click-user">
+                        <article th:each="user : ${users}" class="message-light click-user">
                             <figure class="company-light-figure">
-                                <div class="comment-avatar" style="background-color:#cc33cc"><span>V</span></div>
+                                <div class="comment-avatar" th:style="'background-color:'+${user.color}">
+                                    <span th:text="${user.initial}"></span>
+                                </div>
                             </figure>
                             <div class="company-light-main">
-                                <p class="id_user" style="display: none">1</p>
-                                <h5 class="message-light-title">vas.tvk7619</h5>
-                                <p><i>Ок, понял, буду пробовать )))</i></p>
-                            </div>
-                        </article>
-                        <article class="message-light click-user">
-                            <figure class="company-light-figure">
-                                <div class="comment-avatar" style="background-color:#ffcc33"><span>R</span></div>
-                            </figure>
-                            <div class="company-light-main">
-                                <p class="id_user" style="display: none">2</p>
-                                <h5 class="message-light-title">RVD</h5>
-                                <p>3.0 не видит, возможно надо...</p>
-                            </div>
-                        </article>
-                        <article class="message-light click-user">
-                            <figure class="company-light-figure">
-                                <div class="comment-avatar" style="background-color:#cc0000"><span>В</span></div>
-                            </figure>
-                            <div class="company-light-main">
-                                <p class="id_user" style="display: none">5</p>
-                                <h5 class="message-light-title">Роман</h5>
-                                <p>Не я ничего не настраивал, п...</p>
+                                <p class="id_user" style="display: none" th:text="${user.id}"></p>
+                                <h5 class="message-light-title" th:text="${user.name}"></h5>
+                                <p><i th:text="${user.content}"></i></p>
                             </div>
                         </article>
                     </div>

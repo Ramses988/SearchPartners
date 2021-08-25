@@ -55,4 +55,8 @@ public class User extends AbstractBaseEntity {
     @JoinColumn(name = "city_id")
     private City city;
 
+    @JsonIgnore
+    @Transient
+    private String content;
+
 }

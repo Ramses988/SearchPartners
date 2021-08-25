@@ -33,6 +33,11 @@ public class ChatRoom extends AbstractBaseEntity {
     @JoinColumn(name = "recipient_id", nullable = false)
     private User recipientId;
 
+    @JsonIgnore
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "last_message")
+    private ChatMessage lastMessage;
+
     public ChatRoom(String chatId, User senderId, User recipientId) {
         this.chatId = chatId;
         this.senderId = senderId;
