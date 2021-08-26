@@ -200,7 +200,7 @@
                             <div class="company-light-main">
                                 <p class="id_user" style="display: none" th:text="${user.id}"></p>
                                 <h5 class="message-light-title" th:text="${user.name}"></h5>
-                                <p><i th:text="${user.content}"></i></p>
+                                <p><i class="last-message" th:text="${user.content}"></i></p>
                             </div>
                         </article>
                     </div>
@@ -240,20 +240,60 @@
             + now.getHours() + ":" + (now.getUTCMinutes()<10?'0':'') + now.getUTCMinutes();
     }
 
+    function addDescription(id, content) {
+        $('.id_user').each(function(index, el) {
+            if ($(el).text() == id) {
+                let user = $(el).parent('.company-light-main').find('.last-message');
+                if (content.length > 29) {
+                    content = content.substring(0, 24) + "...";
+                }
+                user.text('');
+                user.text(content);
+            }
+        });
+    }
+
+    function addNewMessage(id) {
+        $('.id_user').each(function(index, el) {
+            if ($(el).text() == id) {
+                let user = $(el).closest('.message-light');
+                if(!user.find('.comment-avatar').hasClass('new-message-border')) {
+                    user.find('.comment-avatar').addClass('new-message-border');
+                    user.find('.last-message').css('color', '#00bb00');
+                    user.find('.company-light-main').prepend('<span class="new_message"></span>');
+                }
+            }
+        });
+    }
+
+    function removeNewMessage(id) {
+        $('.id_user').each(function(index, el) {
+            if ($(el).text() == id) {
+                let user = $(el).closest('.message-light');
+                if(user.find('.comment-avatar').hasClass('new-message-border')) {
+                    user.find('.comment-avatar').removeClass('new-message-border');
+                    user.find('.last-message').css('color', '');
+                    user.find('.company-light-main').find('.new_message').remove();
+                }
+            }
+        });
+    }
+
     const onMessageReceived = (response) => {
         let data = JSON.parse(response.body)
         let userId = $('#activeId').text();
         let sender = data.senderId.id;
-        if(userId) {
-            if (userId == sender) {
-                let str = templateAnswer;
-                str = str.replace("$content", data.content);
-                str = str.replace("$name", data.senderId.name);
-                str = str.replace("$date", formatDate(new Date(data.date)));
-                $('#block-messages').append(str);
-                block.scrollTop = block.scrollHeight;
-            }
+        if (userId == sender) {
+            let str = templateAnswer;
+            str = str.replace("$content", data.content);
+            str = str.replace("$name", data.senderId.name);
+            str = str.replace("$date", formatDate(new Date(data.date)));
+            $('#block-messages').append(str);
+            block.scrollTop = block.scrollHeight;
+        } else {
+            addNewMessage(sender);
         }
+        addDescription(sender, data.content);
     }
 
     function addMessageInChat(message) {
@@ -288,8 +328,6 @@
                 let activeUser = $('#chatId').text();
                 let getDate = message.date[0] + "," + message.date[1] + "," + message.date[2] + "," + message.date[3]
                     + ":" + message.date[4]+ ":" + ((message.date[5] === 'undefined')?message.date[5]:'0');
-                console.log(message.date);
-                console.log(getDate);
                 if (message.senderId.id == activeUser) {
                     str = templateQuestion;
                     str = str.replace("$content", message.content);
@@ -311,6 +349,7 @@
         id.text('');
         id.text($(this).find('.id_user').text());
         getHistory(id.text());
+        removeNewMessage(id.text());
     });
 
     $('#sendBtn').click(function () {
@@ -324,6 +363,7 @@
             stompClient.send('/app/messages', {}, JSON.stringify(message));
             $('#content-text').val('');
             addMessageInChat(message);
+            addDescription(message.recipientId.id, message.content);
         }
     });
 </script>

@@ -9993,6 +9993,23 @@ html.rd-navbar-fixed-linked .page {
 
 /* Start my code*/
 
+.new-message-border {
+    border: 2px solid #00bb00;
+}
+
+.new_message {
+    float: right;
+    width: 7px;
+    height: 7px;
+    background-color: #00bb00;
+    border-radius: 50%;
+    margin-top: 10px;
+}
+
+.message_description {
+    color:#00bb00;
+}
+
 .comment-response {
     background-color: #fbfbfb;
     padding-left: 15px;
