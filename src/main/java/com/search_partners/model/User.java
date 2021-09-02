@@ -59,4 +59,8 @@ public class User extends AbstractBaseEntity {
     @Transient
     private String content;
 
+    @JsonIgnore
+    @Transient
+    private boolean read;
+
 }

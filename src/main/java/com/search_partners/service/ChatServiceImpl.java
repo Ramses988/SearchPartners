@@ -44,6 +44,11 @@ public class ChatServiceImpl implements ChatService {
         else
             user = room.getRecipientId();
 
+        if (room.getUserRead() != 0) {
+            if (room.getUserRead() == id)
+                user.setRead(true);
+        }
+
         if (Objects.nonNull(room.getLastMessage()) && !room.getLastMessage().getContent().isEmpty()) {
             String content = room.getLastMessage().getContent();
             if (content.length() < 29)
@@ -64,6 +69,7 @@ public class ChatServiceImpl implements ChatService {
         message.setDate(LocalDateTime.now());
         ChatMessage response = messageRepository.save(message);
         room.setLastMessage(response);
+        room.setUserRead(message.getRecipientId().getId());
         roomRepository.save(room);
         return response;
     }
@@ -76,6 +82,16 @@ public class ChatServiceImpl implements ChatService {
             return messageRepository.findAllByChatIdOrderByDateAsc(room);
         }
         return List.of();
+    }
+
+    @Override
+    public void setRead(Long recipientId, Long senderId) {
+        String id = getIdChat(recipientId, senderId);
+        ChatRoom room = roomRepository.findByChatId(id).orElse(null);
+        if (Objects.nonNull(room) && senderId == room.getUserRead()) {
+            room.setUserRead(0);
+            roomRepository.save(room);
+        }
     }
 
     private ChatRoom getChatRoom(ChatMessage message) {

@@ -28,4 +28,9 @@ public class RestChatController {
         return service.getHistory(recipientId, SecurityUtil.authUserId());
     }
 
+    @PostMapping("/set-read")
+    public void setRead(@RequestParam long recipientId) {
+        service.setRead(recipientId, SecurityUtil.authUserId());
+    }
+
 }

@@ -11,6 +11,8 @@ public interface ChatService {
 
     List<ChatMessage> getHistory(Long recipientId, Long senderId);
 
+    void setRead(Long recipientId, Long senderId);
+
     List<User> getUsers(Long id);
 
 }

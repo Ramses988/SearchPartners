@@ -193,14 +193,17 @@
                     <div id="users-list">
                         <article th:each="user : ${users}" class="message-light click-user">
                             <figure class="company-light-figure">
-                                <div class="comment-avatar" th:style="'background-color:'+${user.color}">
+                                <div th:attr="class=${user.read ? 'comment-avatar new-message-border' : 'comment-avatar'}"
+                                     th:style="'background-color:'+${user.color}">
                                     <span th:text="${user.initial}"></span>
                                 </div>
                             </figure>
                             <div class="company-light-main">
+                                <span th:if="${user.read}" class="new_message"></span>
                                 <p class="id_user" style="display: none" th:text="${user.id}"></p>
                                 <h5 class="message-light-title" th:text="${user.name}"></h5>
-                                <p><i class="last-message" th:text="${user.content}"></i></p>
+                                <p><i th:attr="style=${user.read ? 'color:#00bb00' : ''}"
+                                    class="last-message" th:text="${user.content}"></i></p>
                             </div>
                         </article>
                     </div>
@@ -277,6 +280,10 @@
         });
     }
 
+    function setRead(id) {
+        $.post('/rest/chat/set-read', { recipientId : id });
+    }
+
     function removeNewMessage(id) {
         $('.id_user').each(function(index, el) {
             if ($(el).text() == id) {
@@ -285,6 +292,7 @@
                     user.find('.comment-avatar').removeClass('new-message-border');
                     user.find('.last-message').css('color', '');
                     user.find('.company-light-main').find('.new_message').remove();
+                    setRead(id);
                 }
             }
         });
@@ -301,6 +309,7 @@
             str = str.replace("$date", formatDate(new Date(data.date)));
             $('#block-messages').append(str);
             block.scrollTop = block.scrollHeight;
+            setRead(userId);
         } else {
             addNewMessage(sender);
         }

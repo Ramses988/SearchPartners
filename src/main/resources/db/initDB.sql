@@ -94,7 +94,8 @@ CREATE TABLE chat_room
     chat_id         VARCHAR               NOT NULL,
     sender_id       INTEGER               NOT NULL,
     recipient_id    INTEGER               NOT NULL,
-    last_message    INTEGER               NULL
+    last_message    INTEGER               NULL,
+    user_read       INTEGER DEFAULT 0     NOT NULL
 );
 CREATE UNIQUE INDEX chat_room_unique_chat_id_idx ON chat_room (chat_id);
 
