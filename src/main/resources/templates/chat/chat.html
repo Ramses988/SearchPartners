@@ -224,6 +224,7 @@
 <div class="snackbars" id="form-output-global"></div>
 <script src="/js/jquery-3.4.1.min.js"></script>
 <script src="/js/core.min.js"></script>
+<script src="/js/noty.min.js"></script>
 <script src="/js/script.js"></script>
 <script src="/js/sockjs.min.js"></script>
 <script src="/js/stomp.min.js"></script>
@@ -238,6 +239,16 @@
         let months = 'января,февраля,марта,апреля,мая,июня,июля,августа,сентября,октября,декабря'.split(',');
         return now.getDate() + " " + months[now.getMonth()] + " " + now.getFullYear() + " в "
             + now.getHours() + ":" + (now.getUTCMinutes()<10?'0':'') + now.getUTCMinutes();
+    }
+
+    function failNoty(msg) {
+        new Noty({
+            theme: 'relax',
+            text: "<span class='fa fa-lg fa-exclamation-circle'></span> &nbsp;"+msg,
+            type: 'error',
+            layout: "topRight",
+            timeout: 3000
+        }).show();
     }
 
     function addDescription(id, content) {
@@ -359,11 +370,13 @@
                 id: $('#activeId').text()
             }
         };
-        if (message && stompClient) {
+        if (message && stompClient && $('#activeId').text()) {
             stompClient.send('/app/messages', {}, JSON.stringify(message));
             $('#content-text').val('');
             addMessageInChat(message);
             addDescription(message.recipientId.id, message.content);
+        } else {
+            failNoty('Нужно выбрать пользователя!');
         }
     });
 </script>
