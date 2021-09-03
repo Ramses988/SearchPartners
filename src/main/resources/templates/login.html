@@ -14,7 +14,10 @@
             <div th:if="${error}" id="error-block">
                 <p>Неверный логин или пароль</p>
             </div>
-            <div class="group-justify"><a class="button button-sm button-facebook button-icon button-icon-left" href="#"><span class="icon fa fa-facebook"></span>Facebook</a><a class="button button-sm button-twitter button-icon button-icon-left" href="#"><span class="icon fa fa-twitter"></span>Twitter</a><a class="button button-sm button-google button-icon button-icon-left" href="#"><span class="icon fa fa-google-plus"></span>Google+</a></div>
+            <div class="group-justify"><a class="button button-sm button-facebook button-icon button-icon-left" href="#">
+                <span class="icon fa fa-facebook"></span>Facebook</a><a class="button button-sm button-twitter button-icon button-icon-left" href="#">
+                <span class="icon fa fa-twitter"></span>Twitter</a><a class="button button-sm button-google button-icon button-icon-left" href="#">
+                <span class="icon fa fa-google-plus"></span>Google+</a></div>
             <div class="text-decoration-lines"><span class="text-decoration-lines-content">or</span></div>
             <form class="rd-form form-centered form-filled" action="/check_login" method="post">
                 <div class="form-wrap">

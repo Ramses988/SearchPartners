@@ -1,3 +1,4 @@
+DROP TABLE IF EXISTS persistent_logins;
 DROP TABLE IF EXISTS internal_comments;
 DROP TABLE IF EXISTS comments;
 DROP TABLE IF EXISTS posts;
@@ -44,6 +45,13 @@ CREATE TABLE users
     FOREIGN KEY (city_id) REFERENCES cities (id)
 );
 CREATE UNIQUE INDEX users_unique_email_idx ON users (email);
+
+CREATE TABLE persistent_logins (
+    series          VARCHAR(64) PRIMARY KEY,
+    username        VARCHAR(100)               NOT NULL,
+    token           VARCHAR(64)                NOT NULL,
+    last_used       TIMESTAMP                  NOT NULL
+);
 
 CREATE TABLE user_roles
 (

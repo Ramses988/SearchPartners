@@ -2,21 +2,28 @@ package com.search_partners.config;
 
 import com.search_partners.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
+
+import javax.sql.DataSource;
 
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private final UserService userService;
+    private final DataSource dataSource;
 
     @Autowired
-    public WebSecurityConfiguration(UserService userService) {
+    public WebSecurityConfiguration(UserService userService, DataSource dataSource) {
         this.userService = userService;
+        this.dataSource = dataSource;
     }
 
     @Override
@@ -39,7 +46,21 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .defaultSuccessUrl("/")
                 .failureUrl("/login?error=true")
                 .and()
+                .rememberMe()
+                .alwaysRemember(true)
+                .rememberMeCookieName("search-partners")
+                .tokenRepository(persistentTokenRepository())
+                .userDetailsService(userService)
+                .tokenValiditySeconds(1209600)
+                .and()
                 // TODO: Enable csrf
                 .csrf().disable();
+    }
+
+    @Bean
+    public PersistentTokenRepository persistentTokenRepository() {
+        JdbcTokenRepositoryImpl db = new JdbcTokenRepositoryImpl();
+        db.setDataSource(dataSource);
+        return db;
     }
 }
