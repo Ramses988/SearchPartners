@@ -10,6 +10,7 @@
     <style>
         html, body, .page, section, .container, #container-messages, #message-left, #message-right {
             height: 100% !important;
+            -ms-overflow-style: none;
         }
 
         ::-webkit-scrollbar-button {background-image:url('');
@@ -42,6 +43,7 @@
         .rd-navbar-classic.rd-navbar-static .rd-navbar-main {
             padding: 5px 0;
         }
+
     </style>
 </head>
 <body>
@@ -211,7 +213,7 @@
                 </div>
                 <div id="message-right">
                     <div id="block-messages">
-
+                        <div id="select-user">Выберите собеседника</div>
                     </div>
                     <div id="text-message">
                         <div id="content-text-wrapper">
@@ -346,7 +348,7 @@
                 let str;
                 let message = data[item];
                 let activeUser = $('#chatId').text();
-                let getDate = message.date[0] + "," + message.date[1] + "," + message.date[2] + "," + message.date[3]
+                let getDate = message.date[0] + "-" + message.date[1] + "-" + message.date[2] + " " + message.date[3]
                     + ":" + message.date[4]+ ":" + ((message.date[5] === 'undefined')?message.date[5]:'0');
                 if (message.senderId.id == activeUser) {
                     str = templateQuestion;
@@ -385,7 +387,7 @@
             addMessageInChat(message);
             addDescription(message.recipientId.id, message.content);
         } else {
-            failNoty('Нужно выбрать пользователя!');
+            failNoty('Нужно выбрать собеседника!');
         }
     });
 </script>

@@ -9993,6 +9993,13 @@ html.rd-navbar-fixed-linked .page {
 
 /* Start my code*/
 
+#select-user {
+    margin: 10% 0 0 31%;
+    font-size: 30px;
+    line-height: 1;
+    color: #ccc;
+}
+
 .new-message-border {
     border: 2px solid #00bb00;
 }
