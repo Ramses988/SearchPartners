@@ -877,5 +877,22 @@ $('.required').focusout(function () {
       }
   });
 
+    function getNewLetter() {
+      let emailComp = $('#email-comp');
+      let emailMobile = $('#email-mobile');
+      if (emailComp.length && emailMobile.length) {
+        $.post('/rest/chat/get-new-letter', function(data) {
+          if (data) {
+            emailComp.removeClass('mdi-email');
+            emailComp.addClass('blink_email mdi-email-newsletter');
+            emailMobile.removeClass('mdi-email');
+            emailMobile.addClass('blink_email mdi-email-newsletter-mobile');
+          }
+        });
+      }
+    }
+
+    getNewLetter();
+
   });
 }());

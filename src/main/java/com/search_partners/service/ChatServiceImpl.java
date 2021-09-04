@@ -94,6 +94,12 @@ public class ChatServiceImpl implements ChatService {
         }
     }
 
+    @Override
+    public boolean getNewLetter(Long id) {
+        List<ChatRoom> rooms = roomRepository.findAllByUserRead(id);
+        return rooms.size() > 0;
+    }
+
     private ChatRoom getChatRoom(ChatMessage message) {
         String id = getIdChat(message.getRecipientId().getId(), message.getSenderId().getId() );
         ChatRoom room = roomRepository.findByChatId(id).orElse(null);

@@ -15,4 +15,6 @@ public interface ChatService {
 
     List<User> getUsers(Long id);
 
+    boolean getNewLetter(Long id);
+
 }

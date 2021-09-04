@@ -633,6 +633,16 @@ h6, .h6 {
     content: "\F01EE";
 }
 
+.mdi-email-newsletter:before {
+    content: "\F0FB1";
+    color: #1087eb;
+}
+
+.mdi-email-newsletter-mobile:before {
+    content: "\F0FB1";
+    color: white;
+}
+
 .mdi-menu-down:before {
     content: "\F035D";
     color:#000;
@@ -9992,6 +10002,20 @@ html.rd-navbar-fixed-linked .page {
 
 
 /* Start my code*/
+
+.blink_email {
+    animation-duration: 5s;
+    animation-name: blinker;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+@keyframes blinker {
+    0% { opacity: 1.0; }
+    10% { opacity: 0.0; }
+    20% { opacity: 1.0; }
+    100% { opacity: 1.0; }
+}
 
 #select-user {
     margin: 10% 0 0 31%;

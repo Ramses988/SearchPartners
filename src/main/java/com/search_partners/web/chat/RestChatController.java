@@ -33,4 +33,9 @@ public class RestChatController {
         service.setRead(recipientId, SecurityUtil.authUserId());
     }
 
+    @PostMapping("/get-new-letter")
+    public boolean getNewLetter() {
+        return service.getNewLetter(SecurityUtil.authUserId());
+    }
+
 }
