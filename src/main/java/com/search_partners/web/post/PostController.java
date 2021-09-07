@@ -58,4 +58,9 @@ public class PostController {
         return "post/add";
     }
 
+    @GetMapping("/manage/post/list")
+    public String getListManagePosts() {
+        return "post/list";
+    }
+
 }
