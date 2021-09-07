@@ -4,15 +4,19 @@ package com.search_partners.util;
 import com.search_partners.model.Post;
 import com.search_partners.to.PostDto;
 import lombok.extern.log4j.Log4j2;
+import org.jsoup.Jsoup;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Log4j2
 public class PostUtil {
 
     private static final Map<String, String> characters = new HashMap<>();
+
+    private PostUtil() {}
 
     static {
         initCharacters();
@@ -29,6 +33,16 @@ public class PostUtil {
                 .title(postDto.getTitle())
                 .date(LocalDateTime.now())
                 .build();
+    }
+
+    public static List<Post> prepareText(List<Post> posts) {
+        for (Post post : posts) {
+            String text = Jsoup.parse(post.getText()).text();
+            if (text.length() > 200)
+                text = text.substring(0, 200) + "...";
+            post.setText(text);
+        }
+        return posts;
     }
 
     public static String validateText(String text) {

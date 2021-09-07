@@ -59,7 +59,8 @@ public class PostController {
     }
 
     @GetMapping("/manage/post/list")
-    public String getListManagePosts() {
+    public String getListManagePosts(Model model) {
+        model.addAttribute("posts", postService.getAllPosts(SecurityUtil.authUserId()));
         return "post/list";
     }
 

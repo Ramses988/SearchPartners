@@ -32,78 +32,32 @@
                         <p class="heading-9">Поиск партнеров по бизнесу</p>
                         <hr class="m-10">
                         <div class="timeline-classic">
-                            <div class="timeline-classic-item">
-                                <div class="timeline-classic-period"><span>05-09-2021</span></div>
-                                <div class="timeline-classic-main">
-                                    <h5 class="timeline-classic-title"><a>Поиск партнеров(выгодное предложение)</a></h5>
-                                    <p>Ищем партнёров-инвесторов в действующий бизнес по переработке отходов полимеров. Окупаемость производства 2 года с 30-50%
-                                        чистой прибыли дополнительно ежегодно. Готовы рассмотреть...</p>
-                                <p><ul class="list-post-menu">
-                                    <li><a><span class="icon-sms icon-m-post-menu mdi mdi-file-document-edit-outline"></span>
-                                        Редактировать</a></li>
-                                    <li><a><span class="icon-sms icon-m-post-menu mdi mdi-message-text-lock-outline"></span>
-                                        Закрыть</a></li>
-                                    <li><a><span class="icon-sms icon-m-post-menu mdi mdi-delete-outline"></span>
-                                        Удалить</a></li>
-                                </ul></p>
-                                </div>
-                            </div>
-                            <div class="timeline-classic-item">
-                                <div class="timeline-classic-period"><span>15-08-2021</span></div>
-                                <div class="timeline-classic-main">
-                                    <h5 class="timeline-classic-title">MВключусь в действующий бизнес</h5>
-                                    <p>Ищем партнёров-инвесторов в действующий бизнес по переработке отходов полимеров. Окупаемость производства 2 года с 30-50%
-                                        чистой прибыли дополнительно ежегодно. Готовы рассмотреть...</p>
-                                    <p><ul class="list-post-menu">
-                                    <li><span class="icon-sms icon-m-post-menu mdi mdi-file-document-edit-outline"></span>Редактировать</li>
-                                    <li><span class="icon-sms icon-m-post-menu mdi mdi-message-text-lock-outline"></span>Закрыть</li>
-                                    <li><span class="icon-sms icon-m-post-menu mdi mdi-delete-outline"></span>Удалить</li>
-                                </ul></p>
-                                </div>
-                            </div>
-                            <div class="timeline-classic-item">
-                                <div class="timeline-classic-period"><span>01-07-2021</span></div>
-                                <div class="timeline-classic-main">
-                                    <h5 class="timeline-classic-title">Ищу партнёра по бизнесу для открытия производственной мастерской.</h5>
-                                    <p>Производственная компания.
-
-                                        Занимаемся разработкой и производством изделий для сна нового поколения, не имеющих аналогов в мире.
-                                        На данный момент компания существует пятый год на свои собственные средства...</p>
-                                    <p><ul class="list-post-menu">
-                                    <li><span class="icon-sms icon-m-post-menu mdi mdi-file-document-edit-outline"></span>Редактировать</li>
-                                    <li><span class="icon-sms icon-m-post-menu mdi mdi-message-text-lock-outline"></span>Закрыть</li>
-                                    <li><span class="icon-sms icon-m-post-menu mdi mdi-delete-outline"></span>Удалить</li>
-                                </ul></p>
-                                </div>
-                            </div>
+                            <th:block th:each="post : ${posts}">
+                                <th:block th:if="${post.active}">
+                                    <div class="timeline-classic-item">
+                                        <div class="timeline-classic-period">
+                                            <span th:text="${#temporals.format(post.date, 'dd-MM-yyyy')}"></span>
+                                        </div>
+                                        <div class="timeline-classic-main">
+                                            <h5 class="timeline-classic-title"><a th:href="@{'/post/' + ${post.id}}" th:text="${post.title}"></a></h5>
+                                            <p th:text="${post.text}"></p>
+                                            <p></p>
+                                            <ul class="list-post-menu">
+                                                <li><a><span class="icon-sms icon-m-post-menu mdi mdi-file-document-edit-outline"></span>
+                                                    Редактировать</a></li>
+                                                <li><a><span class="icon-sms icon-m-post-menu mdi mdi-message-text-lock-outline"></span>
+                                                    Закрыть</a></li>
+                                                <li><a><span class="icon-sms icon-m-post-menu mdi mdi-delete-outline"></span>
+                                                    Удалить</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </th:block>
+                            </th:block>
                         </div>
                     </div>
                     <div class="col-12">
-                        <p class="heading-9">Education</p>
-                        <hr class="m-10">
-                        <div class="timeline-classic">
-                            <div class="timeline-classic-item">
-                                <div class="timeline-classic-period"><span>05-09-2021</span></div>
-                                <div class="timeline-classic-main">
-                                    <h5 class="timeline-classic-title">Advertising School at Stanford University</h5>
-                                    <p>Graduated from Stanford University Advertising School in 2012 after receiving a degree in Digital Design and Online Marketing. Basic skills included concepting, design, execution and presentation.</p>
-                                </div>
-                            </div>
-                            <div class="timeline-classic-item">
-                                <div class="timeline-classic-period"><span>15-08-2021</span></div>
-                                <div class="timeline-classic-main">
-                                    <h5 class="timeline-classic-title">School of Marketing at University of Pennsylvania</h5>
-                                    <p>Finished a 3-year course, which developed in-depth knowledge of the concepts, tools, and practice of modern marketing including traditional and modern design and promotion techniques.</p>
-                                </div>
-                            </div>
-                            <div class="timeline-classic-item">
-                                <div class="timeline-classic-period"><span>01-07-2021</span></div>
-                                <div class="timeline-classic-main">
-                                    <h5 class="timeline-classic-title">Massachusetts Institute of Technology</h5>
-                                    <p>Developed acquired skills and practiced new online marketing methods at special course for American marketers provided by MIT during the last 2 years.</p>
-                                </div>
-                            </div>
-                        </div>
+                        <p></p>
                     </div>
                 </div>
             </div>

@@ -70,6 +70,7 @@ CREATE TABLE posts
     show         INTEGER DEFAULT 0     NOT NULL,
     comments     INTEGER DEFAULT 0     NOT NULL,
     user_id      INTEGER               NOT NULL,
+    active       INTEGER DEFAULT 1     NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users (id)
 );
 

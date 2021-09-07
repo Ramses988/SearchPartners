@@ -1,5 +1,6 @@
 package com.search_partners.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -27,6 +28,9 @@ public class Post extends AbstractBaseEntity {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "post")
     private List<Comment> commentList;
+
+    @JsonIgnore
+    private int active = 1;
 
     @Transient
     private String duration;

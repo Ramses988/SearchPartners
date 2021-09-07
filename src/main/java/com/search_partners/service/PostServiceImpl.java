@@ -17,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 
 @Service
 @Transactional(readOnly = true)
@@ -36,6 +37,11 @@ public class PostServiceImpl implements PostService {
         Page<Post> posts = postRepository.findAll(PageRequest.of(page, 100, Sort.by("date").descending()));
         posts.forEach(DateUtil::getDuration);
         return posts;
+    }
+
+    @Override
+    public List<Post> getAllPosts(Long id) {
+        return PostUtil.prepareText(postRepository.findAllByUser(id));
     }
 
     @Override
