@@ -27,4 +27,19 @@ public class RestPostController {
         service.savePost(post, SecurityUtil.authUserId());
     }
 
+    @PostMapping("/manage/rest/post/set-close")
+    public boolean closePost(Long id) {
+        return service.closePost(id, SecurityUtil.authUserId());
+    }
+
+    @PostMapping("/manage/rest/post/set-active")
+    public boolean activePost(Long id) {
+        return service.activePost(id, SecurityUtil.authUserId());
+    }
+
+    @PostMapping("/manage/rest/post/delete-post")
+    public boolean deletePost(Long id) {
+        return service.deletePost(id, SecurityUtil.authUserId());
+    }
+
 }

@@ -20,4 +20,10 @@ public interface PostService {
 
     List<Post> getAllPosts(Long id);
 
+    boolean closePost(Long postId, Long userId);
+
+    boolean activePost(Long postId, Long userId);
+
+    boolean deletePost(Long postId, Long userId);
+
 }

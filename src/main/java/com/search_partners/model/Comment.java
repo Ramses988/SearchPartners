@@ -29,7 +29,7 @@ public class Comment extends AbstractBaseEntity implements Comparable<Comment> {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "comment")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "comment", cascade = CascadeType.REMOVE)
     private List<InternalComment> internalComments;
 
     public Comment() {}

@@ -11,6 +11,7 @@ import com.search_partners.util.PostUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @Transactional(readOnly = true)
@@ -34,7 +36,8 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public Page<Post> getPosts(int page) {
-        Page<Post> posts = postRepository.findAll(PageRequest.of(page, 100, Sort.by("date").descending()));
+        Pageable pageable = PageRequest.of(page, 100, Sort.by("date").descending());
+        Page<Post> posts = postRepository.findAllByActive(1, pageable);
         posts.forEach(DateUtil::getDuration);
         return posts;
     }
@@ -62,6 +65,39 @@ public class PostServiceImpl implements PostService {
             Collections.sort(comment.getInternalComments());
         }
         return post;
+    }
+
+    @Override
+    @Transactional
+    public boolean closePost(Long postId, Long userId) {
+        return activeOrClose(postId, userId, 0);
+    }
+
+    @Override
+    @Transactional
+    public boolean activePost(Long postId, Long userId) {
+        return activeOrClose(postId, userId, 1);
+    }
+
+    private boolean activeOrClose(Long postId, Long userId, int active) {
+        Post post = postRepository.findByIdAndUser(postId, userId).orElse(null);
+        if (Objects.nonNull(post)) {
+            post.setActive(active);
+            postRepository.save(post);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    @Transactional
+    public boolean deletePost(Long postId, Long userId) {
+        Post post = postRepository.findByIdAndUser(postId, userId).orElse(null);
+        if (Objects.nonNull(post)) {
+            postRepository.delete(post);
+            return true;
+        }
+        return false;
     }
 
     @Override

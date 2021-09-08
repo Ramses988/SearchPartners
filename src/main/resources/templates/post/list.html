@@ -4,60 +4,150 @@
     <title>Добавить новую запись</title>
     <div th:replace="~{fragments/links :: links1}"></div>
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:400%7CUbuntu:300,400,500,600,700">
+    <script>
+
+        function sendPost(id, url) {
+            const request = new XMLHttpRequest();
+            const params = "id=" + id;
+            request.open("POST", url, true);
+            request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            request.addEventListener("readystatechange", () => {
+                if(request.readyState === 4 && request.status === 200) {
+                    if (request.responseText) {
+                        window.location.reload();
+                    }
+                }
+            });
+            request.send(params);
+        }
+
+        function setClose(id) {
+            if (confirm("Вы действительно хотите закрыть пост?")) {
+                const url = "/manage/rest/post/set-close";
+                sendPost(id, url);
+            }
+        }
+
+        function setActive(id) {
+            if (confirm("Вы действительно хотите активировать пост?")) {
+                const url = "/manage/rest/post/set-active";
+                sendPost(id, url);
+            }
+        }
+
+        function deletePost(id) {
+            if (confirm("Вы действительно хотите удалить пост?")) {
+                const url = "/manage/rest/post/delete-post";
+                sendPost(id, url);
+            }
+        }
+
+    </script>
 </head>
 <body>
 <div th:replace="~{fragments/menu :: menu}"></div>
 <div th:replace="~{fragments/title :: title('Добавить новую запись')}"></div>
 
 <section class="section section-md">
-    <div class="container">
+    <div class="container" id="tabs-1">
         <div class="row row-50">
             <div class="col-lg-2-5">
                 <div class="row row-30">
                     <div class="col-md-6 col-lg-12">
                         <p class="heading-8">Выберите раздел</p>
                         <div id="bock-menu">Ваши посты</div>
-                        <ul class="list-marked-1 set-default-color">
-                            <li class="active-post"><a>Активные посты</a></li>
-                            <li><a>Закрытые посты</a></li>
-                            <li><a>Архивные посты</a></li>
+                        <ul class="list-marked-1 set-default-color nav nav-tabs">
+                            <li class="active-post nav-item"><a class="nav-link" href="#tabs-1-1" data-toggle="tab">Активные посты</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#tabs-1-2" data-toggle="tab">Закрытые посты</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#tabs-1-3" data-toggle="tab">Архивные посты</a></li>
                         </ul>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-8">
-                Список активных постов
-                <div class="row row-50">
-                    <div class="col-12">
-                        <p class="heading-9">Поиск партнеров по бизнесу</p>
-                        <hr class="m-10">
-                        <div class="timeline-classic">
-                            <th:block th:each="post : ${posts}">
-                                <th:block th:if="${post.active}">
-                                    <div class="timeline-classic-item">
-                                        <div class="timeline-classic-period">
-                                            <span th:text="${#temporals.format(post.date, 'dd-MM-yyyy')}"></span>
+            <div class="col-lg-8 tab-content">
+                <div class="tab-pane fade active show" id="tabs-1-1">
+                    Список активных постов
+                    <div class="row row-50">
+                        <div class="col-12">
+                            <p class="heading-9">Поиск партнеров по бизнесу</p>
+                            <hr class="m-10">
+                            <div class="timeline-classic">
+                                <th:block th:each="post : ${posts}">
+                                    <th:block th:if="${post.active}">
+                                        <div class="timeline-classic-item">
+                                            <div class="timeline-classic-period">
+                                                <span th:text="${#temporals.format(post.date, 'dd-MM-yyyy')}"></span>
+                                            </div>
+                                            <div class="timeline-classic-main">
+                                                <h5 class="timeline-classic-title"><a th:href="@{'/post/' + ${post.id}}" th:text="${post.title}"></a></h5>
+                                                <p th:text="${post.text}"></p>
+                                                <ul class="list-post-menu">
+                                                    <li><a th:href="@{'/manage/post/edit/' + ${post.id}}">
+                                                        <span class="icon-sms icon-m-post-menu mdi mdi-file-document-edit-outline"></span>
+                                                        Редактировать</a></li>
+                                                    <li th:onclick="'setClose('+${post.id}+')'">
+                                                        <span class="icon-sms icon-m-post-menu mdi mdi-message-text-lock-outline"></span>
+                                                        Закрыть</li>
+                                                    <li th:onclick="'deletePost('+${post.id}+')'"><span class="icon-sms icon-m-post-menu mdi mdi-delete-outline"></span>
+                                                        Удалить</li>
+                                                </ul>
+                                            </div>
                                         </div>
-                                        <div class="timeline-classic-main">
-                                            <h5 class="timeline-classic-title"><a th:href="@{'/post/' + ${post.id}}" th:text="${post.title}"></a></h5>
-                                            <p th:text="${post.text}"></p>
-                                            <p></p>
-                                            <ul class="list-post-menu">
-                                                <li><a><span class="icon-sms icon-m-post-menu mdi mdi-file-document-edit-outline"></span>
-                                                    Редактировать</a></li>
-                                                <li><a><span class="icon-sms icon-m-post-menu mdi mdi-message-text-lock-outline"></span>
-                                                    Закрыть</a></li>
-                                                <li><a><span class="icon-sms icon-m-post-menu mdi mdi-delete-outline"></span>
-                                                    Удалить</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
+                                    </th:block>
                                 </th:block>
-                            </th:block>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <p></p>
                         </div>
                     </div>
-                    <div class="col-12">
-                        <p></p>
+                </div>
+                <div class="tab-pane fade" id="tabs-1-2">
+                    Список закрытых постов
+                    <div class="row row-50">
+                        <div class="col-12">
+                            <p class="heading-9">Поиск партнеров по бизнесу</p>
+                            <hr class="m-10">
+                            <div class="timeline-classic">
+                                <th:block th:each="post : ${posts}">
+                                    <th:block th:if="${post.active != 1}">
+                                        <div class="timeline-classic-item">
+                                            <div class="timeline-classic-period">
+                                                <span th:text="${#temporals.format(post.date, 'dd-MM-yyyy')}"></span>
+                                            </div>
+                                            <div class="timeline-classic-main">
+                                                <h5 class="timeline-classic-title"><a th:href="@{'/post/' + ${post.id}}" th:text="${post.title}"></a></h5>
+                                                <p th:text="${post.text}"></p>
+                                                <ul class="list-post-menu">
+                                                    <li><a th:href="@{'/manage/post/edit/' + ${post.id}}">
+                                                        <span class="icon-sms icon-m-post-menu mdi mdi-file-document-edit-outline"></span>
+                                                        Редактировать</a></li>
+                                                    <li th:onclick="'setActive('+${post.id}+')'"><span class="icon-sms icon-m-post-menu mdi mdi-message-plus-outline"></span>
+                                                        Активировать</li>
+                                                    <li><span class="icon-sms icon-m-post-menu mdi mdi-delete-outline"></span>
+                                                        Удалить</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </th:block>
+                                </th:block>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <p></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="tabs-1-3">
+                    Список архивных постов
+                    <div class="row row-50">
+                        <div class="col-12">
+                            <p class="heading-9">Поиск партнеров по бизнесу</p>
+                            <hr class="m-10">
+                        </div>
+                        <div class="col-12">
+                            <p></p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -66,5 +156,17 @@
 </section>
 
 <div th:replace="~{fragments/footer :: footer}"></div>
+<script>
+
+    $( document ).ready(function() {
+
+        $('.nav-item').click(function () {
+            $('.active-post').removeClass('active-post');
+            $(this).addClass('active-post');
+        })
+
+    });
+
+</script>
 </body>
 </html>

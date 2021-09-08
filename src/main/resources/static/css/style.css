@@ -674,6 +674,10 @@ h6, .h6 {
     content: "\F1175";
 }
 
+.mdi-message-plus-outline:before {
+    content: "\F10BB";
+}
+
 .fl-bigmug-line-portfolio23:before {
     content: "\e08a";
 }
@@ -10072,6 +10076,10 @@ html.rd-navbar-fixed-linked .page {
     border-color: transparent transparent transparent grey;
 }
 
+.list-post-menu {
+    margin-top: 10px;
+}
+
 .list-post-menu > li {
     display: inline;
     padding-left: 20px;
@@ -10080,6 +10088,7 @@ html.rd-navbar-fixed-linked .page {
 
 .list-post-menu > li:hover {
     cursor: pointer;
+    color: #1087eb;
 }
 
 .timeline-classic-title > a:hover {
@@ -10716,6 +10725,7 @@ html.rd-navbar-fixed-linked .page {
 @media (max-width: 500px) {
     .list-post-menu > li {
         display: block;
+        padding-left: 0px;
         margin-bottom: 5px;
     }
 }
