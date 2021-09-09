@@ -25,4 +25,9 @@ public class RestCityController {
         return service.getCities(id);
     }
 
+    @PostMapping("/get-cities-names")
+    public List<City> getCitiesFromNames(@RequestParam String name) {
+        return service.getCitiesFromNames(name);
+    }
+
 }

@@ -45,7 +45,7 @@ public class AccountController {
         model.addAttribute("user", user);
         model.addAttribute("countries", countryService.getAllCountries());
         List<City> cityList = new ArrayList<>();
-        cityList.add(new City(0, "Выберите из списка"));
+        cityList.add(new City(0, "Выберите из списка", "any"));
         if (user.getCountry().getId() > 0)
             cityList.addAll(countryService.getCities(user.getCountry().getId()));
         model.addAttribute("cities", cityList);

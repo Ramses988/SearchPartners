@@ -15,7 +15,11 @@ public class Country extends AbstractBaseEntity {
 
     private String name;
 
+    @Column(name = "name_en")
+    private String nameEn;
+
     public Country(long id) {
         super(id);
     }
+
 }

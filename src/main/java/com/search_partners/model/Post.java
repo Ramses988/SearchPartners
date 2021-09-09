@@ -32,6 +32,16 @@ public class Post extends AbstractBaseEntity {
     @JsonIgnore
     private int active = 1;
 
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "country_id")
+    private Country country;
+
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "city_id")
+    private City city;
+
     @Transient
     private String duration;
     @Transient

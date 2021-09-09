@@ -16,13 +16,17 @@ public class City extends AbstractBaseEntity {
 
     private String name;
 
+    @Column(name = "name_en")
+    private String nameEn;
+
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "country_id")
     private Country country;
 
-    public City(long id, String name) {
+    public City(long id, String name, String nameEn) {
         super(id);
         this.name = name;
+        this.nameEn = nameEn;
     }
 }

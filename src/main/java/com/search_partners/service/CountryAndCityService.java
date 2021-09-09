@@ -11,6 +11,10 @@ public interface CountryAndCityService {
 
     List<City> getCities(long id);
 
+    List<City> getCitiesFromName(String name);
+
+    List<City> getCitiesFromNames(String name);
+
     Country getCountry(long id);
 
     City getCity(long id);

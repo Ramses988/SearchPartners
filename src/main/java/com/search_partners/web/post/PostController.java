@@ -1,6 +1,7 @@
 package com.search_partners.web.post;
 
 import com.search_partners.model.City;
+import com.search_partners.model.Country;
 import com.search_partners.model.Post;
 import com.search_partners.model.User;
 import com.search_partners.service.CountryAndCityService;
@@ -36,6 +37,28 @@ public class PostController {
     public String getPosts(@RequestParam(defaultValue = "0", required = false) int page,
                            Model model) {
         model.addAttribute("posts", postService.getPosts(page));
+        List<Country> countries = countryAndCityService.getAllCountries();
+        countries.get(0).setName("Страна");
+        model.addAttribute("countries", countries);
+        List<City> cityList = new ArrayList<>();
+        cityList.add(new City(0, "Город", "any"));
+        model.addAttribute("cities", cityList);
+        return "post/posts";
+    }
+
+    @GetMapping("/posts/{country}/{city}")
+    public String getPostsWithFilters(@PathVariable("country") String country, @PathVariable("city") String city,
+                                      @RequestParam(defaultValue = "0", required = false) int page, Model model) {
+        model.addAttribute("posts", postService.getPostsWithFilters(country, city, page));
+        List<Country> countries = countryAndCityService.getAllCountries();
+        countries.get(0).setName("Страна");
+        model.addAttribute("countries", countries);
+        List<City> cityList = new ArrayList<>();
+        cityList.add(new City(0, "Город", "any"));
+        cityList.addAll(countryAndCityService.getCitiesFromName(country));
+        model.addAttribute("cities", cityList);
+        model.addAttribute("countryName", country);
+        model.addAttribute("cityName", city);
         return "post/posts";
     }
 
@@ -49,9 +72,10 @@ public class PostController {
     public String getAddPost(Model model) {
         User user = userService.getUserWithCity(SecurityUtil.authUserId());
         model.addAttribute("user", user);
+        model.addAttribute("post", new Post());
         model.addAttribute("countries", countryAndCityService.getAllCountries());
         List<City> cityList = new ArrayList<>();
-        cityList.add(new City(0, "Выберите из списка"));
+        cityList.add(new City(0, "Выберите из списка", "any"));
         if (user.getCountry().getId() > 0)
             cityList.addAll(countryAndCityService.getCities(user.getCountry().getId()));
         model.addAttribute("cities", cityList);

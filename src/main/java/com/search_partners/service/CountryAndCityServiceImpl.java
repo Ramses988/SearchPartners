@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @Transactional(readOnly = true)
@@ -31,6 +32,24 @@ public class CountryAndCityServiceImpl implements CountryAndCityService {
     @Override
     public List<City> getCities(long id) {
         return cityRepository.findAllByCountry(new Country(id));
+    }
+
+    @Override
+    public List<City> getCitiesFromName(String name) {
+        if (Objects.nonNull(name) && !name.isEmpty()) {
+            Country country = countryRepository.findByNameEn(name).orElse(null);
+            if (Objects.nonNull(country) && !"any".equals(country.getNameEn()))
+                return cityRepository.findAllByCountry(country);
+        }
+        return List.of();
+    }
+
+    @Override
+    public List<City> getCitiesFromNames(String name) {
+        Country country = countryRepository.findByNameEn(name).orElse(null);
+        if (Objects.nonNull(country))
+            return getCities(country.getId());
+        return List.of();
     }
 
     @Override

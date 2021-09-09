@@ -10,6 +10,8 @@ public interface PostService {
 
     Page<Post> getPosts(int page);
 
+    Page<Post> getPostsWithFilters(String country, String city, int page);
+
     Post getPost(long id);
 
     Post getPostWithComments(long id);

@@ -1,8 +1,8 @@
 package com.search_partners.service;
 
-import com.search_partners.model.Comment;
-import com.search_partners.model.Post;
-import com.search_partners.model.User;
+import com.search_partners.model.*;
+import com.search_partners.repository.CityRepository;
+import com.search_partners.repository.CountryRepository;
 import com.search_partners.repository.PostRepository;
 import com.search_partners.repository.UserRepository;
 import com.search_partners.to.PostDto;
@@ -27,17 +27,42 @@ public class PostServiceImpl implements PostService {
 
     private final PostRepository postRepository;
     private final UserRepository userRepository;
+    private final CountryRepository countryRepository;
+    private final CityRepository cityRepository;
 
     @Autowired
-    public PostServiceImpl(PostRepository postRepository, UserRepository userRepository) {
+    public PostServiceImpl(PostRepository postRepository, UserRepository userRepository,
+                           CountryRepository countryRepository, CityRepository cityRepository) {
         this.postRepository = postRepository;
         this.userRepository = userRepository;
+        this.countryRepository = countryRepository;
+        this.cityRepository = cityRepository;
     }
 
     @Override
     public Page<Post> getPosts(int page) {
         Pageable pageable = PageRequest.of(page, 100, Sort.by("date").descending());
         Page<Post> posts = postRepository.findAllByActive(1, pageable);
+        posts.forEach(DateUtil::getDuration);
+        return posts;
+    }
+
+    @Override
+    public Page<Post> getPostsWithFilters(String countryName, String cityName, int page) {
+        //if (Objects.isNull(country) || Objects.isNull(city) || country.isEmpty() || city.isEmpty())
+        //TODO: exception if null country or city
+        Page<Post> posts = Page.empty();
+        Pageable pageable = PageRequest.of(page, 100, Sort.by("date").descending());
+        Country country = countryRepository.findByNameEn(countryName).orElse(null);
+        City city = cityRepository.findByNameEn(cityName).orElse(null);
+        if (Objects.nonNull(country) && Objects.nonNull(city)) {
+            if (!"any".equals(country.getNameEn()) && "any".equals(city.getNameEn()))
+                posts = postRepository.findAllByCountryAndActive(country, 1, pageable);
+            else if (!"any".equals(country.getNameEn()) && !"any".equals(city.getNameEn()))
+                posts = postRepository.findAllByCountryAndCityAndActive(country, city, 1, pageable);
+            else if ("any".equals(country.getNameEn()) && "any".equals(city.getNameEn()))
+                posts = getPosts(page);
+        }
         posts.forEach(DateUtil::getDuration);
         return posts;
     }

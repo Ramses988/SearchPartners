@@ -14,26 +14,28 @@
                 <div class="form-layout-search form-lg">
                     <div class="form-wrap form-wrap-icon form-wrap-select">
                         <!-- Select 2-->
-                        <select class="form-input select form-control-has-validation select2-hidden-accessible" id="form-categories" data-placeholder="Страна" name="category" data-minimum-results-for-search="Infinity" data-constraints="@Selected" tabindex="-1" aria-hidden="true">
-                            <option label="All Categories"></option>
-                            <option value="1">Web Design</option>
-                            <option value="2">Development</option>
-                            <option value="3">Marketing</option>
+                        <select id="country-name" th:name="country" class="form-input select form-control-has-validation form-control-last-child select2-hidden-accessible">
+                            <option th:each="country : ${countries}"
+                                    th:value="${country.nameEn}"
+                                    th:text="${country.name}"
+                                    th:selected="${countryName == country.nameEn}">
+                            </option>
                         </select>
-                        <span class="form-validation"></span><span class="icon icon-custom-sizing icon-1 fl-bigmug-line-portfolio23"></span>
+                        <span class="form-validation"></span><span class="icon fl-bigmug-line-big104"></span>
                     </div>
                     <div class="form-wrap form-wrap-icon form-wrap-select">
                         <!-- Select 2-->
-                        <select class="form-input select form-control-has-validation select2-hidden-accessible" id="form-region" data-placeholder="Город" name="region" data-minimum-results-for-search="Infinity" data-constraints="@Selected" tabindex="-1" aria-hidden="true">
-                            <option label="All Regions"></option>
-                            <option value="1">Seattle</option>
-                            <option value="2">Miami</option>
-                            <option value="3">Chicago</option>
+                        <select id="city" th:name="city" class="form-input select form-control-has-validation form-control-last-child select2-hidden-accessible">
+                            <option th:each="city : ${cities}"
+                                    th:value="${city.nameEn}"
+                                    th:text="${city.name}"
+                                    th:selected="${cityName == city.nameEn}">
+                            </option>
                         </select>
                         <span class="form-validation"></span><span class="icon fl-bigmug-line-big104"></span>
                     </div>
                     <div class="form-wrap form-wrap-button">
-                        <button class="button button-lg button-primary" type="submit">Поиск</button>
+                        <button id="btn-search" class="button button-lg button-primary" type="button">Поиск</button>
                     </div>
                 </div>
             </form>
@@ -86,5 +88,37 @@
         </div>
     </section>
     <div th:replace="~{fragments/footer :: footer}"></div>
+<script>
+
+    $( document ).ready(function() {
+
+        function getCitiesFromName(name) {
+            const city = $('#city');
+            city.empty();
+            city.append('<option value="any">Город</option>');
+
+            if (name !== 'any') {
+                $.post('/rest/country/get-cities-names', {name: name}, function(data) {
+                    data.forEach((item) => {
+                        city.append('<option value="' + item.nameEn + '">' + item.name + '</option>');
+                    })
+                });
+            }
+        }
+
+        $('#country-name').on('change', function () {
+            const name = $('#country-name').val();
+            getCitiesFromName(name);
+        });
+
+        $('#btn-search').click(function () {
+            let country = $('#country-name').val();
+            let city = $('#city').val();
+            window.location.href = "http://localhost:8080/posts/" + country + "/" + city;
+        })
+
+    });
+
+</script>
 </body>
 </html>
