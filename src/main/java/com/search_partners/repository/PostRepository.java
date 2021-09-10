@@ -19,9 +19,11 @@ public interface PostRepository extends PagingAndSortingRepository<Post, Long> {
 
     Page<Post> findAllByActive(int active, Pageable pageable);
 
-    Page<Post> findAllByCountryAndActive(Country country, int Active, Pageable pageable);
+    @Query("SELECT p FROM Post p WHERE (p.country.id=:country or p.country.id=0) and p.active=1")
+    Page<Post> findAllByCountryAndActive(long country, Pageable pageable);
 
-    Page<Post> findAllByCountryAndCityAndActive(Country country, City city, int Active, Pageable pageable);
+    @Query("SELECT p FROM Post p WHERE (p.country.id=:country or p.country.id=0) and (p.city.id=:city or p.city.id=0) and p.active=1")
+    Page<Post> findAllByCountryAndCityAndActive(long country, long city, Pageable pageable);
 
     @EntityGraph(attributePaths = {"commentList"}, type = EntityGraph.EntityGraphType.LOAD)
     @Query("SELECT p FROM Post p WHERE p.id=:id")

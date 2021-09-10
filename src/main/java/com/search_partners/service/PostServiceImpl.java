@@ -57,9 +57,9 @@ public class PostServiceImpl implements PostService {
         City city = cityRepository.findByNameEn(cityName).orElse(null);
         if (Objects.nonNull(country) && Objects.nonNull(city)) {
             if (!"any".equals(country.getNameEn()) && "any".equals(city.getNameEn()))
-                posts = postRepository.findAllByCountryAndActive(country, 1, pageable);
+                posts = postRepository.findAllByCountryAndActive(country.getId(), pageable);
             else if (!"any".equals(country.getNameEn()) && !"any".equals(city.getNameEn()))
-                posts = postRepository.findAllByCountryAndCityAndActive(country, city, 1, pageable);
+                posts = postRepository.findAllByCountryAndCityAndActive(country.getId(), city.getId(), pageable);
             else if ("any".equals(country.getNameEn()) && "any".equals(city.getNameEn()))
                 posts = getPosts(page);
         }
