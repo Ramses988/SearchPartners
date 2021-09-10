@@ -11,6 +11,8 @@ import javax.validation.constraints.Size;
 @Data
 public class PostDto {
 
+    private Long id;
+
     @NotBlank(message = "Заголовок не должен быть пустым!")
     @Size(max = 100, message = "Максимальный размер поля Заголовок, 100 символов!")
     @Pattern(regexp = "[^<>]{1,100}", message = "Запрещенные символы в поле заголовок!")
@@ -21,9 +23,9 @@ public class PostDto {
     private String text;
 
     @Min(0)
-    private int country;
+    private Long country;
 
     @Min(0)
-    private int city;
+    private Long city;
 
 }

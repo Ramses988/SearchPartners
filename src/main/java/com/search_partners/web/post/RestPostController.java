@@ -27,6 +27,12 @@ public class RestPostController {
         service.savePost(post, SecurityUtil.authUserId());
     }
 
+    @PostMapping("/manage/rest/post/edit-post")
+    @ResponseStatus(value = HttpStatus.NO_CONTENT)
+    public void editPost(@Valid PostDto post) {
+        service.editPost(post, SecurityUtil.authUserId());
+    }
+
     @PostMapping("/manage/rest/post/set-close")
     public boolean closePost(Long id) {
         return service.closePost(id, SecurityUtil.authUserId());

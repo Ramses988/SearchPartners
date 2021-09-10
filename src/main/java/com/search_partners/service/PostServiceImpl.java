@@ -68,6 +68,14 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
+    public Post getPostWithOwner(Long id, Long userId) {
+        Post post = postRepository.findByIdAndUser(id, userId).orElse(null);
+        if (Objects.isNull(post))
+            System.out.println(""); //TODO: 404 page if no found
+        return post;
+    }
+
+    @Override
     public List<Post> getAllPosts(Long id) {
         return PostUtil.prepareText(postRepository.findAllByUser(id));
     }
@@ -134,12 +142,30 @@ public class PostServiceImpl implements PostService {
     @Override
     @Transactional
     public void savePost(PostDto postDto, Long id) {
-        String text = PostUtil.validateText(postDto.getText());
-        //TODO: Add check exception if user equals null
+        Country country = countryRepository.findById(postDto.getCountry()).orElse(null);
+        City city = cityRepository.findById(postDto.getCity()).orElse(null);
         User user = userRepository.findById(id).orElse(null);
-        Post post = PostUtil.createNewFromTo(postDto);
-        post.setUser(user);
+        if (Objects.isNull(country) || Objects.isNull(city) || Objects.isNull(user))
+            System.out.println(""); //TODO: Add check exception if user equals null
+        String text = PostUtil.validateText(postDto.getText());
+        Post post = PostUtil.createNewFromTo(postDto, user, country, city);
         post.setText(text);
+        postRepository.save(post);
+    }
+
+    @Override
+    @Transactional
+    public void editPost(PostDto postDto, Long id) {
+        Post post = postRepository.findByIdAndUser(postDto.getId(), id).orElse(null);
+        Country country = countryRepository.findById(postDto.getCountry()).orElse(null);
+        City city = cityRepository.findById(postDto.getCity()).orElse(null);
+        if (Objects.isNull(country) || Objects.isNull(city) || Objects.isNull(post))
+            System.out.println("Exception"); //TODO: Add check exception if user equals null
+        String text = PostUtil.validateText(postDto.getText());
+        post.setTitle(postDto.getTitle());
+        post.setText(text);
+        post.setCountry(country);
+        post.setCity(city);
         postRepository.save(post);
     }
 }

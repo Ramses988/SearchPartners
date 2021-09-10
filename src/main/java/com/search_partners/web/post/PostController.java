@@ -71,13 +71,29 @@ public class PostController {
     @GetMapping("/manage/post/add")
     public String getAddPost(Model model) {
         User user = userService.getUserWithCity(SecurityUtil.authUserId());
-        model.addAttribute("user", user);
+        model.addAttribute("countryId", user.getCountry().getId());
+        model.addAttribute("cityId", user.getCity().getId());
         model.addAttribute("post", new Post());
         model.addAttribute("countries", countryAndCityService.getAllCountries());
         List<City> cityList = new ArrayList<>();
         cityList.add(new City(0, "Выберите из списка", "any"));
         if (user.getCountry().getId() > 0)
             cityList.addAll(countryAndCityService.getCities(user.getCountry().getId()));
+        model.addAttribute("cities", cityList);
+        return "post/add";
+    }
+
+    @GetMapping("/manage/post/edit/{id}")
+    public String editPost(@PathVariable("id") Long id, Model model) {
+        Post post = postService.getPostWithOwner(id, SecurityUtil.authUserId());
+        model.addAttribute("countryId", post.getCountry().getId());
+        model.addAttribute("cityId", post.getCity().getId());
+        model.addAttribute("post", post);
+        model.addAttribute("countries", countryAndCityService.getAllCountries());
+        List<City> cityList = new ArrayList<>();
+        cityList.add(new City(0, "Выберите из списка", "any"));
+        if (post.getCountry().getId() > 0)
+            cityList.addAll(countryAndCityService.getCities(post.getCountry().getId()));
         model.addAttribute("cities", cityList);
         return "post/add";
     }

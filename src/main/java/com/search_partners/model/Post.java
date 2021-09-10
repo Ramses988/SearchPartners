@@ -30,7 +30,7 @@ public class Post extends AbstractBaseEntity {
     private List<Comment> commentList;
 
     @JsonIgnore
-    private int active = 1;
+    private int active;
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)

@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html class="wide desktop landscape rd-navbar-static-linked" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Добавить новую запись</title>
+    <title th:text="${post.id > 0} ? 'Редактировать пост' : 'Новая запись'"></title>
     <div th:replace="~{fragments/links :: links1}"></div>
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:400%7CUbuntu:300,400,500,600,700">
 </head>
 <body>
 <div th:replace="~{fragments/menu :: menu}"></div>
-<div th:replace="~{fragments/title :: title('Добавить новую запись')}"></div>
+<div th:replace="~{fragments/title :: title(${post.id > 0} ? 'Редактировать пост' : 'Новая запись')}"></div>
 
 <section class="section section-md">
     <div class="container">
         <form id="addPostForm">
             <div class="block-form">
-                <h4>Новая запись</h4>
+                <h4 th:text="${post.id > 0} ? 'Редактировать пост' : 'Новая запись'"></h4>
                 <hr>
                 <div class="rd-form form-lg">
                     <div class="row row-40">
@@ -26,7 +26,7 @@
                                         <option th:each="country : ${countries}"
                                                 th:value="${country.id}"
                                                 th:text="${country.name}"
-                                                th:selected="${user.country.id == country.id}">
+                                                th:selected="${countryId == country.id}">
                                         </option>
                                     </select>
                                 </div>
@@ -41,7 +41,7 @@
                                         <option th:each="city : ${cities}"
                                                 th:value="${city.id}"
                                                 th:text="${city.name}"
-                                                th:selected="${user.city.id == city.id}">
+                                                th:selected="${cityId == city.id}">
                                         </option>
                                     </select>
                                 </div>
@@ -52,6 +52,7 @@
                                 <label class="form-label-outside" for="title">Заголовок</label>
                                 <div class="form-wrap-inner">
                                     <input class="form-input required" id="title" name="title" th:value="${post.title}">
+                                    <input type="hidden" name="id" th:value="${post.id}">
                                     <span class="form-validation validation-name"></span>
                                 </div>
                             </div>
@@ -60,14 +61,19 @@
                             <div class="form-wrap">
                                 <label class="form-label-outside" for="text">Текст записи</label>
                                 <div class="form-wrap-inner">
-                                    <textarea id="text" name="text" class="form-input form-control-last-child"></textarea>
+                                    <textarea id="text" name="text" class="form-input form-control-last-child" th:text="${post.text}"></textarea>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <button type="button" id="btn_addPost" class="button button-sm button-primary">Опубликовать запись</button>
+            <th:block th:if="${post.id > 0}">
+                <button type="button" id="btn_savePost" class="button button-sm button-primary">Сохранить</button>
+            </th:block>
+            <th:block th:unless="${post.id > 0}">
+                <button type="button" id="btn_addPost" class="button button-sm button-primary">Опубликовать запись</button>
+            </th:block>
         </form>
     </div>
 </section>
@@ -97,7 +103,26 @@
                 url: '/manage/rest/post/add-post',
                 data: $('#addPostForm').serialize(),
                 success: function (data) {
-                    window.location.replace("/posts");
+                    window.location.replace("/manage/post/list");
+                },
+                error: function(data) {
+                    failNoty(data.responseText);
+                }
+            })
+        } else {
+            failNoty('Проверьте правильность заполнения полей!');
+        }
+    });
+
+    $('#btn_savePost').click(function () {
+        if (validForm('#addPostForm')) {
+            instanceText.updateElement();
+            $.ajax({
+                type: 'POST',
+                url: '/manage/rest/post/edit-post',
+                data: $('#addPostForm').serialize(),
+                success: function (data) {
+                    window.location.replace("/manage/post/list");
                 },
                 error: function(data) {
                     failNoty(data.responseText);

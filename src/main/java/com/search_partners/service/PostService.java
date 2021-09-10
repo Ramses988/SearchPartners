@@ -12,6 +12,8 @@ public interface PostService {
 
     Page<Post> getPostsWithFilters(String country, String city, int page);
 
+    Post getPostWithOwner(Long id, Long userId);
+
     Post getPost(long id);
 
     Post getPostWithComments(long id);
@@ -19,6 +21,8 @@ public interface PostService {
     void savePost(Post post);
 
     void savePost(PostDto postDto, Long id);
+
+    void editPost(PostDto postDto, Long id);
 
     List<Post> getAllPosts(Long id);
 

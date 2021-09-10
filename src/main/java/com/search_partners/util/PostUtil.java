@@ -1,7 +1,10 @@
 package com.search_partners.util;
 
 
+import com.search_partners.model.City;
+import com.search_partners.model.Country;
 import com.search_partners.model.Post;
+import com.search_partners.model.User;
 import com.search_partners.to.PostDto;
 import lombok.extern.log4j.Log4j2;
 import org.jsoup.Jsoup;
@@ -28,10 +31,14 @@ public class PostUtil {
         return post;
     }
 
-    public static Post createNewFromTo(PostDto postDto) {
+    public static Post createNewFromTo(PostDto postDto, User user, Country country, City city) {
         return Post.builder()
                 .title(postDto.getTitle())
+                .user(user)
+                .country(country)
+                .city(city)
                 .date(LocalDateTime.now())
+                .active(1)
                 .build();
     }
 
