@@ -5,6 +5,7 @@ import com.search_partners.repository.CityRepository;
 import com.search_partners.repository.CountryRepository;
 import com.search_partners.repository.PostRepository;
 import com.search_partners.repository.UserRepository;
+import com.search_partners.service.interfaces.PostService;
 import com.search_partners.to.PostDto;
 import com.search_partners.util.DateUtil;
 import com.search_partners.util.PostUtil;
@@ -17,7 +18,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 

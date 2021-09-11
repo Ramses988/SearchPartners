@@ -1,9 +1,8 @@
 package com.search_partners.web.city;
 
 import com.search_partners.model.City;
-import com.search_partners.service.CountryAndCityService;
+import com.search_partners.service.interfaces.CountryAndCityService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

@@ -1,7 +1,7 @@
 package com.search_partners.web.chat;
 
 import com.search_partners.model.ChatMessage;
-import com.search_partners.service.ChatService;
+import com.search_partners.service.interfaces.ChatService;
 import com.search_partners.util.SecurityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;

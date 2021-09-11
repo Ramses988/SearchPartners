@@ -5,6 +5,8 @@ import com.search_partners.model.ChatRoom;
 import com.search_partners.model.User;
 import com.search_partners.repository.ChatMessageRepository;
 import com.search_partners.repository.ChatRoomRepository;
+import com.search_partners.service.interfaces.ChatService;
+import com.search_partners.service.interfaces.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -2,8 +2,8 @@ package com.search_partners.web.account;
 
 import com.search_partners.model.City;
 import com.search_partners.model.User;
-import com.search_partners.service.CountryAndCityService;
-import com.search_partners.service.UserService;
+import com.search_partners.service.interfaces.CountryAndCityService;
+import com.search_partners.service.interfaces.UserService;
 import com.search_partners.util.SecurityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

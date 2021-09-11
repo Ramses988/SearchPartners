@@ -1,6 +1,6 @@
 package com.search_partners.web.account;
 
-import com.search_partners.service.UserService;
+import com.search_partners.service.interfaces.UserService;
 import com.search_partners.to.ChangePasswordDto;
 import com.search_partners.to.UserProfileDto;
 import com.search_partners.to.UserRegisterDto;

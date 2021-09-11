@@ -1,12 +1,11 @@
 package com.search_partners.web.chat;
 
 import com.search_partners.model.ChatMessage;
-import com.search_partners.service.ChatService;
+import com.search_partners.service.interfaces.ChatService;
 import com.search_partners.util.SecurityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
-import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

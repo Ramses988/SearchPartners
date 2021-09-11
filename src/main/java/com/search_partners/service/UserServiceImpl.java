@@ -5,14 +5,17 @@ import com.search_partners.model.City;
 import com.search_partners.model.Country;
 import com.search_partners.model.User;
 import com.search_partners.repository.UserRepository;
+import com.search_partners.service.interfaces.CountryAndCityService;
+import com.search_partners.service.interfaces.MailSenderService;
+import com.search_partners.service.interfaces.UserService;
 import com.search_partners.to.ChangePasswordDto;
 import com.search_partners.to.UserProfileDto;
 import com.search_partners.to.UserRegisterDto;
+import com.search_partners.util.EmailMessageUtil;
 import com.search_partners.util.UserUtil;
 import com.search_partners.util.exception.ErrorCheckRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -27,13 +30,15 @@ public class UserServiceImpl implements UserService {
     private final UserRepository repository;
     private final CountryAndCityService service;
     private final PasswordEncoder passwordEncoder;
+    private final MailSenderService mailSender;
 
     @Autowired
-    public UserServiceImpl(UserRepository repository, CountryAndCityService service) {
+    public UserServiceImpl(UserRepository repository, CountryAndCityService service, MailSenderService mailSender) {
         this.repository = repository;
         this.service = service;
 //        passwordEncoder = new BCryptPasswordEncoder();
         passwordEncoder = NoOpPasswordEncoder.getInstance();
+        this.mailSender = mailSender;
     }
 
     @Override
@@ -80,6 +85,7 @@ public class UserServiceImpl implements UserService {
             user.setCountry(country);
             user.setCity(city);
             repository.save(user);
+            mailSender.sendEmail(EmailMessageUtil.getRegisterMail(user));
         } else {
             throw new ErrorCheckRequestException("Ошибка создания пользователя!");
         }

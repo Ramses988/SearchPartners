@@ -1,4 +1,4 @@
-package com.search_partners.service;
+package com.search_partners.service.interfaces;
 
 import com.search_partners.model.User;
 import com.search_partners.to.ChangePasswordDto;

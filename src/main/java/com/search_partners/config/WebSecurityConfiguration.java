@@ -1,6 +1,6 @@
 package com.search_partners.config;
 
-import com.search_partners.service.UserService;
+import com.search_partners.service.interfaces.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,4 +1,4 @@
-package com.search_partners.service;
+package com.search_partners.service.interfaces;
 
 import com.search_partners.model.Post;
 import com.search_partners.to.PostDto;

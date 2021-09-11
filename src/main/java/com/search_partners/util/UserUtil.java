@@ -17,7 +17,7 @@ public class UserUtil extends StdConverter<User, UserDto> {
         return User.builder()
                 .name(newUser.getName().trim())
                 .date(LocalDateTime.now())
-                .email(newUser.getEmail().toLowerCase())
+                .email(newUser.getEmail().toLowerCase().trim())
                 .enabled(false)
                 .initial(initial)
                 .color("#cc33cc")

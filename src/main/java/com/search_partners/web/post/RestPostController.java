@@ -1,6 +1,6 @@
 package com.search_partners.web.post;
 
-import com.search_partners.service.PostService;
+import com.search_partners.service.interfaces.PostService;
 import com.search_partners.to.PostDto;
 import com.search_partners.util.SecurityUtil;
 import org.springframework.beans.factory.annotation.Autowired;

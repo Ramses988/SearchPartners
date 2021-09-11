@@ -4,6 +4,7 @@ import com.search_partners.model.City;
 import com.search_partners.model.Country;
 import com.search_partners.repository.CityRepository;
 import com.search_partners.repository.CountryRepository;
+import com.search_partners.service.interfaces.CountryAndCityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

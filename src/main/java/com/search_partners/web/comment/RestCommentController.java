@@ -2,7 +2,7 @@ package com.search_partners.web.comment;
 
 import com.search_partners.model.Comment;
 import com.search_partners.model.InternalComment;
-import com.search_partners.service.CommentService;
+import com.search_partners.service.interfaces.CommentService;
 import com.search_partners.util.CommentUtil;
 import com.search_partners.util.SecurityUtil;
 import com.search_partners.util.exception.ErrorCheckRequestException;
@@ -11,8 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.Objects;
 
 @Log4j2
 @RestController
