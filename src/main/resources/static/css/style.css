@@ -1223,6 +1223,14 @@ p .link-press {
 	margin-top: 30px;
 }
 
+html .text-gray-3 {
+    color: #e4e6ef;
+}
+
+html .text-primary-1 {
+    color: #1087eb;
+}
+
 @media (min-width: 768px) {
 	.privacy-link {
 		font-size: 16px;
@@ -5311,6 +5319,19 @@ p.footer-creative-title {
 /*
 * Page layout
 */
+
+.button-gray-800-outline, .button-gray-800-outline:focus {
+    color: #151515;
+    background-color: transparent;
+    border-color: #151515;
+}
+
+.button-gray-800-outline:hover, .button-gray-800-outline:active {
+    color: #ffffff;
+    background-color: #151515;
+    border-color: #151515;
+}
+
 .page {
 	position: relative;
 	overflow: hidden;
@@ -10072,6 +10093,16 @@ html.rd-navbar-fixed-linked .page {
 
 /* Start my code*/
 
+#center-post {
+    margin: 0 20% 0 20%;
+    font-size: 16px;
+}
+
+.heading-decorated_1 {
+    margin-bottom: 11px;
+    font-size: 27px;
+}
+
 .set-default-color > li::before {
     border-color: transparent transparent transparent grey;
 }
@@ -10650,6 +10681,10 @@ html.rd-navbar-fixed-linked .page {
 		display: flex;
 		padding-bottom: 20px;
 	}
+
+    .breadcrumbs-custom-title {
+        font-size: 30px;
+    }
 }
 
 @media (min-width: 992px) {
@@ -10802,6 +10837,14 @@ html.rd-navbar-fixed-linked .page {
 	.company-light-title > a {
 		color: #1087eb;
 	}
+
+    #center-post {
+        margin: 0;
+    }
+
+    .heading-decorated_1 {
+        font-size: 24px;
+    }
 	
 }
 

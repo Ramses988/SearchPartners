@@ -1,6 +1,7 @@
 package com.search_partners.util.handler;
 
 import com.search_partners.util.exception.ErrorCheckRequestException;
+import com.search_partners.util.exception.ErrorNotFoundPageException;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindException;
@@ -8,6 +9,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.stream.Collectors;
 
@@ -30,6 +32,15 @@ public class GlobalExceptionHandler {
                 .stream()
                 .map(FieldError::getDefaultMessage)
                 .collect(Collectors.joining("<br /> "));
+    }
+
+    @ExceptionHandler(ErrorNotFoundPageException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ModelAndView handle(ErrorNotFoundPageException ex) {
+        log.warn(ex.getLocalizedMessage());
+        ModelAndView view = new ModelAndView();
+        view.setViewName("error/404");
+        return view;
     }
 
     @ExceptionHandler(Exception.class)

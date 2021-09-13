@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html class="wide desktop landscape rd-navbar-static-linked" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>404 Страница не найдена</title>
+    <div th:replace="~{fragments/links :: links1}"></div>
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:400%7CUbuntu:300,400,500,600,700">
+</head>
+<body>
+<div th:replace="~{fragments/menu :: menu}"></div>
+<div th:replace="~{fragments/title :: title('Страница не найдена')}"></div>
+
+<section class="section section-md text-center">
+    <div class="container">
+        <h2 class="text-gray-3"><span class="text-primary-1">Oops!</span> Страница не найдена</h2>
+        <h5>Возможно страница устарела была удалена или перенесена на новый адрес</h5>
+        <div class="group group-sm group-middle">
+            <a class="button button-gray-800-outline" href="/">На главную</a>
+            <a class="button button-primary" href="contact-us.html">Написать нам</a></div>
+    </div>
+</section>
+
+<div th:replace="~{fragments/footer :: footer}"></div>
+<script src="/js/noty.min.js"> </script>
+<script src="/js/script-register.js"></script>
+</body>
+</html>

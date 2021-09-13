@@ -5,10 +5,12 @@ import com.search_partners.model.User;
 import com.search_partners.service.interfaces.CountryAndCityService;
 import com.search_partners.service.interfaces.UserService;
 import com.search_partners.util.SecurityUtil;
+import com.search_partners.util.exception.ErrorNotFoundPageException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
@@ -50,6 +52,16 @@ public class AccountController {
             cityList.addAll(countryService.getCities(user.getCountry().getId()));
         model.addAttribute("cities", cityList);
         return "account/profile";
+    }
+
+    @GetMapping("/confirm-account/{token}")
+    public String confirmUserAccount(@PathVariable(name="token") String token, Model model) throws ErrorNotFoundPageException {
+        userService.activeUser(token);
+        model.addAttribute("title", "Ваш email адрес успешно подтвержден");
+        model.addAttribute("headline", "Спасибо за регистрацию!");
+        model.addAttribute("text", "Спасибо за регистрацию на нашем сайте.<br/> Ваш email успешно подтвержден, теперь вы можете войти в Личный кабинет.<br/>\n" +
+                "                Для входа в Личный кабинет перейдите по <a href=\"/login\">ссылке</a>");
+        return "account/info";
     }
 
 }

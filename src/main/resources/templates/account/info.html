@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html class="wide desktop landscape rd-navbar-static-linked" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${title}"></title>
+    <div th:replace="~{fragments/links :: links1}"></div>
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:400%7CUbuntu:300,400,500,600,700">
+</head>
+<body>
+<div th:replace="~{fragments/menu :: menu}"></div>
+<div th:replace="~{fragments/title :: title(${title})}"></div>
+
+<section class="section section-md">
+    <div class="container">
+        <div id="center-post">
+            <h3 class="heading-decorated_1" th:text="${headline}"></h3>
+            <p th:utext="${text}"></p>
+        </div>
+    </div>
+</section>
+
+<div th:replace="~{fragments/footer :: footer}"></div>
+<script src="/js/noty.min.js"> </script>
+<script src="/js/script-register.js"></script>
+</body>
+</html>

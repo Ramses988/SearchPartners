@@ -2,9 +2,11 @@ package com.search_partners.service;
 
 import com.search_partners.AuthorizedUser;
 import com.search_partners.model.City;
+import com.search_partners.model.ConfirmToken;
 import com.search_partners.model.Country;
 import com.search_partners.model.User;
 import com.search_partners.repository.UserRepository;
+import com.search_partners.service.interfaces.ConfirmTokenService;
 import com.search_partners.service.interfaces.CountryAndCityService;
 import com.search_partners.service.interfaces.MailSenderService;
 import com.search_partners.service.interfaces.UserService;
@@ -14,6 +16,7 @@ import com.search_partners.to.UserRegisterDto;
 import com.search_partners.util.EmailMessageUtil;
 import com.search_partners.util.UserUtil;
 import com.search_partners.util.exception.ErrorCheckRequestException;
+import com.search_partners.util.exception.ErrorNotFoundPageException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
@@ -31,14 +34,17 @@ public class UserServiceImpl implements UserService {
     private final CountryAndCityService service;
     private final PasswordEncoder passwordEncoder;
     private final MailSenderService mailSender;
+    private final ConfirmTokenService confirmTokenService;
 
     @Autowired
-    public UserServiceImpl(UserRepository repository, CountryAndCityService service, MailSenderService mailSender) {
+    public UserServiceImpl(UserRepository repository, CountryAndCityService service, MailSenderService mailSender,
+                           ConfirmTokenService confirmTokenService) {
         this.repository = repository;
         this.service = service;
 //        passwordEncoder = new BCryptPasswordEncoder();
         passwordEncoder = NoOpPasswordEncoder.getInstance();
         this.mailSender = mailSender;
+        this.confirmTokenService = confirmTokenService;
     }
 
     @Override
@@ -85,7 +91,7 @@ public class UserServiceImpl implements UserService {
             user.setCountry(country);
             user.setCity(city);
             repository.save(user);
-            mailSender.sendEmail(EmailMessageUtil.getRegisterMail(user));
+            mailSender.sendEmail(EmailMessageUtil.getRegisterMail(user, confirmTokenService.newToken(user)));
         } else {
             throw new ErrorCheckRequestException("Ошибка создания пользователя!");
         }
@@ -107,6 +113,16 @@ public class UserServiceImpl implements UserService {
         } else {
             throw new ErrorCheckRequestException("Ошибка смены пароля!");
         }
+    }
+
+    @Override
+    public void activeUser(String token) throws ErrorNotFoundPageException {
+        ConfirmToken confirmToken = confirmTokenService.activeUser(token);
+        if (Objects.isNull(confirmToken))
+            throw new ErrorNotFoundPageException("Error set user active: Page Not Found confirm-account");
+        confirmToken.getUser().setEnabled(true);
+        repository.save(confirmToken.getUser());
+        confirmTokenService.removeToken(confirmToken);
     }
 
     @Override

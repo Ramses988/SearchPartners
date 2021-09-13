@@ -10,9 +10,10 @@ public class EmailMessageUtil {
 
     private EmailMessageUtil() {};
 
-    public static EmailMessage getRegisterMail(User user) {
+    public static EmailMessage getRegisterMail(User user, String token) {
         Map<String, Object> params = new HashMap<>();
         params.put("name", user.getName());
+        params.put("token", token);
         return EmailMessage.builder()
                 .to(user.getEmail())
                 .subject("Пожалуйста, подтвердите Вашу электронную почту")

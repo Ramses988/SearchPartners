@@ -4,6 +4,7 @@ import com.search_partners.model.User;
 import com.search_partners.to.ChangePasswordDto;
 import com.search_partners.to.UserProfileDto;
 import com.search_partners.to.UserRegisterDto;
+import com.search_partners.util.exception.ErrorNotFoundPageException;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -20,5 +21,7 @@ public interface UserService extends UserDetailsService {
     void changePassword(ChangePasswordDto request, long id);
 
     PasswordEncoder getPasswordEncoder();
+
+    void activeUser(String token) throws ErrorNotFoundPageException;
 
 }
