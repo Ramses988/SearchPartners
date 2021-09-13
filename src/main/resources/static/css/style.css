@@ -643,6 +643,11 @@ h6, .h6 {
     color: #1087eb;
 }
 
+.mdi-check-circle-outline:before {
+    content: "\F05E1";
+    color: #1087eb;
+}
+
 .mdi-email-newsletter-mobile:before {
     content: "\F0FB1";
     color: white;
@@ -995,7 +1000,7 @@ h3,
 @media (min-width: 1200px) {
 	h3,
 	.heading-3 {
-		font-size: 36px;
+		font-size: 30px;
 		line-height: 1.33333;
 	}
 }
@@ -2408,6 +2413,12 @@ html a.icon-filled-brand:active, html a.icon-filled-brand:focus, html a.icon-fil
 .icon-xlg {
 	font-size: 30px;
 	line-height: 42px;
+}
+
+.icon-xlm {
+    font-size: 33px;
+    vertical-align: text-bottom;
+    margin-right: 10px !important;
 }
 
 .icon-xl {
@@ -10095,7 +10106,7 @@ html.rd-navbar-fixed-linked .page {
 
 #center-post {
     margin: 0 20% 0 20%;
-    font-size: 16px;
+    font-size: 15px;
 }
 
 .heading-decorated_1 {

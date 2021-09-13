@@ -16,6 +16,9 @@ $(function() {
                 type: 'POST',
                 url: '/rest/account/create-user',
                 data: $('#form-createUser').serialize(),
+                success: function () {
+                    window.location.replace("/register-success");
+                },
                 error: function(data) {
                     failNoty(data.responseText);
                 }

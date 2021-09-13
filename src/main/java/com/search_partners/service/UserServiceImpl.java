@@ -116,6 +116,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public void activeUser(String token) throws ErrorNotFoundPageException {
         ConfirmToken confirmToken = confirmTokenService.activeUser(token);
         if (Objects.isNull(confirmToken))
