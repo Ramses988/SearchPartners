@@ -17,6 +17,7 @@ import com.search_partners.util.EmailMessageUtil;
 import com.search_partners.util.UserUtil;
 import com.search_partners.util.exception.ErrorCheckRequestException;
 import com.search_partners.util.exception.ErrorNotFoundPageException;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
@@ -27,25 +28,16 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Objects;
 
 @Service
+@AllArgsConstructor
 @Transactional(readOnly = true)
 public class UserServiceImpl implements UserService {
 
     private final UserRepository repository;
     private final CountryAndCityService service;
-    private final PasswordEncoder passwordEncoder;
     private final MailSenderService mailSender;
     private final ConfirmTokenService confirmTokenService;
 
-    @Autowired
-    public UserServiceImpl(UserRepository repository, CountryAndCityService service, MailSenderService mailSender,
-                           ConfirmTokenService confirmTokenService) {
-        this.repository = repository;
-        this.service = service;
-//        passwordEncoder = new BCryptPasswordEncoder();
-        passwordEncoder = NoOpPasswordEncoder.getInstance();
-        this.mailSender = mailSender;
-        this.confirmTokenService = confirmTokenService;
-    }
+    private final PasswordEncoder passwordEncoder = NoOpPasswordEncoder.getInstance(); // new BCryptPasswordEncoder();
 
     @Override
     public User getUserWithCity(long id) {
@@ -91,7 +83,7 @@ public class UserServiceImpl implements UserService {
             user.setCountry(country);
             user.setCity(city);
             repository.save(user);
-            mailSender.sendEmail(EmailMessageUtil.getRegisterMail(user, confirmTokenService.newToken(user)));
+            mailSender.sendEmail(EmailMessageUtil.getRegisterMail(user, confirmTokenService.newToken(user, 1)));
         } else {
             throw new ErrorCheckRequestException("Ошибка создания пользователя!");
         }
@@ -116,14 +108,54 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void checkToken(String token) throws ErrorNotFoundPageException {
+        ConfirmToken confirmToken = confirmTokenService.getToken(token, 2);
+        if (Objects.isNull(confirmToken))
+            throw new ErrorNotFoundPageException("Error reset password: Not token page reset-password");
+    }
+
+    @Override
+    @Transactional
+    public String resetPassword(String token, String password, String confirmPassword) {
+        ConfirmToken confirmToken = confirmTokenService.getToken(token, 2);
+        if (Objects.isNull(confirmToken))
+            throw new ErrorNotFoundPageException("Error reset password: Not token page reset-password");
+
+        if (Objects.isNull(password) || Objects.isNull(confirmPassword) || password.trim().isEmpty() || confirmPassword.trim().isEmpty())
+            return "Пароли не должны быть пустыми";
+
+        if (password.equals(confirmPassword)) {
+            if (password.length() >= 7 && password.length() <= 30) {
+                confirmToken.getUser().setPassword(UserUtil.prepareToPassword(password, passwordEncoder));
+                repository.save(confirmToken.getUser());
+                confirmTokenService.removeToken(confirmToken);
+            } else {
+                return "Пароль должен находиться в диапазоне от 7 до 30";
+            }
+        } else {
+            return "Новые пароли не совпадают!";
+        }
+        return "Success";
+    }
+
+    @Override
     @Transactional
     public void activeUser(String token) throws ErrorNotFoundPageException {
-        ConfirmToken confirmToken = confirmTokenService.activeUser(token);
+        ConfirmToken confirmToken = confirmTokenService.getToken(token, 1);
         if (Objects.isNull(confirmToken))
             throw new ErrorNotFoundPageException("Error set user active: Page Not Found confirm-account");
         confirmToken.getUser().setEnabled(true);
         repository.save(confirmToken.getUser());
         confirmTokenService.removeToken(confirmToken);
+    }
+
+    @Override
+    @Transactional
+    public void resetPasswordEmail(String email) {
+        User user = repository.findByEmailAndEnabled(email.toLowerCase().trim(), true).orElse(null);
+        if (Objects.nonNull(user)) {
+            mailSender.sendEmail(EmailMessageUtil.getResetPasswordMail(user, confirmTokenService.newToken(user, 2)));
+        }
     }
 
     @Override

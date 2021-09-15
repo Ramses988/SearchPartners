@@ -26,7 +26,8 @@
                 <div class="form-wrap">
                     <input class="form-input" type="password" id="password" name="password" placeholder="Пароль" required>
                 </div>
-                <div class="row row-15 row-x-14">
+                <label id="reset-password"><span class="popup-open" id="reset-password-link">Забыли пароль?</span></label>
+                <div class="row row-15 row-x-14 sm-6">
                     <div class="col-sm-6">
                         <button class="button button-block button-primary" type="submit">Войти</button>
                     </div>
@@ -38,6 +39,90 @@
         </div>
     </div>
 </section>
+
+<!-- Modal Windows -->
+<div class="popup-fade">
+    <div class="popup">
+        <a class="popup-close" href="#"><span class="icon mdi mdi-close"></span></a>
+        <div class="comment-main-modal">
+            <form class="rd-mailform rd-mailform-outline" id="resetPasswordEmail">
+                <div class="form-wrap">
+                    <label class="form-label-outside" for="email">Укажите свой email</label>
+                    <div class="form-wrap-inner">
+                        <input class="form-input" id="email" name="email" type="email" placeholder="Введите email">
+                        <p>Введите email, на который будет отправлена инструкция по восстановлению пароля.</p>
+                    </div>
+                </div>
+                <div class="from-wrap-modal">
+                    <button type="button" class="button button-primary" id="btnResetPassword">Отправить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="popup-fade-info">
+    <div class="popup">
+        <a class="popup-close" href="#"><span class="icon mdi mdi-close"></span></a>
+        <div class="comment-main-modal">
+            <h4><span class="icon-xlm icon-m-post-menu mdi mdi-check-circle-outline"></span>Запрос принят!</h4>
+            <p>Инстркуция по восстановлению пароля отправлена на указанный email.</p>
+            <button type="button" class="button button-primary" id="btnCloseModal">Закрыть</button>
+        </div>
+    </div>
+</div>
+
 <div th:replace="~{fragments/footer :: footer}"></div>
+<script>
+
+    $('#btnResetPassword').click(function () {
+        $.ajax({
+            type: 'POST',
+            url: '/rest/account/reset-password',
+            data: $('#resetPasswordEmail').serialize(),
+        })
+        $(this).parents('.popup-fade').fadeOut();
+        $('.popup-fade-info').fadeIn();
+    });
+
+    $('#btnCloseModal').click(function () {
+        $('.popup-fade-info').fadeOut();
+    })
+
+    $('.popup-open').click(function() {
+        $('.popup-fade').fadeIn();
+        $('#email').val('');
+        return false;
+    });
+
+    // Клик по ссылке "Закрыть".
+    $('.popup-close').click(function() {
+        $(this).parents('.popup-fade').fadeOut();
+        $(this).parents('.popup-fade-info').fadeOut();
+        return false;
+    });
+
+    // Закрытие по клавише Esc.
+    $(document).keydown(function(e) {
+        if (e.keyCode === 27) {
+            e.stopPropagation();
+            $('.popup-fade').fadeOut();
+            $('.popup-fade-info').fadeOut();
+        }
+    });
+
+    // Клик по фону, но не по окну.
+    $('.popup-fade').click(function(e) {
+        if ($(e.target).closest('.popup').length == 0) {
+            $(this).fadeOut();
+        }
+    });
+
+    $('.popup-fade-info').click(function(e) {
+        if ($(e.target).closest('.popup').length == 0) {
+            $(this).fadeOut();
+        }
+    });
+
+</script>
 </body>
 </html>

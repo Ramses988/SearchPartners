@@ -2421,12 +2421,23 @@ html a.icon-filled-brand:active, html a.icon-filled-brand:focus, html a.icon-fil
     margin-right: 10px !important;
 }
 
+
 .icon-xl {
 	font-size: 42px;
 }
 
 .icon-xxl {
 	font-size: 60px;
+}
+
+.mercury-icon-gear:before {
+    content: '\e83b';
+    color: #1087eb;
+}
+
+html .text-gray-500 {
+    color: #9a9a9a;
+    margin-top: 17px;
 }
 
 @media (min-width: 768px) {
@@ -10104,6 +10115,24 @@ html.rd-navbar-fixed-linked .page {
 
 /* Start my code*/
 
+.sm-6 {
+    margin-top: 30px !important;
+}
+
+#reset-password {
+    margin-top: 10px !important;
+}
+
+#reset-password-link {
+    color: #151515;
+    letter-spacing: .025em;
+}
+
+#reset-password-link:hover {
+    color: #1087eb;
+    cursor: pointer;
+}
+
 #center-post {
     margin: 0 20% 0 20%;
     font-size: 15px;
@@ -10239,11 +10268,11 @@ html.rd-navbar-fixed-linked .page {
     margin-top: 20px;
 }
 
-.popup-fade {
+.popup-fade, .popup-fade-info {
     display: none;
 }
 
-.popup-fade:before {
+.popup-fade:before, .popup-fade-info:before {
     content: '';
     background: #000;
     position: fixed;

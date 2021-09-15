@@ -18,15 +18,15 @@ public class ConfirmTokenServiceImpl implements ConfirmTokenService {
     }
 
     @Override
-    public String newToken(User user) {
-        ConfirmToken token = new ConfirmToken(user);
+    public String newToken(User user, int type) {
+        ConfirmToken token = new ConfirmToken(user, type);
         repository.save(token);
         return token.getConfirmToken();
     }
 
     @Override
-    public ConfirmToken activeUser(String token) {
-        return repository.findByConfirmToken(token).orElse(null);
+    public ConfirmToken getToken(String token, int type) {
+        return repository.findFirstByConfirmTokenAndType(token, type).orElse(null);
     }
 
     @Override

@@ -20,12 +20,15 @@ public class ConfirmToken extends AbstractBaseEntity {
     @Column(name = "confirm_token")
     private String confirmToken;
 
+    private int type;
+
     @OneToOne(targetEntity = User.class, fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    public ConfirmToken(User user) {
+    public ConfirmToken(User user, int type) {
         this.user = user;
+        this.type = type;
         date = LocalDateTime.now();
         confirmToken = UUID.randomUUID().toString();
     }

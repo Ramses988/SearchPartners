@@ -55,6 +55,7 @@ CREATE TABLE confirm_tokens
     date                     TIMESTAMP          NOT NULL,
     confirm_token            VARCHAR(500)       NOT NULL,
     user_id                  INTEGER            NOT NULL,
+    type                     INTEGER            NOT NULL,
     FOREIGN KEY (user_id) REFERENCES USERS (id)
 );
 CREATE UNIQUE INDEX token_unique_user_idx ON confirm_tokens (confirm_token);

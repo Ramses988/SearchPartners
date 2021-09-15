@@ -11,19 +11,20 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-public class AccountController {
+public class UserAccountController {
 
     private final UserService userService;
     private final CountryAndCityService countryService;
 
     @Autowired
-    public AccountController(UserService userService, CountryAndCityService countryService) {
+    public UserAccountController(UserService userService, CountryAndCityService countryService) {
         this.userService = userService;
         this.countryService = countryService;
     }
@@ -54,8 +55,32 @@ public class AccountController {
         return "account/profile";
     }
 
+    @GetMapping("/reset-password/{token}")
+    public String resetPassword(@PathVariable(name="token") String token, Model model) {
+        userService.checkToken(token);
+        model.addAttribute("token", token);
+        return "account/password";
+    }
+
+    @PostMapping("/reset-password")
+    public String confirmResetPassword(@RequestParam("token") String token, @RequestParam("password") String password,
+                                       @RequestParam("confirmPassword") String confirmPassword, Model model) {
+        String response = userService.resetPassword(token, password, confirmPassword);
+        if ("Success".equals(response)) {
+            model.addAttribute("title", "Пароль успешно изменен!");
+            model.addAttribute("headline", "Пароль успешно изменен!");
+            model.addAttribute("text", "Вы успешно изменили пароль для входа в Личный кабинет. Для входа в Личный кабинет перейдите " +
+                    "по <a href='/login'>ссылке</a>");
+            return "account/info";
+        } else {
+            model.addAttribute("token", token);
+            model.addAttribute("errors", response);
+            return "account/password";
+        }
+    }
+
     @GetMapping("/confirm-account/{token}")
-    public String confirmUserAccount(@PathVariable(name="token") String token, Model model) throws ErrorNotFoundPageException {
+    public String confirmUserAccount(@PathVariable(name="token") String token, Model model) {
         userService.activeUser(token);
         model.addAttribute("title", "Ваш email адрес успешно подтвержден");
         model.addAttribute("headline", "Спасибо за регистрацию!");

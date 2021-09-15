@@ -7,6 +7,6 @@ import java.util.Optional;
 
 public interface ConfirmTokenRepository extends JpaRepository<ConfirmToken, Long> {
 
-    Optional<ConfirmToken> findByConfirmToken(String confirmToken);
+    Optional<ConfirmToken> findFirstByConfirmTokenAndType(String confirmToken, int type);
 
 }

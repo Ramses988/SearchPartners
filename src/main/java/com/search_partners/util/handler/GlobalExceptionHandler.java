@@ -44,10 +44,12 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(Exception.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public String handle(Exception exception) {
-        log.error("Handle error Exception.class: Ошибка обработки запроса!");
-        return "Ошибка обработки запроса!";
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public ModelAndView handle(Exception ex) {
+        log.error("Handle error Exception.class: Ошибка обработки запроса!" + ex.getLocalizedMessage());
+        ModelAndView view = new ModelAndView();
+        view.setViewName("error/500");
+        return view;
     }
 
 }

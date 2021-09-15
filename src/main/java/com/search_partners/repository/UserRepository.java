@@ -11,6 +11,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     Optional<User> findByEmail(String email);
 
+    Optional<User> findByEmailAndEnabled(String email, boolean enabled);
+
     @EntityGraph(attributePaths = "city", type = EntityGraph.EntityGraphType.LOAD)
     @Query("SELECT u FROM User u WHERE u.id=:id")
     Optional<User> getUserWithCity(long id);

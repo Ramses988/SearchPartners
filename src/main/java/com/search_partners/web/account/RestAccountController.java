@@ -5,6 +5,7 @@ import com.search_partners.to.ChangePasswordDto;
 import com.search_partners.to.UserProfileDto;
 import com.search_partners.to.UserRegisterDto;
 import com.search_partners.util.SecurityUtil;
+import com.search_partners.util.ValidateData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -28,6 +29,13 @@ public class RestAccountController {
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void changeUserProfile(@Valid UserProfileDto user) {
         service.saveUserProfile(user, SecurityUtil.authUserId());
+    }
+
+    @PostMapping("/reset-password")
+    @ResponseStatus(value = HttpStatus.NO_CONTENT)
+    public void resetPasswordEmail(String email) {
+        if (ValidateData.validateEmail(email))
+            service.resetPasswordEmail(email);
     }
 
     @PostMapping("/create-user")

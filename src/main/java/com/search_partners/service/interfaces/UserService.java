@@ -20,7 +20,13 @@ public interface UserService extends UserDetailsService {
 
     void changePassword(ChangePasswordDto request, long id);
 
+    void resetPasswordEmail(String email);
+
     PasswordEncoder getPasswordEncoder();
+
+    void checkToken(String token) throws ErrorNotFoundPageException;
+
+    String resetPassword(String token, String password, String confirmPassword);
 
     void activeUser(String token) throws ErrorNotFoundPageException;
 
