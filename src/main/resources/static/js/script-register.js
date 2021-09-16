@@ -1,15 +1,5 @@
 $(function() {
 
-    function failNoty(msg) {
-        new Noty({
-            theme: 'relax',
-            text: "<span class='fa fa-lg fa-exclamation-circle'></span> &nbsp;"+msg,
-            type: 'error',
-            layout: "topRight",
-            timeout: 3000
-        }).show();
-    }
-
     $('#btn-createUser').click(function () {
         if (validForm('#form-createUser')) {
             $.ajax({
@@ -62,8 +52,8 @@ $(function() {
         }
     });
 
-    $('#password').on('input', function() {
-        validPassword('#password');
+    $('#userPassword').on('input', function() {
+        validPassword('#userPassword');
     });
 
     $('#confirmPassword').on('input', function() {

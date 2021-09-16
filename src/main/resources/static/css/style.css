@@ -640,7 +640,6 @@ h6, .h6 {
 
 .mdi-email-newsletter:before {
     content: "\F0FB1";
-    color: #1087eb;
 }
 
 .mdi-check-circle-outline:before {
@@ -656,6 +655,12 @@ h6, .h6 {
 .mdi-menu-down:before {
     content: "\F035D";
     color:#000;
+    top: 2px;
+}
+
+.mdi-menu-down-main:before {
+    content: "\F035D";
+    color: white;
     top: 2px;
 }
 
@@ -10114,6 +10119,23 @@ html.rd-navbar-fixed-linked .page {
 }
 
 /* Start my code*/
+
+
+.clw, .clwb {
+    color: white !important;
+}
+
+.clb.mdi-email-newsletter {
+    color: #1087eb !important;
+}
+
+.rd-navbar--is-stuck .clw {
+    color: #9a9a9a !important;
+}
+
+.rd-navbar--is-stuck .clwb, .rd-navbar--is-stuck .mdi-menu-down-main:before {
+    color: #000 !important;
+}
 
 .sm-6 {
     margin-top: 30px !important;

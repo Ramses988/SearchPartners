@@ -1,25 +1,5 @@
 $(function() {
 
-    function successNoty(msg) {
-        new Noty({
-            theme: 'relax',
-            text: "<span class='fa fa-lg fa-check'></span> &nbsp;"+msg,
-            type: 'success',
-            layout: "topRight",
-            timeout: 3000
-        }).show();
-    }
-
-    function failNoty(msg) {
-        new Noty({
-            theme: 'relax',
-            text: "<span class='fa fa-lg fa-exclamation-circle'></span> &nbsp;"+msg,
-            type: 'error',
-            layout: "topRight",
-            timeout: 3000
-        }).show();
-    }
-
     $('#realName').on('input', function(e) {
         const nameInput = $('#realName');
         const data = nameInput.val();

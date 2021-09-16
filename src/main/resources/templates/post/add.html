@@ -80,20 +80,9 @@
 
 <div th:replace="~{fragments/footer :: footer}"></div>
 <script src="/js/ckeditor/ckeditor.js"> </script>
-<script src="/js/noty.min.js"> </script>
 <script>
 
     const instanceText = CKEDITOR.replace('text');
-
-    function failNoty(msg) {
-        new Noty({
-            theme: 'relax',
-            text: "<span class='fa fa-lg fa-exclamation-circle'></span> &nbsp;"+msg,
-            type: 'error',
-            layout: "topRight",
-            timeout: 3000
-        }).show();
-    }
 
     $('#btn_addPost').click(function () {
         if (validForm('#addPostForm')) {

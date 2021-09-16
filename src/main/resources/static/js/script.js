@@ -24,6 +24,26 @@ function password(data) {
   return (data.length < 7 || data.length > 30);
 }
 
+function successNoty(msg) {
+  new Noty({
+    theme: 'relax',
+    text: "<span class='fa fa-lg fa-check'></span> &nbsp;"+msg,
+    type: 'success',
+    layout: "topRight",
+    timeout: 3000
+  }).show();
+}
+
+function failNoty(msg) {
+  new Noty({
+    theme: 'relax',
+    text: "<span class='fa fa-lg fa-exclamation-circle'></span> &nbsp;"+msg,
+    type: 'error',
+    layout: "topRight",
+    timeout: 3000
+  }).show();
+}
+
 function validForm(data) {
   let chek = true;
   $(data).find('.required').each(function(index, el) {
@@ -810,6 +830,20 @@ $('.required').focusout(function () {
     }
 
     // My Code
+
+    $('#btnCreateUserRegister').click(function () {
+      $.ajax({
+        type: 'POST',
+        url: '/rest/account/create-user',
+        data: $('#formRegisterPage').serialize(),
+        success: function () {
+          window.location.replace("/register-success");
+        },
+        error: function(data) {
+          failNoty(data.responseText);
+        }
+      })
+    });
 
     function getCities(id) {
       const city = $('#city');

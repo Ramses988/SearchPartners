@@ -8,26 +8,6 @@ let template = '<div class="comment-group block-comments"><article class="commen
     '           </div></div></article></div>';
 let elementId = '';
 
-function successNoty(msg) {
-    new Noty({
-        theme: 'relax',
-        text: "<span class='fa fa-lg fa-check'></span> &nbsp;"+msg,
-        type: 'success',
-        layout: "topRight",
-        timeout: 3000
-    }).show();
-}
-
-function failNoty(msg) {
-    new Noty({
-        theme: 'relax',
-        text: "<span class='fa fa-lg fa-exclamation-circle'></span> &nbsp;"+msg,
-        type: 'error',
-        layout: "topRight",
-        timeout: 3000
-    }).show();
-}
-
 function formatDate() {
     let now = new Date();
     months = 'янв,фев,мар,апр,мая,июн,июл,авг,сен,окт,дек'.split(',');

@@ -246,16 +246,6 @@
             + now.getHours() + ":" + (now.getUTCMinutes()<10?'0':'') + now.getUTCMinutes();
     }
 
-    function failNoty(msg) {
-        new Noty({
-            theme: 'relax',
-            text: "<span class='fa fa-lg fa-exclamation-circle'></span> &nbsp;"+msg,
-            type: 'error',
-            layout: "topRight",
-            timeout: 3000
-        }).show();
-    }
-
     function addDescription(id, content) {
         $('.id_user').each(function(index, el) {
             if ($(el).text() == id) {

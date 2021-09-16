@@ -67,7 +67,7 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public void createUser(UserRegisterDto newUser) {
-        if (!newUser.getPassword().equals(newUser.getConfirmPassword()))
+        if (!newUser.getUserPassword().equals(newUser.getConfirmPassword()))
             throw new ErrorCheckRequestException("Пароли не совпадают!");
 
         User user = UserUtil.createNewFromTo(newUser);
@@ -79,11 +79,11 @@ public class UserServiceImpl implements UserService {
         User currentUser = repository.findByEmail(user.getEmail()).orElse(null);
 
         if (Objects.isNull(currentUser)) {
-            user.setPassword(UserUtil.prepareToPassword(newUser.getPassword(), passwordEncoder));
+            user.setPassword(UserUtil.prepareToPassword(newUser.getUserPassword(), passwordEncoder));
             user.setCountry(country);
             user.setCity(city);
             repository.save(user);
-            mailSender.sendEmail(EmailMessageUtil.getRegisterMail(user, confirmTokenService.newToken(user, 1)));
+//            mailSender.sendEmail(EmailMessageUtil.getRegisterMail(user, confirmTokenService.newToken(user, 1)));
         } else {
             throw new ErrorCheckRequestException("Ошибка создания пользователя!");
         }
