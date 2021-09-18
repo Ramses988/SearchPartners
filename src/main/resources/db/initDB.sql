@@ -66,6 +66,7 @@ CREATE TABLE persistent_logins (
     token           VARCHAR(64)                NOT NULL,
     last_used       TIMESTAMP                  NOT NULL
 );
+CREATE UNIQUE INDEX persistent_unique_token_idx ON persistent_logins (token);
 
 CREATE TABLE user_roles
 (
@@ -91,6 +92,8 @@ CREATE TABLE posts
     FOREIGN KEY (city_id) REFERENCES cities (id),
     FOREIGN KEY (country_id) REFERENCES countries (id)
 );
+CREATE INDEX posts_user_id_idx ON posts (user_id);
+CREATE INDEX posts_active_idx ON posts (active);
 
 CREATE TABLE comments
 (
@@ -102,6 +105,8 @@ CREATE TABLE comments
     FOREIGN KEY (post_id) REFERENCES posts (id),
     FOREIGN KEY (user_id) REFERENCES users (id)
 );
+CREATE INDEX comments_user_id_idx ON comments (user_id);
+CREATE INDEX comments_post_id_idx ON comments (post_id);
 
 CREATE TABLE internal_comments
 (
@@ -113,6 +118,8 @@ CREATE TABLE internal_comments
     FOREIGN KEY (comment_id) REFERENCES comments (id),
     FOREIGN KEY (user_id) REFERENCES users (id)
 );
+CREATE INDEX internal_comments_comment_id_idx ON internal_comments (comment_id);
+CREATE INDEX internal_comments_user_id_idx ON internal_comments (user_id);
 
 
 CREATE TABLE chat_room
@@ -125,6 +132,9 @@ CREATE TABLE chat_room
     user_read       INTEGER DEFAULT 0     NOT NULL
 );
 CREATE UNIQUE INDEX chat_room_unique_chat_id_idx ON chat_room (chat_id);
+CREATE INDEX chat_room_sender_id_idx ON chat_room (sender_id);
+CREATE INDEX chat_room_recipient_id_idx ON chat_room (recipient_id);
+CREATE INDEX chat_room_user_read_idx ON chat_room (user_read);
 
 CREATE TABLE chat_messages
 (
@@ -136,3 +146,6 @@ CREATE TABLE chat_messages
     date            TIMESTAMP             NOT NULL,
     FOREIGN KEY (chat_id) REFERENCES chat_room (id)
 );
+CREATE INDEX chat_messages_chat_id_idx ON chat_messages (chat_id);
+CREATE INDEX chat_messages_sender_id_idx ON chat_messages (sender_id);
+CREATE INDEX chat_messages_recipient_id_idx ON chat_messages (recipient_id);
