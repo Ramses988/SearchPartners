@@ -6,7 +6,7 @@
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:400%7CUbuntu:300,400,500,600,700">
 </head>
 <body>
-<div th:replace="~{fragments/menu :: menu}"></div>
+<div th:replace="~{fragments/menu :: menu('manage')}"></div>
 <div th:replace="~{fragments/title :: title(${post.id > 0} ? 'Редактировать пост' : 'Новая запись')}"></div>
 
 <section class="section section-md">

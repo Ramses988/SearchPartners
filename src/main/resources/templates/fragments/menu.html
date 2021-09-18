@@ -1,4 +1,4 @@
-<th:block xmlns:th="http://www.thymeleaf.org" th:fragment="menu" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<th:block xmlns:th="http://www.thymeleaf.org" th:fragment="menu(selest)" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <div class="page animated">
         <!-- Page Header-->
         <header class="section page-header">
@@ -13,7 +13,7 @@
                                 <button class="rd-navbar-toggle toggle-original" data-rd-navbar-toggle=".rd-navbar-nav-wrap"><span></span></button>
                                 <!-- RD Navbar Brand-->
                                 <div class="rd-navbar-brand">
-                                    <!--Brand--><a class="brand" href="index.html">
+                                    <!--Brand--><a class="brand" href="/">
                                     <img class="brand-logo-dark" src="/images/logo-default-286x52.png" alt="" width="143" height="26">
                                     <img class="brand-logo-light" src="/images/logo-inverse-286x52.png" alt="" width="143" height="26"></a>
                                 </div>
@@ -22,18 +22,18 @@
                                 <div class="rd-navbar-nav-wrap toggle-original-elements">
                                     <ul class="rd-navbar-nav">
                                         <li class="rd-nav-item rd-navbar--has-dropdown">
-                                            <a class="rd-nav-link" href="#">Главная</a>
+                                            <a class="rd-nav-link" href="/">Главная</a>
                                         </li>
-                                        <li class="rd-nav-item rd-navbar--has-megamenu rd-navbar-submenu">
+                                        <li class="rd-nav-item rd-navbar--has-megamenu rd-navbar-submenu" th:classappend="${selest=='business'} ? active : ''">
                                             <a class="rd-nav-link full-click" href="#">Бизнес</a>
                                             <ul class="rd-menu rd-navbar-megamenu rd-navbar-open-right">
                                                 <li class="rd-megamenu-item">
-                                                    <h6 class="rd-megamenu-title"><a href="pages-1.html">Поиск партнеров</a></h6>
+                                                    <h6 class="rd-megamenu-title"><a href="/post">Поиск партнеров</a></h6>
                                                     <ul class="rd-megamenu-list">
-                                                        <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="about-us.html">Москва</a></li>
-                                                        <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="contact-us.html">Санкт-Петербург</a></li>
-                                                        <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="faq.html">Новосибирск</a></li>
-                                                        <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="pricing-tables.html">Другие города</a></li>
+                                                        <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="/posts/Russia/Moscow">Москва</a></li>
+                                                        <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="/posts/Russia/StPetersburg">Санкт-Петербург</a></li>
+                                                        <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="/posts/Russia/Novosibirsk">Новосибирск</a></li>
+                                                        <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="/posts">Другие города</a></li>
                                                     </ul>
                                                 </li>
                                                 <li class="rd-megamenu-item">
@@ -56,18 +56,18 @@
                                                 </li>
                                             </ul>
                                         </li>
-                                        <li class="rd-nav-item rd-navbar--has-dropdown rd-navbar-submenu">
+                                        <li class="rd-nav-item rd-navbar--has-dropdown rd-navbar-submenu" th:classappend="${selest=='manage'} ? active : ''">
                                             <a class="rd-nav-link full-click" href="#">Объявления</a>
                                             <ul class="rd-menu rd-navbar-dropdown">
-                                                <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="#">Добавить</a></li>
-                                                <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="#">Управление</a></li>
+                                                <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="/manage/post/add">Добавить</a></li>
+                                                <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="/manage/post/list">Управление</a></li>
                                             </ul>
                                         </li>
-                                        <li class="rd-nav-item rd-navbar--has-dropdown">
+                                        <li class="rd-nav-item rd-navbar--has-dropdown" th:classappend="${selest=='faq'} ? active : ''">
                                             <a class="rd-nav-link" href="#">FAQ</a>
                                         </li>
-                                        <li class="rd-nav-item active rd-navbar--has-dropdown">
-                                            <a class="rd-nav-link" href="#">Контакты</a>
+                                        <li class="rd-nav-item rd-navbar--has-dropdown" th:classappend="${selest=='contact'} ? active : ''">
+                                            <a class="rd-nav-link" href="/contact">Контакты</a>
                                         </li>
                                     </ul>
                                 </div>
