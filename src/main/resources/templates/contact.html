@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html class="wide desktop landscape rd-navbar-static-linked" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Форма обратной связи</title>
+    <div th:replace="~{fragments/links :: links1}"></div>
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:400%7CUbuntu:300,400,500,600,700">
+</head>
+<body>
+<div th:replace="~{fragments/menu :: menu('contact')}"></div>
+<div th:replace="~{fragments/title :: title('Форма обратной связи')}"></div>
+
+<section class="section section-md text-center">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-left">
+                <h4>Благодаря вашим отзывам мы улучшаем качество нашей работы!</h4>
+                <p>Мы будем рады ответить на вопросы и получить обратную связь о нашей работе. <br />Вы можете задать вопрос или описать проблему.</p>
+                <!-- RD Mailform-->
+                <form class="rd-mailform form-lg" id="contactForm">
+                    <div class="row row-30">
+                        <div class="col-lg-4">
+                            <div class="form-wrap">
+                                <input class="form-input form-control-has-validation required" id="contact-name" type="text" name="name" placeholder="Введите имя">
+                                <span class="form-validation validation-name"></span>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-wrap">
+                                <input class="form-input form-control-has-validation required email" id="contact-email" type="email" name="email" placeholder="Введите email">
+                                <span class="form-validation validation-name"></span>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-wrap has-error">
+                                <textarea class="form-input form-control-has-validation required" id="contact-message" name="message" placeholder="Напишите вопрос"></textarea>
+                                <span class="form-validation validation-name"></span>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <button class="button button-primary" id="btnContactSend" type="button">Отправить</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div th:replace="~{fragments/footer :: footer}"></div>
+<script src="/js/script-contact.js"></script>
+</body>
+</html>

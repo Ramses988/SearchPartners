@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head></head>
+<body>
+<div>
+    <h3>Получен запрос из формы обратной связи</h3>
+    <p th:text="${'Имя клиента: ' + name}"></p>
+    <p th:text="${'E-mail клиента: ' + email}"></p>
+    <p>Текст:</p>
+    <p th:text="${message}"></p>
+</div>
+</body>
+</html>

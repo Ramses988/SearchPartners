@@ -2,6 +2,7 @@ package com.search_partners.service.interfaces;
 
 import com.search_partners.model.User;
 import com.search_partners.to.ChangePasswordDto;
+import com.search_partners.to.ContactDto;
 import com.search_partners.to.UserProfileDto;
 import com.search_partners.to.UserRegisterDto;
 import com.search_partners.util.exception.ErrorNotFoundPageException;
@@ -23,6 +24,8 @@ public interface UserService extends UserDetailsService {
     void resetPasswordEmail(String email);
 
     PasswordEncoder getPasswordEncoder();
+
+    void sendMessageFromContact(ContactDto contact);
 
     void checkToken(String token) throws ErrorNotFoundPageException;
 

@@ -11,6 +11,7 @@ import com.search_partners.service.interfaces.CountryAndCityService;
 import com.search_partners.service.interfaces.MailSenderService;
 import com.search_partners.service.interfaces.UserService;
 import com.search_partners.to.ChangePasswordDto;
+import com.search_partners.to.ContactDto;
 import com.search_partners.to.UserProfileDto;
 import com.search_partners.to.UserRegisterDto;
 import com.search_partners.util.EmailMessageUtil;
@@ -156,6 +157,11 @@ public class UserServiceImpl implements UserService {
         if (Objects.nonNull(user)) {
             mailSender.sendEmail(EmailMessageUtil.getResetPasswordMail(user, confirmTokenService.newToken(user, 2)));
         }
+    }
+
+    @Override
+    public void sendMessageFromContact(ContactDto contact) {
+        mailSender.sendEmail(EmailMessageUtil.getMailFromContact(contact));
     }
 
     @Override

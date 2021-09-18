@@ -1,6 +1,7 @@
 package com.search_partners.util;
 
 import com.search_partners.model.User;
+import com.search_partners.to.ContactDto;
 import com.search_partners.to.EmailMessage;
 
 import java.util.HashMap;
@@ -17,6 +18,19 @@ public class EmailMessageUtil {
 
     public static EmailMessage getResetPasswordMail(User user, String token) {
         return generateMail(user, token, "Сброс пароля", "reset-password");
+    }
+
+    public static EmailMessage getMailFromContact(ContactDto contact) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("name", contact.getName());
+        params.put("email", contact.getEmail());
+        params.put("message", contact.getMessage());
+        return EmailMessage.builder()
+                .to("go-todeal@yandex.ru")
+                .subject("Пришло новое сообщение с формы обратной связи")
+                .templateLocation("feedback")
+                .context(params)
+                .build();
     }
 
     private static EmailMessage generateMail(User user, String token, String subject, String nameTemplate) {
