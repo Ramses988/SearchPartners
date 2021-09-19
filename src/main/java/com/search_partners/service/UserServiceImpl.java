@@ -84,7 +84,7 @@ public class UserServiceImpl implements UserService {
             user.setCountry(country);
             user.setCity(city);
             repository.save(user);
-//            mailSender.sendEmail(EmailMessageUtil.getRegisterMail(user, confirmTokenService.newToken(user, 1)));
+            mailSender.sendEmail(EmailMessageUtil.getRegisterMail(user, confirmTokenService.newToken(user, 1)));
         } else {
             throw new ErrorCheckRequestException("Ошибка создания пользователя!");
         }
