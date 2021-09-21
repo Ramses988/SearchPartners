@@ -15,6 +15,8 @@ public interface ChatService {
 
     List<User> getUsers(Long id);
 
+    Long getUserActive(Long selectId, Long id, List<User> users);
+
     boolean getNewLetter(Long id);
 
 }

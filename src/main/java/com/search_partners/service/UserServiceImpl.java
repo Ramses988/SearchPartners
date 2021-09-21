@@ -167,7 +167,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getUser(long id) {
         User user = repository.findById(id).orElse(null);
-        //TODO: check if not found
+        if (Objects.isNull(user))
+            throw new ErrorNotFoundPageException("Error set user active: Page Not Found - chat user id");
         return user;
     }
 

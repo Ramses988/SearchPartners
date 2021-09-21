@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width height=device-height initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <!-- <link rel="icon" href="images/favicon.ico" type="image/x-icon"> -->
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="/css/style.css">
     <style>
         html, body, .page, section, .container, #container-messages, #message-left, #message-right {
             height: 100% !important;
@@ -62,8 +62,8 @@
                             <!-- RD Navbar Brand-->
                             <div class="rd-navbar-brand">
                                 <!--Brand--><a class="brand" href="/">
-                                <img class="brand-logo-dark" src="images/logo-default-286x52.png" alt="" width="143" height="26">
-                                <img class="brand-logo-light" src="images/logo-inverse-286x52.png" alt="" width="143" height="26"></a>
+                                <img class="brand-logo-dark" src="/images/logo-default-286x52.png" alt="" width="143" height="26">
+                                <img class="brand-logo-light" src="/images/logo-inverse-286x52.png" alt="" width="143" height="26"></a>
                             </div>
                         </div>
                         <div class="rd-navbar-main-element">
@@ -189,13 +189,13 @@
             <div id="container-messages">
                 <p id="chatMail" style="display: none" sec:authentication="principal.username"></p>
                 <p id="chatId" style="display: none" sec:authentication="principal.id"></p>
-                <p id="activeId" style="display: none"></p>
+                <p id="activeId" style="display: none" th:text="${activeId}"></p>
                 <div id="message-left" class="mobile-users active">
                     <div id="users-search">
                         <input type="search" placeholder="Поиск пользователя" />
                     </div>
                     <div id="users-list">
-                        <article th:each="user : ${users}" class="message-light click-user">
+                        <article th:each="user : ${users}" class="message-light click-user" th:classappend="${user.id == activeId} ? 'selected-user' : ''">
                             <figure class="company-light-figure">
                                 <div th:attr="class=${user.read ? 'comment-avatar new-message-border' : 'comment-avatar'}"
                                      th:style="'background-color:'+${user.color}">
@@ -366,6 +366,16 @@
         removeNewMessage(id.text());
     });
 
+    function initialActiveUser() {
+        let id = $('#activeId').text();
+        if (id > 0) {
+            getHistory(id);
+            removeNewMessage(id);
+        }
+    }
+
+    initialActiveUser();
+
     $('#sendBtn').click(function () {
         const message = {
             content: $('#content-text').val(),
@@ -373,7 +383,7 @@
                 id: $('#activeId').text()
             }
         };
-        if (message && stompClient && $('#activeId').text()) {
+        if (message && stompClient && $('#activeId').text() > 0) {
             stompClient.send('/app/messages', {}, JSON.stringify(message));
             $('#content-text').val('');
             addMessageInChat(message);

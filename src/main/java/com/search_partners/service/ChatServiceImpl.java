@@ -7,7 +7,7 @@ import com.search_partners.repository.ChatMessageRepository;
 import com.search_partners.repository.ChatRoomRepository;
 import com.search_partners.service.interfaces.ChatService;
 import com.search_partners.service.interfaces.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -16,18 +16,12 @@ import java.util.List;
 import java.util.Objects;
 
 @Service
+@AllArgsConstructor
 public class ChatServiceImpl implements ChatService {
 
     private final UserService userService;
     private final ChatMessageRepository messageRepository;
     private final ChatRoomRepository roomRepository;
-
-    @Autowired
-    public ChatServiceImpl(UserService userService, ChatMessageRepository messageRepository, ChatRoomRepository roomRepository) {
-        this.userService = userService;
-        this.messageRepository = messageRepository;
-        this.roomRepository = roomRepository;
-    }
 
     @Override
     public List<User> getUsers(Long id) {
@@ -37,6 +31,17 @@ public class ChatServiceImpl implements ChatService {
             users.add(checkUser(room, id));
         }
         return users;
+    }
+
+    @Override
+    public Long getUserActive(Long selectId, Long id, List<User> users) {
+        User user = userService.getUser(selectId);
+        String chatId = getIdChat(selectId, id);
+        ChatRoom room = roomRepository.findByChatId(chatId).orElse(null);
+        if (Objects.isNull(room)) {
+            users.add(user);
+        }
+        return user.getId();
     }
 
     private User checkUser(ChatRoom room, Long id) {
@@ -103,7 +108,7 @@ public class ChatServiceImpl implements ChatService {
     }
 
     private ChatRoom getChatRoom(ChatMessage message) {
-        String id = getIdChat(message.getRecipientId().getId(), message.getSenderId().getId() );
+        String id = getIdChat(message.getRecipientId().getId(), message.getSenderId().getId());
         ChatRoom room = roomRepository.findByChatId(id).orElse(null);
         if (Objects.nonNull(room)) {
             return room;

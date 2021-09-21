@@ -17,7 +17,8 @@
                         <div class="post-creative-meta-inner">
                             <div class="post-creative-author">
                                 <div class="avatar" th:style="'background-color:'+${post.user.color}">
-                                    <span th:text="${post.user.initial}"></span></div>
+                                    <span th:text="${post.user.initial}"></span>
+                                <span style="display: none" id="userIdLK" th:text="${post.user.id}"></span></div>
                                 <p>
                                     от&nbsp;<a href="#">[[${post.user.name}]]</a></p>
                             </div>
@@ -50,6 +51,8 @@
                             </div>
                         </div>
                     </div>
+                    <div class="button button-sm button-icon button-icon-left button-default-outline" id="sendToLK">
+                        <span class="icon mdi mdi-file-document-edit-outline"></span>Написать в личку</div>
                 </article>
                 <div class="section-sm section-bottom-0">
                     <p class="blog-layout-title text-center" th:text="${'Комментарии ' + post.comments}"></p>

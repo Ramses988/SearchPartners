@@ -48,6 +48,10 @@ function addCommentInner(data) {
     }
 }
 
+$('#sendToLK').click(function () {
+    window.location.replace("/chat/" + $('#userIdLK').text());
+});
+
 $('#btn-addCommit').click(function () {
     $.ajax({
         type: 'POST',
