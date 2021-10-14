@@ -174,7 +174,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public AuthorizedUser loadUserByUsername(String email) throws UsernameNotFoundException {
-        User user = repository.findByEmail(email.toLowerCase()).orElse(null);
+        User user = repository.findByEmail(email.toLowerCase().trim()).orElse(null);
         //TODO: check if not found
 
         return new AuthorizedUser(user);
