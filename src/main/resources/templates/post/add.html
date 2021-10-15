@@ -1,19 +1,20 @@
 <!DOCTYPE html>
 <html class="wide desktop landscape rd-navbar-static-linked" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title th:text="${post.id > 0} ? 'Редактировать пост' : 'Новая запись'"></title>
+    <title th:text="${post.id > 0} ? 'Редактировать пост' : 'Добавить новую запись'"></title>
+    <meta name="description" content="Добавить новую запись">
     <div th:replace="~{fragments/links :: links1}"></div>
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:400%7CUbuntu:300,400,500,600,700">
 </head>
 <body>
 <div th:replace="~{fragments/menu :: menu('manage')}"></div>
-<div th:replace="~{fragments/title :: title(${post.id > 0} ? 'Редактировать пост' : 'Новая запись')}"></div>
+<div th:replace="~{fragments/title :: title(${post.id > 0} ? 'Редактировать пост' : 'Добавить новую запись')}"></div>
 
 <section class="section section-md">
     <div class="container">
         <form id="addPostForm">
             <div class="block-form">
-                <h4 th:text="${post.id > 0} ? 'Редактировать пост' : 'Добавить новую запись'"></h4>
+                <h4 th:text="${post.id > 0} ? 'Редактировать пост' : 'Новая запись'"></h4>
                 <hr>
                 <div class="rd-form form-lg">
                     <div class="row row-40">
