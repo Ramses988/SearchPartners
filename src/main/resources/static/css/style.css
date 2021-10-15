@@ -10120,6 +10120,13 @@ html.rd-navbar-fixed-linked .page {
 
 /* Start my code*/
 
+#email-comp {
+    cursor: pointer;
+}
+
+#text-blue {
+    color: #1087eb;
+}
 
 .clw, .clwb {
     color: white !important;

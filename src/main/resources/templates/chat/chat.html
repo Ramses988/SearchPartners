@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width height=device-height initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <!-- <link rel="icon" href="images/favicon.ico" type="image/x-icon"> -->
+    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="/css/style.css">
     <style>
         html, body, .page, section, .container, #container-messages, #message-left, #message-right {
@@ -62,8 +62,8 @@
                             <!-- RD Navbar Brand-->
                             <div class="rd-navbar-brand">
                                 <!--Brand--><a class="brand" href="/">
-                                <img class="brand-logo-dark" src="/images/logo-default-286x52.png" alt="" width="143" height="26">
-                                <img class="brand-logo-light" src="/images/logo-inverse-286x52.png" alt="" width="143" height="26"></a>
+                                <img class="brand-logo-dark" src="/images/logo.png" alt="" width="143" height="26">
+                                <img class="brand-logo-light" src="/images/logo.png" alt="" width="143" height="26"></a>
                             </div>
                         </div>
                         <div class="rd-navbar-main-element">
@@ -72,50 +72,28 @@
                                     <li class="rd-nav-item rd-navbar--has-dropdown">
                                         <a class="rd-nav-link" href="/">Главная</a>
                                     </li>
-                                    <li class="rd-nav-item rd-navbar--has-megamenu rd-navbar-submenu">
-                                        <a class="rd-nav-link full-click" href="#">Бизнес</a>
-                                        <ul class="rd-menu rd-navbar-megamenu rd-navbar-open-right">
-                                            <li class="rd-megamenu-item">
-                                                <h6 class="rd-megamenu-title"><a href="pages-1.html">Поиск партнеров</a></h6>
-                                                <ul class="rd-megamenu-list">
-                                                    <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="about-us.html">Москва</a></li>
-                                                    <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="contact-us.html">Санкт-Петербург</a></li>
-                                                    <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="faq.html">Новосибирск</a></li>
-                                                    <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="pricing-tables.html">Другие города</a></li>
-                                                </ul>
-                                            </li>
-                                            <li class="rd-megamenu-item">
-                                                <h6 class="rd-megamenu-title"><a href="pages-2.html">Поиск инвестора</a></h6>
-                                                <ul class="rd-megamenu-list">
-                                                    <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="about-us.html">Москва</a></li>
-                                                    <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="contact-us.html">Санкт-Петербург</a></li>
-                                                    <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="faq.html">Новосибирск</a></li>
-                                                    <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="pricing-tables.html">Другие города</a></li>
-                                                </ul>
-                                            </li>
-                                            <li class="rd-megamenu-item">
-                                                <h6 class="rd-megamenu-title"><a href="elements.html">Продажа бизнеса</a></h6>
-                                                <ul class="rd-megamenu-list">
-                                                    <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="about-us.html">Москва</a></li>
-                                                    <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="contact-us.html">Санкт-Петербург</a></li>
-                                                    <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="faq.html">Новосибирск</a></li>
-                                                    <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="pricing-tables.html">Другие города</a></li>
-                                                </ul>
-                                            </li>
+                                    <li class="rd-nav-item rd-navbar--has-dropdown rd-navbar-submenu">
+                                        <a class="rd-nav-link full-click" href="/post">Бизнес</a>
+                                        <ul class="rd-menu rd-navbar-dropdown">
+                                            <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="/posts/Russia/any">Россия</a></li>
+                                            <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="/posts/Ukraine/any">Украина</a></li>
+                                            <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="/posts/Belarus/any">Белоруссия</a></li>
+                                            <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="/posts/Kazakhstan/any">Казахстан</a></li>
+                                            <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="/posts/any/any">Все страны</a></li>
                                         </ul>
                                     </li>
                                     <li class="rd-nav-item rd-navbar--has-dropdown rd-navbar-submenu">
-                                        <a class="rd-nav-link full-click" href="#">Объявления</a>
+                                        <a class="rd-nav-link full-click" href="/manage">Объявления</a>
                                         <ul class="rd-menu rd-navbar-dropdown">
                                             <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="/manage/post/add">Добавить</a></li>
                                             <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="/manage/post/list">Управление</a></li>
                                         </ul>
                                     </li>
                                     <li class="rd-nav-item rd-navbar--has-dropdown">
-                                        <a class="rd-nav-link" href="#">FAQ</a>
+                                        <a class="rd-nav-link" href="/faq">FAQ</a>
                                     </li>
-                                    <li class="rd-nav-item active rd-navbar--has-dropdown">
-                                        <a class="rd-nav-link" href="#">Контакты</a>
+                                    <li class="rd-nav-item rd-navbar--has-dropdown">
+                                        <a class="rd-nav-link" href="/contact">Контакты</a>
                                     </li>
                                 </ul>
                             </div>
@@ -130,8 +108,8 @@
                                         <div class="bg-color-white toggle-original-elements" id="rd-navbar-profile-mobile">
                                             <ul class="user-menu">
                                                 <li class="title-menu menu-margin" sec:authentication="principal.username"></li>
-                                                <li class="menu-item-user menu-margin"><a href="#">Сообщения</a></li>
-                                                <li class="menu-item-user menu-margin"><a href="#">Профиль</a></li>
+                                                <li class="menu-item-user menu-margin"><a href="/chat">Сообщения</a></li>
+                                                <li class="menu-item-user menu-margin"><a href="/profile">Профиль</a></li>
                                                 <li class="sep-menu"></li>
                                                 <li class="menu-item-user menu-margin"><a th:href="@{/logout}">Выход</a></li>
                                             </ul>
@@ -141,14 +119,16 @@
                                 <div class="rd-navbar-aside-item">
                                     <div class="mobile-profile">
                                         <button class="button button-xs button-primary button-icon button-icon-left rd-navbar-popup-toggle toggle-original">
-                                            <span class="icon mdi mdi-email"></span>
+                                                <span id="email-mobile" class="icon mdi mdi-email"
+                                                      onclick="window.location.href='/chat'"></span>
                                         </button>
                                     </div>
                                 </div>
                                 <div class="rd-navbar-aside-item">
                                     <ul id="ul-login-block">
                                         <li class="line-sep"></li>
-                                        <li class="icon icon-lgs text-primary mdi mdi-email"></li>
+                                        <li id="email-comp" class="icon icon-lgs text-primary mdi clb mdi-email"
+                                            onclick="window.location.href='/chat'"></li>
                                         <li class="line-sep"></li>
                                         <li>
                                             <figure>
@@ -163,8 +143,8 @@
                                             <div class="bg-color-white toggle-original-elements" id="rd-navbar-profile">
                                                 <ul class="user-menu">
                                                     <li class="title-menu menu-margin" sec:authentication="principal.username"></li>
-                                                    <li class="menu-item-user menu-margin"><a href="#">Сообщения</a></li>
-                                                    <li class="menu-item-user menu-margin"><a href="#">Профиль</a></li>
+                                                    <li class="menu-item-user menu-margin"><a href="/chat">Сообщения</a></li>
+                                                    <li class="menu-item-user menu-margin"><a href="/profile">Профиль</a></li>
                                                     <li class="sep-menu"></li>
                                                     <li class="menu-item-user menu-margin"><a th:href="@{/logout}">Выход</a></li>
                                                 </ul>

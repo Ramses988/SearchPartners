@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html class="wide desktop landscape rd-navbar-static-linked" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
-    <title>Home</title>
+    <title>Начни свой бизнес прямо сейчас</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width height=device-height initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <!-- <link rel="icon" href="images/favicon.ico" type="image/x-icon"> -->
+    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:400%7CUbuntu:300,400,500,600,700">
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
@@ -15,7 +15,11 @@
     <header class="section page-header jumbotron-creative">
         <!-- RD Navbar-->
         <div class="rd-navbar-wrap" style="height: 110px;">
-            <nav class="rd-navbar rd-navbar-classic rd-navbar-original rd-navbar-static" data-layout="rd-navbar-fixed" data-sm-layout="rd-navbar-fixed" data-md-layout="rd-navbar-fixed" data-md-device-layout="rd-navbar-fixed" data-lg-layout="rd-navbar-static" data-lg-device-layout="rd-navbar-fixed" data-xl-layout="rd-navbar-static" data-xl-device-layout="rd-navbar-static" data-xxl-layout="rd-navbar-static" data-xxl-device-layout="rd-navbar-static" data-lg-stick-up-offset="46px" data-xl-stick-up-offset="46px" data-xxl-stick-up-offset="46px" data-lg-stick-up="true" data-xl-stick-up="true" data-xxl-stick-up="true">
+            <nav class="rd-navbar rd-navbar-classic rd-navbar-original rd-navbar-static" data-layout="rd-navbar-fixed" data-sm-layout="rd-navbar-fixed"
+                 data-md-layout="rd-navbar-fixed" data-md-device-layout="rd-navbar-fixed" data-lg-layout="rd-navbar-static" data-lg-device-layout="rd-navbar-fixed"
+                 data-xl-layout="rd-navbar-static" data-xl-device-layout="rd-navbar-static" data-xxl-layout="rd-navbar-static" data-xxl-device-layout="rd-navbar-static"
+                 data-lg-stick-up-offset="46px" data-xl-stick-up-offset="46px" data-xxl-stick-up-offset="46px" data-lg-stick-up="true" data-xl-stick-up="true"
+                 data-xxl-stick-up="true">
                 <div class="rd-navbar-main-outer">
                     <div class="rd-navbar-main">
                         <!-- RD Navbar Panel-->
@@ -26,8 +30,8 @@
                             <div class="rd-navbar-brand">
                                 <!--Brand-->
                                 <a class="brand" href="/">
-                                    <img class="brand-logo-dark" th:src="@{/images/logo-default-286x52.png}" alt="" width="143" height="26">
-                                    <img class="brand-logo-light" th:src="@{/images/logo-inverse-286x52.png}" alt="" width="143" height="26">
+                                    <img class="brand-logo-dark" th:src="@{/images/logo.png}" alt="" width="143" height="26">
+                                    <img class="brand-logo-light" th:src="@{/images/logo.png}" alt="" width="143" height="26">
                                 </a>
                             </div>
                         </div>
@@ -37,51 +41,60 @@
                                     <li class="rd-nav-item rd-navbar--has-dropdown">
                                         <a class="rd-nav-link" href="/">Главная</a>
                                     </li>
-                                    <li class="rd-nav-item rd-navbar--has-megamenu rd-navbar-submenu">
-                                        <a class="rd-nav-link full-click" href="#">Бизнес</a>
-                                        <ul class="rd-menu rd-navbar-megamenu rd-navbar-open-right">
-                                            <li class="rd-megamenu-item">
-                                                <h6 class="rd-megamenu-title"><a href="pages-1.html">Поиск партнеров</a></h6>
-                                                <ul class="rd-megamenu-list">
-                                                    <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="about-us.html">Москва</a></li>
-                                                    <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="contact-us.html">Санкт-Петербург</a></li>
-                                                    <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="faq.html">Новосибирск</a></li>
-                                                    <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="pricing-tables.html">Другие города</a></li>
-                                                </ul>
-                                            </li>
-                                            <li class="rd-megamenu-item">
-                                                <h6 class="rd-megamenu-title"><a href="pages-2.html">Поиск инвестора</a></h6>
-                                                <ul class="rd-megamenu-list">
-                                                    <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="about-us.html">Москва</a></li>
-                                                    <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="contact-us.html">Санкт-Петербург</a></li>
-                                                    <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="faq.html">Новосибирск</a></li>
-                                                    <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="pricing-tables.html">Другие города</a></li>
-                                                </ul>
-                                            </li>
-                                            <li class="rd-megamenu-item">
-                                                <h6 class="rd-megamenu-title"><a href="elements.html">Продажа бизнеса</a></h6>
-                                                <ul class="rd-megamenu-list">
-                                                    <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="about-us.html">Москва</a></li>
-                                                    <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="contact-us.html">Санкт-Петербург</a></li>
-                                                    <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="faq.html">Новосибирск</a></li>
-                                                    <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="pricing-tables.html">Другие города</a></li>
-                                                </ul>
-                                            </li>
+<!--                                    <li class="rd-nav-item rd-navbar&#45;&#45;has-megamenu rd-navbar-submenu">-->
+<!--                                        <a class="rd-nav-link full-click" href="#">Бизнес</a>-->
+<!--                                        <ul class="rd-menu rd-navbar-megamenu rd-navbar-open-right">-->
+<!--                                            <li class="rd-megamenu-item">-->
+<!--                                                <h6 class="rd-megamenu-title"><a href="pages-1.html">Поиск партнеров</a></h6>-->
+<!--                                                <ul class="rd-megamenu-list">-->
+<!--                                                    <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="about-us.html">Москва</a></li>-->
+<!--                                                    <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="contact-us.html">Санкт-Петербург</a></li>-->
+<!--                                                    <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="faq.html">Новосибирск</a></li>-->
+<!--                                                    <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="pricing-tables.html">Другие города</a></li>-->
+<!--                                                </ul>-->
+<!--                                            </li>-->
+<!--                                            <li class="rd-megamenu-item">-->
+<!--                                                <h6 class="rd-megamenu-title"><a href="pages-2.html">Поиск инвестора</a></h6>-->
+<!--                                                <ul class="rd-megamenu-list">-->
+<!--                                                    <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="about-us.html">Москва</a></li>-->
+<!--                                                    <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="contact-us.html">Санкт-Петербург</a></li>-->
+<!--                                                    <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="faq.html">Новосибирск</a></li>-->
+<!--                                                    <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="pricing-tables.html">Другие города</a></li>-->
+<!--                                                </ul>-->
+<!--                                            </li>-->
+<!--                                            <li class="rd-megamenu-item">-->
+<!--                                                <h6 class="rd-megamenu-title"><a href="elements.html">Продажа бизнеса</a></h6>-->
+<!--                                                <ul class="rd-megamenu-list">-->
+<!--                                                    <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="about-us.html">Москва</a></li>-->
+<!--                                                    <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="contact-us.html">Санкт-Петербург</a></li>-->
+<!--                                                    <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="faq.html">Новосибирск</a></li>-->
+<!--                                                    <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="pricing-tables.html">Другие города</a></li>-->
+<!--                                                </ul>-->
+<!--                                            </li>-->
+<!--                                        </ul>-->
+<!--                                    </li>-->
+                                    <li class="rd-nav-item rd-navbar--has-dropdown rd-navbar-submenu">
+                                        <a class="rd-nav-link full-click" href="/post">Бизнес</a>
+                                        <ul class="rd-menu rd-navbar-dropdown">
+                                            <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="/posts/Russia/any">Россия</a></li>
+                                            <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="/posts/Ukraine/any">Украина</a></li>
+                                            <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="/posts/Belarus/any">Белоруссия</a></li>
+                                            <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="/posts/Kazakhstan/any">Казахстан</a></li>
+                                            <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="/posts/any/any">Все страны</a></li>
                                         </ul>
                                     </li>
                                     <li class="rd-nav-item rd-navbar--has-dropdown rd-navbar-submenu">
-                                        <a class="rd-nav-link full-click" href="blog.html">Объявления</a>
+                                        <a class="rd-nav-link full-click" href="/manage">Объявления</a>
                                         <ul class="rd-menu rd-navbar-dropdown">
-                                            <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="/manage/post/add">Добавить</a>
-                                            <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="/manage/post/list">Управление</a>
-                                            </li>
+                                            <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="/manage/post/add">Добавить</a></li>
+                                            <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="/manage/post/list">Управление</a></li>
                                         </ul>
                                     </li>
                                     <li class="rd-nav-item rd-navbar--has-dropdown">
-                                        <a class="rd-nav-link" href="#">FAQ</a>
+                                        <a class="rd-nav-link" href="/faq">FAQ</a>
                                     </li>
                                     <li class="rd-nav-item rd-navbar--has-dropdown">
-                                        <a class="rd-nav-link" href="#">Контакты</a>
+                                        <a class="rd-nav-link" href="/contact">Контакты</a>
                                     </li>
                                 </ul>
                             </div>
@@ -110,15 +123,15 @@
                                             <div class="form-wrap">
                                                 <button class="button button-block button-primary" id="btnCreateUserRegister" type="button">Создать</button>
                                             </div>
-                                            <div class="form-wrap form-wrap-ally">
-                                                <div class="text-decoration-lines rd-navbar-popup-title">
-                                                    <span class="text-decoration-lines-content">Или войдите с помощью других сервисов</span></div>
-                                            </div>
-                                            <div class="form-wrap form-wrap-ally">
-                                                <div class="button-group"><a class="button button-facebook button-icon button-icon-only button-winona" href="#" aria-label="Facebook">
-                                                    <span class="icon mdi mdi mdi-facebook"></span></a><a class="button button-twitter button-icon button-icon-only button-winona" href="#" aria-label="Twitter">
-                                                    <span class="icon mdi mdi-twitter"></span></a><a class="button button-google button-icon button-icon-only button-winona" href="#" aria-label="Google+"><span class="icon mdi mdi-google"></span></a></div>
-                                            </div>
+<!--                                            <div class="form-wrap form-wrap-ally">-->
+<!--                                                <div class="text-decoration-lines rd-navbar-popup-title">-->
+<!--                                                    <span class="text-decoration-lines-content">Или войдите с помощью других сервисов</span></div>-->
+<!--                                            </div>-->
+<!--                                            <div class="form-wrap form-wrap-ally">-->
+<!--                                                <div class="button-group"><a class="button button-facebook button-icon button-icon-only button-winona" href="#" aria-label="Facebook">-->
+<!--                                                    <span class="icon mdi mdi mdi-facebook"></span></a><a class="button button-twitter button-icon button-icon-only button-winona" href="#" aria-label="Twitter">-->
+<!--                                                    <span class="icon mdi mdi-twitter"></span></a><a class="button button-google button-icon button-icon-only button-winona" href="#" aria-label="Google+"><span class="icon mdi mdi-google"></span></a></div>-->
+<!--                                            </div>-->
                                         </form>
                                     </div>
                                 </div>
@@ -152,8 +165,8 @@
                                         <div class="bg-color-white toggle-original-elements" id="rd-navbar-profile-mobile">
                                             <ul class="user-menu">
                                                 <li class="title-menu menu-margin" sec:authentication="principal.username"></li>
-                                                <li class="menu-item-user menu-margin"><a href="#">Сообщения</a></li>
-                                                <li class="menu-item-user menu-margin"><a href="#">Профиль</a></li>
+                                                <li class="menu-item-user menu-margin"><a href="/chat">Сообщения</a></li>
+                                                <li class="menu-item-user menu-margin"><a href="/profile">Профиль</a></li>
                                                 <li class="sep-menu"></li>
                                                 <li class="menu-item-user menu-margin"><a th:href="@{/logout}">Выход</a></li>
                                             </ul>
@@ -163,14 +176,16 @@
                                 <div class="rd-navbar-aside-item">
                                     <div class="mobile-profile">
                                         <button class="button button-xs button-primary button-icon button-icon-left rd-navbar-popup-toggle toggle-original">
-                                            <span id="email-mobile" class="icon mdi mdi-email"></span>
+                                            <span id="email-mobile" class="icon mdi mdi-email"
+                                                  onclick="window.location.href='/chat'"></span>
                                         </button>
                                     </div>
                                 </div>
                                 <div class="rd-navbar-aside-item">
                                     <ul id="ul-login-block">
                                         <li class="line-sep clw"></li>
-                                        <li id="email-comp" class="icon icon-lgs clw text-primary mdi mdi-email"></li>
+                                        <li id="email-comp" class="icon icon-lgs clw text-primary mdi mdi-email"
+                                            onclick="window.location.href='/chat'"></li>
                                         <li class="line-sep clw"></li>
                                         <li>
                                                 <span id="login-name" class="clwb" sec:authentication="principal.name" onselectstart="return false" onmousedown="return false" data-rd-navbar-toggle="#rd-navbar-profile">
@@ -179,8 +194,8 @@
                                             <div class="bg-color-white toggle-original-elements" id="rd-navbar-profile">
                                                 <ul class="user-menu">
                                                     <li class="title-menu menu-margin" sec:authentication="principal.username"></li>
-                                                    <li class="menu-item-user menu-margin"><a href="#">Сообщения</a></li>
-                                                    <li class="menu-item-user menu-margin"><a href="#">Профиль</a></li>
+                                                    <li class="menu-item-user menu-margin"><a href="/chat">Сообщения</a></li>
+                                                    <li class="menu-item-user menu-margin"><a href="/profile">Профиль</a></li>
                                                     <li class="sep-menu"></li>
                                                     <li class="menu-item-user menu-margin"><a th:href="@{/logout}">Выход</a></li>
                                                 </ul>
@@ -200,7 +215,7 @@
                     <h2 class="jumbotron-creative-title">Начни свой бизнес прямо сейчас!</h2>
                     <div class="form-layout-search-outer">
                         <div class="form-wrap form-wrap-icon">
-                            <div class="button button-primary">Создать тему</div>
+                            <a href="/manage/post/add"><div class="button button-primary">Создать тему</div></a>
                         </div>
                     </div>
                     <p class="big text-gray-800">Мы предлагаем большую базу объявлений</p>
@@ -228,7 +243,7 @@
     <!-- Welcome to JobsFactory-->
     <section class="section section-md bg-default text-center">
         <div class="container">
-            <h3>Добро пожаловать на <span class="text-primary">Jobs</span>Factory</h3>
+            <h3>Добро пожаловать на <span id="text-blue">Find</span>Team</h3>
             <p class="text-spacing-05">Это место где Вы сможете найти партнеров или инвестров для свого бизнеса.</p>
             <div class="row row-50 justify-content-center align-items-center text-left">
                 <div class="col-md-10 col-lg-6">
@@ -424,65 +439,65 @@
             </ul>
         </div>
     </section>
-    <!-- Latest Posts-->
-    <section class="section section-md bg-gray-100">
-        <div class="container">
-            <h3 class="text-center">Последние новости</h3>
-            <div class="row row-30 row-xl-70">
-                <div class="col-12 col-lg-4">
-                    <!-- Post Minimal-->
-                    <article class="post-minimal">
-                        <a class="post-minimal-media" href="blog-post.html">
-                            <picture>
-                                <source th:srcset="@{/images/home/new1.webp}" type="image/webp">
-                                <source th:srcset="@{/images/home/new1.jpg}" type="image/jpg">
-                                <img th:src="@{/images/home/new1.jpg}" alt="" width="369" height="253">
-                            </picture>
-                        </a>
-                        <div class="post-minimal-main">
-                            <h5 class="post-minimal-title"><a href="blog-post.html">Мы запустили новый telegram канал (@new_shearch)</a></h5>
-                            <p>Мы запустили новый телеграм каннал, теперь Вы можете получать новые объявления удобным для Вас способом.</p>
-                            <time class="post-minimal-time" datetime="2019">23 Ноября 2020</time>
-                        </div>
-                    </article>
-                </div>
-                <div class="col-12 col-lg-4">
-                    <!-- Post Minimal-->
-                    <article class="post-minimal">
-                        <a class="post-minimal-media" href="blog-post.html">
-                            <picture>
-                                <source th:srcset="@{/images/home/new2.webp}" type="image/webp">
-                                <source th:srcset="@{/images/home/new2.jpg}" type="image/jpg">
-                                <img th:src="@{/images/home/new2.jpg}" alt="" width="369" height="253">
-                            </picture>
-                        </a>
-                        <div class="post-minimal-main">
-                            <h5 class="post-minimal-title"><a href="blog-post.html">Добавлен новый раздел (Продажа бизнеса)</a></h5>
-                            <p>В новом разделе "Продажа бизнеса", теперь Вы можете удобно и быстро продать свой бизнес. </p>
-                            <time class="post-minimal-time" datetime="2019">03 июня 2020</time>
-                        </div>
-                    </article>
-                </div>
-                <div class="col-12 col-lg-4">
-                    <!-- Post Minimal-->
-                    <article class="post-minimal">
-                        <a class="post-minimal-media" href="blog-post.html">
-                            <picture>
-                                <source th:srcset="@{/images/home/new3.webp}" type="image/webp">
-                                <source th:srcset="@{/images/home/new3.jpg}" type="image/jpg">
-                                <img th:src="@{/images/home/new3.jpg}" alt="" width="369" height="253">
-                            </picture>
-                        </a>
-                        <div class="post-minimal-main">
-                            <h5 class="post-minimal-title"><a href="blog-post.html">Делись интересными постами в соцсетях!</a></h5>
-                            <p>На страницах объявлений добавлена возможность быстро и удобно делиться понравившимися объявлениями.</p>
-                            <time class="post-minimal-time" datetime="2019">15 мая 2020</time>
-                        </div>
-                    </article>
-                </div>
-            </div>
-        </div>
-    </section>
+    <!-- Latest News-->
+<!--    <section class="section section-md bg-gray-100">-->
+<!--        <div class="container">-->
+<!--            <h3 class="text-center">Последние новости</h3>-->
+<!--            <div class="row row-30 row-xl-70">-->
+<!--                <div class="col-12 col-lg-4">-->
+<!--                    &lt;!&ndash; Post Minimal&ndash;&gt;-->
+<!--                    <article class="post-minimal">-->
+<!--                        <a class="post-minimal-media" href="blog-post.html">-->
+<!--                            <picture>-->
+<!--                                <source th:srcset="@{/images/home/new1.webp}" type="image/webp">-->
+<!--                                <source th:srcset="@{/images/home/new1.jpg}" type="image/jpg">-->
+<!--                                <img th:src="@{/images/home/new1.jpg}" alt="" width="369" height="253">-->
+<!--                            </picture>-->
+<!--                        </a>-->
+<!--                        <div class="post-minimal-main">-->
+<!--                            <h5 class="post-minimal-title"><a href="blog-post.html">Мы запустили новый telegram канал (@new_shearch)</a></h5>-->
+<!--                            <p>Мы запустили новый телеграм каннал, теперь Вы можете получать новые объявления удобным для Вас способом.</p>-->
+<!--                            <time class="post-minimal-time" datetime="2019">23 Ноября 2020</time>-->
+<!--                        </div>-->
+<!--                    </article>-->
+<!--                </div>-->
+<!--                <div class="col-12 col-lg-4">-->
+<!--                    &lt;!&ndash; Post Minimal&ndash;&gt;-->
+<!--                    <article class="post-minimal">-->
+<!--                        <a class="post-minimal-media" href="blog-post.html">-->
+<!--                            <picture>-->
+<!--                                <source th:srcset="@{/images/home/new2.webp}" type="image/webp">-->
+<!--                                <source th:srcset="@{/images/home/new2.jpg}" type="image/jpg">-->
+<!--                                <img th:src="@{/images/home/new2.jpg}" alt="" width="369" height="253">-->
+<!--                            </picture>-->
+<!--                        </a>-->
+<!--                        <div class="post-minimal-main">-->
+<!--                            <h5 class="post-minimal-title"><a href="blog-post.html">Добавлен новый раздел (Продажа бизнеса)</a></h5>-->
+<!--                            <p>В новом разделе "Продажа бизнеса", теперь Вы можете удобно и быстро продать свой бизнес. </p>-->
+<!--                            <time class="post-minimal-time" datetime="2019">03 июня 2020</time>-->
+<!--                        </div>-->
+<!--                    </article>-->
+<!--                </div>-->
+<!--                <div class="col-12 col-lg-4">-->
+<!--                    &lt;!&ndash; Post Minimal&ndash;&gt;-->
+<!--                    <article class="post-minimal">-->
+<!--                        <a class="post-minimal-media" href="blog-post.html">-->
+<!--                            <picture>-->
+<!--                                <source th:srcset="@{/images/home/new3.webp}" type="image/webp">-->
+<!--                                <source th:srcset="@{/images/home/new3.jpg}" type="image/jpg">-->
+<!--                                <img th:src="@{/images/home/new3.jpg}" alt="" width="369" height="253">-->
+<!--                            </picture>-->
+<!--                        </a>-->
+<!--                        <div class="post-minimal-main">-->
+<!--                            <h5 class="post-minimal-title"><a href="blog-post.html">Делись интересными постами в соцсетях!</a></h5>-->
+<!--                            <p>На страницах объявлений добавлена возможность быстро и удобно делиться понравившимися объявлениями.</p>-->
+<!--                            <time class="post-minimal-time" datetime="2019">15 мая 2020</time>-->
+<!--                        </div>-->
+<!--                    </article>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </section>-->
     <!-- Page Footer-->
     <footer class="section footer-creative context-dark">
         <div class="footer-creative-main">
@@ -494,16 +509,15 @@
                         <div class="row row-narrow row-15 item-hidden">
                             <div class="foot-col-6">
                                 <ul class="list-marked-1">
-                                    <li><a href="#">Москва</a></li>
-                                    <li><a href="#">Новосибирск</a></li>
-                                    <li><a href="#">Другие города</a></li>
+                                    <li><a href="/posts/Russia/any">Россия</a></li>
+                                    <li><a href="/posts/Ukraine/any">Украина</a></li>
+                                    <li><a href="/posts/Belarus/any">Белоруссия</a></li>
                                 </ul>
                             </div>
                             <div class="foot-col-6">
                                 <ul class="list-marked-1">
-                                    <li><a href="#">Найти</a></li>
-                                    <li><a href="#">Поиск</a></li>
-                                    <li><a href="#">Контакты</a></li>
+                                    <li><a href="/posts/Kazakhstan/any">Казахстан</a></li>
+                                    <li><a href="/posts/any/any">Все страны</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -511,41 +525,58 @@
                     <div class="footer-block_items footer-block_item2">
                         <p class="footer-creative-title hidden">Последние новости<span class="mdi mdi-chevron-right footer-mdi"></span></p>
                         <div class="footer-creative-divider"></div>
-                        <div class="post-line-group item-hidden">
-                            <!-- Post Line--><a class="post-line" href="blog-post.html">
-                            <time class="post-line-time" datetime="2019"><span class="post-line-time-day">25</span><span class="post-line-time-month">december</span></time>
-                            <p class="post-line-text">Добавлен новый раздел (Поиск инвестора)</p></a>
-                            <!-- Post Line--><a class="post-line" href="blog-post.html">
-                            <time class="post-line-time" datetime="2019"><span class="post-line-time-day">10</span><span class="post-line-time-month">november</span></time>
-                            <p class="post-line-text">Как продать свой бизнес правильно?</p></a>
-                        </div>
+<!--                        <div class="post-line-group item-hidden">-->
+<!--                            <a class="post-line" href="blog-post.html">-->
+<!--                            <time class="post-line-time" datetime="2019"><span class="post-line-time-day">25</span><span class="post-line-time-month">december</span></time>-->
+<!--                            <p class="post-line-text">Добавлен новый раздел (Поиск инвестора)</p></a>-->
+<!--                            <a class="post-line" href="blog-post.html">-->
+<!--                            <time class="post-line-time" datetime="2019"><span class="post-line-time-day">10</span><span class="post-line-time-month">november</span></time>-->
+<!--                            <p class="post-line-text">Как продать свой бизнес правильно?</p></a>-->
+<!--                        </div>-->
                     </div>
                     <div class="footer-block_items footer-block_item3">
-                        <p class="footer-creative-title hidden">Найти инвестора<span class="mdi mdi-chevron-right footer-mdi"></span></p>
+                        <p class="footer-creative-title hidden">Найти партнера<span class="mdi mdi-chevron-right footer-mdi"></span></p>
                         <div class="footer-creative-divider"></div>
                         <div class="row row-narrow row-15 item-hidden">
                             <div class="foot-col-6">
                                 <ul class="list-marked-1">
-                                    <li><a href="#">Москва</a></li>
-                                    <li><a href="#">Новосибирск</a></li>
-                                    <li><a href="#">Другие города</a></li>
+                                    <li><a href="/posts/Russia/any">Россия</a></li>
+                                    <li><a href="/posts/Ukraine/any">Украина</a></li>
+                                    <li><a href="/posts/Belarus/any">Белоруссия</a></li>
                                 </ul>
                             </div>
                             <div class="foot-col-6">
                                 <ul class="list-marked-1">
-                                    <li><a href="#">Найти</a></li>
-                                    <li><a href="#">Поиск</a></li>
-                                    <li><a href="#">Контакты</a></li>
+                                    <li><a href="/posts/Kazakhstan/any">Казахстан</a></li>
+                                    <li><a href="/posts/any/any">Все страны</a></li>
                                 </ul>
                             </div>
                         </div>
+<!--                        <p class="footer-creative-title hidden">Найти инвестора<span class="mdi mdi-chevron-right footer-mdi"></span></p>-->
+<!--                        <div class="footer-creative-divider"></div>-->
+<!--                        <div class="row row-narrow row-15 item-hidden">-->
+<!--                            <div class="foot-col-6">-->
+<!--                                <ul class="list-marked-1">-->
+<!--                                    <li><a href="#">Москва</a></li>-->
+<!--                                    <li><a href="#">Новосибирск</a></li>-->
+<!--                                    <li><a href="#">Другие города</a></li>-->
+<!--                                </ul>-->
+<!--                            </div>-->
+<!--                            <div class="foot-col-6">-->
+<!--                                <ul class="list-marked-1">-->
+<!--                                    <li><a href="#">Найти</a></li>-->
+<!--                                    <li><a href="#">Поиск</a></li>-->
+<!--                                    <li><a href="#">Контакты</a></li>-->
+<!--                                </ul>-->
+<!--                            </div>-->
+<!--                        </div>-->
                     </div>
                 </div>
             </div>
         </div>
         <div class="footer-creative-aside">
             <div class="container">
-                <p class="rights"><span>StartUp Search&nbsp;©&nbsp;2019 Privacy Policy</span></p>
+                <p class="rights"><span>FindTeam&nbsp;©&nbsp;2021 Privacy Policy</span></p>
             </div>
         </div>
     </footer>

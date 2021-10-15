@@ -41,14 +41,14 @@
                     <div class="post-creative-footer">
                         <div class="post-creative-footer-inner">
                             <p>Поделиться</p>
-                            <div>
-                                <ul class="list-inline list-inline-xs">
-                                    <li><a class="icon icon-xxs icon-filled icon-filled-brand icon-circle fa fa-facebook" href="#"></a></li>
-                                    <li><a class="icon icon-xxs icon-filled icon-filled-brand icon-circle fa fa-google-plus" href="#"></a></li>
-                                    <li><a class="icon icon-xxs icon-filled icon-filled-brand icon-circle fa fa-twitter" href="#"></a></li>
-                                    <li><a class="icon icon-xxs icon-filled icon-filled-brand icon-circle fa fa-pinterest-p" href="#"></a></li>
-                                </ul>
-                            </div>
+<!--                            <div>-->
+<!--                                <ul class="list-inline list-inline-xs">-->
+<!--                                    <li><a class="icon icon-xxs icon-filled icon-filled-brand icon-circle fa fa-facebook" href="#"></a></li>-->
+<!--                                    <li><a class="icon icon-xxs icon-filled icon-filled-brand icon-circle fa fa-google-plus" href="#"></a></li>-->
+<!--                                    <li><a class="icon icon-xxs icon-filled icon-filled-brand icon-circle fa fa-twitter" href="#"></a></li>-->
+<!--                                    <li><a class="icon icon-xxs icon-filled icon-filled-brand icon-circle fa fa-pinterest-p" href="#"></a></li>-->
+<!--                                </ul>-->
+<!--                            </div>-->
                         </div>
                     </div>
                     <div class="button button-sm button-icon button-icon-left button-default-outline" id="sendToLK">
@@ -113,7 +113,7 @@
                                     </div>
                                     <div class="comment-footer">
                                         <ul class="comment-list">
-                                            <li> <a class="comment-link" href="#"><span class="icon mdi mdi-thumb-up-outline"></span><span>0</span></a></li>
+                                            <li><span class="icon mdi mdi-thumb-up-outline"></span><span>0</span></li>
                                             <th:block sec:authorize="isAuthenticated()">
                                                 <li>
                                                     <a class="comment-link popup-open" href="#"><span class="icon mdi mdi-comment-outline"></span>
@@ -144,7 +144,7 @@
                                         <div class="comment-text" th:utext="${internal.text}"></div>
                                         <div class="comment-footer">
                                             <ul class="comment-list">
-                                                <li> <a class="comment-link" href="#"><span class="icon mdi mdi-thumb-up-outline"></span><span>0</span></a></li>
+                                                <li><span class="icon mdi mdi-thumb-up-outline"></span><span>0</span></li>
                                                 <th:block sec:authorize="isAuthenticated()">
                                                     <li>
                                                         <a class="comment-link popup-open" href="#"><span class="icon mdi mdi-comment-outline"></span>
@@ -161,32 +161,32 @@
             </div>
             <div class="blog-layout-aside">
                 <div class="blog-layout-aside-item">
-                    <p class="blog-layout-title">Последние посты</p>
-                    <div class="post-light-group">
-                        <!-- Post Light--><a class="post-light" href="blog-post.html">
-                        <div class="post-light-main">
-                            <p class="post-light-title">web программист - ищу партнера / проекты</p>
-                            <time class="post-light-time" datetime="2019">23 Окт. 2020, 12:18</time>
-                        </div></a>
-                        <!-- Post Light--><a class="post-light" href="blog-post.html">
-                        <div class="post-light-main">
-                            <p class="post-light-title">Ищу надежного партнера в интересный проект. Готов инвестировать.</p>
-                            <time class="post-light-time" datetime="2019">19 Окт. 2020, 19:46</time>
-                        </div></a>
-                        <!-- Post Light--><a class="post-light" href="blog-post.html">
-                        <div class="post-light-main">
-                            <p class="post-light-title">Участок под постройку ТЦ</p>
-                            <time class="post-light-time" datetime="2019">25 Окт. 2020, 12:16</time>
-                        </div></a>
-                    </div>
+<!--                    <p class="blog-layout-title">Последние посты</p>-->
+<!--                    <div class="post-light-group">-->
+<!--                        &lt;!&ndash; Post Light&ndash;&gt;<a class="post-light" href="blog-post.html">-->
+<!--                        <div class="post-light-main">-->
+<!--                            <p class="post-light-title">web программист - ищу партнера / проекты</p>-->
+<!--                            <time class="post-light-time" datetime="2019">23 Окт. 2020, 12:18</time>-->
+<!--                        </div></a>-->
+<!--                        &lt;!&ndash; Post Light&ndash;&gt;<a class="post-light" href="blog-post.html">-->
+<!--                        <div class="post-light-main">-->
+<!--                            <p class="post-light-title">Ищу надежного партнера в интересный проект. Готов инвестировать.</p>-->
+<!--                            <time class="post-light-time" datetime="2019">19 Окт. 2020, 19:46</time>-->
+<!--                        </div></a>-->
+<!--                        &lt;!&ndash; Post Light&ndash;&gt;<a class="post-light" href="blog-post.html">-->
+<!--                        <div class="post-light-main">-->
+<!--                            <p class="post-light-title">Участок под постройку ТЦ</p>-->
+<!--                            <time class="post-light-time" datetime="2019">25 Окт. 2020, 12:16</time>-->
+<!--                        </div></a>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="blog-layout-aside-item">-->
+<!--                    <p class="blog-layout-title">Минуточку внимания</p>-->
+<!--                    <div class="post-light-group">-->
+<!--                        <img src="/images/reklama.png" />-->
+<!--                    </div>-->
                 </div>
-                <div class="blog-layout-aside-item">
-                    <p class="blog-layout-title">Минуточку внимания</p>
-                    <div class="post-light-group">
-                        <img src="/images/reklama.png" />
-                    </div>
-                </div>
-            </div>
+           </div>
         </div>
     </div>
 </section>
