@@ -25,6 +25,7 @@ CREATE TABLE cities
     country_id      INTEGER         NOT NULL,
     FOREIGN KEY (country_id) REFERENCES countries (id)
 );
+CREATE UNIQUE INDEX cities_unique_name_en_idx ON cities (name_en);
 
 CREATE TABLE users
 (

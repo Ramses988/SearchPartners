@@ -54,6 +54,19 @@ public class CountryAndCityServiceImpl implements CountryAndCityService {
     }
 
     @Override
+    public String getNameWhereSearch(String nameCountry, String nameCity) {
+        City city = cityRepository.findByNameEn(nameCity).orElse(null);
+        if (Objects.nonNull(city) && !"any".equals(city.getNameEn()))
+            return city.getName();
+
+        Country country = countryRepository.findByNameEn(nameCountry).orElse(null);
+        if (Objects.nonNull(country) && !"any".equals(country.getNameEn()))
+            return country.getName();
+
+        return "";
+    }
+
+    @Override
     public Country getCountry(long id) {
         return countryRepository.findById(id).orElse(null);
     }

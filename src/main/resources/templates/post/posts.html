@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html class="wide desktop landscape rd-navbar-static-linked" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Поиск партнеров по бизнесу</title>
-    <meta name="description" content="Поиск партнера или партнеров по бизнесу, начать совместный бизнес, собрать команду для бизнеса">
-    <meta name="keywords" content="найти партнеров для бизнеса начать совместный бизнес">
+    <title th:text="'Поиск партнеров по бизнесу ' + ${local}"></title>
+    <meta name="description" th:content="'Поиск партнера или партнеров по бизнесу ' + ${local} + ', начать совместный бизнес, собрать команду для бизнеса'">
+    <meta name="keywords" th:content="'найти партнеров для бизнеса ' + ${local} + ' начать совместный бизнес'">
     <div th:replace="~{fragments/links :: links1}"></div>
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:400%7CUbuntu:300,400,500,600,700">
 </head>
 <body>
     <div th:replace="~{fragments/menu :: menu('business')}"></div>
-    <div th:replace="~{fragments/title :: title('Поиск партнеров по бизнесу')}"></div>
+    <div th:replace="~{fragments/title :: title('Поиск партнеров по бизнесу ' + ${local})}"></div>
     <section class="section section-md">
         <div class="container">
             <form class="form-creative-outer">

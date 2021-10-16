@@ -26,7 +26,7 @@ public class EmailMessageUtil {
         params.put("email", contact.getEmail());
         params.put("message", contact.getMessage());
         return EmailMessage.builder()
-                .to("go-todeal@yandex.ru")
+                .to("support@find-team.one")
                 .subject("Пришло новое сообщение с формы обратной связи")
                 .templateLocation("feedback")
                 .context(params)

@@ -19,4 +19,6 @@ public interface CountryAndCityService {
 
     City getCity(long id);
 
+    String getNameWhereSearch(String country, String city);
+
 }
