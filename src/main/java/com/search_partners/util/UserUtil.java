@@ -22,6 +22,33 @@ public class UserUtil extends StdConverter<User, UserDto> {
         colors.put(2, "#ffcc33");
         colors.put(3, "#cc0000");
         colors.put(4, "#00cc00");
+        colors.put(5, "#4285f4");
+        colors.put(6, "#0f9d58");
+        colors.put(7, "#f4b400");
+        colors.put(8, "#db4437");
+        colors.put(9, "#2d3b41");
+        colors.put(10, "#fb6a75");
+        colors.put(11, "#00c7b7");
+        colors.put(12, "#f6bc00");
+        colors.put(13, "#f6d852");
+        colors.put(14, "#8bc34a");
+        colors.put(15, "#ffc107");
+        colors.put(16, "#ff5722");
+        colors.put(17, "#e91e63");
+        colors.put(18, "#259b24");
+        colors.put(19, "#cddc39");
+        colors.put(20, "#9c27b0");
+        colors.put(21, "#ffeb3b");
+        colors.put(22, "#03a9f4");
+        colors.put(23, "#00bcd4");
+        colors.put(24, "#9e9e9e");
+        colors.put(25, "#607d8b");
+        colors.put(26, "#5677fc");
+        colors.put(27, "#009688");
+        colors.put(28, "#795548");
+        colors.put(29, "#8ecae6");
+        colors.put(30, "#219ebc");
+        colors.put(31, "#023047");
     }
 
     public static User createNewFromTo(UserRegisterDto newUser) {

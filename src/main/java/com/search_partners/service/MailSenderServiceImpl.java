@@ -40,11 +40,11 @@ public class MailSenderServiceImpl implements MailSenderService {
 
             mimeMessageHelper.setTo(emailMessage.getTo());
             mimeMessageHelper.setSubject(emailMessage.getSubject());
-            mimeMessageHelper.setFrom("info@find-team.one");
+            mimeMessageHelper.setFrom("info@find-team.one", "FindTeam");
             mimeMessageHelper.setText(text, true);
             emailSender.send(message);
 
-        } catch (MessagingException e) {
+        } catch (Exception e) {
             log.error("Error send to email");
             log.error(e.getLocalizedMessage());
         }
