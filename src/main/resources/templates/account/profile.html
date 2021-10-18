@@ -14,7 +14,7 @@
                 <div class="layout-2-item layout-2-item-main">
                     <!-- Profile Light-->
                     <article class="profile-light">
-                        <img class="profile-light-image" src="/images/no_avatar.gif" alt="" width="100" height="100">
+                        <img class="profile-light-image" th:src="@{/resources/images/no_avatar.gif}" alt="" width="100" height="100">
                         <div class="profile-light-main">
                             <h4 class="profile-light-name" th:text="${user.name}"></h4>
                             <h6 class="profile-light-position" th:text="${user.email}"></h6>
@@ -239,6 +239,6 @@
     </div>
 </section>
 <div th:replace="~{fragments/footer :: footer}"></div>
-<script src="/js/script-profile.js"></script>
+<script th:src="@{/resources/js/script-profile.js}"></script>
 </body>
 </html>

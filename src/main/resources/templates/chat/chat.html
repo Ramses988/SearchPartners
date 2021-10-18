@@ -6,8 +6,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width height=device-height initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <link rel="icon" href="/images/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="icon" th:href="@{/resources/images/favicon.ico}" type="image/x-icon">
+    <link rel="stylesheet" th:href="@{/resources/css/style.css}">
     <style>
         html, body, .page, section, .container, #container-messages, #message-left, #message-right {
             height: 100% !important;
@@ -63,8 +63,8 @@
                             <!-- RD Navbar Brand-->
                             <div class="rd-navbar-brand">
                                 <!--Brand--><a class="brand" href="/">
-                                <img class="brand-logo-dark" src="/images/logo.png" alt="" width="143" height="26">
-                                <img class="brand-logo-light" src="/images/logo.png" alt="" width="143" height="26"></a>
+                                <img class="brand-logo-dark" th:src="@{/resources/images/logo.png}" alt="" width="143" height="26">
+                                <img class="brand-logo-light" th:src="@{/resources/images/logo.png}" alt="" width="143" height="26"></a>
                             </div>
                         </div>
                         <div class="rd-navbar-main-element">
@@ -210,12 +210,12 @@
     </section>
 </div>
 <div class="snackbars" id="form-output-global"></div>
-<script src="/js/jquery-3.4.1.min.js"></script>
-<script src="/js/core.min.js"></script>
-<script src="/js/noty.min.js"></script>
-<script src="/js/script.js"></script>
-<script src="/js/sockjs.min.js"></script>
-<script src="/js/stomp.min.js"></script>
+<script th:src="@{/resources/js/jquery-3.4.1.min.js}"></script>
+<script th:src="@{/resources/js/core.min.js}"></script>
+<script th:src="@{/resources/js/noty.min.js}"></script>
+<script th:src="@{/resources/js/script.js}"></script>
+<script th:src="@{/resources/js/sockjs.min.js}"></script>
+<script th:src="@{/resources/js/stomp.min.js}"></script>
 <script>
     let chatId = '/chat/' + $('#chatMail').text() + '/' + $('#chatId').text();
     let block = document.getElementById("block-messages");
