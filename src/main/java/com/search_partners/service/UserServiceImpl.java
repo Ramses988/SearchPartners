@@ -21,6 +21,7 @@ import com.search_partners.util.exception.ErrorNotFoundPageException;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -38,7 +39,8 @@ public class UserServiceImpl implements UserService {
     private final MailSenderService mailSender;
     private final ConfirmTokenService confirmTokenService;
 
-    private final PasswordEncoder passwordEncoder = NoOpPasswordEncoder.getInstance(); // new BCryptPasswordEncoder();
+    private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+//    private final PasswordEncoder passwordEncoder = NoOpPasswordEncoder.getInstance();
 
     @Override
     public User getUserWithCity(long id) {

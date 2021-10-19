@@ -10632,11 +10632,11 @@ html.rd-navbar-fixed-linked .page {
 .avatar span {
 	font-weight: 500;
 	color: #fff;
-	font-size: 23px;
+	font-size: 20px;
 	margin: 0;
 	position: absolute;
-	top: 41%;
-    left: 52%;
+	top: 50%;
+    left: 50%;
     transform: translate(-50%, -50%) 
 }
 
@@ -10663,8 +10663,8 @@ html.rd-navbar-fixed-linked .page {
     font-size: 25px;
     margin: 0;
     position: absolute;
-    top: 46%;
-    left: 52%;
+    top: 50%;
+    left: 50%;
     transform: translate(-50%, -50%)
 }
 
@@ -10673,8 +10673,8 @@ html.rd-navbar-fixed-linked .page {
     font-size: 15px;
     margin: 0;
     position: absolute;
-    top: 48%;
-    left: 53%;
+    top: 53%;
+    left: 50%;
     transform: translate(-50%, -50%)
 }
 
