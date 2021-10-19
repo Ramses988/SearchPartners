@@ -1,2 +1,29 @@
+User-agent: Yandex
+Disallow: /login
+Disallow: /profile
+Disallow: /register
+Disallow: /chat
+Disallow: /manage
+Disallow: /contact
+Disallow: /feedback
+Disallow: /faq
+Disallow: /reset-password
+Disallow: /confirm-account
+Disallow: /register-success
+
 User-agent: *
-Disallow: /
+Disallow: /login
+Disallow: /profile
+Disallow: /register
+Disallow: /chat
+Disallow: /manage
+Disallow: /contact
+Disallow: /feedback
+Disallow: /faq
+Disallow: /reset-password
+Disallow: /confirm-account
+Disallow: /register-success
+
+Host: https://find-team.one
+
+Sitemap: https://find-team.one/sitemap.xml
