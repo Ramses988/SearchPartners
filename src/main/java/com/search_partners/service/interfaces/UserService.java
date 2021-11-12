@@ -15,6 +15,10 @@ public interface UserService extends UserDetailsService {
 
     User getUser(long id);
 
+    User getUserWithProvider(String email, String provider);
+
+    User saveUser(User user);
+
     void saveUserProfile(UserProfileDto user, long id);
 
     void createUser(UserRegisterDto newUser);

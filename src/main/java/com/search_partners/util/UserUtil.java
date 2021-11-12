@@ -1,9 +1,12 @@
 package com.search_partners.util;
 
 import com.fasterxml.jackson.databind.util.StdConverter;
+import com.search_partners.model.City;
+import com.search_partners.model.Provider;
 import com.search_partners.model.Role;
 import com.search_partners.model.User;
 import com.search_partners.to.UserDto;
+import com.search_partners.to.UserOAuth2;
 import com.search_partners.to.UserRegisterDto;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -52,18 +55,42 @@ public class UserUtil extends StdConverter<User, UserDto> {
     }
 
     public static User createNewFromTo(UserRegisterDto newUser) {
-        String initial = String.valueOf(newUser.getName().trim().charAt(0)).toUpperCase();
-        int color = new SecureRandom().nextInt(colors.size()) + 1;
+        String initial = getInitial(newUser.getName());
         return User.builder()
                 .name(newUser.getName().trim())
                 .date(LocalDateTime.now())
                 .email(newUser.getEmail().toLowerCase().trim())
                 .enabled(false)
                 .initial(initial)
-                .color(colors.get(color))
+                .color(colors.get(getColor()))
                 .gender(newUser.getGender())
+                .provider(Provider.LOCAL.getName())
                 .roles(Set.of(Role.ROLE_USER))
                 .build();
+    }
+
+    public static User createUserFromOAuth2(String email, String password, String provider, PasswordEncoder passwordEncoder) {
+        String initial = getInitial(provider);
+        return User.builder()
+                .name(provider)
+                .date(LocalDateTime.now())
+                .email(email.toLowerCase().trim())
+                .enabled(true)
+                .initial(initial)
+                .gender("U")
+                .password(prepareToPassword(password, passwordEncoder))
+                .color(colors.get(getColor()))
+                .provider(provider)
+                .roles(Set.of(Role.ROLE_USER))
+                .build();
+    }
+
+    private static String getInitial(String name) {
+        return String.valueOf(name.trim().charAt(0)).toUpperCase();
+    }
+
+    private static int getColor() {
+        return new SecureRandom().nextInt(colors.size()) + 1;
     }
 
     public static User getUser(Long id) {

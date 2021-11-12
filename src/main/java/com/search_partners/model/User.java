@@ -18,6 +18,8 @@ import java.util.Set;
 @Table(name="users")
 public class User extends AbstractBaseEntity {
 
+    @Column(name = "user_id")
+    private String userId;
     private String name;
     private LocalDateTime date;
     @Column(name = "real_name")
@@ -29,6 +31,7 @@ public class User extends AbstractBaseEntity {
     private String initial;
     private String color;
     private String gender;
+    private String provider;
     private int busyness;
     private int day;
     private int month;

@@ -11,7 +11,11 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     Optional<User> findByEmail(String email);
 
+    Optional<User> findByUserId(String userId);
+
     Optional<User> findByEmailAndEnabled(String email, boolean enabled);
+
+    Optional<User> findByEmailAndProvider(String email, String provider);
 
     @EntityGraph(attributePaths = "city", type = EntityGraph.EntityGraphType.LOAD)
     @Query("SELECT u FROM User u WHERE u.id=:id")

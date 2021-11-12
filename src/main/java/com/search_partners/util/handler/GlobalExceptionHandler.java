@@ -1,6 +1,7 @@
 package com.search_partners.util.handler;
 
 import com.search_partners.util.exception.ErrorCheckRequestException;
+import com.search_partners.util.exception.ErrorInternalException;
 import com.search_partners.util.exception.ErrorNotFoundPageException;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
@@ -40,6 +41,15 @@ public class GlobalExceptionHandler {
         log.warn(ex.getLocalizedMessage());
         ModelAndView view = new ModelAndView();
         view.setViewName("error/404");
+        return view;
+    }
+
+    @ExceptionHandler(ErrorInternalException.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public ModelAndView handle(ErrorInternalException ex) {
+        log.error(ex.getLocalizedMessage());
+        ModelAndView view = new ModelAndView();
+        view.setViewName("error/500");
         return view;
     }
 

@@ -708,6 +708,10 @@ h6, .h6 {
     content: "\F0544";
 }
 
+.mdi-vk:before {
+    content: "\F0579";
+}
+
 .fa {
     display: inline-block;
     font-family: 'FontAwesome';
@@ -2739,16 +2743,16 @@ hr {
     border-color: #6585b9;
 }
 
-.button-twitter, .button-twitter:focus {
+.button-vk, .button-vk:focus {
     color: #ffffff;
-    background-color: #02bcf3;
-    border-color: #02bcf3;
+    background-color: #1087eb;
+    border-color: #1087eb;
 }
 
-.button-twitter:hover, .button-twitter:active {
+.button-vk:hover, .button-vk:active {
     color: #ffffff;
-    background-color: #21cbfd;
-    border-color: #21cbfd;
+    background-color: #0097eb;
+    border-color: #0097eb;
 }
 
 .button-google, .button-google:focus {

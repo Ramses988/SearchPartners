@@ -93,6 +93,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User getUserWithProvider(String email, String provider) {
+        return repository.findByEmailAndProvider(email, provider).orElse(null);
+    }
+
+    @Override
+    @Transactional
+    public User saveUser(User user) {
+        return repository.save(user);
+    }
+
+    @Override
     @Transactional
     public void changePassword(ChangePasswordDto request, long id) {
         User user = getUser(id);
@@ -175,8 +186,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public AuthorizedUser loadUserByUsername(String email) throws UsernameNotFoundException {
-        User user = repository.findByEmail(email.toLowerCase().trim()).orElse(null);
+    public AuthorizedUser loadUserByUsername(String login) throws UsernameNotFoundException {
+        User user = repository.findByEmail(login.toLowerCase().trim()).orElse(null);
+        if (Objects.isNull(user))
+            user = repository.findByUserId(login).orElse(null);
         //TODO: check if not found
 
         return new AuthorizedUser(user);
@@ -186,4 +199,5 @@ public class UserServiceImpl implements UserService {
     public PasswordEncoder getPasswordEncoder() {
         return passwordEncoder;
     }
+
 }
