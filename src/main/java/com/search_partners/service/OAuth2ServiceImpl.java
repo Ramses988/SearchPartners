@@ -44,6 +44,8 @@ public class OAuth2ServiceImpl implements OAuth2Service {
         if (Objects.isNull(clientResponse) || Objects.isNull(clientResponse.getAccessToken()) || clientResponse.getAccessToken().isEmpty())
             throw new ErrorInternalException("Ошибка получения токена для oauth2 " + provider.getName());
 
+        log.info(">>>>>>>>>>>>>>>>>>>>>>>>>> " + clientResponse);
+
         User user;
         UserOAuth2 userInfo;
 
@@ -54,22 +56,22 @@ public class OAuth2ServiceImpl implements OAuth2Service {
             if (Objects.isNull(userInfo) || Objects.isNull(userInfo.getEmail()) || userInfo.getEmail().isEmpty())
                 throw new ErrorInternalException("Ошибка получения пользователя google oauth2");
 
-            user = getUser(userInfo.getEmail(), clientResponse.getAccessToken(), provider);
+            user = getUser(userInfo.getId(), userInfo.getEmail(), clientResponse.getAccessToken(), provider);
         } else {
-            user = getUser(clientResponse.getEmail(), clientResponse.getAccessToken(), provider);
+            user = getUser(clientResponse.getUserId(), clientResponse.getEmail(), clientResponse.getAccessToken(), provider);
         }
 
-        return new UsernamePasswordAuthenticationToken(user.getEmail(), clientResponse.getAccessToken());
+        return new UsernamePasswordAuthenticationToken(user.getUserId(), clientResponse.getAccessToken());
 
     }
 
-    private User getUser(String email, String password, Provider provider) {
-        User user = service.getUserWithProvider(email.toLowerCase(), provider.getName());
+    private User getUser(String id, String email, String password, Provider provider) {
+        User user = service.getUserWithProvider(id, provider.getName());
 
         if (Objects.nonNull(user))
             user.setPassword(UserUtil.prepareToPassword(password, service.getPasswordEncoder()));
         else{
-            user = UserUtil.createUserFromOAuth2(email, password, provider.getName(), service.getPasswordEncoder());
+            user = UserUtil.createUserFromOAuth2(id, email, password, provider.getName(), service.getPasswordEncoder());
             user.setCountry(countryAndCityService.getCountry(0));
             user.setCity(countryAndCityService.getCity(0));
         }

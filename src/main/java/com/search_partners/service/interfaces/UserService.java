@@ -15,7 +15,7 @@ public interface UserService extends UserDetailsService {
 
     User getUser(long id);
 
-    User getUserWithProvider(String email, String provider);
+    User getUserWithProvider(String id, String provider);
 
     User saveUser(User user);
 

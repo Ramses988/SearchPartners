@@ -14,6 +14,7 @@ import java.security.SecureRandom;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 public class UserUtil extends StdConverter<User, UserDto> {
@@ -69,12 +70,13 @@ public class UserUtil extends StdConverter<User, UserDto> {
                 .build();
     }
 
-    public static User createUserFromOAuth2(String email, String password, String provider, PasswordEncoder passwordEncoder) {
+    public static User createUserFromOAuth2(String id, String email, String password, String provider, PasswordEncoder passwordEncoder) {
         String initial = getInitial(provider);
         return User.builder()
+                .userId(id)
                 .name(provider)
                 .date(LocalDateTime.now())
-                .email(email.toLowerCase().trim())
+                .email((Objects.nonNull(email) ? email.toLowerCase().trim() : null))
                 .enabled(true)
                 .initial(initial)
                 .gender("U")

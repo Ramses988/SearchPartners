@@ -93,8 +93,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getUserWithProvider(String email, String provider) {
-        return repository.findByEmailAndProvider(email, provider).orElse(null);
+    public User getUserWithProvider(String id, String provider) {
+        return repository.findByUserIdAndProvider(id, provider).orElse(null);
     }
 
     @Override

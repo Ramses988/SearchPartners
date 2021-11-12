@@ -34,7 +34,7 @@ CREATE TABLE users
     name         VARCHAR                       NOT NULL,
     date         TIMESTAMP                     NOT NULL,
     real_name    VARCHAR                       NULL,
-    email        VARCHAR                       NOT NULL,
+    email        VARCHAR                       NULL,
     password     VARCHAR                       NOT NULL,
     enabled      BOOLEAN                       NOT NULL,
     initial      VARCHAR(1)                    NOT NULL,

@@ -26,4 +26,7 @@ public class ClientOAuth2Response {
 
     private String email;
 
+    @JsonProperty("user_id")
+    private String userId;
+
 }

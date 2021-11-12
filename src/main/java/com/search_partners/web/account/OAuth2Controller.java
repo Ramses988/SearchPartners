@@ -38,7 +38,7 @@ public class OAuth2Controller {
 
     @GetMapping("/oauth2/provider/vk")
     public String getLinkVK() {
-        return String.format("redirect:https://oauth.vk.com/authorize?client_id=%s&redirect_uri=%s&v=5.74&response_type=code&scope=%s",
+        return String.format("redirect:https://oauth.vk.com/authorize?client_id=%s&redirect_uri=%s&v=6.3&response_type=code&scope=%s",
                 params.getVkId(), params.getVkRedirect(), params.getVkScope());
     }
 

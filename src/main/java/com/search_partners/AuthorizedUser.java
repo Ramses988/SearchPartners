@@ -1,10 +1,12 @@
 package com.search_partners;
 
+import com.search_partners.model.Provider;
 import com.search_partners.model.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.Objects;
 
 public class AuthorizedUser implements UserDetails {
 
@@ -26,6 +28,10 @@ public class AuthorizedUser implements UserDetails {
         return user.getInitial();
     }
 
+    public String getEmail() {
+        return user.getEmail();
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return user.getRoles();
@@ -38,7 +44,9 @@ public class AuthorizedUser implements UserDetails {
 
     @Override
     public String getUsername() {
-        return user.getEmail();
+        if (Provider.LOCAL.getName().equals(user.getProvider()))
+            return user.getEmail();
+        return user.getUserId();
     }
 
     @Override
