@@ -16,6 +16,14 @@ public class OAuth2Params {
     private String googleScope;
     @Value("${oauth2.google.redirect}")
     private String googleRedirect;
+    @Value("${oauth2.facebook.clientId}")
+    private String facebookId;
+    @Value("${oauth2.facebook.clientSecret}")
+    private String facebookSecret;
+    @Value("${oauth2.facebook.scope}")
+    private String facebookScope;
+    @Value("${oauth2.facebook.redirect}")
+    private String facebookRedirect;
     @Value("${oauth2.vk.clientId}")
     private String vkId;
     @Value("${oauth2.vk.clientSecret}")

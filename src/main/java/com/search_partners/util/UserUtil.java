@@ -70,13 +70,14 @@ public class UserUtil extends StdConverter<User, UserDto> {
                 .build();
     }
 
-    public static User createUserFromOAuth2(String id, String email, String password, String provider, PasswordEncoder passwordEncoder) {
+    public static User createUserFromOAuth2(UserOAuth2 userInfo, String password, String provider, PasswordEncoder passwordEncoder) {
         String initial = getInitial(provider);
         return User.builder()
-                .userId(id)
+                .userId(userInfo.getId())
                 .name(provider)
+                .realName(((Objects.nonNull(userInfo.getFirstName()) ? userInfo.getFirstName() : null)))
                 .date(LocalDateTime.now())
-                .email((Objects.nonNull(email) ? email.toLowerCase().trim() : null))
+                .email((Objects.nonNull(userInfo.getEmail()) ? userInfo.getEmail().toLowerCase().trim() : null))
                 .enabled(true)
                 .initial(initial)
                 .gender("U")

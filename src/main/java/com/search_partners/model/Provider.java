@@ -4,6 +4,7 @@ public enum Provider {
 
     LOCAL("local"),
     GOOGLE("google"),
+    FACEBOOK("facebook"),
     VK("vk");
 
     private final String name;

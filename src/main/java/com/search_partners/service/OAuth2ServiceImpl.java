@@ -41,37 +41,57 @@ public class OAuth2ServiceImpl implements OAuth2Service {
 
         ClientOAuth2Response clientResponse = getToken(code, provider);
 
+        log.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> " + clientResponse);
+
         if (Objects.isNull(clientResponse) || Objects.isNull(clientResponse.getAccessToken()) || clientResponse.getAccessToken().isEmpty())
             throw new ErrorInternalException("Ошибка получения токена для oauth2 " + provider.getName());
 
-        log.info(">>>>>>>>>>>>>>>>>>>>>>>>>> " + clientResponse);
+        User user = getInfoUser(clientResponse, provider);
 
-        User user;
-        UserOAuth2 userInfo;
+        if (Objects.nonNull(user)) {
+            return new UsernamePasswordAuthenticationToken(user.getUserId(), clientResponse.getAccessToken());
+        }
+
+        throw new ErrorInternalException("Ошибка получения пользователя google oauth2");
+
+    }
+
+    private User getInfoUser(ClientOAuth2Response clientResponse, Provider provider) {
+        UserOAuth2 userInfo = null;
 
         if (Provider.GOOGLE.getName().equals(provider.getName())) {
             userInfo = restTemplate.getForObject("https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token={access_token}",
                     UserOAuth2.class, clientResponse.getAccessToken());
-
-            if (Objects.isNull(userInfo) || Objects.isNull(userInfo.getEmail()) || userInfo.getEmail().isEmpty())
-                throw new ErrorInternalException("Ошибка получения пользователя google oauth2");
-
-            user = getUser(userInfo.getId(), userInfo.getEmail(), clientResponse.getAccessToken(), provider);
-        } else {
-            user = getUser(clientResponse.getUserId(), clientResponse.getEmail(), clientResponse.getAccessToken(), provider);
+            if (Objects.nonNull(userInfo))
+                userInfo.setFirstName(userInfo.getName());
         }
 
-        return new UsernamePasswordAuthenticationToken(user.getUserId(), clientResponse.getAccessToken());
+        if (Provider.FACEBOOK.getName().equals(provider.getName())) {
+            userInfo = restTemplate.getForObject("https://graph.facebook.com/me?access_token={access_token}&fields=id,email,first_name,last_name",
+                    UserOAuth2.class, clientResponse.getAccessToken());
+            if (Objects.nonNull(userInfo) && Objects.nonNull(userInfo.getLastName()))
+                userInfo.setFirstName(userInfo.getFirstName() + " " + userInfo.getLastName());
+        }
 
+        if (Provider.VK.getName().equals(provider.getName())) {
+            String infoUser = restTemplate.getForObject("https://api.vk.com/method/users.get?uids={uids}&fields=first_name&v=6.3&access_token={access_token}",
+                    String.class, clientResponse.getUserId(), clientResponse.getAccessToken());
+            log.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> " + userInfo);
+        }
+
+        if (Objects.isNull(userInfo) || Objects.isNull(userInfo.getId()) || userInfo.getId().isEmpty())
+            throw new ErrorInternalException("Ошибка получения пользователя oauth2 " + provider.getName());
+
+        return getUser(userInfo, clientResponse.getAccessToken(), provider);
     }
 
-    private User getUser(String id, String email, String password, Provider provider) {
-        User user = service.getUserWithProvider(id, provider.getName());
+    private User getUser(UserOAuth2 userInfo, String password, Provider provider) {
+        User user = service.getUserWithProvider(userInfo.getId(), provider.getName());
 
         if (Objects.nonNull(user))
             user.setPassword(UserUtil.prepareToPassword(password, service.getPasswordEncoder()));
         else{
-            user = UserUtil.createUserFromOAuth2(id, email, password, provider.getName(), service.getPasswordEncoder());
+            user = UserUtil.createUserFromOAuth2(userInfo, password, provider.getName(), service.getPasswordEncoder());
             user.setCountry(countryAndCityService.getCountry(0));
             user.setCity(countryAndCityService.getCity(0));
         }
@@ -89,6 +109,17 @@ public class OAuth2ServiceImpl implements OAuth2Service {
                     .code(code)
                     .build();
             return restTemplate.postForObject("https://accounts.google.com/o/oauth2/token", clientRequest, ClientOAuth2Response.class);
+        }
+
+        if (Provider.FACEBOOK.getName().equals(provider.getName())) {
+            Map<String, String> requestParams = new HashMap<>();
+            requestParams.put("client_id", params.getFacebookId());
+            requestParams.put("client_secret", params.getFacebookSecret());
+            requestParams.put("code", code);
+            requestParams.put("redirect_uri", params.getFacebookRedirect());
+            return restTemplate.getForObject("https://graph.facebook.com/oauth/access_token?client_id={client_id}&client_secret={client_secret}&" +
+                            "code={code}&redirect_uri={redirect_uri}",
+                    ClientOAuth2Response.class, requestParams);
         }
 
         if (Provider.VK.getName().equals(provider.getName())) {

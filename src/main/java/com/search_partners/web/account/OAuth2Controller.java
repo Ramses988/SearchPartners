@@ -36,6 +36,12 @@ public class OAuth2Controller {
                 params.getGoogleId(), params.getGoogleRedirect(), params.getGoogleScope());
     }
 
+    @GetMapping("/oauth2/provider/facebook")
+    public String getLinkFacebook() {
+        return String.format("redirect:https://www.facebook.com/dialog/oauth?client_id=%s&redirect_uri=%s&response_type=code&scope=%s",
+                params.getFacebookId(), params.getFacebookRedirect(), params.getFacebookScope());
+    }
+
     @GetMapping("/oauth2/provider/vk")
     public String getLinkVK() {
         return String.format("redirect:https://oauth.vk.com/authorize?client_id=%s&redirect_uri=%s&v=6.3&response_type=code&scope=%s",
@@ -45,6 +51,11 @@ public class OAuth2Controller {
     @GetMapping("/oauth2/code/google")
     public String getUserGoogle(@RequestParam("code") String code, HttpServletRequest request, HttpServletResponse response) {
         return getUser(code, Provider.GOOGLE, request, response);
+    }
+
+    @GetMapping("/oauth2/code/facebook")
+    public String getUserFacebook(@RequestParam("code") String code, HttpServletRequest request, HttpServletResponse response) {
+        return getUser(code, Provider.FACEBOOK, request, response);
     }
 
     @GetMapping("/oauth2/code/vk")
