@@ -3,6 +3,7 @@ Disallow: /login
 Disallow: /profile
 Disallow: /register
 Disallow: /chat
+Disallow: /oauth2
 Disallow: /manage
 Disallow: /contact
 Disallow: /feedback
@@ -16,6 +17,7 @@ Disallow: /login
 Disallow: /profile
 Disallow: /register
 Disallow: /chat
+Disallow: /oauth2
 Disallow: /manage
 Disallow: /contact
 Disallow: /feedback

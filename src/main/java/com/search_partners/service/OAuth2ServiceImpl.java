@@ -41,8 +41,6 @@ public class OAuth2ServiceImpl implements OAuth2Service {
 
         ClientOAuth2Response clientResponse = getToken(code, provider);
 
-        log.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> " + clientResponse);
-
         if (Objects.isNull(clientResponse) || Objects.isNull(clientResponse.getAccessToken()) || clientResponse.getAccessToken().isEmpty())
             throw new ErrorInternalException("Ошибка получения токена для oauth2 " + provider.getName());
 
@@ -74,9 +72,13 @@ public class OAuth2ServiceImpl implements OAuth2Service {
         }
 
         if (Provider.VK.getName().equals(provider.getName())) {
-            String infoUser = restTemplate.getForObject("https://api.vk.com/method/users.get?uids={uids}&fields=first_name&v=6.3&access_token={access_token}",
-                    String.class, clientResponse.getUserId(), clientResponse.getAccessToken());
-            log.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> " + userInfo);
+            userInfo = restTemplate.getForObject("https://api.vk.com/method/users.get?uids={uids}&fields=first_name&v=6.3&access_token={access_token}",
+                    UserOAuth2.class, clientResponse.getUserId(), clientResponse.getAccessToken());
+            if (Objects.nonNull(userInfo)) {
+                userInfo.setId(clientResponse.getUserId());
+                userInfo.setFirstName(userInfo.getResponse().get(0).getFirstName());
+                userInfo.setEmail(clientResponse.getEmail());
+            }
         }
 
         if (Objects.isNull(userInfo) || Objects.isNull(userInfo.getId()) || userInfo.getId().isEmpty())

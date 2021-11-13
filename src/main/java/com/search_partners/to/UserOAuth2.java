@@ -6,6 +6,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -27,5 +30,8 @@ public class UserOAuth2 {
 
     @JsonProperty("family_name")
     private String familyName;
+
+    @JsonProperty("response")
+    private List<UserName> response = new ArrayList<>();
 
 }
