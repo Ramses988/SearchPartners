@@ -1,6 +1,7 @@
 package com.search_partners.web.chat;
 
 import com.search_partners.model.ChatMessage;
+import com.search_partners.model.Provider;
 import com.search_partners.model.User;
 import com.search_partners.service.interfaces.ChatService;
 import com.search_partners.util.SecurityUtil;
@@ -51,8 +52,9 @@ public class ChatController {
     @MessageMapping("/messages")
     public void sendMessage(@Payload ChatMessage message) {
         ChatMessage response = service.sendMessage(message, SecurityUtil.authUserId());
-        messagingTemplate.convertAndSend("/chat/" + response.getRecipientId().getEmail() + "/"
-                + response.getRecipientId().getId(), response);
+        messagingTemplate.convertAndSend("/chat/" +
+                ((Provider.LOCAL.getName().equals(response.getRecipientId().getProvider())) ? response.getRecipientId().getEmail() : response.getRecipientId().getUserId())
+                + "/" + response.getRecipientId().getId(), response);
     }
 
 }
