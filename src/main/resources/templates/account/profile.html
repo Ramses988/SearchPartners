@@ -51,7 +51,9 @@
                     <!-- Nav tabs-->
                     <ul class="nav nav-tabs">
                         <li class="nav-item" role="presentation"><a class="nav-link active show" href="#tabs-1-1" data-toggle="tab">Мой профиль</a></li>
+                        <th:block th:if="${user.provider == 'local'}">
                         <li class="nav-item" role="presentation"><a class="nav-link" href="#tabs-1-2" data-toggle="tab">Смена пароля</a></li>
+                            </th:block>
                     </ul>
                     <!-- Tab panes-->
                     <div class="tab-content" style="letter-spacing: .05em;">
@@ -202,6 +204,7 @@
                             <button type="button" id="btn-updateProfile" class="button button-sm button-primary">Сохранить</button>
                             </form>
                         </div>
+                        <th:block th:if="${user.provider == 'local'}">
                         <div class="tab-center tab-pane fade" id="tabs-1-2">
                             <form id="resetPasswordForm">
                                 <div class="block-form">
@@ -234,6 +237,7 @@
                                 <button type="button" id="btn-resetPassword" class="button button-sm button-primary">Сменить</button>
                             </form>
                         </div>
+                        </th:block>
                     </div>
                 </div>
             </div>

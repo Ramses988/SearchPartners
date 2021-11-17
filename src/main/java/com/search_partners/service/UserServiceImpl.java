@@ -1,10 +1,7 @@
 package com.search_partners.service;
 
 import com.search_partners.AuthorizedUser;
-import com.search_partners.model.City;
-import com.search_partners.model.ConfirmToken;
-import com.search_partners.model.Country;
-import com.search_partners.model.User;
+import com.search_partners.model.*;
 import com.search_partners.repository.UserRepository;
 import com.search_partners.service.interfaces.ConfirmTokenService;
 import com.search_partners.service.interfaces.CountryAndCityService;
@@ -186,7 +183,7 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public void resetPasswordEmail(String email) {
-        User user = repository.findByEmailAndEnabled(email.toLowerCase().trim(), true).orElse(null);
+        User user = repository.findByEmailAndEnabledAndProvider(email.toLowerCase().trim(), true, Provider.LOCAL.getName()).orElse(null);
         if (Objects.nonNull(user)) {
             mailSender.sendEmail(EmailMessageUtil.getResetPasswordMail(user, confirmTokenService.newToken(user, 2)));
         }

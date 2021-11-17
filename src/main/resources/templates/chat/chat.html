@@ -365,10 +365,14 @@
             }
         };
         if (message && stompClient && $('#activeId').text() > 0) {
-            stompClient.send('/app/messages', {}, JSON.stringify(message));
-            $('#content-text').val('');
-            addMessageInChat(message);
-            addDescription(message.recipientId.id, message.content);
+            if ($('#content-text').val().trim() !== '') {
+                stompClient.send('/app/messages', {}, JSON.stringify(message));
+                $('#content-text').val('');
+                addMessageInChat(message);
+                addDescription(message.recipientId.id, message.content);
+            } else {
+                failNoty('Сообщение пустое!');
+            }
         } else {
             failNoty('Нужно выбрать собеседника!');
         }
