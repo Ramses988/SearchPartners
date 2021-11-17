@@ -1,11 +1,7 @@
 package com.search_partners.repository;
 
-import com.search_partners.model.City;
-import com.search_partners.model.Country;
 import com.search_partners.model.Post;
-import com.search_partners.model.User;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.Query;
