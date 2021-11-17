@@ -55,7 +55,14 @@ public class UserServiceImpl implements UserService {
         User user = getUser(id);
         Country country = service.getCountry(userDto.getCountry());
         City city = service.getCity(userDto.getCity());
-        //TODO: check if not found User, Country and City
+        if (Objects.isNull(user) || Objects.isNull(country) || Objects.isNull(city))
+            throw new ErrorCheckRequestException("Ошибка обновления профиля!");
+
+        if (!user.getName().equals(userDto.getName()) && isUniqueLogin(userDto.getName()))
+            throw new ErrorCheckRequestException("Указанный логин уже существует!");
+
+        user.setInitial(UserUtil.getInitial(userDto.getName()));
+        user.setName(userDto.getName());
         user.setRealName(userDto.getRealName());
         user.setBusyness(userDto.getBusyness());
         user.setCountry(country);
@@ -68,10 +75,23 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public boolean isUniqueLogin(String name) {
+        return Objects.nonNull(repository.findFirstByName(name).orElse(null));
+    }
+
+    @Override
+    public long getNextUserId() {
+        return repository.getNextUserId();
+    }
+
+    @Override
     @Transactional
     public void createUser(UserRegisterDto newUser) {
         if (!newUser.getUserPassword().equals(newUser.getConfirmPassword()))
             throw new ErrorCheckRequestException("Пароли не совпадают!");
+
+        if (isUniqueLogin(newUser.getName()))
+            throw new ErrorCheckRequestException("Указанный логин уже существует!");
 
         User user = UserUtil.createNewFromTo(newUser);
         Country country = service.getCountry(newUser.getCountry());

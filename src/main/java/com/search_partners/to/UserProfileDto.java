@@ -8,6 +8,11 @@ import javax.validation.constraints.*;
 public class UserProfileDto {
 
     //TODO: Check for special character
+    @NotBlank(message = "Логин не должен быть пустым!")
+    @Size(max = 15, message = "Максимальный размер поля логин, 15 символов!")
+    private String name;
+
+    //TODO: Check for special character
     @Size(max = 30)
     private String realName;
 

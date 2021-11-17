@@ -70,16 +70,15 @@ public class UserUtil extends StdConverter<User, UserDto> {
                 .build();
     }
 
-    public static User createUserFromOAuth2(UserOAuth2 userInfo, String password, String provider, PasswordEncoder passwordEncoder) {
-        String initial = getInitial(provider);
+    public static User createUserFromOAuth2(UserOAuth2 userInfo, String password, long id, String provider, PasswordEncoder passwordEncoder) {
         return User.builder()
                 .userId(userInfo.getId())
-                .name(provider)
+                .name("Alien" + id)
                 .realName(((Objects.nonNull(userInfo.getFirstName()) ? userInfo.getFirstName() : null)))
                 .date(LocalDateTime.now())
                 .email((Objects.nonNull(userInfo.getEmail()) ? userInfo.getEmail().toLowerCase().trim() : null))
                 .enabled(true)
-                .initial(initial)
+                .initial("A")
                 .gender("U")
                 .password(prepareToPassword(password, passwordEncoder))
                 .color(colors.get(getColor()))
@@ -88,7 +87,7 @@ public class UserUtil extends StdConverter<User, UserDto> {
                 .build();
     }
 
-    private static String getInitial(String name) {
+    public static String getInitial(String name) {
         return String.valueOf(name.trim().charAt(0)).toUpperCase();
     }
 

@@ -9,6 +9,9 @@ DROP TABLE IF EXISTS chat_room;
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS cities;
 DROP TABLE IF EXISTS countries;
+DROP SEQUENCE IF EXISTS user_id_seq;
+
+CREATE SEQUENCE user_id_seq START 1;
 
 CREATE TABLE countries
 (
@@ -50,6 +53,7 @@ CREATE TABLE users
     FOREIGN KEY (country_id) REFERENCES countries (id),
     FOREIGN KEY (city_id) REFERENCES cities (id)
 );
+CREATE UNIQUE INDEX users_unique_name_idx ON users (name);
 CREATE UNIQUE INDEX users_unique_email_idx ON users (email);
 CREATE UNIQUE INDEX users_unique_user_id_idx ON users (user_id);
 

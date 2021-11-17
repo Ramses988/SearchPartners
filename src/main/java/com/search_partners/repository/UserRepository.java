@@ -17,6 +17,11 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     Optional<User> findByUserIdAndProvider(String userId, String provider);
 
+    Optional<User> findFirstByName(String name);
+
+    @Query(value = "SELECT nextval('user_id_seq')", nativeQuery = true)
+    Long getNextUserId();
+
     @EntityGraph(attributePaths = "city", type = EntityGraph.EntityGraphType.LOAD)
     @Query("SELECT u FROM User u WHERE u.id=:id")
     Optional<User> getUserWithCity(long id);

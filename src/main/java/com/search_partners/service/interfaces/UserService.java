@@ -19,6 +19,10 @@ public interface UserService extends UserDetailsService {
 
     User saveUser(User user);
 
+    long getNextUserId();
+
+    boolean isUniqueLogin(String name);
+
     void saveUserProfile(UserProfileDto user, long id);
 
     void createUser(UserRegisterDto newUser);

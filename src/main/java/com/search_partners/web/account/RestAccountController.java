@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Objects;
 
 @RestController
 @RequestMapping(value = RestAccountController.REST_URL)
@@ -29,6 +30,13 @@ public class RestAccountController {
     @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void changeUserProfile(@Valid UserProfileDto user) {
         service.saveUserProfile(user, SecurityUtil.authUserId());
+    }
+
+    @PostMapping("/checkLogin")
+    public boolean checkLogin(String name) {
+        if (Objects.nonNull(name) && !name.isEmpty())
+            return service.isUniqueLogin(name);
+        return false;
     }
 
     @PostMapping("/reset-password")

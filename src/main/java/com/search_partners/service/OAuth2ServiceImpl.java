@@ -93,7 +93,7 @@ public class OAuth2ServiceImpl implements OAuth2Service {
         if (Objects.nonNull(user))
             user.setPassword(UserUtil.prepareToPassword(password, service.getPasswordEncoder()));
         else{
-            user = UserUtil.createUserFromOAuth2(userInfo, password, provider.getName(), service.getPasswordEncoder());
+            user = UserUtil.createUserFromOAuth2(userInfo, password, service.getNextUserId(), provider.getName(), service.getPasswordEncoder());
             user.setCountry(countryAndCityService.getCountry(0));
             user.setCity(countryAndCityService.getCity(0));
         }

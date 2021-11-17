@@ -1,5 +1,19 @@
 $(function() {
 
+    $('.unique-login').focusout(function () {
+        let errorInput = $(".unique-login");
+        let name = errorInput.val();
+        if (name.trim() !== '') {
+            $.post("/rest/account/checkLogin", {name : name}, function (data) {
+                if (data) {
+                    errorInput.addClass("has-error");
+                    errorInput.parent().find('.validation-name').empty();
+                    errorInput.parent().find('.validation-name').append("Указанный логин уже существует!");
+                }
+            });
+        }
+    });
+
     $('#btn-createUser').click(function () {
         if (validForm('#form-createUser')) {
             $.ajax({

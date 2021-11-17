@@ -65,9 +65,11 @@
                                     <div class="row row-40">
                                         <div class="col-md-6">
                                             <div class="form-wrap">
-                                                <label class="form-label-outside">Никнейм</label>
+                                                <label class="form-label-outside">Логин</label>
                                                 <div class="form-wrap-inner">
-                                                    <input class="form-input only-read" th:value="${user.name}" type="text" readonly>
+                                                    <input type="hidden" id="check-name" th:value="${user.name}">
+                                                    <input class="form-input form-control-has-validation unique-login required" id="name" name="name" th:value="${user.name}" type="text">
+                                                    <span class="form-validation validation-name"></span>
                                                 </div>
                                             </div>
                                         </div>

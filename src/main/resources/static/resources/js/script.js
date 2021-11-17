@@ -117,6 +117,27 @@ $('.required').focusout(function () {
   }
 });
 
+function chekLogin(name, errorInput) {
+  $.post("/rest/account/checkLogin", {name : name}, function (data) {
+    if (data) {
+      errorInput.addClass("has-error");
+      errorInput.parent().find('.validation-name').empty();
+      errorInput.parent().find('.validation-name').append("Указанный логин уже существует!");
+    } else {
+      errorInput.removeClass("has-error");
+      errorInput.parent().find('.validation-name').empty();
+    }
+  });
+}
+
+$('.unique-login-pages').focusout(function () {
+  let errorInput = $(".unique-login-pages");
+  let name = errorInput.val();
+  if (name.trim() !== '') {
+    chekLogin(name, errorInput);
+  }
+});
+
 (function () {
   // Global variables
   var userAgent = navigator.userAgent.toLowerCase(),

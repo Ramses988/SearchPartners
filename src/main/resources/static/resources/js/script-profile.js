@@ -1,5 +1,20 @@
 $(function() {
 
+    $('.unique-login').focusout(function () {
+        let errorInput = $(".unique-login");
+        let checkName = $("#check-name").val();
+        let name = errorInput.val();
+        if (name.trim() !== '' && name !== checkName ) {
+            $.post("/rest/account/checkLogin", {name : name}, function (data) {
+                if (data) {
+                    errorInput.addClass("has-error");
+                    errorInput.parent().find('.validation-name').empty();
+                    errorInput.parent().find('.validation-name').append("Указанный логин уже существует!");
+                }
+            });
+        }
+    });
+
     $('#realName').on('input', function(e) {
         const nameInput = $('#realName');
         const data = nameInput.val();
@@ -15,6 +30,23 @@ $(function() {
                 nameInput.addClass("has-error");
                 $('#validation-realName').append("Максимум 30 символов");
             }
+        }
+    });
+
+    $('#name').on('input', function() {
+        const nameInput = $('#name');
+        const data = nameInput.val();
+        const status = nameInput.hasClass("has-error");
+        if (data.length <= 15) {
+            if (status) {
+                nameInput.removeClass("has-error");
+                nameInput.parent().find('.validation-name').empty();
+            }
+        }
+        if (data.length > 15) {
+            nameInput.addClass("has-error");
+            nameInput.parent().find('.validation-name').empty();
+            nameInput.parent().find('.validation-name').append("Максимум 15 символов");
         }
     });
 
