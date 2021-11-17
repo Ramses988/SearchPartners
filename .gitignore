@@ -12,4 +12,6 @@ target/
 *.properties
 *.yml
 
+yandex_*.html
+
 /src/main/resources/db/populateDB.sql
