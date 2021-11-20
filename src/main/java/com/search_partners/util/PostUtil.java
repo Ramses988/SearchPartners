@@ -1,11 +1,9 @@
 package com.search_partners.util;
 
 
-import com.search_partners.model.City;
-import com.search_partners.model.Country;
-import com.search_partners.model.Post;
-import com.search_partners.model.User;
+import com.search_partners.model.*;
 import com.search_partners.to.PostDto;
+import com.search_partners.to.SellPostDto;
 import lombok.extern.log4j.Log4j2;
 import org.jsoup.Jsoup;
 
@@ -32,14 +30,29 @@ public class PostUtil {
     }
 
     public static Post createNewFromTo(PostDto postDto, User user, Country country, City city) {
-        return Post.builder()
-                .title(postDto.getTitle())
-                .user(user)
-                .country(country)
-                .city(city)
-                .date(LocalDateTime.now())
-                .active(1)
-                .build();
+        Post post = new Post();
+        post.setTitle(postDto.getTitle());
+        post.setUser(user);
+        post.setCountry(country);
+        post.setCity(city);
+        post.setDate(LocalDateTime.now());
+        post.setActive(1);
+        return post;
+    }
+
+    public static SellBusiness createSellBusinessNewFromTo(SellPostDto sellPost, User user, Country country, City city) {
+        SellBusiness sellBusiness = new SellBusiness();
+        sellBusiness.setTitle(sellPost.getTitle());
+        sellBusiness.setUser(user);
+        sellBusiness.setCountry(country);
+        sellBusiness.setCity(city);
+        sellBusiness.setDate(LocalDateTime.now());
+        sellBusiness.setActive(1);
+        sellBusiness.setAge(sellPost.getAge());
+        sellBusiness.setPrice(sellPost.getPrice());
+        sellBusiness.setProfit(sellPost.getProfit());
+        sellBusiness.setIncome(sellPost.getIncome());
+        return sellBusiness;
     }
 
     public static List<Post> prepareText(List<Post> posts) {

@@ -44,6 +44,7 @@ public class PostController {
         cityList.add(new City(0, "Город", "any"));
         model.addAttribute("cities", cityList);
         model.addAttribute("local", "");
+        model.addAttribute("category", 1);
         return "post/posts";
     }
 
@@ -61,6 +62,7 @@ public class PostController {
         model.addAttribute("countryName", country);
         model.addAttribute("cityName", city);
         model.addAttribute("local", countryAndCityService.getNameWhereSearch(country, city));
+        model.addAttribute("category", 1);
         return "post/posts";
     }
 

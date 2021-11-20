@@ -10049,6 +10049,12 @@ html.rd-navbar-fixed-linked .page {
 *
 * Modal Custom
 */
+
+.price-text {
+    font-size: 16px;
+    color: #000;
+}
+
 @media (min-width: 768px) {
 	.modal-tip {
 		align-items: center;

@@ -56,22 +56,35 @@
                                 </figure>
                                 <div class="company-light-main">
                                     <h5 class="company-light-title">
-                                        <a th:href="@{'/post/' + ${post.id}}">[[${post.title}]]</a>
+                                        <th:block th:if="${category == 1}">
+                                            <a th:href="@{'/post/' + ${post.id}}">[[${post.title}]]</a>
+                                         </th:block>
+                                        <th:block th:if="${category == 2}">
+                                            <a th:href="@{'/sell/' + ${post.id}}">[[${post.title}]]</a>
+                                        </th:block>
                                     </h5>
                                     <p th:text="${post.user.name}+' » '+${#temporals.format(post.date, 'dd MMM yyyy, HH:mm')}"></p>
                                     <p class="view-text"><span th:text="${post.show}+' просмотров'"></span>&nbsp;&nbsp;&nbsp;[[${post.comments}]] ответов</p>
                                 </div>
                             </article>
                         </td>
-                        <td class="table-job-offers-meta td-hidden">
-                            <div class="object-inline"><span class="icon color-blue icon-sm mdi mdi-eye"></span>
-                                <span th:text="${post.show}"></span></div>
-                        </td>
-                        <td class="table-job-offers-meta td-hidden">
-                            <div class="object-inline"><span class="icon color-blue icon-1 mdi mdi-comment-outline"></span>
-                                <span th:text="${post.comments}"></span>
-                            </div>
-                        </td>
+                        <th:block th:if="${category == 1}">
+                            <td class="table-job-offers-meta td-hidden">
+                                <div class="object-inline"><span class="icon color-blue icon-sm mdi mdi-eye"></span>
+                                    <span th:text="${post.show}"></span></div>
+                            </td>
+                            <td class="table-job-offers-meta td-hidden">
+                                <div class="object-inline"><span class="icon color-blue icon-1 mdi mdi-comment-outline"></span>
+                                    <span th:text="${post.comments}"></span>
+                                </div>
+                            </td>
+                        </th:block>
+                        <th:block th:if="${category == 2}">
+                            <td class="table-job-offers-meta td-hidden">
+                                <div class="object-inline">
+                                    <span class="price-text" th:text="'Цена продажи бизнеса: ' + ${post.price} + ' руб.'"></span></div>
+                            </td>
+                        </th:block>
                     </tr>
                     </tbody>
                 </table>

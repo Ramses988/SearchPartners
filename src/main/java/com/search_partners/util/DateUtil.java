@@ -1,5 +1,6 @@
 package com.search_partners.util;
 
+import com.search_partners.model.AbstractBasePost;
 import com.search_partners.model.Post;
 
 import java.time.LocalDateTime;
@@ -7,7 +8,7 @@ import java.time.temporal.ChronoUnit;
 
 public class DateUtil {
 
-    public static void getDuration(Post post) {
+    public static void getDuration(AbstractBasePost post) {
         LocalDateTime date = LocalDateTime.now();
         long value = post.getDate().until(date, ChronoUnit.MONTHS);
         if (value >= 1) {
