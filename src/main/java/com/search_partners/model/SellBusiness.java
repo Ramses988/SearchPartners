@@ -1,5 +1,6 @@
 package com.search_partners.model;
 
+import com.search_partners.model.abstractentity.AbstractBasePost;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

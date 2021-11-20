@@ -1,7 +1,6 @@
 package com.search_partners.util;
 
-import com.search_partners.model.AbstractBasePost;
-import com.search_partners.model.Post;
+import com.search_partners.model.abstractentity.AbstractBasePost;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;

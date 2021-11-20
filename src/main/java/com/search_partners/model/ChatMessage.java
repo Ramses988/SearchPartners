@@ -2,6 +2,7 @@ package com.search_partners.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.search_partners.model.abstractentity.AbstractBaseEntity;
 import com.search_partners.util.UserUtil;
 import lombok.Getter;
 import lombok.Setter;

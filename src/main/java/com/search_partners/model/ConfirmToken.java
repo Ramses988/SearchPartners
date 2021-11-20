@@ -1,5 +1,6 @@
 package com.search_partners.model;
 
+import com.search_partners.model.abstractentity.AbstractBaseEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

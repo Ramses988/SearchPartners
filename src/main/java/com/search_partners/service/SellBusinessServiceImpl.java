@@ -53,6 +53,7 @@ public class SellBusinessServiceImpl implements SellBusinessService {
     }
 
     @Override
+    @Transactional
     public SellBusiness getPostWithComments(long id) {
         //TODO: Add check exception if post equals null
         SellBusiness post = repository.getPostWithComments(id).orElse(null);

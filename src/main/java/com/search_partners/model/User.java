@@ -2,6 +2,7 @@ package com.search_partners.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.search_partners.model.abstractentity.AbstractBaseEntity;
 import lombok.*;
 
 import javax.persistence.*;

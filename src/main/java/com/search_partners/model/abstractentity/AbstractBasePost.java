@@ -1,6 +1,10 @@
-package com.search_partners.model;
+package com.search_partners.model.abstractentity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.search_partners.model.City;
+import com.search_partners.model.Comment;
+import com.search_partners.model.Country;
+import com.search_partners.model.User;
 import lombok.*;
 
 import javax.persistence.*;

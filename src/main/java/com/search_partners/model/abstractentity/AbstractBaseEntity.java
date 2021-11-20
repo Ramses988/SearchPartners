@@ -1,4 +1,4 @@
-package com.search_partners.model;
+package com.search_partners.model.abstractentity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
