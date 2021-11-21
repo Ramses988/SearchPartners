@@ -8,7 +8,11 @@ public interface SellBusinessService {
 
     void savePost(SellPostDto sellPost,Long id);
 
+    void savePost(SellBusiness sellBusiness);
+
     Page<SellBusiness> getPosts(int page);
+
+    SellBusiness getPostById(Long id);
 
     SellBusiness getPostWithComments(long id);
 

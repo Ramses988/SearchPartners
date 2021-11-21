@@ -69,6 +69,7 @@ public class PostController {
     @GetMapping("/post/{id}")
     public String getPost(@PathVariable("id") long id, Model model) {
         model.addAttribute("post", postService.getPostWithComments(id));
+        model.addAttribute("category", 1);
         return "post/post";
     }
 

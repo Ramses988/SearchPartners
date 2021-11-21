@@ -39,6 +39,7 @@ public class SellBusinessController {
     @GetMapping("/sell/{id}")
     public String getPost(@PathVariable("id") long id, Model model) {
         model.addAttribute("post", service.getPostWithComments(id));
+        model.addAttribute("category", 2);
         return "post/post";
     }
 

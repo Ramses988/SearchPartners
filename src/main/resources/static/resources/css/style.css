@@ -10130,6 +10130,11 @@ html.rd-navbar-fixed-linked .page {
 
 /* Start my code*/
 
+#description-sell {
+    color: black;
+    margin-top: 9px;
+}
+
 #email-comp {
     cursor: pointer;
 }

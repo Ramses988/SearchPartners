@@ -38,6 +38,14 @@
                         </div>
                     </div>
                     <h5 th:text="${post.title}"></h5>
+                    <th:block th:if="${category == 2}">
+                        <div id="description-sell">
+                            <p><span th:text="'Возраст бизнеса: ' + ${post.age}"></span><br/>
+                                <span th:text="'Стоимость продажи бизнеса: ' + ${post.price} + ' руб.'"></span><br/>
+                                <span th:text="'Оборот бизнеса ежемесячно: ' + ${post.income} + ' руб.'"></span><br/>
+                                <span th:text="'Чистая прибыль ежемесячно: ' + ${post.profit} + ' руб.'"></span></p>
+                        </div>
+                    </th:block>
                     <div id="reset-style" th:utext="${post.text}"></div>
                     <div class="post-creative-footer">
                         <div class="post-creative-footer-inner">
@@ -80,6 +88,7 @@
                                 <div class="comment-main">
                                     <form class="rd-mailform rd-mailform-outline" id="addPostComment" novalidate="novalidate">
                                         <input type="hidden" name="post" th:value="${post.id}">
+                                        <input type="hidden" name="category" th:value="${category}">
                                         <div class="form-wrap">
                                             <textarea class="form-input" id="comment-message" name="message" placeholder="Написать комментарий"></textarea>
                                         </div>

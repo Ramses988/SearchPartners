@@ -20,7 +20,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @MappedSuperclass
-public abstract class AbstractComment extends AbstractBaseEntity implements Comparable<Comment>  {
+public abstract class AbstractComment extends AbstractBaseEntity implements Comparable<AbstractComment>  {
 
     private String text;
     private LocalDateTime date;
@@ -31,7 +31,7 @@ public abstract class AbstractComment extends AbstractBaseEntity implements Comp
     private User user;
 
     @Override
-    public int compareTo(Comment c) {
+    public int compareTo(AbstractComment c) {
         return c.getDate().compareTo(date);
     }
 

@@ -28,9 +28,6 @@ public abstract class AbstractBasePost extends AbstractBaseEntity {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "post", cascade = CascadeType.REMOVE)
-    private List<Comment> commentList;
-
     @JsonIgnore
     private int active;
 

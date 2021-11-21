@@ -53,6 +53,16 @@ public class SellBusinessServiceImpl implements SellBusinessService {
     }
 
     @Override
+    public void savePost(SellBusiness sellBusiness) {
+        repository.save(sellBusiness);
+    }
+
+    @Override
+    public SellBusiness getPostById(Long id) {
+        return repository.findById(id).orElse(null);
+    }
+
+    @Override
     @Transactional
     public SellBusiness getPostWithComments(long id) {
         //TODO: Add check exception if post equals null
@@ -60,7 +70,7 @@ public class SellBusinessServiceImpl implements SellBusinessService {
         post.setShow(post.getShow() + 1);
         repository.save(post);
         Collections.sort(post.getCommentList());
-        for (Comment comment : post.getCommentList()) {
+        for (CommentSell comment : post.getCommentList()) {
             Collections.sort(comment.getInternalComments());
         }
         return post;

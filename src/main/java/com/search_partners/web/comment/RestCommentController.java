@@ -1,7 +1,7 @@
 package com.search_partners.web.comment;
 
-import com.search_partners.model.Comment;
 import com.search_partners.model.InternalComment;
+import com.search_partners.model.abstractentity.AbstractComment;
 import com.search_partners.service.interfaces.CommentService;
 import com.search_partners.util.CommentUtil;
 import com.search_partners.util.SecurityUtil;
@@ -25,16 +25,11 @@ public class RestCommentController {
         this.service = service;
     }
 
-//    @GetMapping("/get-comments")
-//    public List<Comment> getCmments() {
-//        return service.getComments();
-//    }
-
     //TODO: Close url
     @PostMapping("/save-comment")
-    public Comment saveComment(Long post, String message) throws ErrorCheckRequestException {
+    public AbstractComment saveComment(Long post, int category, String message) throws ErrorCheckRequestException {
         message = CommentUtil.commentValid(message);
-        return service.saveComment(post, message, SecurityUtil.authUserId());
+        return service.saveComment(post, category, message, SecurityUtil.authUserId());
     }
 
     //TODO: Close url

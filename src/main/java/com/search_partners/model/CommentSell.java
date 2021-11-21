@@ -1,10 +1,7 @@
 package com.search_partners.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.search_partners.model.abstractentity.AbstractBaseEntity;
 import com.search_partners.model.abstractentity.AbstractComment;
-import com.search_partners.util.UserUtil;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,22 +12,22 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-@Table(name="comments")
-public class Comment extends AbstractComment {
+@Table(name="comments_sell")
+public class CommentSell extends AbstractComment {
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "post_id", nullable = false)
-    private Post post;
+    private SellBusiness post;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "comment", cascade = CascadeType.REMOVE)
-    private List<InternalComment> internalComments;
+    private List<InternalCommentSell> internalComments;
 
-    public Comment() {
+    public CommentSell() {
         super();
     }
 
-    public Comment(String text, LocalDateTime date, Post post, User user) {
+    public CommentSell(String text, LocalDateTime date, SellBusiness post, User user) {
         super(text, date, user);
         this.post = post;
     }

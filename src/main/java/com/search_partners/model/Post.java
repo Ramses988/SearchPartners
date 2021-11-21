@@ -4,6 +4,7 @@ import com.search_partners.model.abstractentity.AbstractBasePost;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @Setter
@@ -11,4 +12,8 @@ import javax.persistence.*;
 @Entity
 @Table(name="posts")
 public class Post extends AbstractBasePost {
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "post", cascade = CascadeType.REMOVE)
+    private List<Comment> commentList;
+
 }
