@@ -6,8 +6,10 @@ import com.search_partners.model.Post;
 import com.search_partners.model.User;
 import com.search_partners.service.interfaces.CountryAndCityService;
 import com.search_partners.service.interfaces.PostService;
+import com.search_partners.service.interfaces.SellBusinessService;
 import com.search_partners.service.interfaces.UserService;
 import com.search_partners.util.SecurityUtil;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,19 +21,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
+@AllArgsConstructor
 public class PostController {
 
     private final PostService postService;
     private final UserService userService;
     private final CountryAndCityService countryAndCityService;
-
-    @Autowired
-    public PostController(PostService postService, UserService userService,
-                          CountryAndCityService countryAndCityService) {
-        this.postService = postService;
-        this.userService = userService;
-        this.countryAndCityService = countryAndCityService;
-    }
+    private final SellBusinessService sellBusinessService;
 
     @GetMapping("/posts")
     public String getPosts(@RequestParam(defaultValue = "0", required = false) int page,
@@ -106,6 +102,7 @@ public class PostController {
     @GetMapping("/manage/post/list")
     public String getListManagePosts(Model model) {
         model.addAttribute("posts", postService.getAllPosts(SecurityUtil.authUserId()));
+        model.addAttribute("sells", sellBusinessService.getAllPosts(SecurityUtil.authUserId()));
         return "post/list";
     }
 

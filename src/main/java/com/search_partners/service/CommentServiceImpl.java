@@ -2,6 +2,7 @@ package com.search_partners.service;
 
 import com.search_partners.model.*;
 import com.search_partners.model.abstractentity.AbstractComment;
+import com.search_partners.model.abstractentity.AbstractInternalComment;
 import com.search_partners.repository.CommentRepository;
 import com.search_partners.repository.CommentSellRepository;
 import com.search_partners.repository.InternalCommentRepository;
@@ -66,8 +67,15 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     @Transactional
-    public InternalComment saveCommentChildren(Long parent, Long children, String message, Long id) {
+    public AbstractInternalComment saveCommentChildren(Long parent, Long children, int category, String message, Long id) {
         User user = userService.getUser(id);
+        if (category == 1)
+            return saveCommentChildrenPost(parent, children, message, user);
+        else
+            return saveCommentChildrenSell(parent, children, message, user);
+    }
+
+    private AbstractInternalComment saveCommentChildrenPost(Long parent, Long children, String message, User user) {
         Comment comment = commentRepository.findById(parent).orElse(null);
         if (Objects.isNull(user) || Objects.isNull(comment))
             throw new ErrorCheckRequestException("Возникла внутренняя ошибка сервера!");
@@ -92,4 +100,31 @@ public class CommentServiceImpl implements CommentService {
         postService.savePost(post);
         return internalCommentRepository.save(new InternalComment(message, LocalDateTime.now(), comment, user));
     }
+
+    private AbstractInternalComment saveCommentChildrenSell(Long parent, Long children, String message, User user) {
+        CommentSell commentSell = commentSellRepository.findById(parent).orElse(null);
+        if (Objects.isNull(user) || Objects.isNull(commentSell))
+            throw new ErrorCheckRequestException("Возникла внутренняя ошибка сервера!");
+        SellBusiness sellBusiness = sellBusinessService.getPostById(commentSell.getPost().getId());
+        if (children == 0) {
+            //TODO: send mail parent
+            message = String.format("<p>%s</p>", message);
+        } else {
+            //TODO: send mail children
+            InternalCommentSell internalCommentSell = internalCommentSellRepository.findById(children).orElse(null);
+            if (Objects.isNull(internalCommentSell))
+                throw new ErrorCheckRequestException("Возникла внутренняя ошибка сервера!");
+            //TODO: cut if lenth message more than 200 charects
+            String getText = internalCommentSell.getText();
+            if (getText.length() > 270)
+                getText = getText.substring(0, 190) + "...</p>";
+
+            message = String.format("<div class='comment-response'><b>%s</b><br><em>%s</em></div><p>%s</p>",
+                    internalCommentSell.getUser().getName(), getText, message);
+        }
+        sellBusiness.setComments(sellBusiness.getComments() + 1);
+        sellBusinessService.savePost(sellBusiness);
+        return internalCommentSellRepository.save(new InternalCommentSell(message, LocalDateTime.now(), commentSell, user));
+    }
+
 }

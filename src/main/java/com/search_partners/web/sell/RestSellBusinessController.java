@@ -24,4 +24,14 @@ public class RestSellBusinessController {
         service.savePost(sellPost, SecurityUtil.authUserId());
     }
 
+    @PostMapping("/manage/rest/sell/set-close")
+    public boolean closePost(Long id) {
+        return service.closePost(id, SecurityUtil.authUserId());
+    }
+
+    @PostMapping("/manage/rest/sell/delete-post")
+    public boolean deletePost(Long id) {
+        return service.deletePost(id, SecurityUtil.authUserId());
+    }
+
 }

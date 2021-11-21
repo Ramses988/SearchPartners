@@ -10130,6 +10130,10 @@ html.rd-navbar-fixed-linked .page {
 
 /* Start my code*/
 
+.row-not-top {
+    margin-top: 1px !important;
+}
+
 #description-sell {
     color: black;
     margin-top: 9px;

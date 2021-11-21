@@ -29,6 +29,13 @@
             }
         }
 
+        function setCloseSell(id) {
+            if (confirm("Вы действительно хотите закрыть пост?")) {
+                const url = "/manage/rest/sell/set-close";
+                sendPost(id, url);
+            }
+        }
+
         function setActive(id) {
             if (confirm("Вы действительно хотите активировать пост?")) {
                 const url = "/manage/rest/post/set-active";
@@ -39,6 +46,13 @@
         function deletePost(id) {
             if (confirm("Вы действительно хотите удалить пост?")) {
                 const url = "/manage/rest/post/delete-post";
+                sendPost(id, url);
+            }
+        }
+
+        function deletePostSell(id) {
+            if (confirm("Вы действительно хотите удалить пост?")) {
+                const url = "/manage/rest/sell/delete-post";
                 sendPost(id, url);
             }
         }
@@ -70,7 +84,7 @@
                     Список активных постов
                     <div class="row row-50">
                         <div class="col-12">
-                            <p class="heading-9">Поиск партнеров по бизнесу</p>
+                            <p class="heading-9">Поиск партнеров/инвесторов для бизнеса</p>
                             <hr class="m-10">
                             <div class="timeline-classic">
                                 <th:block th:each="post : ${posts}">
@@ -102,12 +116,46 @@
                             <p></p>
                         </div>
                     </div>
+                    <div class="row row-50 row-not-top">
+                    <div class="col-12">
+                        <p class="heading-9">Продажа/покупка готового бизнеса</p>
+                        <hr class="m-10">
+                        <div class="timeline-classic">
+                            <th:block th:each="sell : ${sells}">
+                                <th:block th:if="${sell.active}">
+                                    <div class="timeline-classic-item">
+                                        <div class="timeline-classic-period">
+                                            <span th:text="${#temporals.format(sell.date, 'dd-MM-yyyy')}"></span>
+                                        </div>
+                                        <div class="timeline-classic-main">
+                                            <h5 class="timeline-classic-title"><a th:href="@{'/sell/' + ${sell.id}}" th:text="${sell.title}"></a></h5>
+                                            <p th:text="${sell.text}"></p>
+                                            <ul class="list-post-menu">
+                                                <li><a th:href="@{'/manage/post/edit/' + ${sell.id}}">
+                                                    <span class="icon-sms icon-m-post-menu mdi mdi-file-document-edit-outline"></span>
+                                                    Редактировать</a></li>
+                                                <li th:onclick="'setCloseSell('+${sell.id}+')'">
+                                                    <span class="icon-sms icon-m-post-menu mdi mdi-message-text-lock-outline"></span>
+                                                    Закрыть</li>
+                                                <li th:onclick="'deletePostSell('+${sell.id}+')'"><span class="icon-sms icon-m-post-menu mdi mdi-delete-outline"></span>
+                                                    Удалить</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </th:block>
+                            </th:block>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <p></p>
+                    </div>
+                </div>
                 </div>
                 <div class="tab-pane fade" id="tabs-1-2">
                     Список закрытых постов
                     <div class="row row-50">
                         <div class="col-12">
-                            <p class="heading-9">Поиск партнеров по бизнесу</p>
+                            <p class="heading-9">Поиск партнеров/инвесторов для бизнеса</p>
                             <hr class="m-10">
                             <div class="timeline-classic">
                                 <th:block th:each="post : ${posts}">
@@ -123,9 +171,44 @@
                                                     <li><a th:href="@{'/manage/post/edit/' + ${post.id}}">
                                                         <span class="icon-sms icon-m-post-menu mdi mdi-file-document-edit-outline"></span>
                                                         Редактировать</a></li>
-                                                    <li th:onclick="'setActive('+${post.id}+')'"><span class="icon-sms icon-m-post-menu mdi mdi-message-plus-outline"></span>
+                                                    <li th:onclick="'setActive('+${post.id}+')'">
+                                                        <span class="icon-sms icon-m-post-menu mdi mdi-message-plus-outline"></span>
                                                         Активировать</li>
                                                     <li><span class="icon-sms icon-m-post-menu mdi mdi-delete-outline"></span>
+                                                        Удалить</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </th:block>
+                                </th:block>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <p></p>
+                        </div>
+                    </div>
+                    <div class="row row-50 row-not-top">
+                        <div class="col-12">
+                            <p class="heading-9">Продажа/покупка готового бизнеса</p>
+                            <hr class="m-10">
+                            <div class="timeline-classic">
+                                <th:block th:each="sell : ${sells}">
+                                    <th:block th:if="${sell.active != 1}">
+                                        <div class="timeline-classic-item">
+                                            <div class="timeline-classic-period">
+                                                <span th:text="${#temporals.format(sell.date, 'dd-MM-yyyy')}"></span>
+                                            </div>
+                                            <div class="timeline-classic-main">
+                                                <h5 class="timeline-classic-title"><a th:href="@{'/sell/' + ${sell.id}}" th:text="${sell.title}"></a></h5>
+                                                <p th:text="${sell.text}"></p>
+                                                <ul class="list-post-menu">
+                                                    <li><a th:href="@{'/manage/post/edit/' + ${sell.id}}">
+                                                        <span class="icon-sms icon-m-post-menu mdi mdi-file-document-edit-outline"></span>
+                                                        Редактировать</a></li>
+                                                    <li th:onclick="'setActiveSell('+${sell.id}+')'">
+                                                        <span class="icon-sms icon-m-post-menu mdi mdi-message-plus-outline"></span>
+                                                        Активировать</li>
+                                                    <li th:onclick="'deletePostSell('+${sell.id}+')'"><span class="icon-sms icon-m-post-menu mdi mdi-delete-outline"></span>
                                                         Удалить</li>
                                                 </ul>
                                             </div>

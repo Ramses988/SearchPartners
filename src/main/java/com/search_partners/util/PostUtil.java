@@ -65,6 +65,16 @@ public class PostUtil {
         return posts;
     }
 
+    public static List<SellBusiness> prepareTextSell(List<SellBusiness> posts) {
+        for (SellBusiness post : posts) {
+            String text = Jsoup.parse(post.getText()).text();
+            if (text.length() > 200)
+                text = text.substring(0, 200) + "...";
+            post.setText(text);
+        }
+        return posts;
+    }
+
     public static String validateText(String text) {
         for (Map.Entry<String, String> symbol : characters.entrySet()) {
             text = text.replace(symbol.getKey(), symbol.getValue());

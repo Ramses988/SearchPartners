@@ -2,6 +2,7 @@ package com.search_partners.web.comment;
 
 import com.search_partners.model.InternalComment;
 import com.search_partners.model.abstractentity.AbstractComment;
+import com.search_partners.model.abstractentity.AbstractInternalComment;
 import com.search_partners.service.interfaces.CommentService;
 import com.search_partners.util.CommentUtil;
 import com.search_partners.util.SecurityUtil;
@@ -34,8 +35,8 @@ public class RestCommentController {
 
     //TODO: Close url
     @PostMapping("/save-comment-children")
-    public InternalComment saveCommentChildren(Long parent, Long children, String message) throws ErrorCheckRequestException {
+    public AbstractInternalComment saveCommentChildren(Long parent, Long children, int category, String message) throws ErrorCheckRequestException {
         message = CommentUtil.commentValid(message);
-        return service.saveCommentChildren(parent, children, message, SecurityUtil.authUserId());
+        return service.saveCommentChildren(parent, children, category, message, SecurityUtil.authUserId());
     }
 }

@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collections;
+import java.util.List;
 import java.util.Objects;
 
 @Service
@@ -63,6 +64,11 @@ public class SellBusinessServiceImpl implements SellBusinessService {
     }
 
     @Override
+    public List<SellBusiness> getAllPosts(Long id) {
+        return PostUtil.prepareTextSell(repository.findAllByUser(id));
+    }
+
+    @Override
     @Transactional
     public SellBusiness getPostWithComments(long id) {
         //TODO: Add check exception if post equals null
@@ -74,5 +80,32 @@ public class SellBusinessServiceImpl implements SellBusinessService {
             Collections.sort(comment.getInternalComments());
         }
         return post;
+    }
+
+    @Override
+    @Transactional
+    public boolean closePost(Long postId, Long userId) {
+        return activeOrClose(postId, userId, 0);
+    }
+
+    private boolean activeOrClose(Long postId, Long userId, int active) {
+        SellBusiness sellBusiness = repository.findByIdAndUser(postId, userId).orElse(null);
+        if (Objects.nonNull(sellBusiness)) {
+            sellBusiness.setActive(active);
+            repository.save(sellBusiness);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    @Transactional
+    public boolean deletePost(Long postId, Long userId) {
+        SellBusiness sellBusiness = repository.findByIdAndUser(postId, userId).orElse(null);
+        if (Objects.nonNull(sellBusiness)) {
+            repository.delete(sellBusiness);
+            return true;
+        }
+        return false;
     }
 }
