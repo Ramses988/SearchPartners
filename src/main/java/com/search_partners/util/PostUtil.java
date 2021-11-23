@@ -7,9 +7,11 @@ import com.search_partners.to.SellPostDto;
 import lombok.extern.log4j.Log4j2;
 import org.jsoup.Jsoup;
 
+import java.text.NumberFormat;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 @Log4j2
@@ -56,7 +58,8 @@ public class PostUtil {
     }
 
     public static String convertAmount(String amount) {
-        return String.format("%,d", Integer.parseInt(amount.replace(" ", "")));
+        NumberFormat numberFormat = NumberFormat.getInstance(new Locale("ru", "RU"));
+        return numberFormat.format(Integer.parseInt(amount.replace(" ", ""))).replace("\u00a0"," ");
     }
 
     public static List<Post> prepareText(List<Post> posts) {

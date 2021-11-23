@@ -11,6 +11,8 @@ target/
 
 *.properties
 *.yml
+robots.txt
+sitemap.xml
 
 yandex_*.html
 
