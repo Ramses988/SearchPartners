@@ -17,10 +17,10 @@ import java.util.List;
 @Table(name = "sell_business")
 public class SellBusiness extends AbstractBasePost {
 
-    private long price;
+    private String price;
     private String age;
-    private long profit;
-    private long income;
+    private String profit;
+    private String income;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "post", cascade = CascadeType.REMOVE)
     private List<CommentSell> commentList;

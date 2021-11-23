@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html class="wide desktop landscape rd-navbar-static-linked" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title th:text="'Поиск партнеров по бизнесу ' + ${local}"></title>
-    <meta name="description" th:content="'Поиск партнера или партнеров по бизнесу ' + ${local} + ', начать совместный бизнес, собрать команду для бизнеса'">
-    <meta name="keywords" th:content="'найти партнеров для бизнеса ' + ${local} + ' начать совместный бизнес'">
+    <title th:text="${local}"></title>
+    <meta name="description" th:content="${local} + (${category == 1} ? ', начать совместный бизнес, собрать команду для бизнеса' :
+    ', покупка готового бизнеса, продажа готового бизнеса, готовый бизнес')">
+    <meta name="keywords" th:content="${local} + (${category == 1} ? ' начать совместный бизнес' : ' продажа покупка бизнеса')">
     <div th:replace="~{fragments/links :: links1}"></div>
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:400%7CUbuntu:300,400,500,600,700">
 </head>
 <body>
     <div th:replace="~{fragments/menu :: menu('business')}"></div>
-    <div th:replace="~{fragments/title :: title('Поиск партнеров по бизнесу ' + ${local})}"></div>
+    <div th:replace="~{fragments/title :: title(${local})}"></div>
     <section class="section section-md">
         <div class="container">
             <form class="form-creative-outer">
@@ -41,6 +42,7 @@
                     </div>
                 </div>
             </form>
+            <input type="hidden" id="category" th:value="${category}">
             <div class="table-job-offers-outer">
                 <table class="table-job-offers table-responsive">
                     <tbody>
@@ -129,7 +131,12 @@
         $('#btn-search').click(function () {
             let country = $('#country-name').val();
             let city = $('#city').val();
-            window.location.href = "https://find-team.one/posts/" + country + "/" + city;
+            let category = $('#category').val();
+            if (category === '1') {
+                window.location.href = "/posts/" + country + "/" + city;
+            } else {
+                window.location.href = "/sell/" + country + "/" + city;
+            }
         })
 
     });

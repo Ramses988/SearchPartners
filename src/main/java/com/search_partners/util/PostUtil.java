@@ -49,10 +49,14 @@ public class PostUtil {
         sellBusiness.setDate(LocalDateTime.now());
         sellBusiness.setActive(1);
         sellBusiness.setAge(sellPost.getAge());
-        sellBusiness.setPrice(sellPost.getPrice());
-        sellBusiness.setProfit(sellPost.getProfit());
-        sellBusiness.setIncome(sellPost.getIncome());
+        sellBusiness.setPrice(convertAmount(sellPost.getPrice()));
+        sellBusiness.setProfit(convertAmount(sellPost.getProfit()));
+        sellBusiness.setIncome(convertAmount(sellPost.getIncome()));
         return sellBusiness;
+    }
+
+    public static String convertAmount(String amount) {
+        return String.format("%,d", Integer.parseInt(amount.replace(" ", "")));
     }
 
     public static List<Post> prepareText(List<Post> posts) {

@@ -119,10 +119,10 @@ CREATE TABLE sell_business
     user_id      INTEGER               NOT NULL,
     city_id      INTEGER DEFAULT 0     NOT NULL,
     country_id   INTEGER DEFAULT 0     NOT NULL,
-    price        INTEGER               NOT NULL,
+    price        VARCHAR(50)           NOT NULL,
     age          VARCHAR(100)          NOT NULL,
-    profit       INTEGER               NOT NULL,
-    income       INTEGER               NOT NULL,
+    profit       VARCHAR(50)           NOT NULL,
+    income       VARCHAR(50)           NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users (id),
     FOREIGN KEY (city_id) REFERENCES cities (id),
     FOREIGN KEY (country_id) REFERENCES countries (id)

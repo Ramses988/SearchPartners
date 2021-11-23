@@ -19,6 +19,12 @@ public interface SellBusinessRepository extends JpaRepository<SellBusiness, Long
     @Query("SELECT s FROM SellBusiness s WHERE s.id=:id")
     Optional<SellBusiness> getPostWithComments(@Param("id") long id);
 
+    @Query("SELECT s FROM SellBusiness s WHERE (s.country.id=:country or s.country.id=0) and s.active=1")
+    Page<SellBusiness> findAllByCountryAndActive(long country, Pageable pageable);
+
+    @Query("SELECT s FROM SellBusiness s WHERE (s.country.id=:country or s.country.id=0) and (s.city.id=:city or s.city.id=0) and s.active=1")
+    Page<SellBusiness> findAllByCountryAndCityAndActive(long country, long city, Pageable pageable);
+
     @Query("SELECT s FROM SellBusiness s WHERE s.user.id=:id ORDER BY s.date")
     List<SellBusiness> findAllByUser(Long id);
 

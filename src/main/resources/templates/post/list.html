@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html class="wide desktop landscape rd-navbar-static-linked" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Управление объявлениями</title>
-    <meta name="description" content="Управление объявлениями">
+    <title>Управление постами</title>
+    <meta name="description" content="Управление постами">
     <div th:replace="~{fragments/links :: links1}"></div>
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:400%7CUbuntu:300,400,500,600,700">
     <script>
@@ -43,6 +43,13 @@
             }
         }
 
+        function setActiveSell(id) {
+            if (confirm("Вы действительно хотите активировать пост?")) {
+                const url = "/manage/rest/sell/set-active";
+                sendPost(id, url);
+            }
+        }
+
         function deletePost(id) {
             if (confirm("Вы действительно хотите удалить пост?")) {
                 const url = "/manage/rest/post/delete-post";
@@ -61,7 +68,7 @@
 </head>
 <body>
 <div th:replace="~{fragments/menu :: menu('manage')}"></div>
-<div th:replace="~{fragments/title :: title('Управление объявлениями')}"></div>
+<div th:replace="~{fragments/title :: title('Управление постами')}"></div>
 
 <section class="section section-md">
     <div class="container" id="tabs-1">
@@ -131,7 +138,7 @@
                                             <h5 class="timeline-classic-title"><a th:href="@{'/sell/' + ${sell.id}}" th:text="${sell.title}"></a></h5>
                                             <p th:text="${sell.text}"></p>
                                             <ul class="list-post-menu">
-                                                <li><a th:href="@{'/manage/post/edit/' + ${sell.id}}">
+                                                <li><a th:href="@{'/manage/sell/edit/' + ${sell.id}}">
                                                     <span class="icon-sms icon-m-post-menu mdi mdi-file-document-edit-outline"></span>
                                                     Редактировать</a></li>
                                                 <li th:onclick="'setCloseSell('+${sell.id}+')'">
@@ -174,7 +181,7 @@
                                                     <li th:onclick="'setActive('+${post.id}+')'">
                                                         <span class="icon-sms icon-m-post-menu mdi mdi-message-plus-outline"></span>
                                                         Активировать</li>
-                                                    <li><span class="icon-sms icon-m-post-menu mdi mdi-delete-outline"></span>
+                                                    <li th:onclick="'deletePost('+${post.id}+')'"><span class="icon-sms icon-m-post-menu mdi mdi-delete-outline"></span>
                                                         Удалить</li>
                                                 </ul>
                                             </div>
@@ -202,7 +209,7 @@
                                                 <h5 class="timeline-classic-title"><a th:href="@{'/sell/' + ${sell.id}}" th:text="${sell.title}"></a></h5>
                                                 <p th:text="${sell.text}"></p>
                                                 <ul class="list-post-menu">
-                                                    <li><a th:href="@{'/manage/post/edit/' + ${sell.id}}">
+                                                    <li><a th:href="@{'/manage/sell/edit/' + ${sell.id}}">
                                                         <span class="icon-sms icon-m-post-menu mdi mdi-file-document-edit-outline"></span>
                                                         Редактировать</a></li>
                                                     <li th:onclick="'setActiveSell('+${sell.id}+')'">

@@ -54,6 +54,26 @@ public class SellBusinessServiceImpl implements SellBusinessService {
     }
 
     @Override
+    public Page<SellBusiness> getPostsWithFilters(String countryName, String cityName, int page) {
+        //if (Objects.isNull(country) || Objects.isNull(city) || country.isEmpty() || city.isEmpty())
+        //TODO: exception if null country or city
+        Page<SellBusiness> sell = Page.empty();
+        Pageable pageable = PageRequest.of(page, 100, Sort.by("date").descending());
+        Country country = countryRepository.findByNameEn(countryName).orElse(null);
+        City city = cityRepository.findByNameEn(cityName).orElse(null);
+        if (Objects.nonNull(country) && Objects.nonNull(city)) {
+            if (!"any".equals(country.getNameEn()) && "any".equals(city.getNameEn()))
+                sell = repository.findAllByCountryAndActive(country.getId(), pageable);
+            else if (!"any".equals(country.getNameEn()) && !"any".equals(city.getNameEn()))
+                sell = repository.findAllByCountryAndCityAndActive(country.getId(), city.getId(), pageable);
+            else if ("any".equals(country.getNameEn()) && "any".equals(city.getNameEn()))
+                sell = getPosts(page);
+        }
+        sell.forEach(DateUtil::getDuration);
+        return sell;
+    }
+
+    @Override
     public void savePost(SellBusiness sellBusiness) {
         repository.save(sellBusiness);
     }
@@ -66,6 +86,14 @@ public class SellBusinessServiceImpl implements SellBusinessService {
     @Override
     public List<SellBusiness> getAllPosts(Long id) {
         return PostUtil.prepareTextSell(repository.findAllByUser(id));
+    }
+
+    @Override
+    public SellBusiness getPostWithOwner(Long id, Long userId) {
+        SellBusiness sellBusiness = repository.findByIdAndUser(id, userId).orElse(null);
+        if (Objects.isNull(sellBusiness))
+            System.out.println(""); //TODO: 404 page if no found
+        return sellBusiness;
     }
 
     @Override
@@ -86,6 +114,32 @@ public class SellBusinessServiceImpl implements SellBusinessService {
     @Transactional
     public boolean closePost(Long postId, Long userId) {
         return activeOrClose(postId, userId, 0);
+    }
+
+    @Override
+    @Transactional
+    public void editPost(SellPostDto sellPostDto, Long id) {
+        SellBusiness sellBusiness= repository.findByIdAndUser(sellPostDto.getId(), id).orElse(null);
+        Country country = countryRepository.findById(sellPostDto.getCountry()).orElse(null);
+        City city = cityRepository.findById(sellPostDto.getCity()).orElse(null);
+        if (Objects.isNull(country) || Objects.isNull(city) || Objects.isNull(sellBusiness))
+            System.out.println("Exception"); //TODO: Add check exception if user equals null
+        String text = PostUtil.validateText(sellPostDto.getText());
+        sellBusiness.setTitle(sellPostDto.getTitle());
+        sellBusiness.setText(text);
+        sellBusiness.setAge(sellPostDto.getAge());
+        sellBusiness.setPrice(PostUtil.convertAmount(sellPostDto.getPrice()));
+        sellBusiness.setIncome(PostUtil.convertAmount(sellPostDto.getIncome()));
+        sellBusiness.setProfit(PostUtil.convertAmount(sellPostDto.getProfit()));
+        sellBusiness.setCountry(country);
+        sellBusiness.setCity(city);
+        repository.save(sellBusiness);
+    }
+
+    @Override
+    @Transactional
+    public boolean activePost(Long postId, Long userId) {
+        return activeOrClose(postId, userId, 1);
     }
 
     private boolean activeOrClose(Long postId, Long userId, int active) {

@@ -53,9 +53,9 @@
                                 <label class="form-label-outside">Категория</label>
                                 <div class="form-wrap-inner">
                                     <!-- Select 2-->
-                                    <select id="category" class="form-input select form-control-has-validation form-control-last-child select2-hidden-accessible">
-                                        <option selected value="0">Поиск партнеров/инвесторов для бизнеса</option>
-                                        <option value="1">Продажа/покупка готового бизнеса</option>
+                                    <select id="category" th:disabled="${post.id > 0}" class="form-input select form-control-has-validation form-control-last-child select2-hidden-accessible">
+                                        <option th:selected="${category == 1}" value="0">Поиск партнеров/инвесторов для бизнеса</option>
+                                        <option th:selected="${category == 2}" value="1">Продажа/покупка готового бизнеса</option>
                                     </select>
                                 </div>
                             </div>
@@ -64,7 +64,9 @@
                             <div class="form-wrap">
                                 <label class="form-label-outside">Возраст бизнеса</label>
                                 <div class="form-wrap-inner">
-                                    <input class="form-input form-control-has-validation" type="text" id="age" name="age" placeholder="Пример: более 3-х лет">
+                                    <input class="form-input form-control-has-validation required" type="text" id="age" name="age" placeholder="Пример: более 3-х лет"
+                                           th:value="${category == 2} ? ${post.age} : '' ">
+                                    <span class="form-validation validation-name"></span>
                                 </div>
                             </div>
                         </div>
@@ -72,7 +74,9 @@
                             <div class="form-wrap">
                                 <label class="form-label-outside">Стоимость продажи бизнеса</label>
                                 <div class="form-wrap-inner">
-                                    <input class="form-input form-control-has-validation" type="text" id="price" name="price" placeholder="Укажите сумму в руб.">
+                                    <input class="form-input form-control-has-validation required" type="text" id="price" name="price" placeholder="Укажите сумму в руб."
+                                           th:value="${category == 2} ? ${post.price} : '' ">
+                                    <span class="form-validation validation-name"></span>
                                 </div>
                             </div>
                         </div>
@@ -80,7 +84,9 @@
                             <div class="form-wrap">
                                 <label class="form-label-outside">Оборот бизнеса ежемесячно</label>
                                 <div class="form-wrap-inner">
-                                    <input class="form-input form-control-has-validation" type="text" id="income" name="income" placeholder="Укажите сумму в руб.">
+                                    <input class="form-input form-control-has-validation required" type="text" id="income" name="income" placeholder="Укажите сумму в руб."
+                                           th:value="${category == 2} ? ${post.income} : '' ">
+                                    <span class="form-validation validation-name"></span>
                                 </div>
                             </div>
                         </div>
@@ -88,7 +94,9 @@
                             <div class="form-wrap">
                                 <label class="form-label-outside">Чистая прибыль ежемесячно</label>
                                 <div class="form-wrap-inner">
-                                    <input class="form-input form-control-has-validation" type="text" id="profit" name="profit" placeholder="Укажите сумму в руб.">
+                                    <input class="form-input form-control-has-validation required" type="text" id="profit" name="profit" placeholder="Укажите сумму в руб."
+                                           th:value="${category == 2} ? ${post.profit} : '' ">
+                                    <span class="form-validation validation-name"></span>
                                 </div>
                             </div>
                         </div>
@@ -127,11 +135,19 @@
 <script th:src="@{/resources/js/ckeditor/ckeditor.js}"></script>
 <script>
 
+    $(function() {
+        let id = $('#category').val();
+        if (id === '1') {
+            $('.business').show();
+        }
+    });
+
     const instanceText = CKEDITOR.replace('text');
 
     $('#btn_addPost').click(function () {
         let id = $('#category').val();
         if (id === '0') {
+            delInputs();
             if (validForm('#addPostForm')) {
                 instanceText.updateElement();
                 $.ajax({
@@ -147,39 +163,66 @@
                 })
             } else {
                 failNoty('Проверьте правильность заполнения полей!');
+                addInputs();
             }
         } else {
-            instanceText.updateElement();
-            $.ajax({
-                type: 'POST',
-                url: '/manage/rest/sell/add-post',
-                data: $('#addPostForm').serialize(),
-                success: function (data) {
-                    window.location.replace("/manage/post/list");
-                },
-                error: function(data) {
-                    failNoty(data.responseText);
-                }
-            })
+            if (validForm('#addPostForm')) {
+                instanceText.updateElement();
+                $.ajax({
+                    type: 'POST',
+                    url: '/manage/rest/sell/add-post',
+                    data: $('#addPostForm').serialize(),
+                    success: function (data) {
+                        window.location.replace("/manage/post/list");
+                    },
+                    error: function(data) {
+                        failNoty(data.responseText);
+                    }
+                })
+            } else {
+                failNoty('Проверьте правильность заполнения полей!');
+            }
         }
     });
 
     $('#btn_savePost').click(function () {
-        if (validForm('#addPostForm')) {
-            instanceText.updateElement();
-            $.ajax({
-                type: 'POST',
-                url: '/manage/rest/post/edit-post',
-                data: $('#addPostForm').serialize(),
-                success: function (data) {
-                    window.location.replace("/manage/post/list");
-                },
-                error: function(data) {
-                    failNoty(data.responseText);
-                }
-            })
+        let id = $('#category').val();
+        if (id === '0') {
+            delInputs();
+            if (validForm('#addPostForm')) {
+                instanceText.updateElement();
+                $.ajax({
+                    type: 'POST',
+                    url: '/manage/rest/post/edit-post',
+                    data: $('#addPostForm').serialize(),
+                    success: function (data) {
+                        window.location.replace("/manage/post/list");
+                    },
+                    error: function(data) {
+                        failNoty(data.responseText);
+                    }
+                })
+            } else {
+                failNoty('Проверьте правильность заполнения полей!');
+                addInputs();
+            }
         } else {
-            failNoty('Проверьте правильность заполнения полей!');
+            if (validForm('#addPostForm')) {
+                instanceText.updateElement();
+                $.ajax({
+                    type: 'POST',
+                    url: '/manage/rest/sell/edit-post',
+                    data: $('#addPostForm').serialize(),
+                    success: function (data) {
+                        window.location.replace("/manage/post/list");
+                    },
+                    error: function(data) {
+                        failNoty(data.responseText);
+                    }
+                })
+            } else {
+                failNoty('Проверьте правильность заполнения полей!');
+            }
         }
     });
 
@@ -192,8 +235,41 @@
         }
     });
 
+    function delInputs() {
+        $('#age').removeClass('required');
+        $('#price').removeClass('required');
+        $('#profit').removeClass('required');
+        $('#income').removeClass('required');
+    }
+
+    function addInputs() {
+        $('#age').addClass('required');
+        $('#price').addClass('required');
+        $('#profit').addClass('required');
+        $('#income').addClass('required');
+    }
+
     $('#title').on('input', function() {
-        const titleInput = $('#title');
+        checkInput($('#title'));
+    });
+
+    $('#age').on('input', function() {
+        checkInput($('#age'));
+    });
+
+    $('#price').on('input', function() {
+        checkInput($('#price'));
+    });
+
+    $('#profit').on('input', function() {
+        checkInput($('#profit'));
+    });
+
+    $('#income').on('input', function() {
+        checkInput($('#income'));
+    });
+
+    function checkInput(titleInput) {
         const data = titleInput.val();
         const status = titleInput.hasClass("has-error");
         if (data.length <= 100) {
@@ -207,7 +283,7 @@
             titleInput.parent().find('.validation-name').empty();
             titleInput.parent().find('.validation-name').append("Максимум 100 символов");
         }
-    });
+    }
 
 </script>
 </body>

@@ -24,21 +24,34 @@
                                         <li class="rd-nav-item rd-navbar--has-dropdown">
                                             <a class="rd-nav-link" href="/">Главная</a>
                                         </li>
-                                        <li class="rd-nav-item rd-navbar--has-dropdown rd-navbar-submenu" th:classappend="${selest=='business'} ? active : ''">
-                                            <a class="rd-nav-link full-click" href="/posts">Бизнес</a>
-                                            <ul class="rd-menu rd-navbar-dropdown">
-                                                <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="/posts/Russia/any">Россия</a></li>
-                                                <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="/posts/Ukraine/any">Украина</a></li>
-                                                <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="/posts/Belarus/any">Белоруссия</a></li>
-                                                <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="/posts/Kazakhstan/any">Казахстан</a></li>
-                                                <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="/posts">Все страны</a></li>
+                                        <li class="rd-nav-item rd-navbar--has-megamenu rd-navbar-submenu">
+                                            <a class="rd-nav-link full-click" href="#">Бизнес</a>
+                                            <ul class="rd-menu rd-navbar-megamenu rd-navbar-open-right">
+                                                <li class="rd-megamenu-item">
+                                                    <h6 class="rd-megamenu-title"><a href="/posts">Поиск партнеров/инвесторов</a></h6>
+                                                    <ul class="rd-megamenu-list">
+                                                        <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="/posts/Russia/any">Россия</a></li>
+                                                        <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="/posts/Ukraine/any">Украина</a></li>
+                                                        <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="/posts/Belarus/any">Белоруссия</a></li>
+                                                        <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="/posts/Kazakhstan/any">Казахстан</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li class="rd-megamenu-item">
+                                                    <h6 class="rd-megamenu-title"><a href="/sell">Продажа/покупка бизнеса</a></h6>
+                                                    <ul class="rd-megamenu-list">
+                                                        <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="/sell/Russia/any">Россия</a></li>
+                                                        <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="/sell/Ukraine/any">Украина</a></li>
+                                                        <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="/sell/Belarus/any">Белоруссия</a></li>
+                                                        <li class="rd-megamenu-list-item"><a class="rd-megamenu-list-link" href="/sell/Kazakhstan/any">Казахстан</a></li>
+                                                    </ul>
+                                                </li>
                                             </ul>
                                         </li>
                                         <li class="rd-nav-item rd-navbar--has-dropdown rd-navbar-submenu" th:classappend="${selest=='manage'} ? active : ''">
-                                            <a class="rd-nav-link full-click" href="/manage">Объявления</a>
+                                            <a class="rd-nav-link full-click" href="/manage">Посты</a>
                                             <ul class="rd-menu rd-navbar-dropdown">
-                                                <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="/manage/post/add">Добавить</a></li>
-                                                <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="/manage/post/list">Управление</a></li>
+                                                <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="/manage/post/add">Добавить пост</a></li>
+                                                <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="/manage/post/list">Мои посты</a></li>
                                             </ul>
                                         </li>
                                         <li class="rd-nav-item rd-navbar--has-dropdown" th:classappend="${selest=='faq'} ? active : ''">

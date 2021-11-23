@@ -10,18 +10,21 @@ import javax.validation.constraints.Size;
 @Data
 public class SellPostDto extends PostDto {
 
-    @Min(0)
-    private long price;
+    @NotBlank(message = "Поле (Стоимость продажи бизнеса) не должно быть пустым!")
+    @Pattern(regexp = "^[0-9 ]+$", message = "В поле (Стоимость продажи бизнеса) могут быть только цифры!")
+    private String price;
 
     @NotBlank(message = "Поле (возраст бизнеса) не должно быть пустым!")
     @Size(max = 100, message = "Максимальный размер поля (возраст бизнеса), 100 символов!")
     @Pattern(regexp = "[^<>]{1,100}", message = "Запрещенные символы в поле (возраст бизнеса)!")
     private String age;
 
-    @Min(0)
-    private long profit;
+    @NotBlank(message = "Поле (Чистая прибыль ежемесячно) не должно быть пустым!")
+    @Pattern(regexp = "^[0-9 ]+$", message = "В поле (Чистая прибыль ежемесячно) могут быть только цифры!")
+    private String profit;
 
-    @Min(0)
-    private long income;
+    @NotBlank(message = "Поле (Оборот бизнеса ежемесячно) не должно быть пустым!")
+    @Pattern(regexp = "^[0-9 ]+$", message = "В поле (Оборот бизнеса ежемесячно) могут быть только цифры!")
+    private String income;
 
 }
