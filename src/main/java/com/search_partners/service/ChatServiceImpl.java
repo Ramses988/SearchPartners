@@ -7,6 +7,7 @@ import com.search_partners.repository.ChatMessageRepository;
 import com.search_partners.repository.ChatRoomRepository;
 import com.search_partners.service.interfaces.ChatService;
 import com.search_partners.service.interfaces.UserService;
+import com.search_partners.util.ValidateData;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -74,6 +75,7 @@ public class ChatServiceImpl implements ChatService {
         ChatRoom room = getChatRoom(message);
         message.setChatId(room);
         message.setDate(LocalDateTime.now());
+        message.setContent(ValidateData.getRemoveChar(message.getContent()));
         ChatMessage response = messageRepository.save(message);
         room.setLastMessage(response);
         room.setUserRead(message.getRecipientId().getId());

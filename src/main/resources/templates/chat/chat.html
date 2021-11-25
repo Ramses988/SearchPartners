@@ -370,9 +370,20 @@
 
     initialActiveUser();
 
+    function getMessage(message) {
+        message = message.replaceAll('<', '');
+        message = message.replaceAll('>', '');
+        message = message.replaceAll('&', '');
+        message = message.replaceAll('/', '');
+        message = message.replaceAll(']', '');
+        message = message.replaceAll('[', '');
+        return message;
+    }
+
     $('#sendBtn').click(function () {
+        let txt = getMessage($('#content-text').val());
         const message = {
-            content: $('#content-text').val(),
+            content: txt,
             recipientId: {
                 id: $('#activeId').text()
             }

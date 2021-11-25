@@ -41,6 +41,7 @@ public class PostController {
         model.addAttribute("cities", cityList);
         model.addAttribute("local", "Поиск партнеров/инвесторов для бизнеса");
         model.addAttribute("category", 1);
+        model.addAttribute("link", "");
         return "post/posts";
     }
 
@@ -57,8 +58,10 @@ public class PostController {
         model.addAttribute("cities", cityList);
         model.addAttribute("countryName", country);
         model.addAttribute("cityName", city);
-        model.addAttribute("local", "Поиск партнеров/инвесторов для бизнеса " + countryAndCityService.getNameWhereSearch(country, city));
+        String localName = countryAndCityService.getNameWhereSearch(country, city);
+        model.addAttribute("local", "Поиск партнеров/инвесторов для бизнеса " + localName);
         model.addAttribute("category", 1);
+        model.addAttribute("link", (localName.isEmpty()) ? "<link rel=\"canonical\" href=\"https://find-team.one/posts\"/>" : "");
         return "post/posts";
     }
 

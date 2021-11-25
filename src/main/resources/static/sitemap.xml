@@ -8,31 +8,61 @@
     </url>
     <url>
         <loc>https://find-team.one/posts</loc>
-        <lastmod>2021-10-19</lastmod>
+        <lastmod>2021-11-23</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.5</priority>
     </url>
     <url>
         <loc>https://find-team.one/posts/Russia/any</loc>
-        <lastmod>2021-10-19</lastmod>
+        <lastmod>2021-11-23</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.5</priority>
     </url>
     <url>
         <loc>https://find-team.one/posts/Ukraine/any</loc>
-        <lastmod>2021-10-19</lastmod>
+        <lastmod>2021-11-23</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.5</priority>
     </url>
     <url>
         <loc>https://find-team.one/posts/Belarus/any</loc>
-        <lastmod>2021-10-19</lastmod>
+        <lastmod>2021-11-23</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.5</priority>
     </url>
     <url>
         <loc>https://find-team.one/posts/Kazakhstan/any</loc>
-        <lastmod>2021-10-19</lastmod>
+        <lastmod>2021-11-23</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://find-team.one/sell</loc>
+        <lastmod>2021-11-23</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://find-team.one/sell/Russia/any</loc>
+        <lastmod>2021-11-23</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://find-team.one/sell/Ukraine/any</loc>
+        <lastmod>2021-11-23</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://find-team.one/sell/Belarus/any</loc>
+        <lastmod>2021-11-23</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://find-team.one/sell/Kazakhstan/any</loc>
+        <lastmod>2021-11-23</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.5</priority>
     </url>

@@ -6,6 +6,7 @@
     ', покупка готового бизнеса, продажа готового бизнеса, готовый бизнес')">
     <meta name="keywords" th:content="${local} + (${category == 1} ? ' начать совместный бизнес' : ' продажа покупка бизнеса')">
     <div th:replace="~{fragments/links :: links1}"></div>
+    <th:block th:utext="${link}"></th:block>
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:400%7CUbuntu:300,400,500,600,700">
 </head>
 <body>

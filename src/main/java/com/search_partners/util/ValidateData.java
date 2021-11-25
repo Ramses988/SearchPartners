@@ -14,4 +14,31 @@ public class ValidateData {
         Matcher matcher = pattern.matcher(email);
         return matcher.matches();
     }
+
+    public static String getSafeText(String message) {
+        message = message.replace("<", "&lt;");
+        message = message.replace(">", "&gt;");
+        message = message.replace("/", "&frasl;");
+        message = message.replace("'", "&prime;");
+        message = message.replace("(", "&#40;");
+        message = message.replace(")", "&#41;");
+        message = message.replace("|", "&#124;");
+        message = message.replace("&", "&amp;");
+        message = message.replace("[", "");
+        message = message.replace("]", "");
+        return message;
+    }
+
+    public static String getRemoveChar(String message) {
+        message = message.replace("<", "");
+        message = message.replace(">", "");
+        message = message.replace("/", "");
+        message = message.replace("'", "");
+        message = message.replace("|", "");
+        message = message.replace("&", "");
+        message = message.replace("[", "");
+        message = message.replace("]", "");
+        return message;
+    }
+
 }
