@@ -16,6 +16,7 @@ import com.search_partners.util.UserUtil;
 import com.search_partners.util.exception.ErrorCheckRequestException;
 import com.search_partners.util.exception.ErrorNotFoundPageException;
 import lombok.AllArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -26,6 +27,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Objects;
 
+@Log4j2
 @Service
 @AllArgsConstructor
 @Transactional(readOnly = true)
@@ -42,7 +44,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getUserWithCity(long id) {
         User user = repository.getUserWithCity(id).orElse(null);
-        //TODO: check if not found
+        if (Objects.isNull(user))
+            throw new ErrorNotFoundPageException("Not found the user");
         return user;
     }
 
@@ -104,6 +107,7 @@ public class UserServiceImpl implements UserService {
             user.setCity(city);
             repository.save(user);
             mailSender.sendEmail(EmailMessageUtil.getRegisterMail(user, confirmTokenService.newToken(user, 1)));
+            log.info("Created the user " + newUser.getEmail());
         } else {
             throw new ErrorCheckRequestException("Ошибка создания пользователя!");
         }
@@ -132,8 +136,9 @@ public class UserServiceImpl implements UserService {
 
             user.setPassword(UserUtil.prepareToPassword(request.getNewPassword(), passwordEncoder));
             repository.save(user);
-
+            log.info("The password changed for user " + user.getName());
         } else {
+            log.error("Error changed password for user " + id);
             throw new ErrorCheckRequestException("Ошибка смены пароля!");
         }
     }
@@ -183,6 +188,7 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public void resetPasswordEmail(String email) {
+        log.info("Request for reset password from " + email);
         User user = repository.findByEmailAndEnabledAndProvider(email.toLowerCase().trim(), true, Provider.LOCAL.getName()).orElse(null);
         if (Objects.nonNull(user)) {
             mailSender.sendEmail(EmailMessageUtil.getResetPasswordMail(user, confirmTokenService.newToken(user, 2)));
@@ -207,7 +213,8 @@ public class UserServiceImpl implements UserService {
         User user = repository.findByEmail(login.toLowerCase().trim()).orElse(null);
         if (Objects.isNull(user))
             user = repository.findByUserId(login).orElse(null);
-        //TODO: check if not found
+        if (Objects.isNull(user))
+            throw new ErrorCheckRequestException("Error load user: " + login);
 
         return new AuthorizedUser(user);
     }

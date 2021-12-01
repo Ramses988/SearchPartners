@@ -9,6 +9,8 @@ import com.search_partners.service.interfaces.SellBusinessService;
 import com.search_partners.to.SellPostDto;
 import com.search_partners.util.DateUtil;
 import com.search_partners.util.PostUtil;
+import com.search_partners.util.exception.ErrorCheckRequestException;
+import com.search_partners.util.exception.ErrorNotFoundPageException;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -38,7 +40,7 @@ public class SellBusinessServiceImpl implements SellBusinessService {
         City city = cityRepository.findById(sellPost.getCity()).orElse(null);
         User user = userRepository.findById(id).orElse(null);
         if (Objects.isNull(country) || Objects.isNull(city) || Objects.isNull(user))
-            System.out.println(""); //TODO: Add check exception if user equals null
+            throw new ErrorCheckRequestException("Not found user, city, country");
         String text = PostUtil.validateText(sellPost.getText());
         SellBusiness sellBusiness = PostUtil.createSellBusinessNewFromTo(sellPost, user, country, city);
         sellBusiness.setText(text);
@@ -55,8 +57,8 @@ public class SellBusinessServiceImpl implements SellBusinessService {
 
     @Override
     public Page<SellBusiness> getPostsWithFilters(String countryName, String cityName, int page) {
-        //if (Objects.isNull(country) || Objects.isNull(city) || country.isEmpty() || city.isEmpty())
-        //TODO: exception if null country or city
+        if (Objects.isNull(countryName) || Objects.isNull(cityName) || countryName.isEmpty() || cityName.isEmpty())
+            throw new ErrorNotFoundPageException("Errors params country or city");
         Page<SellBusiness> sell = Page.empty();
         Pageable pageable = PageRequest.of(page, 100, Sort.by("date").descending());
         Country country = countryRepository.findByNameEn(countryName).orElse(null);
@@ -80,7 +82,10 @@ public class SellBusinessServiceImpl implements SellBusinessService {
 
     @Override
     public SellBusiness getPostById(Long id) {
-        return repository.findById(id).orElse(null);
+        SellBusiness business = repository.findById(id).orElse(null);
+        if (Objects.isNull(business))
+            throw new ErrorNotFoundPageException("The SellBusiness was not found");
+        return business;
     }
 
     @Override
@@ -92,15 +97,16 @@ public class SellBusinessServiceImpl implements SellBusinessService {
     public SellBusiness getPostWithOwner(Long id, Long userId) {
         SellBusiness sellBusiness = repository.findByIdAndUser(id, userId).orElse(null);
         if (Objects.isNull(sellBusiness))
-            System.out.println(""); //TODO: 404 page if no found
+            throw new ErrorNotFoundPageException("The sellBusiness was not found");
         return sellBusiness;
     }
 
     @Override
     @Transactional
     public SellBusiness getPostWithComments(long id) {
-        //TODO: Add check exception if post equals null
         SellBusiness post = repository.getPostWithComments(id).orElse(null);
+        if (Objects.isNull(post))
+            throw new ErrorNotFoundPageException("Not found the post");
         post.setShow(post.getShow() + 1);
         repository.save(post);
         Collections.sort(post.getCommentList());
@@ -123,7 +129,7 @@ public class SellBusinessServiceImpl implements SellBusinessService {
         Country country = countryRepository.findById(sellPostDto.getCountry()).orElse(null);
         City city = cityRepository.findById(sellPostDto.getCity()).orElse(null);
         if (Objects.isNull(country) || Objects.isNull(city) || Objects.isNull(sellBusiness))
-            System.out.println("Exception"); //TODO: Add check exception if user equals null
+            throw new ErrorCheckRequestException("Not found user, city, country");
         String text = PostUtil.validateText(sellPostDto.getText());
         sellBusiness.setTitle(sellPostDto.getTitle());
         sellBusiness.setText(text);

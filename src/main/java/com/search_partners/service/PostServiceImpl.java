@@ -9,6 +9,8 @@ import com.search_partners.service.interfaces.PostService;
 import com.search_partners.to.PostDto;
 import com.search_partners.util.DateUtil;
 import com.search_partners.util.PostUtil;
+import com.search_partners.util.exception.ErrorCheckRequestException;
+import com.search_partners.util.exception.ErrorNotFoundPageException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -49,8 +51,8 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public Page<Post> getPostsWithFilters(String countryName, String cityName, int page) {
-        //if (Objects.isNull(country) || Objects.isNull(city) || country.isEmpty() || city.isEmpty())
-        //TODO: exception if null country or city
+        if (Objects.isNull(countryName) || Objects.isNull(cityName) || countryName.isEmpty() || cityName.isEmpty())
+            throw new ErrorNotFoundPageException("Errors params country or city");
         Page<Post> posts = Page.empty();
         Pageable pageable = PageRequest.of(page, 100, Sort.by("date").descending());
         Country country = countryRepository.findByNameEn(countryName).orElse(null);
@@ -71,7 +73,7 @@ public class PostServiceImpl implements PostService {
     public Post getPostWithOwner(Long id, Long userId) {
         Post post = postRepository.findByIdAndUser(id, userId).orElse(null);
         if (Objects.isNull(post))
-            System.out.println(""); //TODO: 404 page if no found
+            throw new ErrorNotFoundPageException("Post was not found");
         return post;
     }
 
@@ -82,15 +84,18 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public Post getPost(long id) {
-        //TODO: Add check exception if post equals null
-        return postRepository.findById(id).orElse(null);
+        Post post = postRepository.findById(id).orElse(null);
+        if (Objects.isNull(post))
+            throw new ErrorNotFoundPageException("The post was not found");
+        return post;
     }
 
     @Override
     @Transactional
     public Post getPostWithComments(long id) {
-        //TODO: Add check exception if post equals null
         Post post = postRepository.getPostWithComments(id).orElse(null);
+        if (Objects.isNull(post))
+            throw new ErrorNotFoundPageException("The post was not found");
         post.setShow(post.getShow() + 1);
         postRepository.save(post);
         Collections.sort(post.getCommentList());
@@ -146,7 +151,7 @@ public class PostServiceImpl implements PostService {
         City city = cityRepository.findById(postDto.getCity()).orElse(null);
         User user = userRepository.findById(id).orElse(null);
         if (Objects.isNull(country) || Objects.isNull(city) || Objects.isNull(user))
-            System.out.println(""); //TODO: Add check exception if user equals null
+            throw new ErrorCheckRequestException("Not found user, city, country");
         String text = PostUtil.validateText(postDto.getText());
         Post post = PostUtil.createNewFromTo(postDto, user, country, city);
         post.setText(text);
@@ -160,7 +165,7 @@ public class PostServiceImpl implements PostService {
         Country country = countryRepository.findById(postDto.getCountry()).orElse(null);
         City city = cityRepository.findById(postDto.getCity()).orElse(null);
         if (Objects.isNull(country) || Objects.isNull(city) || Objects.isNull(post))
-            System.out.println("Exception"); //TODO: Add check exception if user equals null
+            throw new ErrorCheckRequestException("Not found user, city, country");
         String text = PostUtil.validateText(postDto.getText());
         post.setTitle(postDto.getTitle());
         post.setText(text);

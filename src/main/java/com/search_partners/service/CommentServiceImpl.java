@@ -13,6 +13,7 @@ import com.search_partners.service.interfaces.SellBusinessService;
 import com.search_partners.service.interfaces.UserService;
 import com.search_partners.util.exception.ErrorCheckRequestException;
 import lombok.AllArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,6 +21,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
+@Log4j2
 @Service
 @AllArgsConstructor
 @Transactional(readOnly = true)
@@ -42,7 +44,7 @@ public class CommentServiceImpl implements CommentService {
     @Transactional
     public AbstractComment saveComment(Long postId, int category, String message, Long id) {
         User user = userService.getUser(id);
-        //TODO: check User if not found
+        log.info("Add comment for post " + postId + " and user " + user.getName());
         if (category == 1)
             return saveCommentPost(postId, message, user);
         else
@@ -51,7 +53,6 @@ public class CommentServiceImpl implements CommentService {
 
     private AbstractComment saveCommentPost(Long postId, String message, User user) {
         Post post = postService.getPost(postId);
-        //TODO: check Post if not found
         post.setComments(post.getComments() + 1);
         postService.savePost(post);
         return commentRepository.save(new Comment(message, LocalDateTime.now(), post, user));
@@ -59,7 +60,6 @@ public class CommentServiceImpl implements CommentService {
 
     private AbstractComment saveCommentSell(Long postId, String message, User user) {
         SellBusiness sellBusiness = sellBusinessService.getPostById(postId);
-        //TODO: check Post if not found
         sellBusiness.setComments(sellBusiness.getComments() + 1);
         sellBusinessService.savePost(sellBusiness);
         return commentSellRepository.save(new CommentSell(message, LocalDateTime.now(), sellBusiness, user));
@@ -69,6 +69,7 @@ public class CommentServiceImpl implements CommentService {
     @Transactional
     public AbstractInternalComment saveCommentChildren(Long parent, Long children, int category, String message, Long id) {
         User user = userService.getUser(id);
+        log.info("Add comment for comment child " + children + " and user " + user.getName());
         if (category == 1)
             return saveCommentChildrenPost(parent, children, message, user);
         else
@@ -88,7 +89,6 @@ public class CommentServiceImpl implements CommentService {
             InternalComment internalComment = internalCommentRepository.findById(children).orElse(null);
             if (Objects.isNull(internalComment))
                 throw new ErrorCheckRequestException("Возникла внутренняя ошибка сервера!");
-            //TODO: cut if lenth message more than 200 charects
             String getText = internalComment.getText();
             if (getText.length() > 270)
                 getText = getText.substring(0, 190) + "...</p>";
@@ -114,7 +114,6 @@ public class CommentServiceImpl implements CommentService {
             InternalCommentSell internalCommentSell = internalCommentSellRepository.findById(children).orElse(null);
             if (Objects.isNull(internalCommentSell))
                 throw new ErrorCheckRequestException("Возникла внутренняя ошибка сервера!");
-            //TODO: cut if lenth message more than 200 charects
             String getText = internalCommentSell.getText();
             if (getText.length() > 270)
                 getText = getText.substring(0, 190) + "...</p>";
