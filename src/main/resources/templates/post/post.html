@@ -171,31 +171,23 @@
             </div>
             <div class="blog-layout-aside">
                 <div class="blog-layout-aside-item">
-<!--                    <p class="blog-layout-title">Последние посты</p>-->
-<!--                    <div class="post-light-group">-->
-<!--                        &lt;!&ndash; Post Light&ndash;&gt;<a class="post-light" href="blog-post.html">-->
-<!--                        <div class="post-light-main">-->
-<!--                            <p class="post-light-title">web программист - ищу партнера / проекты</p>-->
-<!--                            <time class="post-light-time" datetime="2019">23 Окт. 2020, 12:18</time>-->
-<!--                        </div></a>-->
-<!--                        &lt;!&ndash; Post Light&ndash;&gt;<a class="post-light" href="blog-post.html">-->
-<!--                        <div class="post-light-main">-->
-<!--                            <p class="post-light-title">Ищу надежного партнера в интересный проект. Готов инвестировать.</p>-->
-<!--                            <time class="post-light-time" datetime="2019">19 Окт. 2020, 19:46</time>-->
-<!--                        </div></a>-->
-<!--                        &lt;!&ndash; Post Light&ndash;&gt;<a class="post-light" href="blog-post.html">-->
-<!--                        <div class="post-light-main">-->
-<!--                            <p class="post-light-title">Участок под постройку ТЦ</p>-->
-<!--                            <time class="post-light-time" datetime="2019">25 Окт. 2020, 12:16</time>-->
-<!--                        </div></a>-->
-<!--                    </div>-->
-<!--                </div>-->
+                    <p class="blog-layout-title">Популярные посты</p>
+                    <div class="post-light-group">
+                        <th:block th:each="post : ${posts}">
+                            <!-- Post Light--><a class="post-light" th:href="@{'/post/' + ${post.id}}">
+                            <div class="post-light-main">
+                                <p class="post-light-title" th:text="${post.title}"></p>
+                                <time class="post-light-time" th:text="${#temporals.format(post.date, 'dd MMM yyyy, hh:mm')}"></time>
+                            </div></a>
+                        </th:block>
+                    </div>
+                </div>
 <!--                <div class="blog-layout-aside-item">-->
 <!--                    <p class="blog-layout-title">Минуточку внимания</p>-->
 <!--                    <div class="post-light-group">-->
 <!--                        <img src="/images/reklama.png" />-->
 <!--                    </div>-->
-                </div>
+<!--                </div>-->
            </div>
         </div>
     </div>

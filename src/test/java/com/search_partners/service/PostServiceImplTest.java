@@ -20,23 +20,31 @@ public class PostServiceImplTest {
     public PostService service;
 
     @Test
-    public void getPostsTest() {
+    void getPostsTest() {
         Page<Post> posts = service.getPosts(0);
         Assertions.assertNotNull(posts);
         Assertions.assertTrue(posts.getSize() > 0);
     }
 
+    @Test
+    void getPopularPostsTest() {
+        Page<Post> posts = service.getPopularPosts();
+        Assertions.assertEquals(posts.getSize(), 3);
+    }
+
     @Test()
-    public void getPostWithOwnerTest() {
+    void getPostWithOwnerTest() {
         Post post = service.getPostWithOwner(1L, 1L);
         Assertions.assertNotNull(post);
         Assertions.assertEquals("vas.tvk7619", post.getUser().getName());
     }
 
     @Test()
-    public void getPostWithOwnerWithExceptionTestException() {
+    void getPostWithOwnerWithExceptionTestException() {
         assertThrows(ErrorNotFoundPageException.class, () ->
                 service.getPostWithOwner(15L, 15L));
     }
+
+
 
 }

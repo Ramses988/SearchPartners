@@ -19,6 +19,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -47,6 +49,13 @@ public class PostServiceImpl implements PostService {
         Page<Post> posts = postRepository.findAllByActive(1, pageable);
         posts.forEach(DateUtil::getDuration);
         return posts;
+    }
+
+    @Override
+    public Page<Post> getPopularPosts() {
+        Pageable pageable = PageRequest.of(0, 3, Sort.by("show").descending());
+        LocalDateTime date = LocalDateTime.now();
+        return postRepository.findAllByDateBetween(date.minusMonths(2), date.minusMonths(1), pageable);
     }
 
     @Override

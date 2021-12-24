@@ -8,6 +8,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,6 +19,8 @@ public interface PostRepository extends PagingAndSortingRepository<Post, Long> {
 
     @Query("SELECT p FROM Post p WHERE (p.country.id=:country or p.country.id=0) and p.active=1")
     Page<Post> findAllByCountryAndActive(long country, Pageable pageable);
+
+    Page<Post> findAllByDateBetween(LocalDateTime dateStart, LocalDateTime dateEnd, Pageable pageable);
 
     @Query("SELECT p FROM Post p WHERE (p.country.id=:country or p.country.id=0) and (p.city.id=:city or p.city.id=0) and p.active=1")
     Page<Post> findAllByCountryAndCityAndActive(long country, long city, Pageable pageable);
