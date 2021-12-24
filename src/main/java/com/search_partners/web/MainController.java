@@ -17,6 +17,11 @@ public class MainController {
         return "contact";
     }
 
+    @GetMapping("/search-partners")
+    public String searchPartners() {
+        return "search-partners";
+    }
+
     @GetMapping("/feedback")
     public String feedback(Model model) {
         model.addAttribute("title", "Ваше сообщение успешно отправлено");

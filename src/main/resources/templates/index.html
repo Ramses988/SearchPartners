@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="Начни свой бизнес прямо сейчас, Мы предлагаем большую базу объявлений, Найти партнеров для бизнеса, Найти инвесторов для своего бизнеса, Продать свой бизнес">
     <meta name="keywords" content="найти партнеров для бизнеса продать бизнес найти инвестора">
-    <link rel="icon" th:href="@{/resources/images/favicon.ico}" type="image/x-icon">
+    <link rel="icon" th:href="@{/resources/images/favicon.svg}" type="image/svg+xml">
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:400%7CUbuntu:300,400,500,600,700">
     <link rel="stylesheet" th:href="@{/resources/css/style.css}">
 </head>
@@ -44,7 +44,7 @@
                                         <a class="rd-nav-link" href="/">Главная</a>
                                     </li>
                                     <li class="rd-nav-item rd-navbar--has-megamenu rd-navbar-submenu">
-                                        <a class="rd-nav-link full-click" href="#">Бизнес</a>
+                                        <a class="rd-nav-link full-click" href="">Бизнес</a>
                                         <ul class="rd-menu rd-navbar-megamenu rd-navbar-open-right">
                                             <li class="rd-megamenu-item">
                                                 <h6 class="rd-megamenu-title"><a href="/posts">Поиск партнеров/инвесторов</a></h6>
@@ -83,8 +83,11 @@
                                             <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="/manage/post/list">Мои посты</a></li>
                                         </ul>
                                     </li>
-                                    <li class="rd-nav-item rd-navbar--has-dropdown">
-                                        <a class="rd-nav-link" href="/faq">FAQ</a>
+                                    <li class="rd-nav-item rd-navbar--has-dropdown rd-navbar-submenu">
+                                        <a class="rd-nav-link full-click" href="/faq">FAQ</a>
+                                        <ul class="rd-menu rd-navbar-dropdown">
+                                            <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="/search-partners">Поиск партнеров</a></li>
+                                        </ul>
                                     </li>
                                     <li class="rd-nav-item rd-navbar--has-dropdown">
                                         <a class="rd-nav-link" href="/contact">Контакты</a>

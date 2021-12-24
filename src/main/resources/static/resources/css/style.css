@@ -622,6 +622,18 @@ h6, .h6 {
     transform: translate(0, 0);
 }
 
+.list-marked-check > li::before {
+    position: relative;
+    display: inline-block;
+    left: 20px;
+    top: -1px;
+    min-width: 25px;
+    content: '\F012C';
+    font: normal normal normal 24px/1 "Material Design Icons";
+    font-size: 17px;
+    color: #1087eb;
+}
+
 .mdi-account:before {
     content: "\F0004";
 }
@@ -10130,6 +10142,34 @@ html.rd-navbar-fixed-linked .page {
 }
 
 /* Start my code*/
+
+.list-marked-check {
+    padding-top: 15px;
+    text-align: left;
+    letter-spacing: .025em;
+}
+
+.list-marked-check > li {
+    text-indent: -25px;
+    padding-left: 40px;
+}
+
+#text-center-page {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.padding-top-40 {
+    padding-top: 40px;
+}
+
+.padding-top-20 {
+    padding-top: 20px;
+}
+
+.padding-bottom-50 {
+    padding-bottom: 50px;
+}
 
 .row-not-top {
     margin-top: 1px !important;

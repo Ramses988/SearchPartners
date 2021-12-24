@@ -54,8 +54,11 @@
                                                 <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="/manage/post/list">Мои посты</a></li>
                                             </ul>
                                         </li>
-                                        <li class="rd-nav-item rd-navbar--has-dropdown" th:classappend="${selest=='faq'} ? active : ''">
-                                            <a class="rd-nav-link" href="/faq">FAQ</a>
+                                        <li class="rd-nav-item rd-navbar--has-dropdown rd-navbar-submenu" th:classappend="${selest=='faq'} ? active : ''">
+                                            <a class="rd-nav-link full-click" href="/faq">FAQ</a>
+                                            <ul class="rd-menu rd-navbar-dropdown">
+                                                <li class="rd-dropdown-item"><a class="rd-dropdown-link" href="/search-partners">Поиск партнеров</a></li>
+                                            </ul>
                                         </li>
                                         <li class="rd-nav-item rd-navbar--has-dropdown" th:classappend="${selest=='contact'} ? active : ''">
                                             <a class="rd-nav-link" href="/contact">Контакты</a>
